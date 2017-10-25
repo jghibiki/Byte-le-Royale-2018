@@ -1,0 +1,116 @@
+import random
+import os
+import json
+from datetime import datetime, timedelta
+
+
+class ServerControl:
+
+    def __init__(self):
+
+        self._loop = None
+        self._socket_client = None
+
+        self._clients_connected = 0
+        self._client_ids = []
+
+
+        # Game Configuration options
+        self.turn_time = 0.01
+        self.game_tick_no = 0
+        self.max_game_tick = 100
+        self.client_turn_data = {}
+
+    def initialize(self):
+        print("Initializing Server Logic")
+        self.send({ "type": "game_starting"})
+        self.schedule(self.pre_tick, delay=0.1)
+
+    def wait_for_clients(self):
+        print("Waiting for clients...")
+
+        if self._clients_connected < 2:
+            self.schedule(self.wait_for_clients, 2)
+        else:
+            self.schedule(self.initialize, delay=0.1)
+
+    def notify_client_connect(self, client_id):
+        self._clients_connected += 1
+        self._client_ids.append(client_id)
+
+    def notify_client_turn(self, client_id,  turn_data):
+        if client_id not in self.client_turn_data:
+            self.client_turn_data[client_id] = turn_data
+
+    def pre_tick(self):
+        print("Tick: {}".format(self.game_tick_no))
+        self.game_tick_no += 1
+
+        self.client_turn_data = {}
+
+        self.pre_turn()
+
+        self.send_turn_data()
+
+        self.schedule(self.post_tick)
+
+
+    def post_tick(self):
+
+        self.post_turn()
+
+        log_data = self.log()
+        self.dump_log(log_data)
+
+        if self.game_tick_no < self.max_game_tick:
+            self.schedule(self.pre_tick)
+        else:
+            print("Game Completed")
+            self._socket_client.close()
+            self.schedule(exit, 3)
+
+    def send_turn_data(self):
+        pass
+
+    def set_loop(self, loop):
+        self._loop = loop
+
+    def set_socket_client(self, socket_client):
+        self._socket_client = socket_client
+
+    def send(self, data):
+        self._socket_client.sendAll( data )
+
+
+    def schedule(self, callback, delay=None):
+        self._loop.call_later(
+                delay if delay != None else self.turn_time,
+                callback)
+
+
+    def pre_turn(self):
+        """ Override. Logic to be executed before the players are allowed to take a turn """
+        pass
+
+
+    def post_turn(self):
+        """Override. Logic to be executed after the players have sent turn actions"""
+        pass
+
+    def log(self):
+        """Override. Dumps state to a file """
+        return {}
+
+
+    def dump_log(self, data):
+        if not os.path.exists("game_log"):
+            os.makedirs("game_log")
+
+        with open("game_log/{0:05d}.json".format(self.game_tick_no), "w") as f:
+            json.dump(data, f)
+
+
+
+
+
+
