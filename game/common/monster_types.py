@@ -6,6 +6,14 @@ class MON_TYPE:
     goblin = 3
 
 
+def get_random_monster(self):
+    return random.choice([
+        MON_TYPE.chimera,
+        MON_TYPE.beholder,
+        MON_TYPE.goblin
+    ])
+
+
 class Chimera(Monster):
     def init(self, level):
         Monster.init(self, "Chimera", level)

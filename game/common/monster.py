@@ -18,8 +18,12 @@ class Monster(Serializable):
 
         self.initialized = True
 
-    def fromDict(self, d):
+    def from_dict(self, d, safe=False):
         """ Load obj from dict that has been deserialized from json """
+
+        if not safe:
+            # variables that should be hidden from user
+            pass
 
         self.id = d["id"]
         self.name = d["name"]
@@ -29,15 +33,18 @@ class Monster(Serializable):
         self.initialized = True
 
 
-    def toDict(self):
+    def to_dict(self, safe=False):
         """ Dump obj data to a dict to prepare it for json serialization. """
-        return {
-            "id": self.id,
-            "name": self.name,
-            "level": self.level,
-            "attack_state": self.attack_state,
-        }
+        data =  {}
 
+        if not safe:
+            # variables that should be hidden from user
+            pass
+
+        data["id"] = self.id
+        data["name"] = self.name
+        data["level"] = self.level
+        data["attack_state"] = self.attack_state
 
 
     def attack(self, targets):

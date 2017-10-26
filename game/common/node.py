@@ -1,6 +1,14 @@
+from uuid import uuid4
+
 from game.common.game_serializable import Serializable
 
 class Node(Serializable):
+
+    @staticmethod
+    def new_node():
+        n = Node()
+        n.init()
+        return n
 
     def __init__(self):
         self.initialized = False
@@ -11,24 +19,35 @@ class Node(Serializable):
 
         self.id = str(uuid4())
         self.initialized = True
-        self.left = None
-        self.right = None
+        self.nodes = []
+        self.node_ids = []
 
-    def fromDict(self, d):
+    def from_dict(self, d):
         """ Load node from dict that has been deserialized from json """
 
         self.id = d["id"]
-
-        self.left = d["left"]
-        self.right = d["right"]
+        self.nodes_ids = d["node_ids"]
 
         self.initialized = True
 
 
-    def toDict(self):
+    def to_dict(self):
         """ Dump node data to a dict to prepare it for json serialization. """
         return {
             "id": self.id,
-            "left": self.left,
-            "right": self.right
+            "nodes_ids": self.node_ids,
         }
+
+    def load_nodes(self, node_list):
+        self.nodes = [ None for _ in range(len(self.node_ids)) ]
+        for n in node_list:
+            for idx, n_id in enumerate(self.node_ids):
+                if n.id == n_id:
+                    self.nodes[idx] = n
+                    break
+
+
+    def add_node(self, node):
+        self.nodes.append(node)
+        self.node_ids.append(node.id)
+

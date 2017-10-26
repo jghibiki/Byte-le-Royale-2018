@@ -16,12 +16,12 @@ class Serializable:
         """Manually initialize object"""
         raise Exception("{0} missing implementation of init()".format(self.__class__.__name__))
 
-    def fromDict(self, d):
+    def from_dict(self, d):
         """ Load object data from dict that has been deserialized from json """
-        raise Exception("{0} missing implementation of fromDict()".format(self.__class__.__name__))
+        raise Exception("{0} missing implementation of from_dict()".format(self.__class__.__name__))
 
 
-    def toDict(self):
+    def to_dict(self):
         """ Dump object data to a dict to prepare it for json serialization. """
-        raise Exception("{0} missing implementation of toDict()".format(self.__class__.__name__))
+        raise Exception("{0} missing implementation of to_dict()".format(self.__class__.__name__))
 
