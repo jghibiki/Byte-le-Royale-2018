@@ -100,4 +100,4 @@ ENV/
 # mypy
 .mypy_cache/
 
-*/game_log/*.json
+*/**/game_log/*.json
