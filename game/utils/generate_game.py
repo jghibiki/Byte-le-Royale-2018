@@ -1,4 +1,5 @@
 import random
+import json
 
 from game.common.node import Node
 from game.common.node_types import *
@@ -88,13 +89,44 @@ def generate_sections(num, nodes):
 
     return nodes, first_right, first_left, i
 
+def save(turns):
+
+    serialized_turns = []
+
+    for turn in turns:
+        serialized_turn = []
+        for node in turn:
+            d = node.to_dict()
+            serialized_turn.append(d)
+        serialized_turns.append(serialized_turn)
+
+    with open("game_data.json", "w") as f:
+        json.dump({ "data": serialized_turns }, f, sort_keys=True, indent=4)
+
+
+def load():
+    unserialized_turns = []
+
+    with open("game_data.json", "r") as f:
+        data = json.load(f)["data"]
+
+    for turn in data:
+        unserialized_turn = []
+        for node in turn:
+            new_node = get_node(node["node_type"])
+            new_node.from_dict(node)
+            unserialized_turn.append(new_node)
+        unserialized_turns.append(unserialized_turn)
+
+    return unserialized_turns
+
 
 def generate():
 
     nodes = []
     nodes_per_turn = []
 
-    root = Node.new_node()
+    root = StartNode.new_node()
     nodes.append(root)
     nodes_per_turn.append([root])
 
@@ -114,5 +146,7 @@ def generate():
     #for turn_node in nodes_per_turn:
     #    print([ n.id[0:5] for n in turn_node ])
 
-    print(len(nodes))
-    visualize(nodes)
+    save(nodes_per_turn)
+    #visualize(nodes)
+
+

@@ -26,7 +26,7 @@ class Node(Serializable):
         """ Load node from dict that has been deserialized from json """
 
         self.id = d["id"]
-        self.nodes_ids = d["node_ids"]
+        self.node_ids = d["node_ids"]
 
         self.initialized = True
 
@@ -35,7 +35,8 @@ class Node(Serializable):
         """ Dump node data to a dict to prepare it for json serialization. """
         return {
             "id": self.id,
-            "nodes_ids": self.node_ids,
+            "node_ids": self.node_ids,
+            "node_type": self.get_type()
         }
 
     def load_nodes(self, node_list):
@@ -50,4 +51,8 @@ class Node(Serializable):
     def add_node(self, node):
         self.nodes.append(node)
         self.node_ids.append(node.id)
+
+    def get_type(self):
+        raise Exception("{0} missing implementation of get_type()".format(self.__class__.__name__))
+
 
