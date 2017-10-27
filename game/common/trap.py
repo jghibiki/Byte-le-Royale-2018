@@ -1,4 +1,4 @@
-
+from uuid import uuid4
 import random
 
 from game.common.game_serializable import Serializable
@@ -8,11 +8,11 @@ class Trap(Serializable):
         self.initialized = False
 
 
-    def init(self, _type, level):
+    def init(self, name, level):
         """Manually initialize obj"""
 
         self.id = str(uuid4())
-        self.type = _type
+        self.name = name
         self.level = level
 
         self.initialized = True
@@ -21,7 +21,7 @@ class Trap(Serializable):
         """ Load obj from dict that has been deserialized from json """
 
         self.id = d["id"]
-        self.type = d["type"]
+        self.name = d["name"]
         self.level = d["level"]
 
         self.initialized = True
@@ -31,11 +31,15 @@ class Trap(Serializable):
         """ Dump obj data to a dict to prepare it for json serialization. """
         return {
             "id": self.id,
-            "type": self.name,
+            "name": self.name,
             "level": self.level
         }
 
 
     def attempt_clear(self, units):
         raise Exception("{0} missing implementation of attempt_clear()".format(self.__class__.__name__))
+
+
+    def get_type(self):
+        raise Exception("{0} missing implementation of get_type()".format(self.__class__.__name__))
 

@@ -1,6 +1,8 @@
 import random
 
 from game.common.node import Node
+from game.common.trap_types import *
+from game.common.monster_types import *
 
 
 class NODE_TYPES:
@@ -59,6 +61,28 @@ class MonsterNode(Node):
         node.init()
         return node
 
+    def init(self):
+        Node.init(self)
+
+        lvl = random.randint(1,5)
+        self.monster = get_random_monster()
+        self.monster.init(lvl)
+
+    def from_dict(self, d, safe=False):
+        Node.from_dict(self, d, safe=safe)
+
+        self.monster = get_monster(d["monster"]["monster_type"])
+        self.monster.from_dict(d["monster"])
+
+    def to_dict(self, safe=False):
+        data = Node.to_dict(self, safe=safe)
+
+        data["monster"] = self.monster.to_dict()
+
+        return data
+
+
+
     def get_type(self):
         return NODE_TYPES.monster
 
@@ -73,4 +97,23 @@ class TrapNode(Node):
     def get_type(self):
         return NODE_TYPES.trap
 
+    def init(self):
+        Node.init(self)
+
+        lvl = random.randint(1,5)
+        self.trap = get_random_trap()
+        self.trap.init(lvl)
+
+    def from_dict(self, d, safe=False):
+        Node.from_dict(self, d, safe=safe)
+
+        self.trap = get_trap(d["trap"]["trap_type"])
+        self.trap.from_dict(d["trap"])
+
+    def to_dict(self, safe=False):
+        data = Node.to_dict(self, safe=safe)
+
+        data["trap"] = self.trap.to_dict()
+
+        return data
 

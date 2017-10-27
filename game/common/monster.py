@@ -1,4 +1,5 @@
 import random
+from uuid import uuid4
 
 from game.common.game_serializable import Serializable
 
@@ -46,12 +47,19 @@ class Monster(Serializable):
         data["level"] = self.level
         data["attack_state"] = self.attack_state
 
+        data["monster_type"] = self.get_type()
+
+        return data
+
 
     def attack(self, targets):
         """Define the monster's attack pattern. Default returns the id of the unit or units it is attacking"""
 
         # default attack pattern - randomly attack any target
         return random.choice(targets).id
+
+    def get_type(self):
+        raise Exception("{0} missing implementation of get_type()".format(self.__class__.__name__))
 
 
 
