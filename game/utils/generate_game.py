@@ -23,7 +23,7 @@ from game.utils.network_visualizer import visualize
 #  \ /
 #   i
 
-LEVELS = 5
+LEVELS = 2
 
 
 def random_room_type(self):
@@ -81,7 +81,7 @@ def generate_sections(num, nodes):
         c = h
 
 
-    i = TownNode.new_node()
+    i = Town.new_node()
     b.add_node(i)
     c.add_node(i)
 
@@ -126,7 +126,7 @@ def generate():
     nodes = []
     nodes_per_turn = []
 
-    root = StartNode.new_node()
+    root = StartRoom.new_node()
     nodes.append(root)
     nodes_per_turn.append([root])
 

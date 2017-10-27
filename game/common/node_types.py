@@ -18,35 +18,35 @@ def get_random_node():
     ])
 
     if node_type == NODE_TYPES.monster:
-        return MonsterNode.new_node()
+        return MonsterRoom.new_node()
     elif node_type == NODE_TYPES.trap:
-        return TrapNode.new_node()
+        return TrapRoom.new_node()
 
 def get_node(node_type):
     if node_type == NODE_TYPES.monster:
-        return MonsterNode()
+        return MonsterRoom()
     elif node_type == NODE_TYPES.trap:
-        return TrapNode()
+        return TrapRoom()
     elif node_type == NODE_TYPES.town:
-        return TownNode()
+        return Town()
     elif node_type == NODE_TYPES.start:
-        return StartNode()
+        return StartRoom()
 
 
-class StartNode(Node):
+class StartRoom(Node):
     @staticmethod
     def new_node():
-        node = StartNode()
+        node = StartRoom()
         node.init()
         return node
 
     def get_type(self):
         return NODE_TYPES.start
 
-class TownNode(Node):
+class Town(Node):
     @staticmethod
     def new_node():
-        node = TownNode()
+        node = Town()
         node.init()
         return node
 
@@ -54,10 +54,10 @@ class TownNode(Node):
         return NODE_TYPES.town
 
 
-class MonsterNode(Node):
+class MonsterRoom(Node):
     @staticmethod
     def new_node():
-        node = MonsterNode()
+        node = MonsterRoom()
         node.init()
         return node
 
@@ -87,10 +87,10 @@ class MonsterNode(Node):
         return NODE_TYPES.monster
 
 
-class TrapNode(Node):
+class TrapRoom(Node):
     @staticmethod
     def new_node():
-        node = TrapNode()
+        node = TrapRoom()
         node.init()
         return node
 

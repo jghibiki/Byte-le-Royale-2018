@@ -66,11 +66,11 @@ def visualize(turns):
     print()
 
     def convert(t):
-        if isinstance(t, MonsterNode):
+        if isinstance(t, MonsterRoom):
             return ("  M  ")
-        elif isinstance(t, TrapNode):
+        elif isinstance(t, TrapRoom):
             return ("  T  ")
-        elif isinstance(t, TownNode):
+        elif isinstance(t, Town):
             return ("  R  ")
         else:
             return ("  o  ")
