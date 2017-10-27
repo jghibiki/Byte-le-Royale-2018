@@ -31,10 +31,10 @@ def draw_subtree(turns, turn_no, formatter=None, first=False, last=False):
 
         print("  |            |")
 
-        if turn_no % 3 == 0:
+        if turn_no < len(turns) and len(turns[turn_no + 1]) == 1 :
             print("  +-----+------+")
             print("        |       ")
-        elif turn_no % 1 == 0:
+        else:
             print("  +----+ +-----+")
             print("  |    | |     |")
 

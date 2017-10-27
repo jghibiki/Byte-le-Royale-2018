@@ -32,7 +32,8 @@ class Trap(Serializable):
         return {
             "id": self.id,
             "name": self.name,
-            "level": self.level
+            "level": self.level,
+            "trap_type": self.get_type()
         }
 
 
