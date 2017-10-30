@@ -30,6 +30,9 @@ class Chimera(Monster):
     def init(self, level):
         Monster.init(self, "Chimera", level)
 
+        self.health = 5
+        self.damage = 5
+
     def get_type(self):
         return MON_TYPE.chimera
 
@@ -38,12 +41,16 @@ class Beholder(Monster):
     def init(self, level):
         Monster.init(self, "Beholder", level)
 
+
     def get_type(self):
         return MON_TYPE.beholder
 
 class Goblin(Monster):
     def init(self, level):
         Monster.init(self, "Goblin", level)
+
+        self.health = 1
+        self.damage = 1
 
     def get_type(self):
         return MON_TYPE.goblin

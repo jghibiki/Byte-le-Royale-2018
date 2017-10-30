@@ -14,6 +14,8 @@ class Monster(Serializable):
         self.id = str(uuid4())
         self.name = name
         self.level = level
+        self.damage = 5
+        self.health = 5
 
         self.attack_state = {}
 
@@ -29,6 +31,8 @@ class Monster(Serializable):
         self.id = d["id"]
         self.name = d["name"]
         self.level = d["level"]
+        self.damage = d["damage"]
+        self.health = d["health"]
         self.attack_state = d["attack_state"]
 
         self.initialized = True
@@ -45,6 +49,8 @@ class Monster(Serializable):
         data["id"] = self.id
         data["name"] = self.name
         data["level"] = self.level
+        data["damage"] = self.damage
+        data["health"] = self.health
         data["attack_state"] = self.attack_state
 
         data["monster_type"] = self.get_type()
@@ -61,6 +67,8 @@ class Monster(Serializable):
     def get_type(self):
         raise Exception("{0} missing implementation of get_type()".format(self.__class__.__name__))
 
+    def get_description(self):
+        return "{0}(Level {1})".format(self.name, self.level)
 
 
 

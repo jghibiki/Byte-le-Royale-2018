@@ -44,3 +44,6 @@ class Trap(Serializable):
     def get_type(self):
         raise Exception("{0} missing implementation of get_type()".format(self.__class__.__name__))
 
+    def get_description(self):
+        return "{0}(Level {1})".format(self.name, self.level)
+

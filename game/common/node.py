@@ -27,6 +27,7 @@ class Node(Serializable):
 
         self.id = d["id"]
         self.node_ids = d["node_ids"]
+        self.nodes = []
 
         self.initialized = True
 
@@ -54,6 +55,9 @@ class Node(Serializable):
 
     def get_type(self):
         raise Exception("{0} missing implementation of get_type()".format(self.__class__.__name__))
+
+    def get_description(self):
+        raise Exception("{0} missing implementation of get_description()".format(self.__class__.__name__))
 
 
 

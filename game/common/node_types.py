@@ -43,6 +43,9 @@ class StartRoom(Node):
     def get_type(self):
         return NODE_TYPES.start
 
+    def get_description(self):
+        return "Start Room"
+
 class Town(Node):
     @staticmethod
     def new_node():
@@ -52,6 +55,9 @@ class Town(Node):
 
     def get_type(self):
         return NODE_TYPES.town
+
+    def get_description(self):
+        return "You see a town"
 
 
 class MonsterRoom(Node):
@@ -81,6 +87,8 @@ class MonsterRoom(Node):
 
         return data
 
+    def get_description(self):
+        return "A {} stands guard.".format(self.monster.get_description())
 
 
     def get_type(self):
@@ -116,4 +124,7 @@ class TrapRoom(Node):
         data["trap"] = self.trap.to_dict()
 
         return data
+
+    def get_description(self):
+        return "A {} spans the room.".format(self.trap.get_description())
 

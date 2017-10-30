@@ -106,6 +106,7 @@ def save(turns):
 
 def load():
     unserialized_turns = []
+    unserialized_nodes = []
 
     with open("game_data.json", "r") as f:
         data = json.load(f)["data"]
@@ -116,7 +117,11 @@ def load():
             new_node = get_node(node["node_type"])
             new_node.from_dict(node)
             unserialized_turn.append(new_node)
+            unserialized_nodes.append(new_node)
         unserialized_turns.append(unserialized_turn)
+
+    for node in unserialized_nodes:
+        node.load_nodes(unserialized_nodes)
 
     return unserialized_turns
 
