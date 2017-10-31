@@ -108,9 +108,8 @@ class TrapRoom(Node):
     def init(self):
         Node.init(self)
 
-        lvl = random.randint(1,5)
         self.trap = get_random_trap()
-        self.trap.init(lvl)
+        self.trap.init()
 
     def from_dict(self, d, safe=False):
         Node.from_dict(self, d, safe=safe)

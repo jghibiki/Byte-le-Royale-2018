@@ -52,8 +52,8 @@ class Beholder(Monster):
 
         self.health = 6000
         self.current_health = self.health
-        self.defense = 500 * level
-        self.damage = 2000 * level
+        self.defense = 1500 * math.floor(0.5 * level)
+        self.damage = 250 * math.floor(0.5 * level)
 
         self.weaknesses = [
             DAMAGE_TYPE.piercing,

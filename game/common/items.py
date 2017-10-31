@@ -1,6 +1,10 @@
 from game.common.damage import *
 from game.common.game_serializable import Serializable
 
+###############
+# Combat Item #
+###############
+
 class CombatItem(Serializable):
 
     def __init__(self):
@@ -42,6 +46,46 @@ class CombatItem(Serializable):
 
     def damage_types(self):
         raise Exception("{0} missing implementation of damage_types(self)".format(self.__class__.__name__))
+
+    def get_types():
+        raise Exception("{0} missing implementation of get_types()".format(self.__class__.__name__))
+
+
+################
+# Utility Item #
+################
+
+class UtilityItem(Serializable):
+
+    def __init__(self):
+        self.initialized = False
+
+
+    def init(self, name):
+
+        self.name = name
+
+        self.initialized = True
+
+    def from_dict(self, d, safe=False):
+
+        if not safe:
+            pass
+            # stuff to hide from user
+
+        self.name = d["name"]
+
+
+    def to_dict(self, safe=False):
+        data =  {}
+
+        if not safe:
+            pass
+            # stuff to hide from user
+
+        data["name"] = self.name
+
+        return data
 
     def get_types():
         raise Exception("{0} missing implementation of get_types()".format(self.__class__.__name__))

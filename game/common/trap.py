@@ -8,12 +8,11 @@ class Trap(Serializable):
         self.initialized = False
 
 
-    def init(self, name, level):
+    def init(self, name):
         """Manually initialize obj"""
 
         self.id = str(uuid4())
         self.name = name
-        self.level = level
 
         self.initialized = True
 
@@ -22,7 +21,6 @@ class Trap(Serializable):
 
         self.id = d["id"]
         self.name = d["name"]
-        self.level = d["level"]
 
         self.initialized = True
 
@@ -32,7 +30,6 @@ class Trap(Serializable):
         return {
             "id": self.id,
             "name": self.name,
-            "level": self.level,
             "trap_type": self.get_type()
         }
 
@@ -45,5 +42,5 @@ class Trap(Serializable):
         raise Exception("{0} missing implementation of get_type()".format(self.__class__.__name__))
 
     def get_description(self):
-        return "{0}(Level {1})".format(self.name, self.level)
+        return "{0}".format(self.name)
 
