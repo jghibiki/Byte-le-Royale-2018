@@ -1,5 +1,7 @@
 import random
+import math
 
+from game.common.damage import *
 from game.common.monster import Monster
 
 class MON_TYPE:
@@ -30,8 +32,15 @@ class Chimera(Monster):
     def init(self, level):
         Monster.init(self, "Chimera", level)
 
-        self.health = 5
-        self.damage = 5
+        self.health = 9000
+        self.current_health = self.health
+        self.defense = 750 * math.floor(0.5 * level)
+        self.damage = 500 * math.floor(0.5 * level)
+
+        self.weaknesses = [
+            DAMAGE_TYPE.slashing,
+            DAMAGE_TYPE.cold
+        ]
 
     def get_type(self):
         return MON_TYPE.chimera
@@ -41,6 +50,18 @@ class Beholder(Monster):
     def init(self, level):
         Monster.init(self, "Beholder", level)
 
+        self.health = 6000
+        self.current_health = self.health
+        self.defense = 500 * level
+        self.damage = 2000 * level
+
+        self.weaknesses = [
+            DAMAGE_TYPE.piercing,
+            DAMAGE_TYPE.slashing,
+            DAMAGE_TYPE.acid,
+            DAMAGE_TYPE.cold
+        ]
+
 
     def get_type(self):
         return MON_TYPE.beholder
@@ -49,8 +70,19 @@ class Goblin(Monster):
     def init(self, level):
         Monster.init(self, "Goblin", level)
 
-        self.health = 1
-        self.damage = 1
+        self.health = 6000
+        self.current_health = self.health
+        self.defense = 500 * level
+        self.damage = 1000 * level
+
+        self.weaknesses = [
+            DAMAGE_TYPE.piercing,
+            DAMAGE_TYPE.slashing,
+            DAMAGE_TYPE.acid,
+            DAMAGE_TYPE.cold,
+            DAMAGE_TYPE.fire,
+            DAMAGE_TYPE.electricity
+        ]
 
     def get_type(self):
         return MON_TYPE.goblin

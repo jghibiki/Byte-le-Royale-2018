@@ -4,7 +4,7 @@ class Serializable:
 
 
     def __repr__(self):
-        return "<{0}.{1} at {2}".format(
+        return "<{0}.{1} at {2}>".format(
                 self.__class__.__module__,
                 self.__class__.__name__,
                 hex(id(self)) )
