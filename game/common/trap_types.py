@@ -40,6 +40,10 @@ class PitTrap(Trap):
     def init(self):
         Trap.init(self, "Pit Trap")
 
+        self.counters = [
+
+        ]
+
     def get_type(self):
         return TRAP_TYPE.pit_trap
 

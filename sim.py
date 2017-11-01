@@ -1,6 +1,6 @@
 from game.common.node_types import *
 from game.common.unit import Unit
-from game.common.items import *
+from game.common.item_types import *
 from game.server.combat import CombatManager
 from game.utils.network_visualizer import visualize
 from game.utils.generate_game import load
@@ -27,7 +27,7 @@ for i in range(num_units):
     u.init( names[i] )
 
     # give unit a sword
-    s = Sword()
+    s = get_item(ItemClass.combat, WeaponTypes.sword, 1)
     s.init(1)
     u.items.append(s)
 
