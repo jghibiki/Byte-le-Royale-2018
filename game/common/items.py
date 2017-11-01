@@ -2,8 +2,9 @@ from game.common.game_serializable import Serializable
 
 
 class ItemClass:
-    combat = 1
+    melee= 1
     magic = 2
+    spell = 3
     utility = 3
 
 
@@ -16,9 +17,12 @@ class Item(Serializable):
     def __init__(self):
         self.initialized = False
 
-    def init(self, name):
+    def init(self, name, item_class, item_type):
 
         self.name = name
+        self.item_class = item_class
+        self.item_type = item_type
+
         self.initialized = True
 
     def from_dict(self, d, safe=False):
@@ -27,6 +31,8 @@ class Item(Serializable):
             pass
             # stuff to hide from user
         self.name = d["name"]
+        self.item_class = d["item_class"]
+        self.item_type = d["item_type"]
 
     def to_dict(self, safe=False):
         data = Serializable.to_dict(self, safe)
@@ -34,26 +40,27 @@ class Item(Serializable):
             pass
             # stuff to hide from user
         data["name"] = self.name
+        data["item_class"] = self.item_class
+        data["item_type"] = self.item_type
+
         return data
 
-    def get_types():
-        raise Exception("{0} missing implementation of get_types()".format(self.__class__.__name__))
 
 ###############
 # Combat Item #
 ###############
 
-class MeleeItem(Item):
+class CombatItem(Item):
 
     def __init__(self):
         self.initialized = False
 
-    def init(self, name, damage, level):
-        Item.init(self, name)
+    def init(self, name, damage, damage_types, level, item_class, item_type):
+        Item.init(self, name, item_class, item_type)
 
         self.damage = damage
+        self.damage_types = damage_types
         self.level = level
-        self.item_class = ItemClass.combat
 
         self.initialized = True
 
@@ -64,6 +71,7 @@ class MeleeItem(Item):
             pass
             # stuff to hide from user
         self.damage = d["damage"]
+        self.damage_types = d["damage_types"]
         self.level = d["level"]
 
 
@@ -75,54 +83,97 @@ class MeleeItem(Item):
             # stuff to hide from user
 
         data["damage"] = self.damage
+        data["damage_types"] = self.damage_types
         data["level"] = self.level
 
         return data
 
 
-    def damage_types(self):
-        raise Exception("{0} missing implementation of damage_types(self)".format(self.__class__.__name__))
+###############
+# Melee Item #
+###############
 
-    def get_types():
-        raise Exception("{0} missing implementation of get_types()".format(self.__class__.__name__))
+class MeleeItem(CombatItem):
+
+    def __init__(self):
+        self.initialized = False
+
+    def init(self, name, damage, damage_types, level, item_type):
+        CombatItem.init(self, name, damage, damage_types, level, ItemClass.melee, item_type)
+        self.initialized = True
+
+    def from_dict(self, d, safe=False):
+        CombatItem.from_dict(self, d, safe)
+
+        if not safe:
+            pass
+            # stuff to hide from user
+
+    def to_dict(self, safe=False):
+        data = CombatItem.from_dict(self, safe)
+
+        if not safe:
+            pass
+            # stuff to hide from user
+        return data
 
 
 ##############
 # Magic Item #
 ##############
 
-class MagicItem(Item):
+class MagicItem(CombatItem):
 
     def __init__(self):
         self.initialized = False
 
-
-    def init(self, name):
-        Item.init(self, name)
-
-        self.item_class = ItemClass.magic
-
+    def init(self, name, damage, damage_types, level, item_type):
+        CombatItem.init(self, name, damage, damage_types, level, ItemClass.magic, item_type)
         self.initialized = True
 
     def from_dict(self, d, safe=False):
-        Item.from_dict(self, d, safe)
+        CombatItem.from_dict(self, d, safe)
 
         if not safe:
             pass
             # stuff to hide from user
-
 
     def to_dict(self, safe=False):
-        data = Item.to_dict(self, safE)
+        data = CombatItem.from_dict(self, safe)
+
+        if not safe:
+            pass
+            # stuff to hide from user
+        return data
+
+
+##############
+# Magic Item #
+##############
+
+class MagicSpell(CombatItem):
+
+    def __init__(self):
+        self.initialized = False
+
+    def init(self, name, damage, damage_types, level, item_type):
+        CombatItem.init(self, name, damage, damage_types, level, ItemClass.spell, item_type)
+        self.initialized = True
+
+    def from_dict(self, d, safe=False):
+        CombatItem.from_dict(self, d, safe)
 
         if not safe:
             pass
             # stuff to hide from user
 
-        return data
+    def to_dict(self, safe=False):
+        data = CombatItem.from_dict(self, safe)
 
-    def get_types():
-        raise Exception("{0} missing implementation of get_types()".format(self.__class__.__name__))
+        if not safe:
+            pass
+            # stuff to hide from user
+        return data
 
 
 ################
@@ -135,8 +186,8 @@ class UtilityItem(Item):
         self.initialized = False
 
 
-    def init(self, name):
-        Item.init(self, name)
+    def init(self, name, item_class, item_type):
+        Item.init(self, name, item_class, item_type)
 
         self.item_class = ItemClass.utility
 

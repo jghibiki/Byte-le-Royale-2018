@@ -86,7 +86,7 @@ class Monster(Serializable):
 
     def summary(self):
         percent_health = self.current_health / float(self.health)
-        bar_size = 8
+        bar_size = 50
         percent_bar = math.floor( bar_size * percent_health)
 
 

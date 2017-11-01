@@ -1,5 +1,5 @@
 
-class DAMAGE_TYPE:
+class DamageType:
     piercing = 0
     slashing = 1
     bludgeoning = 2

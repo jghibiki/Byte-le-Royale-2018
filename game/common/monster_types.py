@@ -38,8 +38,8 @@ class Chimera(Monster):
         self.damage = 500 * math.floor(0.5 * level)
 
         self.weaknesses = [
-            DAMAGE_TYPE.slashing,
-            DAMAGE_TYPE.cold
+            DamageType.slashing,
+            DamageType.cold
         ]
 
     def get_type(self):
@@ -56,10 +56,10 @@ class Beholder(Monster):
         self.damage = 250 * math.floor(0.5 * level)
 
         self.weaknesses = [
-            DAMAGE_TYPE.piercing,
-            DAMAGE_TYPE.slashing,
-            DAMAGE_TYPE.acid,
-            DAMAGE_TYPE.cold
+            DamageType.piercing,
+            DamageType.slashing,
+            DamageType.acid,
+            DamageType.cold
         ]
 
 
@@ -76,12 +76,12 @@ class Goblin(Monster):
         self.damage = 1000 * level
 
         self.weaknesses = [
-            DAMAGE_TYPE.piercing,
-            DAMAGE_TYPE.slashing,
-            DAMAGE_TYPE.acid,
-            DAMAGE_TYPE.cold,
-            DAMAGE_TYPE.fire,
-            DAMAGE_TYPE.electricity
+            DamageType.piercing,
+            DamageType.slashing,
+            DamageType.acid,
+            DamageType.cold,
+            DamageType.fire,
+            DamageType.electricity
         ]
 
     def get_type(self):

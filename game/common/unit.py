@@ -3,6 +3,7 @@ import math
 from uuid import uuid4
 
 from game.common.game_serializable import Serializable
+from game.common.item_types import *
 from game.safe.unit import Unit as ClientUnit
 
 
@@ -21,18 +22,19 @@ class Unit(Serializable):
     __str__ = __repr__
 
 
-    def init(self, name):
+    def init(self, name, class_name,  max_health, primary_weapon_types):
         """Manually initialize obj"""
 
         self.id = str(uuid4())
         self.name = name
-        self.damage = 500
-        self.cumulative_damage = 0
-        self.defense = 0
-        self.health = 5000
+        self.class_name = class_name
+
+        self.health = max_health
         self.current_health = self.health
 
-        self.items = []
+        self.items = [
+            get_item(*primary_weapon_types, 1)
+        ]
 
         self.initialized = True
 
@@ -47,13 +49,19 @@ class Unit(Serializable):
         self.id = d["id"]
         self.name = d["name"]
 
-        self.damage = d["damage"]
-        self.defense = d["defense"]
-        self.cumulative_damage = d["cumulative_damage"]
+        self.class_name = d["class_name"]
+
         self.health = d["health"]
         self.current_health = d["current_health"]
 
-        self.items = d["items"]
+        # load items
+        self.items = []
+        for item in d["items"]:
+            i = load_item(item[0], item[1], item[2])
+            self.items.append(item)
+
+
+
 
         self.initialized = True
 
@@ -75,24 +83,25 @@ class Unit(Serializable):
         # these values should have matching properties on game.safe.user.
         data["id"] = self.id
         data["name"] =  self.name
+        data["class_name"] =  self.class_name
 
-        data["attack"] = self.attack
-        data["defense"] = self.defense
-        data["cumulative_damage"] = self.cumulative_damage
         data["health"] = self.health
 
-        data["items"] = self.items #TODO: serialize items
+        data["items"] = []
+        for item in self.items:
+            i = [ item.item_class, item.item_type, item.to_dict() ]
 
         return data
 
     def summary(self):
         percent_health = self.current_health / float(self.health)
-        bar_size = 8
+        bar_size = 50
         percent_bar = math.floor( bar_size * percent_health)
 
 
-        out = "{0}: ({1:04d}/{2:04d})[{3}]".format(
+        out = "{0}({1}): ({2:04d}/{3:04d})[{4}]".format(
                 self.name,
+                self.class_name,
                 self.current_health,
                 self.health,
                 ("="*percent_bar).ljust(bar_size, " "))

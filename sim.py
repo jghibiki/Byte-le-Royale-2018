@@ -1,6 +1,7 @@
 from game.common.node_types import *
-from game.common.unit import Unit
+from game.common.unit_classes import *
 from game.common.item_types import *
+from game.common.items import *
 from game.server.combat import CombatManager
 from game.utils.network_visualizer import visualize
 from game.utils.generate_game import load
@@ -20,14 +21,15 @@ traps_faced = 0
 num_units = 3
 units = []
 names = [ "a", "b", "c", "d" , "e" ]
+class_types = [ Knight, Brawler, Pikeman, Rogue ]
 
 print("Unit Line-up")
 for i in range(num_units):
-    u = Unit()
+    u = class_types[i]()
     u.init( names[i] )
 
     # give unit a sword
-    s = get_item(ItemClass.combat, WeaponTypes.sword, 1)
+    s = get_item(ItemClass.melee, ItemType.sword, 1)
     s.init(1)
     u.items.append(s)
 

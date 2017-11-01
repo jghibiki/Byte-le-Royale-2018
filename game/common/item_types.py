@@ -1,39 +1,123 @@
 from game.common.damage import *
 from game.common.items import *
 
-class WeaponTypes:
+class ItemType:
     # melee
     sword = 1
     dagger = 2
-    club = 3
-    fire_bomb = 4
-    acid_bomb = 5
+    mace = 3
+    spear = 4
 
-    # magic
-    fire_ball = 6
-    thunderbolt = 7
-    magic_missile = 8
-    ice_spike = 9
+    # magic item
+    staff = 5
+    wand = 6
+    spell_book = 7
+    alchemical_supplies = 8
 
+    # magic spell
+    fire_ball = 9
+    thunderbolt = 10
+    ice_spike = 11
 
-def get_item(item_class, item_type, level):
+    rope = 12
 
-    # combat items
-    if item_class == ItemClass.combat:
-        if item_type == WeaponTypes.sword:
+def get_item(item_class, item_type, level, init=False):
+
+    # melee items
+    if item_class == ItemClass.melee:
+        if item_type == ItemType.sword:
             new_item = Sword()
-            new_item.init(level)
-            return new_item
+        elif item_type == ItemType.dagger:
+            new_item = Dagger()
+        elif item_type == ItemType.mace:
+            new_item = Mace()
+        elif item_type == ItemType.spear:
+            new_item = Spear()
+        else:
+            raise Exception("Invalid item type: {0}".format(item_type))
 
     # magic items
     elif item_class == ItemClass.magic:
-        pass
+        if item_type == ItemType.staff:
+            new_item = Staff()
+        elif item_type == ItemType.wand:
+            new_item = Wand()
+        elif item_type == ItemType.spell_book:
+            new_item = SpellBook()
+        elif item_type == ItemType.alchemical_supplies:
+            new_item = AlchemicalSupplies()
+        else:
+            raise Exception("Invalid item type: {0}".format(item_type))
+
+    # magic spells
+    elif item_class == ItemClass.spell:
+        if item_type == ItemType.fireball:
+            new_item = Fireball()
+        elif item_type == ItemType.thunderbolt:
+            new_item = Thunderbolt()
+        elif item_type == ItemType.ice_spike:
+            new_item = Thunderbolt()
+        else:
+            raise Exception("Invalid item type: {0}".format(item_type))
+
 
     # utility items
     elif item_class == ItemClass.utility:
         pass
 
+    else:
+        raise Exception("Invalid item class: {0}".format(item_class))
 
+    new_item.init(level)
+    return new_item
+
+def load_item(item_class, item_type, data):
+
+    # combat items
+    if item_class == ItemClass.melee:
+        if item_type == ItemType.sword:
+            new_item = Sword()
+        elif item_type == ItemType.dagger:
+            new_item = Dagger()
+        elif item_type == ItemType.mace:
+            new_item = Mace()
+        elif item_type == ItemType.mace:
+            new_item = Mace()
+        else:
+            raise Exception("Invalid item type: {0}".format(item_type))
+
+    # magic items
+    elif item_class == ItemClass.magic:
+        if item_type == ItemType.staff:
+            new_item = Staff()
+        elif item_type == ItemType.wand:
+            new_item = Wand()
+        elif item_type == ItemType.spell_book:
+            new_item = SpellBook()
+        elif item_type == ItemType.alchemical_supplies:
+            new_item = AlchemicalSupplies()
+        else:
+            raise Exception("Invalid item type: {0}".format(item_type))
+
+    elif item_class == ItemClass.spell:
+        if item_type == ItemType.fireball:
+            new_item = Fireball()
+        elif item_type == ItemType.thunderbolt:
+            new_item = Thunderbolt()
+        elif item_type == ItemType.ice_spike:
+            new_item = Thunderbolt()
+        else:
+            raise Exception("Invalid item type: {0}".format(item_type))
+
+    # utility items
+    elif item_class == ItemClass.utility:
+        pass
+
+    else:
+        raise Exception("Invalid item class: {0}".format(item_class))
+
+    new_item.from_dict(data)
+    return new_item
 
 ################
 # Melee Weapon #
@@ -42,134 +126,68 @@ def get_item(item_class, item_type, level):
 class Sword(MeleeItem):
 
     def init(self, level):
-        MeleeItem.init(self, "Sword", 1000, level)
-
-    def get_type(self):
-        return WeaponTypes.sword
-
-    def damage_types(self):
-        return [
-            DAMAGE_TYPE.slashing
-        ]
-    def damage_rating():
-        return
+        MeleeItem.init(self, "Sword", 100, [ DamageType.slashing ],  level, ItemType.sword)
 
 class Dagger(MeleeItem):
 
     def init(self, level):
-        MeleeItem.init(self, "Dagger", 5000, level)
+        MeleeItem.init(self, "Dagger", 100, [DamageType.percing, DamageType.slashing ], level, ItemType.dagger)
 
-    def get_type(self):
-        return WeaponTypes.dagger
-
-    def damage_types(self):
-        return [
-            DAMAGE_TYPE.piercing
-        ]
-
-class Club(MeleeItem):
-    def init(self, level):
-        MeleeItem.init(self, "Club", 1000, level)
-
-    def get_type(self):
-        return WeaponTypes.club
-
-    def damage_types(self):
-        return [
-            DAMAGE_TYPE.bludgeoning
-        ]
-
-class FireBomb(MeleeItem):
-    """more powerful than fireball but more expensive and you have to buy each use"""
+class Spear(MeleeItem):
 
     def init(self, level):
-        MeleeItem.init(self, "Fire Bomb", 1000, level)
+        MeleeItem.init(self, "Spear", 100, [ DamageType.piercing ], level, ItemType.spear)
 
-    def get_type(self):
-        return WeaponTypes.fire_bomb
-
-    def damage_types(self):
-        return [
-            DAMAGE_TYPE.fire,
-            DAMAGE_TYPE.force
-        ]
-
-class AcidBomb(MeleeItem):
-
+class Mace(MeleeItem):
     def init(self, level):
-        MeleeItem.init(self, "Acid Bomb", 2, level)
-
-    def get_type(self):
-        return WeaponTypes.acid_bomb
-
-    def damage_types(self):
-        return [
-            DAMAGE_TYPE.acid
-        ]
+        MeleeItem.init(self, "Club", 100, [ DamageType.bludgeoning ], level, ItemType.mace)
 
 
+#################
+# Magic Weapons #
+#################
 
-class Fireball(MagicItem):
+class Staff(MagicItem):
     def init(self, level):
-        MagicItem.init(self, "Fireball", 2, level)
+        MagicItem.init(self, "Staff", 100, [ DamageType.force ], level, ItemType.staff)
 
-    def get_type(self):
-        return WeaponTypes.fireball
-
-    def damage_types(self):
-        return [
-            DAMAGE_TYPE.fire,
-            DAMAGE_TYPE.force
-        ]
-
-class Thundrbolt(MagicItem):
+class Wand(MagicItem):
     def init(self, level):
-        MagicItem.init(self, "Thunderbolt", 2, level)
+        MagicItem.init(self, "Wand", 100, [ DamageType.force ], level, ItemType.wand)
 
-    def get_type(self):
-        return WeaponTypes.thunderbolt
-
-    def damage_types(self):
-        return [
-            DAMAGE_TYPE.electricity
-        ]
-
-class MagicMissile(MagicItem):
+class SpellBook(MagicItem):
     def init(self, level):
-        MagicItem.init(self, "Magic Missile", 2, level)
+        MagicItem.init(self, "Spell Book", 100, [ DamageType.force], level, ItemType.spell_book)
 
-    def get_type(self):
-        return WeaponTypes.magic_missile
-
-    def damage_types(self):
-        return [
-            DAMAGE_TYPE.force,
-            DAMAGE_TYPE.bludgeoning
-        ]
-
-class IceSpike(MagicItem):
+class AlchemicalSupplies(MagicItem):
     def init(self, level):
-        MagicItem.init(self, "", 2, level)
+        MagicItem.init(self, "Alchemical Supplies", 100, [ DamageType.force ], level, ItemType.alchemical_supplies)
 
-    def get_type(self):
-        return WeaponTypes.ice_spike
 
-    def damage_types(self):
-        return [
-            DAMAGE_TYPE.cold
-        ]
+################
+# Magic Spells #
+################
+
+class Fireball(MagicSpell):
+    def init(self, level):
+        MagicSpell.init(self, "Fireball", 100, [ DamageType.fire ], level)
+
+class Thundrbolt(MagicSpell):
+    def init(self, level):
+        MagicSpell.init(self, "Thunderbolt", 100, [ DamageType.electricity ], level)
+
+
+class IceSpike(MagicSpell):
+    def init(self, level):
+        MagicSpell.init(self, "Ice Spike", 100, [ DamageType.cold ], level)
+
 
 
 #################
 # Utility Items #
 #################
 
-class UtilityItemTypes:
-    rope = 1
-
 class Rope(UtilityItem):
     def init(self):
         UtilityItem.init(self, "Rope")
 
-    def get_type(self):
-        return UtilityItemTypes.rope
