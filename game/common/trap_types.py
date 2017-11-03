@@ -1,13 +1,7 @@
 import random
 
 from game.common.trap import Trap
-
-class TRAP_TYPE:
-    pit_trap = 1
-    spike_trap = 2
-    boulder_trap = 3
-    dart_trap = 4
-    narrow_bridge = 5
+from game.common.enums import *
 
 
 

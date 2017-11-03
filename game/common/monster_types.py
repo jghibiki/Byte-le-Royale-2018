@@ -1,7 +1,7 @@
 import random
 import math
 
-from game.common.damage import *
+from game.common.enums import *
 from game.common.monster import Monster
 
 class MON_TYPE:

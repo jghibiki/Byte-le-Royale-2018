@@ -1,5 +1,5 @@
-from game.common.message_types import MessageType
-from game.common.node_types import *
+from game.common.enums import *
+from game.common.node_types import get_node
 
 class ClientLogic:
 

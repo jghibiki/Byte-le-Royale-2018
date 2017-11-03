@@ -1,8 +1,7 @@
 from game.server.server_control import ServerControl
 from game.utils.generate_game import load
 from game.common.node_types import *
-from game.common.directions import *
-from game.common.message_types import *
+from game.common.enums import *
 
 
 class CustomServer(ServerControl):
@@ -19,9 +18,15 @@ class CustomServer(ServerControl):
 
         self.current_location = self.game_map.pop(0)[0]
 
+        self.combat_manager = None
+
 
     def pre_turn(self):
         print(self.current_location)
+
+        if self.game_tick_no != 0:
+            # first turn, ask for what units the team should be made up of
+            return # purposefully short circuit to get to send data
 
         if isinstance(self.current_location, Town):
             self.print("Town")
@@ -63,9 +68,10 @@ class CustomServer(ServerControl):
                         # TODO: LOG location change
                         self.check_end()
 
-
-
             self.client_turn_data[client_id] = None
+
+
+
 
     def send_turn_data(self):
         # send turn data to clients
@@ -74,11 +80,13 @@ class CustomServer(ServerControl):
         for i in self._client_ids:
             payload[i] = { }
 
-            self.current_location.resolved = True # force true to move
+            if self.game_tick_no == 0:
+                payload[i] = {
+                        "message_type":  MessageType.unit_choice
+                }
 
             if self.current_location.resolved:
                 if isinstance(self.current_location, StartRoom):
-                    self.print("Start Room")
                     payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
                 elif isinstance(self.current_location, Town):

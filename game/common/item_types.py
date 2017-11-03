@@ -1,25 +1,7 @@
 from game.common.damage import *
 from game.common.items import *
+from game.common.enums import *
 
-class ItemType:
-    # melee
-    sword = 1
-    dagger = 2
-    mace = 3
-    spear = 4
-
-    # magic item
-    staff = 5
-    wand = 6
-    spell_book = 7
-    alchemical_supplies = 8
-
-    # magic spell
-    fire_ball = 9
-    thunderbolt = 10
-    ice_spike = 11
-
-    rope = 12
 
 def get_item(item_class, item_type, level, init=False):
 

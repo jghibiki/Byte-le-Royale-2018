@@ -1,15 +1,7 @@
 from game.common.unit import *
 from game.common.item_types import *
 from game.common.items import *
-
-class UnitClass:
-    knight = 1
-    brawler = 2
-    pikeman = 3
-    rogue = 4
-    wizard = 5
-    sorcerer = 6
-    alchemist = 7
+from game.common.enums import *
 
 
 class Knight(Unit):

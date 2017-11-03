@@ -1,6 +1,5 @@
 from game.client.client_logic import ClientLogic
-from game.common.message_types import MessageType
-from game.common.directions import Direction
+from game.common.enums import *
 
 class CustomClient(ClientLogic):
 
@@ -19,8 +18,16 @@ class CustomClient(ClientLogic):
         print("tick: {}".format(self.tick_no))
         print(turn_data)
 
+        if turn_data["message_type"] == MessageType.unit_choice:
 
-        if turn_data["message_type"] == MessageType.room_choice:
+            return {
+                "units": [
+
+                ]
+            }
+
+
+        elif turn_data["message_type"] == MessageType.room_choice:
 
             if len(turn_data["options"]) == 1:
 

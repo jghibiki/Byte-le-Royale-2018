@@ -1,11 +1,5 @@
 from game.common.game_serializable import Serializable
-
-
-class ItemClass:
-    melee= 1
-    magic = 2
-    spell = 3
-    utility = 3
+from game.common.enums import *
 
 
 ########

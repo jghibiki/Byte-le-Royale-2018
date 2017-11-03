@@ -9,14 +9,39 @@ class CombatManager:
         self.done_reason = ""
         self.success = None
 
-    def play_round(self, monster, units):
+        self.monster = None
+        self.units = []
+
+    def serialize_combat_state(self, first=False, last=False):
+        data = {}
+
+        if first:
+            data["message_type"] = MessageType.combat_begin
+        elif last:
+            data["message_type"] = MessageType.combat_round
+        else:
+            data["message_type"] = MessageType.combat_end
+
+        data["monster"] = self.monster.to_dict()
+
+        data["units"] = []
+        for u in self.units:
+            d = u.to_dict()
+            data["units"].append(d)
+
+        return data
+
+    def init(self, monster, units):
+        self.monster = monster
+        self.units = units
 
 
-        living_units = [ u for u in units if u.is_alive() ]
+    def play_round(self):
 
+        living_units = [ u for u in self.units if u.is_alive() ]
 
         # pick targets / moves
-        monster_target = monster.attack(living_units)
+        monster_target = self.monster.attack(living_units)
 
         unit_actions = {}
 
@@ -27,8 +52,11 @@ class CombatManager:
         # apply damage to target / execute move
         #########################################
 
-        print("{0} deals {1} damage to {2}".format(monster.name, monster.damage, monster_target.name))
-        monster_target.current_health -= monster.damage
+        print("{0} deals {1} damage to {2}".format(
+            self.monster.name,
+            self.monster.damage,
+            self.monster_target.name))
+        monster_target.current_health -= self.monster.damage
 
         if monster_target.current_health < 0:
             monster_target.current_health = 0
@@ -40,7 +68,7 @@ class CombatManager:
 
             # check for double damage
             for damage_type in action.damage_types:
-                if damage_type in monster.weaknesses:
+                if damage_type in self.monster.weaknesses:
                     double_damage = True
                     break
 
@@ -51,16 +79,20 @@ class CombatManager:
             # apply normal damage
             dmg += action.damage
 
-            print("{0} deals {1} damage to {2}".format(unit.name, dmg, monster.name))
-            monster.current_health -= dmg
+            print("{0} deals {1} damage to {2}".format(
+                unit.name,
+                dmg,
+                self.monster.name))
 
-            if monster.current_health < 0:
-                monster.current_health = 0
+            self.monster.current_health -= dmg
+
+            if self.monster.current_health < 0:
+                self.monster.current_health = 0
                 break
 
         self.round += 1
 
-        if monster.current_health <= 0:
+        if self.monster.current_health <= 0:
             self.done = True
             self.done_reason = "Monster Defeated!"
             self.success = True
@@ -70,14 +102,12 @@ class CombatManager:
             self.done_reason = "Party Defeated!\n Game Over!"
             self.success = False
 
-        return monster, units
 
-
-    def print_summary(self, monster, units):
+    def print_summary(self):
 
         print()
         print("Combat Round {}".format(self.round-1))
-        print(monster.summary())
+        print(self.monster.summary())
 
         print()
         for u in units:
