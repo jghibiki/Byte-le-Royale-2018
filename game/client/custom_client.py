@@ -1,4 +1,4 @@
-from client_logic import ClientLogic
+from game.client.client_logic import ClientLogic
 
 class CustomClient(ClientLogic):
 

@@ -72,6 +72,10 @@ def visualize(turns):
             return ("  T  ")
         elif isinstance(t, Town):
             return ("  R  ")
+        elif isinstance(t, EndRoom):
+            return ("  E  ")
+        elif isinstance(t, StartRoom):
+            return ("  S  ")
         else:
             return ("  o  ")
 

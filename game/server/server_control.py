@@ -13,6 +13,7 @@ class ServerControl:
 
         self._clients_connected = 0
         self._client_ids = []
+        self._quit = False
 
 
         # Game Configuration options
@@ -29,7 +30,7 @@ class ServerControl:
     def wait_for_clients(self):
         print("Waiting for clients...")
 
-        if self._clients_connected < 2:
+        if self._clients_connected < 1:
             self.schedule(self.wait_for_clients, 2)
         else:
             self.schedule(self.initialize, delay=0.1)
@@ -37,6 +38,7 @@ class ServerControl:
     def notify_client_connect(self, client_id):
         self._clients_connected += 1
         self._client_ids.append(client_id)
+        self.client_turn_data[client_id] = None
 
     def notify_client_turn(self, client_id,  turn_data):
         if client_id not in self.client_turn_data:
@@ -62,7 +64,7 @@ class ServerControl:
         log_data = self.log()
         self.dump_log(log_data)
 
-        if self.game_tick_no < self.max_game_tick:
+        if self.game_tick_no < self.max_game_tick and not self._quit:
             self.schedule(self.pre_tick)
         else:
             print("Game Completed")
