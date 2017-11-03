@@ -11,48 +11,53 @@ def draw_child(node, indent_level=0):
             draw_child(node.nodes[0], indent_level+1)
 
 
-def draw_subtree(turns, turn_no, formatter=None, first=False, last=False):
+def draw_subtree(turns, formatter=None, first=False, last=False):
     if not formatter: formatter = lambda t: t.id[0:5]
 
-    turn = turns[turn_no]
+    turn_no = 0
 
-    if len(turn) == 1:
-        print("      {0}      ".format(
-            formatter(turn[0]) ))
-        if not last:
-            print("        |")
-            print("  +------------+")
+    for turn_no in range(len(turns)):
+        turn = turns[turn_no]
+
+        if len(turn) == 1:
+            print("      {0}      ".format(
+                formatter(turn[0]) ))
+            if not last:
+                print("        |")
+                print("  +------------+")
+                print("  |            |")
+
+        elif len(turn) == 2:
+            print("{0}        {1}".format(
+                formatter(turn[0]) ,
+                formatter(turn[1]) ))
+
             print("  |            |")
 
-    elif len(turn) == 2:
-        print("{0}        {1}".format(
-            formatter(turn[0]) ,
-            formatter(turn[1]) ))
+            if turn_no < len(turns) and len(turns[turn_no + 1]) == 1 :
+                print("  +-----+------+")
+                print("        |       ")
+            else:
+                print("  +----+ +-----+")
+                print("  |    | |     |")
 
-        print("  |            |")
-
-        if turn_no < len(turns) and len(turns[turn_no + 1]) == 1 :
-            print("  +-----+------+")
-            print("        |       ")
-        else:
-            print("  +----+ +-----+")
+        elif len(turn) == 3:
+            print("{0} {1}  {2}".format(
+                formatter(turn[0]) ,
+                formatter(turn[1]) ,
+                formatter(turn[2]) ))
             print("  |    | |     |")
-
-    elif len(turn) == 3:
-        print("{0} {1}  {2}".format(
-            formatter(turn[0]) ,
-            formatter(turn[1]) ,
-            formatter(turn[2]) ))
-        print("  |    | |     |")
-        print("  +----+ +-----+")
-        print("  |            |")
+            print("  +----+ +-----+")
+            print("  |            |")
 
 
 
-    if turn_no < len(turns)-2 :
-        draw_subtree(turns, turn_no + 1, formatter=formatter)
-    elif turn_no < len(turns)-1 :
-        draw_subtree(turns, turn_no + 1, formatter=formatter, last=True)
+        if turn_no < len(turns)-2 :
+            turn_no += 1
+        elif turn_no < len(turns)-1 :
+            turn_no += 1
+            last = True
+
 
 
 def visualize(turns):
@@ -79,7 +84,7 @@ def visualize(turns):
         else:
             return ("  o  ")
 
-    draw_subtree(turns, 0, formatter=convert, first=True)
+    draw_subtree(turns, formatter=convert, first=True)
 
 
 

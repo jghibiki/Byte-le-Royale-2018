@@ -15,14 +15,18 @@ class BroadcastClientProtocol(WebSocketClientProtocol):
         self.clients = []
         self.trigger_tick_cb = None
         self.id = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(20))
+        self.verbose = False
 
     def onOpen(self):
         self.factory._registerClient(self)
-        print("Client connection open")
         self.factory.trigger_initialize_cb()
+        self.verbose = self.factory.verbose
+        if self.verbose:
+            print("Client connection open")
 
     def onConnect(self, client):
-        print("Client connecting: {}".format(client.peer))
+        if self.verbose:
+            print("Client connecting: {}".format(client.peer))
         self.clients.append(client)
 
 
@@ -35,10 +39,12 @@ class BroadcastClientProtocol(WebSocketClientProtocol):
         #    print("Incoming Message: ", obj["type"])
 
         if(obj["type"] == "pong"):
-            print("Pong!");
+            if self.verbose:
+                print("Pong!");
 
         elif obj["type"] == "error":
-            print("Communication Error: {}".format(obj["msg"]))
+            if self.verbose:
+                print("Communication Error: {}".format(obj["msg"]))
 
         elif obj["type"] == "game_starting":
             self.factory.notify_game_started_cb()
@@ -54,11 +60,13 @@ class BroadcastClientProtocol(WebSocketClientProtocol):
     def connectionLost(self, reason):
         WebSocketClientProtocol.connectionLost(self, reason)
         self.factory._unregisterClient(self)
-        print("Connection lost. Reason: {}".format(reason))
+        if self.verbose:
+            print("Connection lost. Reason: {}".format(reason))
 
     def onClose(self, wasClean, code, reason):
-        print("Connection closed. Reason: {}".format(reason))
-        print("Server Connection Closed. Exiting.")
+        if self.verbose:
+            print("Connection closed. Reason: {}".format(reason))
+            print("Server Connection Closed. Exiting.")
         exit()
 
     def register(self, id):
@@ -97,7 +105,8 @@ class BroadcastClientProtocol(WebSocketClientProtocol):
 
 
     def ping(self):
-        print("Ping!")
+        if self.verbose:
+            print("Ping!")
         self.send({"type": "ping"})
 
 
@@ -105,9 +114,10 @@ class BroadcastClientFactory(WebSocketClientFactory):
 
     protocol = BroadcastClientProtocol
 
-    def __init__(self):
+    def __init__(self, verbose):
         WebSocketClientFactory.__init__(self)
         self.client = None
+        self.verbose = verbose
         self.trigger_tick_cb = None
 
     def _registerClient(self, client):
@@ -121,29 +131,34 @@ class BroadcastClientFactory(WebSocketClientFactory):
         if self.client:
             self.client.send(payload, broadcast)
         else:
-            print("Attempted to send when no client connection has been established.")
+            if self.verbose:
+                print("Attempted to send when no client connection has been established.")
 
     def sendBulk(self, payload, broadcast=False):
         if self.client:
             self.client.sendBulk(payload, broadcast)
         else:
-            print("Attempted to send when no client connection has been established.")
+            if self.verbose:
+                print("Attempted to send when no client connection has been established.")
 
     def ping(self):
         if self.client:
             self.client.ping()
         else:
-            print("Attempted to send ping when no client connection has been established.")
+            if self.verbose:
+                print("Attempted to send ping when no client connection has been established.")
 
     def subscribe(self, channel, callback):
         if channel not in self.subscriptions:
-            print("Invalid channel name \"{}\". Subscription failed.".format(channel))
+            if self.verbose:
+                print("Invalid channel name \"{}\". Subscription failed.".format(channel))
         else:
             self.subscriptions[channel].append(callback)
 
     def unsubscribe(self, channel, callback):
         if channel not in self.subscriptions:
-            print("Invalid channel name \"{}\". Unsubscribe failed.".format(channel))
+            if self.verbose:
+                print("Invalid channel name \"{}\". Unsubscribe failed.".format(channel))
         else:
             for cb in self.subscriptions[channel]:
                 if cb == callback:
@@ -152,12 +167,13 @@ class BroadcastClientFactory(WebSocketClientFactory):
 
     def _get_subscribers(self, channel):
         if channel not in self.subscriptions:
-            print("Attempted to handle undefined subscription type: {}".format(channel))
+            if self.verbose:
+                print("Attempted to handle undefined subscription type: {}".format(channel))
             return None
         return self.subscriptions[channel]
 
 
-def start_client(host, port, client_logic):
+def start_client(host, port, client_logic, verbose=False):
 
     try:
        import asyncio
@@ -165,9 +181,10 @@ def start_client(host, port, client_logic):
        ## Trollius >= 0.3 was renamed
        import trollius as asyncio
 
-    print("Client attempting to connect to {}:{}".format(host, port))
+    if verbose:
+        print("Client attempting to connect to {}:{}".format(host, port))
 
-    factory = BroadcastClientFactory()
+    factory = BroadcastClientFactory(verbose)
 
     factory.trigger_tick_cb = client_logic.tick
     factory.trigger_initialize_cb = client_logic.initialize

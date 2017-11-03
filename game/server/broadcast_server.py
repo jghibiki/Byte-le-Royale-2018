@@ -9,19 +9,23 @@ class BroadcastServerProtocol(WebSocketServerProtocol):
     def __init__(self, *args, **kwargs):
         super(WebSocketServerProtocol, self).__init__(*args, **kwargs)
 
-        print("init")
-
         self.clients = []
+        self.verbose = False
 
     def onOpen(self):
         self.factory.register(self)
 
+        # copy verbosity
+        self.verbose = self.factory.verbose
+
     def onConnect(self, client):
-        print("Client connecting: {}".format(client.peer))
+        if self.verbose:
+            print("Client connecting: {}".format(client.peer))
         self.clients.append(client)
 
     def onClose(self, wasClean, code, reason):
-        print("Client connection closed: {}".format(reason))
+        if self.verbose:
+            print("Client connection closed: {}".format(reason))
         self.factory.unregister(self)
 
 
@@ -74,9 +78,10 @@ class BroadcastServerFactory(WebSocketServerFactory):
     protocol = BroadcastServerProtocol
 
 
-    def __init__(self):
+    def __init__(self, verbose=False):
         WebSocketServerFactory.__init__(self)
 
+        self.verbose = verbose
         self.clients = []
 
 
@@ -103,7 +108,7 @@ class BroadcastServerFactory(WebSocketServerFactory):
 
 
 
-def start_server(host, port, server_logic):
+def start_server(host, port, server_logic, verbose=False):
 
    try:
       import asyncio
@@ -112,7 +117,7 @@ def start_server(host, port, server_logic):
       import trollius as asyncio
 
 
-   factory = BroadcastServerFactory()
+   factory = BroadcastServerFactory(verbose)
 
    factory.notify_client_connect_cb = server_logic.notify_client_connect
    factory.notify_client_turn_cb = server_logic.notify_client_turn
