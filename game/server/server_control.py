@@ -6,10 +6,11 @@ from datetime import datetime, timedelta
 
 class ServerControl:
 
-    def __init__(self):
+    def __init__(self, verbose):
 
         self._loop = None
         self._socket_client = None
+        self.verbose = verbose
 
         self._clients_connected = 0
         self._client_ids = []
@@ -19,16 +20,18 @@ class ServerControl:
         # Game Configuration options
         self.turn_time = 0.01
         self.game_tick_no = 0
-        self.max_game_tick = 100
+        self.max_game_tick = 1e5
         self.client_turn_data = {}
 
     def initialize(self):
-        print("Initializing Server Logic")
+        if self.verbose:
+            print("Initializing Server Logic")
         self.send({ "type": "game_starting"})
         self.schedule(self.pre_tick, delay=0.1)
 
     def wait_for_clients(self):
-        print("Waiting for clients...")
+        if self.verbose:
+            print("Waiting for clients...")
 
         if self._clients_connected < 1:
             self.schedule(self.wait_for_clients, 2)
@@ -67,7 +70,8 @@ class ServerControl:
         if self.game_tick_no < self.max_game_tick and not self._quit:
             self.schedule(self.pre_tick)
         else:
-            print("Game Completed")
+            if self.verbose:
+                print("Game Completed")
             self._socket_client.close()
             self.schedule(exit, 3)
 
