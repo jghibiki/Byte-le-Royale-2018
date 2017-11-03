@@ -1,6 +1,8 @@
 from game.common.enums import *
 from game.common.node_types import get_node
 
+import sys
+
 class ClientLogic:
 
     def __init__(self, verbose):

@@ -4,6 +4,42 @@ from game.common.items import *
 from game.common.enums import *
 
 
+def get_unit(unit_class, name):
+
+    knight = 1
+    brawler = 2
+    pikeman = 3
+    rogue = 4
+    wizard = 5
+    sorcerer = 6
+    alchemist = 7
+    magus = 8
+
+    if unit_class == UnitClass.knight:
+        new_unit = Knight()
+    elif unit_class == UnitClass.brawler:
+        new_unit = Brawler()
+    elif unit_class == UnitClass.pikeman:
+        new_unit = Pikeman()
+    elif unit_class == UnitClass.rogue:
+        new_unit = Rogue()
+
+    elif unit_class == UnitClass.magus:
+        new_unit = Magus()
+    elif unit_class == UnitClass.wizard:
+        new_unit = Wizard()
+    elif unit_class == UnitClass.sorcerer:
+        new_unit = Sorcerer()
+    elif unit_class == UnitClass.alchemist:
+        new_unit = Alchemist()
+
+    new_unit.init(name)
+
+    return new_unit
+
+
+
+
 class Knight(Unit):
 
     def init(self, name):

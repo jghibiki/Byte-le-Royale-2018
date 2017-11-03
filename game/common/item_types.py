@@ -1,4 +1,3 @@
-from game.common.damage import *
 from game.common.items import *
 from game.common.enums import *
 
@@ -113,7 +112,7 @@ class Sword(MeleeItem):
 class Dagger(MeleeItem):
 
     def init(self, level):
-        MeleeItem.init(self, "Dagger", 100, [DamageType.percing, DamageType.slashing ], level, ItemType.dagger)
+        MeleeItem.init(self, "Dagger", 100, [DamageType.piercing, DamageType.slashing ], level, ItemType.dagger)
 
 class Spear(MeleeItem):
 

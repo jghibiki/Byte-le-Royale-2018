@@ -20,9 +20,27 @@ class CustomClient(ClientLogic):
 
         if turn_data["message_type"] == MessageType.unit_choice:
 
-            return {
-                "units": [
+            print("Sending Unit Choices")
 
+            return {
+                "message_type": MessageType.unit_choice,
+                "units": [
+                    {
+                        "name": "Martin",
+                        "class": UnitClass.knight
+                    },
+                    {
+                        "name": "Steve",
+                        "class": UnitClass.brawler
+                    },
+                    {
+                        "name": "Ed",
+                        "class": UnitClass.pikeman
+                    },
+                    {
+                        "name": "Thomas",
+                        "class": UnitClass.rogue
+                    }
                 ]
             }
 
@@ -36,6 +54,12 @@ class CustomClient(ClientLogic):
             if len(turn_data["options"]) == 2:
 
                 return { "message_type": MessageType.room_choice, "choice": Direction.left }
+
+            else:
+                return { "message_type": MessageType.null }
+
+        else:
+            return { "message_type": MessageType.null }
 
 
 

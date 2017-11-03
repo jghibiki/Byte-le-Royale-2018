@@ -4,9 +4,10 @@ class UnitClass:
     brawler = 2
     pikeman = 3
     rogue = 4
-    wizard = 5
-    sorcerer = 6
-    alchemist = 7
+    magus = 5
+    wizard = 6
+    sorcerer = 7
+    alchemist = 8
 
 
 class MessageType:
@@ -16,6 +17,7 @@ class MessageType:
     combat_end = 4
     room_choice = 5
     unit_choice = 6
+    null = 7
 
 
 class ItemType:
