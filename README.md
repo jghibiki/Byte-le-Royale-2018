@@ -2,6 +2,41 @@
 Now with or without nuts. (Advertised as seen)
 
 
+# Scripts
+
+## Shell Scripts
+
+### Run Game
+```shell
+$ ./run.sh
+```
+
+## Python Scripts
+
+### Generate Game
+```shell
+$ python -m game.scripts.load
+```
+
+### Run Terminal Simulation
+```shell
+$ python -m game.scripts.sim
+```
+
+### Visualize Generated Game
+```shell
+$ python -m game.scripts.load
+```
+
+### Run Server
+```shell
+$ python -m game.scripts.server
+```
+
+### Run Client 
+```shell
+$ python -m game.scripts.client
+```
 
 # Visualisation Examples
 Maps are read from top to bottom. Both examples show a 2-level game, longer games are supported but become more difficult to render in a terminal.

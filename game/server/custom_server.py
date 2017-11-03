@@ -1,4 +1,4 @@
-from server_control import ServerControl
+from game.server.server_control import ServerControl
 
 
 class CustomServer(ServerControl):

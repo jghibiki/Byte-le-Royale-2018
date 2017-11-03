@@ -34,7 +34,6 @@ class Chimera(Monster):
 
         self.health = 9000
         self.current_health = self.health
-        self.defense = 750 * math.floor(0.5 * level)
         self.damage = 500 * math.floor(0.5 * level)
 
         self.weaknesses = [
@@ -52,7 +51,6 @@ class Beholder(Monster):
 
         self.health = 6000
         self.current_health = self.health
-        self.defense = 1500 * math.floor(0.5 * level)
         self.damage = 250 * math.floor(0.5 * level)
 
         self.weaknesses = [
@@ -72,8 +70,7 @@ class Goblin(Monster):
 
         self.health = 6000
         self.current_health = self.health
-        self.defense = 500 * level
-        self.damage = 1000 * level
+        self.damage = 150 * level
 
         self.weaknesses = [
             DamageType.piercing,
