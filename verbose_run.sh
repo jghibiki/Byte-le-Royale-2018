@@ -9,13 +9,13 @@ function ctrl_c() {
 }
 
 echo "Starting Server..."
-python -m game.scripts.server &
+python -m game.scripts.server --server-verbose &
 p1=$!
 
 sleep 6;
 
 echo "Starting Client..."
-python -m game.scripts.client &
+python -m game.scripts.client --client-verbose &
 p2=$!
 
 wait $p1 $p2;

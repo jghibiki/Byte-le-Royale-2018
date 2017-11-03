@@ -23,7 +23,7 @@ from game.utils.network_visualizer import visualize
 #  \ /
 #   i
 
-LEVELS = 5
+LEVELS = 15
 
 
 def random_room_type(self):
@@ -130,7 +130,9 @@ def load():
     return unserialized_turns
 
 
-def generate():
+def generate(num=None):
+
+    num = num if num is not None else LEVELS
 
     nodes = []
     nodes_per_turn = []
@@ -143,10 +145,11 @@ def generate():
 
     current = root
 
-    for i in range(LEVELS):
+    for i in range(num):
+        print("Generate Level {}".format(i+1))
 
         # generate level
-        if i == LEVELS - 1:
+        if i == num - 1:
             nodes, right, left, tail = generate_sections(i, nodes_per_turn, tail = end)
         else:
             nodes, right, left, tail = generate_sections(i, nodes_per_turn)

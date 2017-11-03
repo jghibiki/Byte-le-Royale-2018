@@ -7,10 +7,16 @@ from game.common.message_types import *
 
 class CustomServer(ServerControl):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, verbose=False):
+        super().__init__(verbose)
 
+        self.verbose = verbose
+        if self.verbose:
+            print("Loading Game Data...")
         self.game_map = load()
+        if self.verbose:
+            print("Game Data Loaded")
+
         self.current_location = self.game_map.pop(0)[0]
 
 
@@ -18,17 +24,17 @@ class CustomServer(ServerControl):
         print(self.current_location)
 
         if isinstance(self.current_location, Town):
-            print("Town")
+            self.print("Town")
 
             #for u in units:
             #    u.reset_health()
 
         elif isinstance(self.current_location, MonsterRoom):
-            print("Combat against {}".format(self.current_location.monster.get_description()))
+            self.print("Combat against {}".format(self.current_location.monster.get_description()))
 
 
         elif isinstance(self.current_location, TrapRoom):
-            print("Navgating trap {}".format(self.current_location.trap.get_description()))
+            self.print("Navgating trap {}".format(self.current_location.trap.get_description()))
 
 
     def post_turn(self):
@@ -72,19 +78,19 @@ class CustomServer(ServerControl):
 
             if self.current_location.resolved:
                 if isinstance(self.current_location, StartRoom):
-                    print("Start Room")
+                    self.print("Start Room")
                     payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
                 elif isinstance(self.current_location, Town):
-                    print("Town")
+                    self.print("Town")
 
 
                 elif isinstance(self.current_location, MonsterRoom):
-                    print("Combat against {}".format(self.current_location.monster.get_description()))
+                    self.print("Combat against {}".format(self.current_location.monster.get_description()))
 
 
                 elif isinstance(self.current_location, TrapRoom):
-                    print("Trap Room")
+                    self.print("Trap Room")
 
             payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
@@ -122,3 +128,9 @@ class CustomServer(ServerControl):
             print(("*" * 25) + " End Room Reached! " + ("*" * 25))
             print("*" * 69)
             self._quit = True
+
+    def print(self, msg):
+        if self.verbose:
+            print(msg)
+
+

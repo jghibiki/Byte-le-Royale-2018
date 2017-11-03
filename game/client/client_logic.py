@@ -3,9 +3,10 @@ from game.common.node_types import *
 
 class ClientLogic:
 
-    def __init__(self):
+    def __init__(self, verbose):
         self._loop = None
         self._socket_client = None
+        self.verbose = verbose
 
         # Public properties availiable to users
 
@@ -44,7 +45,8 @@ class ClientLogic:
         self._socket_client.send(data)
 
     def notify_game_started(self):
-        print("Game Started")
+        if self.verbose:
+            print("Game Started")
         self.started_game = True
 
     def deserialize(self, turn_data):
