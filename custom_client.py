@@ -1,4 +1,6 @@
 from game.client.client_logic import ClientLogic
+from game.common.message_types import MessageType
+from game.common.directions import Direction
 
 class CustomClient(ClientLogic):
 
@@ -15,8 +17,20 @@ class CustomClient(ClientLogic):
     def turn(self, turn_data):
 
         print("tick: {}".format(self.tick_no))
+        print(turn_data)
 
-        return turn_data
+
+        if turn_data["message_type"] == MessageType.room_choice:
+
+            if len(turn_data["options"]) == 1:
+
+                return { "message_type": MessageType.room_choice, "choice": Direction.forward }
+
+            if len(turn_data["options"]) == 2:
+
+                return { "message_type": MessageType.room_choice, "choice": Direction.left }
+
+
 
 
 

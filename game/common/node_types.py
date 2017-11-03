@@ -10,6 +10,7 @@ class NODE_TYPES:
     trap = 2
     town = 3
     start = 4
+    end = 5
 
 def get_random_node():
     node_type = random.choice([
@@ -31,6 +32,8 @@ def get_node(node_type):
         return Town()
     elif node_type == NODE_TYPES.start:
         return StartRoom()
+    elif node_type == NODE_TYPES.end:
+        return EndRoom()
 
 
 class StartRoom(Node):
@@ -45,6 +48,28 @@ class StartRoom(Node):
 
     def get_description(self):
         return "Start Room"
+
+    def init(self):
+        Node.init(self)
+        self.resolved = True #always resolved so we move on immediately
+
+class EndRoom(Node):
+    @staticmethod
+    def new_node():
+        node = EndRoom()
+        node.init()
+        return node
+
+    def get_type(self):
+        return NODE_TYPES.end
+
+    def get_description(self):
+        return "End Room"
+
+    def init(self):
+        Node.init(self)
+        self.resolved = True #always resolved so we move on immediately
+
 
 class Town(Node):
     @staticmethod

@@ -1,4 +1,5 @@
-
+from game.common.message_types import MessageType
+from game.common.node_types import *
 
 class ClientLogic:
 
@@ -25,6 +26,9 @@ class ClientLogic:
 
     def tick(self, turn_data):
         self.tick_no += 1
+
+        turn_data = self.deserialize(turn_data)
+
         turn_result = self.turn(turn_data)
 
         self.send({
@@ -42,5 +46,19 @@ class ClientLogic:
     def notify_game_started(self):
         print("Game Started")
         self.started_game = True
+
+    def deserialize(self, turn_data):
+
+        if turn_data["message_type"] == MessageType.room_choice:
+            for direction, room in turn_data["options"].items():
+               new_room = get_node(room["node_type"])
+               new_room.from_dict(room)
+               turn_data["options"][direction] = new_room
+
+        return turn_data
+
+    def serialize(self, turn_result):
+        return turn_result
+
 
 

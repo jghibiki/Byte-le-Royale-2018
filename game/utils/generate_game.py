@@ -30,7 +30,7 @@ def random_room_type(self):
     random.choice([0, 0, 1])
 
 
-def generate_sections(num, nodes):
+def generate_sections(num, nodes, tail=None):
     #   a
     #  / \
     # .....
@@ -81,7 +81,11 @@ def generate_sections(num, nodes):
         c = h
 
 
-    i = Town.new_node()
+    if tail == None:
+        i = Town.new_node()
+    else:
+        i = tail
+
     b.add_node(i)
     c.add_node(i)
 
@@ -135,12 +139,17 @@ def generate():
     nodes.append(root)
     nodes_per_turn.append([root])
 
+    end = EndRoom.new_node()
+
     current = root
 
     for i in range(LEVELS):
 
         # generate level
-        nodes, right, left, tail = generate_sections(i, nodes_per_turn)
+        if i == LEVELS - 1:
+            nodes, right, left, tail = generate_sections(i, nodes_per_turn, tail = end)
+        else:
+            nodes, right, left, tail = generate_sections(i, nodes_per_turn)
 
         current.add_node(right)
         current.add_node(left)

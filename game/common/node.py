@@ -21,12 +21,14 @@ class Node(Serializable):
         self.initialized = True
         self.nodes = []
         self.node_ids = []
+        self.resolved = False
 
     def from_dict(self, d, safe=False):
         """ Load node from dict that has been deserialized from json """
 
         self.id = d["id"]
         self.node_ids = d["node_ids"]
+        self.resolved = d["resolved"]
         self.nodes = []
 
         self.initialized = True
@@ -37,7 +39,8 @@ class Node(Serializable):
         return {
             "id": self.id,
             "node_ids": self.node_ids,
-            "node_type": self.get_type()
+            "node_type": self.get_type(),
+            "resolved": self.resolved
         }
 
     def load_nodes(self, node_list):
