@@ -58,9 +58,12 @@ class CustomClient(ClientLogic):
             else:
                 return { "message_type": MessageType.null }
 
+        elif turn_data["message_type"] == MessageType.combat_round:
+            print("COMBAT!")
+            print(turn_data["monster"])    
+            exit()
         else:
             return { "message_type": MessageType.null }
-
 
 
 

@@ -22,12 +22,13 @@ class Unit(Serializable):
     __str__ = __repr__
 
 
-    def init(self, name, class_name,  max_health, primary_weapon_types):
+    def init(self, name, class_name, unit_class, max_health, primary_weapon_types):
         """Manually initialize obj"""
 
         self.id = str(uuid4())
         self.name = name
         self.class_name = class_name
+        self.unit_class = unit_class
 
         self.health = max_health
         self.current_health = self.health
@@ -50,6 +51,8 @@ class Unit(Serializable):
         self.name = d["name"]
 
         self.class_name = d["class_name"]
+        self.unit_class = d["unit_class"]
+
 
         self.health = d["health"]
         self.current_health = d["current_health"]
@@ -84,6 +87,7 @@ class Unit(Serializable):
         data["id"] = self.id
         data["name"] =  self.name
         data["class_name"] =  self.class_name
+        data["unit_class"] =  self.unit_class
 
         data["health"] = self.health
 

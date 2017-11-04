@@ -3,6 +3,7 @@ from game.utils.generate_game import load
 from game.common.node_types import *
 from game.common.enums import *
 from game.common.unit_classes import get_unit
+from game.server.combat import CombatManager
 
 
 class CustomServer(ServerControl):
@@ -40,6 +41,11 @@ class CustomServer(ServerControl):
 
         elif isinstance(self.current_location, MonsterRoom):
             self.print("Combat against {}".format(self.current_location.monster.get_description()))
+
+
+            if self.combat_manager is None:
+                self.print("Init new combat manager")
+                self.combat_manager = CombatManager(self.current_location.monster, self.units)
 
 
         elif isinstance(self.current_location, TrapRoom):
@@ -106,6 +112,25 @@ class CustomServer(ServerControl):
                             # TODO: LOG location change
                             self.check_end()
 
+                elif not self.current_location.resolved:
+
+                    if isinstance(self.current_location, Town):
+                        self.print("Notify Player they are in town Town")
+
+                        #for u in units:
+                        #    u.reset_health()
+
+                    elif isinstance(self.current_location, MonsterRoom):
+                        self.print("Do combat with for user.")
+                        
+                        
+
+
+                    elif isinstance(self.current_location, TrapRoom):
+                        self.print("Navgating trap {}".format(self.current_location.trap.get_description()))
+
+		
+
             self.client_turn_data[client_id] = None
 
 
@@ -135,7 +160,9 @@ class CustomServer(ServerControl):
 
                 elif isinstance(self.current_location, MonsterRoom):
                     self.print("Combat against {}".format(self.current_location.monster.get_description()))
-                    payload[i] = self.generate_room_option_payload(self.current_location.nodes)
+                    #payload[i] = self.generate_room_option_payload(self.current_location.nodes)
+                    
+                    payload[i] = self.combat_manager.serialize_combat_state()
 
 
                 elif isinstance(self.current_location, TrapRoom):

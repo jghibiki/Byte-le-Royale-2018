@@ -4,7 +4,7 @@ from game.common.items import *
 from game.common.enums import *
 
 
-def get_unit(unit_class, name):
+def get_unit(unit_class, name=""):
 
     knight = 1
     brawler = 2
@@ -43,35 +43,35 @@ def get_unit(unit_class, name):
 class Knight(Unit):
 
     def init(self, name):
-        Unit.init(self, name, "Knight", 5000, [ItemClass.melee, ItemType.sword])
+        Unit.init(self, name, "Knight", UnitClass.knight, 5000, [ItemClass.melee, ItemType.sword])
 
 class Brawler(Unit):
     def init(self, name):
-        Unit.init(self, name, "Brawler", 5000, [ItemClass.melee, ItemType.mace])
+        Unit.init(self, name, "Brawler", UnitClass.brawler, 5000, [ItemClass.melee, ItemType.mace])
 
 class Pikeman(Unit):
     def init(self, name):
-        Unit.init(self, name, "Pikeman", 5000, [ItemClass.melee, ItemType.spear])
+        Unit.init(self, name, "Pikeman", UnitClass.pikeman, 5000, [ItemClass.melee, ItemType.spear])
 
 class Rogue(Unit):
     def init(self, name):
-        Unit.init(self, name, "Rogue", 5000, [ItemClass.melee, ItemType.dagger])
+        Unit.init(self, name, "Rogue", UnitClass.rogue, 5000, [ItemClass.melee, ItemType.dagger])
 
 class Magus(Unit):
     def init(self, name):
-        Unit.init(self, name, "Magus", 5000, [ItemClass.magic, ItemType.staff])
+        Unit.init(self, name, "Magus", UnitClass.magus, 5000, [ItemClass.magic, ItemType.staff])
 
 class Wizard(Unit):
     def init(self, name):
-        Unit.init(self, name, "Wizard", 5000, [ItemClass.magic, ItemType.wand])
+        Unit.init(self, name, "Wizard", UnitClass.wizard, 5000, [ItemClass.magic, ItemType.wand])
 
 class Sorcerer(Unit):
     def init(self, name):
-        Unit.init(self, name, "Sorcerer", 5000, [ItemClass.magic, ItemType.spell_book])
+        Unit.init(self, name, "Sorcerer", UnitClass.sorcerer, 5000, [ItemClass.magic, ItemType.spell_book])
 
 class Alchemist(Unit):
     def init(self, name):
-        Unit.init(self, name, "Alchemist", 5000, [ItemClass.magic, ItemType.alchemy_supplies])
+        Unit.init(self, name, "Alchemist", UnitClass.alchemist, 5000, [ItemClass.magic, ItemType.alchemy_supplies])
 
 
 

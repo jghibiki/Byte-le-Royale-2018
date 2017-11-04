@@ -18,6 +18,7 @@ class MessageType:
     room_choice = 5
     unit_choice = 6
     null = 7
+    town_choice = 8
 
 
 class ItemType:
@@ -74,3 +75,9 @@ class Direction:
     forward = 1
     left = 2
     right = 3
+
+
+class MonsterType:
+    chimera = 1
+    beholder = 2
+    goblin = 3
