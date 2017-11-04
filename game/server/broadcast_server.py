@@ -17,6 +17,8 @@ class BroadcastServerProtocol(WebSocketServerProtocol):
 
         # copy verbosity
         self.verbose = self.factory.verbose
+        if self.verbose:
+            print("Client Connected")
 
     def onConnect(self, client):
         if self.verbose:

@@ -51,7 +51,7 @@ class CustomServer(ServerControl):
         client_id = self._client_ids[0]
 
         # handle response if we got one
-        if client_id in self.client_turn_data and  self.client_turn_data[client_id] is not None:
+        if client_id in self.client_turn_data and self.client_turn_data[client_id] is not None:
             data = self.client_turn_data[client_id]
 
             if "message_type" not in data:
