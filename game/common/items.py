@@ -20,7 +20,6 @@ class Item(Serializable):
         self.initialized = True
 
     def from_dict(self, d, safe=False):
-        Serializable.from_dict(self, d, safe)
         if not safe:
             pass
             # stuff to hide from user
@@ -29,7 +28,8 @@ class Item(Serializable):
         self.item_type = d["item_type"]
 
     def to_dict(self, safe=False):
-        data = Serializable.to_dict(self, safe)
+        data = {}
+
         if not safe:
             pass
             # stuff to hide from user
@@ -70,7 +70,7 @@ class CombatItem(Item):
 
 
     def to_dict(self, safe=False):
-        data =  Item.from_dict(self, safe)
+        data =  Item.to_dict(self, safe)
 
         if not safe:
             pass
@@ -104,7 +104,7 @@ class MeleeItem(CombatItem):
             # stuff to hide from user
 
     def to_dict(self, safe=False):
-        data = CombatItem.from_dict(self, safe)
+        data = CombatItem.to_dict(self, safe)
 
         if not safe:
             pass
@@ -133,7 +133,7 @@ class MagicItem(CombatItem):
             # stuff to hide from user
 
     def to_dict(self, safe=False):
-        data = CombatItem.from_dict(self, safe)
+        data = CombatItem.to_dict(self, safe)
 
         if not safe:
             pass
@@ -155,7 +155,7 @@ class MagicSpell(CombatItem):
         self.initialized = True
 
     def from_dict(self, d, safe=False):
-        CombatItem.from_dict(self, d, safe)
+        CombatItem.to_dict(self, d, safe)
 
         if not safe:
             pass

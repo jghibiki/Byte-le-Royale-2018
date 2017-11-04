@@ -38,7 +38,7 @@ class Unit(Serializable):
 
         self.initialized = True
 
-    def fromDict(self, d, safe=False):
+    def from_dict(self, d, safe=False):
         """ Load obj from dict that has been deserialized from json """
 
         if not safe:
@@ -66,7 +66,7 @@ class Unit(Serializable):
         self.initialized = True
 
 
-    def toDict(self, safe=False):
+    def to_dict(self, safe=False):
         """
         Dump obj data to a dict to prepare it for json serialization.
 

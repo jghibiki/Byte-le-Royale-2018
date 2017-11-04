@@ -22,6 +22,7 @@ class CustomServer(ServerControl):
         self.started = False
 
         self.combat_manager = None
+        self.units = []
 
 
     def pre_turn(self):
@@ -142,6 +143,8 @@ class CustomServer(ServerControl):
                     payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
         # send turn data to clients
+        payload["units"] = self.serialize_units()
+
         self.send({
             "type": "server_turn_prompt",
             "payload": payload
@@ -168,6 +171,14 @@ class CustomServer(ServerControl):
                     Direction.right: rooms[1].to_dict()
                 }
             }
+
+    def serialize_units(self):
+        units = []
+        for u in self.units:
+            units.append( u.to_dict() )
+
+        return units
+
 
     def check_end(self):
         if isinstance(self.current_location, EndRoom):
