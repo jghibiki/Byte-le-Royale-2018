@@ -59,6 +59,7 @@ class Knight(Unit):
                 ItemClass.melee, 
                 ItemType.sword
             ],
+            0,
             [
                 CombatAction.primary_weapon,
                 CombatAction.special_ability,
@@ -72,11 +73,12 @@ class Brawler(Unit):
             name, 
             "Brawler", 
             UnitClass.brawler, 
-            5000, 
+            5000, # health
             [
                 ItemClass.melee, 
                 ItemType.mace
             ],
+            0, #item slots
             [
                 CombatAction.primary_weapon,
                 CombatAction.special_ability,
@@ -89,11 +91,12 @@ class Pikeman(Unit):
             name, 
             "Pikeman", 
             UnitClass.pikeman, 
-            5000, 
+            5000, #health
             [
                 ItemClass.melee, 
                 ItemType.spear
             ],
+            0, #item slots
             [
                 CombatAction.primary_weapon,
                 CombatAction.special_ability,
@@ -105,11 +108,12 @@ class Rogue(Unit):
         Unit.init(self, name, 
             "Rogue", 
             UnitClass.rogue, 
-            5000,
+            5000, #health
             [
                 ItemClass.melee, 
                 ItemType.dagger
             ],
+            2, #item slots
             [
                 CombatAction.primary_weapon,
                 CombatAction.secondary_1,
@@ -122,11 +126,12 @@ class Magus(Unit):
         Unit.init(self, 
             name, "Magus", 
             UnitClass.magus, 
-            5000, 
+            5000, #health
             [
                 ItemClass.magic,
                 ItemType.staff
             ],
+            4, #item slots
             [
                 CombatAction.primary_weapon,
                 CombatAction.secondary_1,
@@ -143,11 +148,12 @@ class Wizard(Unit):
             name, 
             "Wizard", 
             UnitClass.wizard, 
-            5000, 
+            5000, # health
             [
                 ItemClass.magic, 
                 ItemType.wand
             ],
+            4, #item slots
             [
                 CombatAction.primary_weapon,
                 CombatAction.secondary_1,
@@ -164,11 +170,12 @@ class Sorcerer(Unit):
             name, 
             "Sorcerer", 
             UnitClass.sorcerer, 
-            5000, 
+            5000, #health
             [
                 ItemClass.magic, 
                 ItemType.spell_book
             ],
+            4, #item slots
             [
                 CombatAction.primary_weapon,
                 CombatAction.secondary_1,
@@ -185,11 +192,12 @@ class Alchemist(Unit):
             name, 
             "Alchemist", 
             UnitClass.alchemist, 
-            5000, 
+            5000, #health
             [
                 ItemClass.magic, 
                 ItemType.alchemy_supplies
             ],
+            3, #item slots
             [
                 CombatAction.secondary_1,
                 CombatAction.secondary_2,

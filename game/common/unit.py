@@ -22,7 +22,7 @@ class Unit(Serializable):
     __str__ = __repr__
 
 
-    def init(self, name, class_name, unit_class, max_health, primary_weapon_types, combat_action_types):
+    def init(self, name, class_name, unit_class, max_health, primary_weapon_types, item_slots, combat_action_types):
         """Manually initialize obj"""
 
         self.id = str(uuid4())
@@ -36,9 +36,10 @@ class Unit(Serializable):
         self.combat_action_types = combat_action_types
         self.availiable_combat_actions = combat_action_types
 
-        self.items = [
-            get_item(*primary_weapon_types, 1)
-        ]
+        self.primary_weapon = get_item(*primary_weapon_types, 1)
+
+        self.item_slots = item_slots
+        self.items = []
 
         self.initialized = True
 
@@ -63,13 +64,18 @@ class Unit(Serializable):
         self.health = d["health"]
         self.current_health = d["current_health"]
 
+        self.primary_weapon = load_item(
+            d["primary_weapon"][0], 
+            d["primary_weapon"][1],
+            d["primary_weapon"][2])
+
+        self.item_slots = d["item_slots"]
+
         # load items
         self.items = []
         for item in d["items"]:
             i = load_item(item[0], item[1], item[2])
             self.items.append(item)
-
-
 
 
         self.initialized = True
@@ -100,6 +106,14 @@ class Unit(Serializable):
 
         data["health"] = self.health
         data["current_health"] = self.current_health
+
+        data["primary_weapon"] = [
+            self.primary_weapon.item_class,
+            self.primary_weapon.item_type,
+            self.primary_weapon.to_dict() 
+        ]
+
+        data["item_slots"] = self.item_slots
 
         data["items"] = []
         for item in self.items:

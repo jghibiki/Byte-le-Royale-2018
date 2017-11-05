@@ -62,8 +62,8 @@ def load_item(item_class, item_type, data):
             new_item = Dagger()
         elif item_type == ItemType.mace:
             new_item = Mace()
-        elif item_type == ItemType.mace:
-            new_item = Mace()
+        elif item_type == ItemType.spear:
+            new_item = Spear()
         else:
             raise Exception("Invalid item type: {0}".format(item_type))
 

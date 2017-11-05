@@ -66,7 +66,6 @@ class CustomClient(ClientLogic):
             return_data = { "message_type": MessageType.combat_round, "actions": {}}
 
             for u in turn_data["units"]:
-                print("Client: Calculating turn for unit: {}".format(u.name))
 
                 # TODO: switch this process out for a method on the unit classes called take_action, which returns
                 #  a boolean indicating if the action was valid or not based on the unit's current internal state.

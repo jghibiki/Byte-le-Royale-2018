@@ -60,17 +60,35 @@ class CombatManager:
         # apply unit damage to monster
         for unit, action in unit_actions:
             dmg = 0
-            dmg_multiplier = 1.0
 
-            # check for double damage
+            weapon = None
+
+            # get appropriate weapon
             if action == CombatAction.primary_weapon:
-                print("{} deals primary weapon damage to monster".format(unit))
-                for damage_type in unit.items[0].damage_types:
+                print("{} uses primary weapon".format(unit))
+                weapon = unit.primary_weapon
+            elif action == CombatAction.secondary_1 and unit.item_slots > 0 and unit.items[0] is not None:
+                print("{} uses secondary 1 item".format(unit))
+                weapon = unit.items[0]
+            elif action == CombatAction.secondary_2 and unit.item_slots > 1 and unit.items[1] is not None:
+                print("{} uses secondary 2 item".format(unit))
+                weapon = unit.items[1]
+            elif action == CombatAction.secondary_3 and unit.item_slots > 2 and unit.items[2] is not None:
+                print("{} uses secondary 3 item".format(unit))
+                weapon = unit.items[2]
+            elif action == CombatAction.secondary_4 and unit.item_slots > 3 and unit.items[3] is not None:
+                print("{} uses secondary 4 item".format(unit))
+                weapon = unit.items[3]
+
+            # calculate damage multiplier and damage
+            dmg_multiplier = 1.0
+            if weapon is not None:
+                for damage_type in weapon.damage_types:
                     if damage_type in self.monster.weaknesses:
                         dmg_multiplier += 0.25
 
-                # apply normal damage
-                dmg += math.floor(unit.items[0].damage * dmg_multiplier)
+                # apply damage * damage multiplier
+                dmg += math.floor(weapon.damage * dmg_multiplier)
 
                 print("{0} deals {1} damage to {2}".format(
                     unit.name,
