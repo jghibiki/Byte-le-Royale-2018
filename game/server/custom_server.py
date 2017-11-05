@@ -27,7 +27,8 @@ class CustomServer(ServerControl):
 
 
     def pre_turn(self):
-        print(self.current_location)
+        self.print("#"*70)
+        self.print("SERVER PRE TURN")
 
         if not self.started:
             # first turn, ask for what units the team should be made up of
@@ -53,12 +54,14 @@ class CustomServer(ServerControl):
 
 
     def post_turn(self):
+        self.print("SERVER POST TURN")
 
         client_id = self._client_ids[0]
 
         # handle response if we got one
         if client_id in self.client_turn_data and self.client_turn_data[client_id] is not None:
             data = self.client_turn_data[client_id]
+            print(data)
 
             if "message_type" not in data:
                 return # bad turn
@@ -72,47 +75,32 @@ class CustomServer(ServerControl):
                     unique_classes = list(set(classes))
 
                     if len(classes) > 4:
-                        if self.verbose:
-                            print("Too many units defined")
-                        return
+                        raise Exception("Too many units defined")
 
                     if len(classes) > len(unique_classes):
-                        if self.verbose:
-                            print("Only one unit of each class allowed.")
-                        return
+                        raise Exception("Only one unit of each class allowed.")
 
                     for u in  data["units"]:
                         new_unit = get_unit(u["class"], u["name"])
                         self.units.append(new_unit)
 
                     if self.verbose:
-                        print("Client Successfully Sent Desired Unit Types")
+                        self.print("Client Successfully Sent Desired Unit Types")
                         for u in self.units:
-                            print(u)
+                            self.print(u)
                     self.started = True
 
             else:
 
-                self.current_location.resolved = True #TODO remove and implement resolution of types properly
-                if self.current_location.resolved and data["message_type"] == MessageType.room_choice:
+                #TODO remove this 
+                if isinstance(self.current_location, Town) or isinstance(self.current_location, TrapRoom):
+                    self.print("Skip Town or TrapRoom")
+                    self.current_location.resolved = True
 
-                    if len(self.current_location.nodes) == 1 and data["choice"] == Direction.forward:
-                        self.current_location = self.current_location.nodes[0]
-                        # TODO: LOG location change
-                        self.check_end()
+                # HANDLE ROOM NOT RESOLVED
+                if not self.current_location.resolved:
 
-                    elif len(self.current_location.nodes) == 2:
-                        if data["choice"] == Direction.left:
-                            self.current_location = self.current_location.nodes[0]
-                            # TODO: LOG location change
-                            self.check_end()
-
-                        elif data["choice"] == Direction.right:
-                            self.current_location = self.current_location.nodes[1]
-                            # TODO: LOG location change
-                            self.check_end()
-
-                elif not self.current_location.resolved:
+                    self.print("Location: {} not resolved.".format(self.current_location))
 
                     if isinstance(self.current_location, Town):
                         self.print("Notify Player they are in town Town")
@@ -120,14 +108,57 @@ class CustomServer(ServerControl):
                         #for u in units:
                         #    u.reset_health()
 
-                    elif isinstance(self.current_location, MonsterRoom):
+                    elif isinstance(self.current_location, MonsterRoom) and data["message_type"] == MessageType.combat_round:
+                        self.print("Combat against {}".format(self.current_location.monster.get_description()))
                         self.print("Do combat with for user.")
-                        
+
+                        if "actions" in data:
+                            actions = []
+                            for name, action in data["actions"].items():
+                                for unit in self.units:
+                                    if name == unit.name:
+                                        actions.append( [ unit, action ] )
+                                        break
+                                    
+
+                            self.print("Valid data, running combat round.")
+                            self.combat_manager.play_round(actions)
+
+                            if self.combat_manager.done:
+                                if self.combat_manager.success is True:
+                                    print("Combat Resolved!")
+                                    self.current_location.resolved = True
+                                    self.combat_manager = None
+                                    return 
+                                elif self.combat_manager.success is False:
+                                    print("Party Killed! GAME OVER!")
+                                    self._quit = True # die safely
+                                    return
                         
 
 
                     elif isinstance(self.current_location, TrapRoom):
                         self.print("Navgating trap {}".format(self.current_location.trap.get_description()))
+
+                # HANDLE ROOM RESOLVED
+                if self.current_location.resolved:
+                    if data["message_type"] == MessageType.room_choice:
+
+                        if len(self.current_location.nodes) == 1 and data["choice"] == Direction.forward:
+                            self.current_location = self.current_location.nodes[0]
+                            # TODO: LOG location change
+                            self.check_end()
+
+                        elif len(self.current_location.nodes) == 2:
+                            if data["choice"] == Direction.left:
+                                self.current_location = self.current_location.nodes[0]
+                                # TODO: LOG location change
+                                self.check_end()
+
+                            elif data["choice"] == Direction.right:
+                                self.current_location = self.current_location.nodes[1]
+                                # TODO: LOG location change
+                                self.check_end()
 
 		
 
@@ -138,6 +169,7 @@ class CustomServer(ServerControl):
 
     def send_turn_data(self):
         # send turn data to clients
+        self.print("SERVER SEND DATA")
         payload = {}
         import random
         for i in self._client_ids:
@@ -157,20 +189,26 @@ class CustomServer(ServerControl):
                     self.print("Town")
                     payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
-
                 elif isinstance(self.current_location, MonsterRoom):
-                    self.print("Combat against {}".format(self.current_location.monster.get_description()))
-                    #payload[i] = self.generate_room_option_payload(self.current_location.nodes)
-                    
-                    payload[i] = self.combat_manager.serialize_combat_state()
+                    self.print("Town")
+                    payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
 
                 elif isinstance(self.current_location, TrapRoom):
                     self.print("Trap Room")
                     payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
-        # send turn data to clients
-        payload["units"] = self.serialize_units()
+            elif not self.current_location.resolved:
+
+                if isinstance(self.current_location, MonsterRoom):
+                    self.print("Combat against {}".format(self.current_location.monster.get_description()))
+                    #payload[i] = self.generate_room_option_payload(self.current_location.nodes)
+                    
+                    payload[i] = self.combat_manager.serialize_combat_state()
+
+            # send turn data to clients
+            payload[i]["units"] = self.serialize_units()
+
 
         self.send({
             "type": "server_turn_prompt",

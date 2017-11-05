@@ -1,4 +1,13 @@
 
+class CombatAction:
+    primary_weapon = 1
+    secondary_1 = 2
+    secondary_2 = 3
+    secondary_3 = 4
+    secondary_4 = 5
+    special_ability = 6
+    wait = 7
+
 class UnitClass:
     knight = 1
     brawler = 2

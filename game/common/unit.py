@@ -22,7 +22,7 @@ class Unit(Serializable):
     __str__ = __repr__
 
 
-    def init(self, name, class_name, unit_class, max_health, primary_weapon_types):
+    def init(self, name, class_name, unit_class, max_health, primary_weapon_types, combat_action_types):
         """Manually initialize obj"""
 
         self.id = str(uuid4())
@@ -32,6 +32,9 @@ class Unit(Serializable):
 
         self.health = max_health
         self.current_health = self.health
+
+        self.combat_action_types = combat_action_types
+        self.availiable_combat_actions = combat_action_types
 
         self.items = [
             get_item(*primary_weapon_types, 1)
@@ -52,6 +55,9 @@ class Unit(Serializable):
 
         self.class_name = d["class_name"]
         self.unit_class = d["unit_class"]
+
+        self.combat_action_types = d["combat_action_types"]
+        self.availiable_combat_actions = d["availiable_combat_actions"]
 
 
         self.health = d["health"]
@@ -89,7 +95,11 @@ class Unit(Serializable):
         data["class_name"] =  self.class_name
         data["unit_class"] =  self.unit_class
 
+        data["combat_action_types"] = self.combat_action_types
+        data["availiable_combat_actions"] = self.availiable_combat_actions
+
         data["health"] = self.health
+        data["current_health"] = self.current_health
 
         data["items"] = []
         for item in self.items:
@@ -125,7 +135,8 @@ class Unit(Serializable):
         self.current_health = self.health
 
 
-
+    def special_ability(self):
+        raise Exception("{0} missing implementation of special_ability()".format(self.__class__.__name__))
 
 
 

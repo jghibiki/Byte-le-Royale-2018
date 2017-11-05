@@ -48,7 +48,7 @@ class ServerControl:
             self.client_turn_data[client_id] = turn_data
 
     def pre_tick(self):
-        print("Tick: {}".format(self.game_tick_no))
+        if self.verbose: print("SERVER TICK: {}".format(self.game_tick_no))
         self.game_tick_no += 1
 
         self.client_turn_data = {}
