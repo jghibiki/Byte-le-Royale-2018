@@ -36,6 +36,11 @@ class Unit(Serializable):
         self.combat_action_types = combat_action_types
         self.availiable_combat_actions = combat_action_types
 
+        self.current_combat_action = CombatAction.none
+        self.combat_action_target = None
+        self.special_ability_timer = 0
+        self.special_ability_cooldown = 0
+
         self.primary_weapon = get_item(*primary_weapon_types, 1)
 
         self.item_slots = item_slots
@@ -48,7 +53,7 @@ class Unit(Serializable):
 
         if not safe:
             # values that should not be exposed to user
-            pass
+            self.current_health = d["current_health"]
 
         # these values should have matching properties on game.safe.user.
         self.id = d["id"]
@@ -59,13 +64,15 @@ class Unit(Serializable):
 
         self.combat_action_types = d["combat_action_types"]
         self.availiable_combat_actions = d["availiable_combat_actions"]
-
+        self.current_combat_action = d["current_combat_action"]
+        self.combat_action_target = d["combat_action_target"]
+        self.special_ability_timer = d["special_ability_timer"]
+        self.special_ability_cooldown = d["special_ability_cooldown"]
 
         self.health = d["health"]
-        self.current_health = d["current_health"]
 
         self.primary_weapon = load_item(
-            d["primary_weapon"][0], 
+            d["primary_weapon"][0],
             d["primary_weapon"][1],
             d["primary_weapon"][2])
 
@@ -103,6 +110,10 @@ class Unit(Serializable):
 
         data["combat_action_types"] = self.combat_action_types
         data["availiable_combat_actions"] = self.availiable_combat_actions
+        data["current_combat_action"] = self.current_combat_action
+        data["combat_action_target"] = self.combat_action_target
+        data["special_ability_timer"] = self.special_ability_timer
+        data["special_ability_cooldown"] = self.special_ability_cooldown
 
         data["health"] = self.health
         data["current_health"] = self.current_health
@@ -110,7 +121,7 @@ class Unit(Serializable):
         data["primary_weapon"] = [
             self.primary_weapon.item_class,
             self.primary_weapon.item_type,
-            self.primary_weapon.to_dict() 
+            self.primary_weapon.to_dict()
         ]
 
         data["item_slots"] = self.item_slots
@@ -136,21 +147,28 @@ class Unit(Serializable):
 
         return out
 
-    def is_alive(self):
-        return self.current_health > 0
-
-    def select_combat_action(self, target):
-        if len(self.items) > 0:
-            return self.items[0]
-        else:
-            return None
-
     def reset_health(self):
         self.current_health = self.health
 
+    def _special_ability(self):
+        raise Exception("{0} missing implementation of _special_ability()".format(self.__class__.__name__))
+
+
+
+    ## PUBLIC Methods
 
     def special_ability(self):
-        raise Exception("{0} missing implementation of special_ability()".format(self.__class__.__name__))
+        self.current_combat_action = CombatAction.special_ability
+
+    def attack(self):
+        self.current_combat_action = CombatAction.primary_weapon
+
+    def wait(self):
+        self.current_combat_action = CombatAction.wait
+
+    def is_alive(self):
+        return self.current_health > 0
+
 
 
 

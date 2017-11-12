@@ -7,6 +7,7 @@ class CombatAction:
     secondary_4 = 5
     special_ability = 6
     wait = 7
+    none = 8
 
 class UnitClass:
     knight = 1

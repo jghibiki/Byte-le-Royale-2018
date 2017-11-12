@@ -142,7 +142,7 @@ class SpellBook(MagicItem):
 
 class AlchemicalSupplies(MagicItem):
     def init(self, level):
-        MagicItem.init(self, "Alchemical Supplies", 100, [ DamageType.force ], level, ItemType.alchemical_supplies)
+        MagicItem.init(self, "Alchemical Supplies", 0, [ DamageType.force ], level, ItemType.alchemical_supplies)
 
 
 ################
