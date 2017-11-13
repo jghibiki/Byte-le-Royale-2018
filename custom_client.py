@@ -67,8 +67,8 @@ class CustomClient(ClientLogic):
             return_data = { "message_type": MessageType.combat_round }
 
             for u in turn_data["units"]:
-                if u.unit_class == UnitClass.brawler:
-                    u.fit_of_rage()
+                if u.unit_class == UnitClass.pikeman:
+                    u.target_weakness()
                 else:
                     u.wait()
 

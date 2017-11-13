@@ -138,14 +138,18 @@ class FitOfRage(SpecialAbility):
 class TargetWeakness(SpecialAbility):
 
     def use(self, unit, monster):
-        if not self.ability_charged:
+        if not self.charged:
             self.charged = True
+            print("{} searches {} for weaknesses.".format(unit.name, monster.name))
 
         else:
             self.charged = False
 
-            monster.current_health = math.floor( unit.primary_weapon.damage * 2.5 )
+            damage = math.floor( unit.primary_weapon.damage * 2.5 )
+            monster.current_health -= damage
             if monster.current_health < 0: monster.current_health = 0
+
+            print("Seeing a weakness, {} strikes at {} for {} damage.".format(unit.name, monster.name, damage))
 
     def reset(self):
         self.charged = False
@@ -375,6 +379,9 @@ class CombatManager:
 
                 if unit.unit_class is UnitClass.brawler:
                     sa.use(unit, self.monster, brawler_damage)
+
+                if unit.unit_class is UnitClass.pikeman:
+                    sa.use(unit, self.monster)
 
 
             # calculate normal combat damage
