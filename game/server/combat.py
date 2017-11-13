@@ -52,12 +52,17 @@ def reset_special_abilities():
     for _, sa in special_abilities.items():
         sa.reset()
 
+def cooldown_abilities(self):
+    global special_abilities
+    for _, sa in special_abilities.items():
+        sa.cooldown()
 
 
 class SpecialAbility:
 
     def __init__(self):
         self.charged = False
+        self.charging = False
 
         self.cooldown_timer = 0
         self.charge_timer = 0
@@ -71,7 +76,7 @@ class SpecialAbility:
 
     def charge(self):
         if self.charge_timer > 0:
-            self.charge -= 1
+            self.charge_timer -= 1
 
     def set_target(self, target):
         self.target = target
@@ -82,38 +87,7 @@ class SpecialAbility:
 class Taunt(SpecialAbility):
 
     def use(self, damage, targets, unit, monster):
-        blocked_damage = 0
-
-        if type(targets) is list or type(targets) is tuple:
-            # Deal Damage to other units
-            original = damage
-            damage = math.floor(damage * 0.5)
-            for target in targets:
-                blocked_damage += origin - damage
-                if target is not self:
-                    target.current_health -= damage
-                    if target.current_health < 0: target.current_health = 0
-
-                    print("{0} deals {1} damage to {2}".format(
-                        monster.name,
-                        damage,
-                        unit.name))
-        else:
-            # Calculate Damage
-            original = damage
-            damage = math.floor(damage * 0.85)
-
-        blocked_damage += original - damage
-
-        # Apply Damage to self
-        unit.current_health -= damage
-        if unit.current_health < 0: unit.current_health = 0
-
-        print("{0} deals {1} damage to {2}".format(
-            monster.name,
-            damage,
-            unit.name))
-        print("{0} blocked {1} damage due to taunt.".format(unit.name, blocked_damage))
+        pass
 
 
 class FitOfRage(SpecialAbility):
@@ -123,28 +97,41 @@ class FitOfRage(SpecialAbility):
 
         self.damage_taken = 0
 
-    def use(self, unit, monster):
+    def use(self, unit, monster, damage):
 
         if not self.charged:
+            print("{0} is becoming enraged".format(unit.name))
             self.damage_taken += damage
 
+            if not self.charging:
+                self.charge_timer = 1
+                self.charging = True
+            else:
+                self.charge_timer -= 1
+                if self.charge_timer <= 0:
+                    self.charging = False
+                    self.charged = True
         else:
             n = 1.0
-            if math.floor(self.health * 0.25) < self.damage_taken < math.floor(self.health * 0.5):
+            if math.floor(unit.health * 0.25) < self.damage_taken < math.floor(unit.health * 0.5):
                 n = 2.0
-            elif math.floor(self.health * 0.5) < self.damage_taken < math.floor(self.health * 75):
+            elif math.floor(unit.health * 0.5) < self.damage_taken < math.floor(unit.health * 75):
                 n = 3.0
-            elif damage > math.floor(self.health * 0.75):
+            elif damage > math.floor(unit.health * 0.75):
                 n = 3.5
 
-            monster.current_health = math.floor( unit.primary_weapon.damage * ( 2.5 + ( n * 0.5) ) )
-            if monster.current_health < 0: monster.current_health= 0
+            damage = math.floor( unit.primary_weapon.damage * ( 3.5 + n  ) )
+            monster.current_health -= damage
+            if monster.current_health < 0: monster.current_health = 0
+
+            print("In a Fit of Rage, {0} deals {1} damage to {2}".format(unit.name, damage, monster.name))
 
             self.reset()
 
     def reset(self):
-        self.ability_charged = False
-        self.special_ability_timer = 0
+        self.charged = False
+        self.charging = False
+        self.charge_timer = 0
         self.damage_taken = 0
 
 
@@ -266,31 +253,75 @@ class CombatManager:
         monster_damage = self.monster.damage
 
         taunt_unit = None
+        brawler_damage = 0
 
-        # handle special abilities early
+        # handle early special abilities
         for unit in self.units:
             if unit.combat_action == CombatAction.special_ability:
                 sa = get_special_ability(unit.unit_class)
+
                 if unit.unit_class is UnitClass.knight:
-                    taunt_unit = [ unit, sa ]
+                    taunt_unit = unit
+
 
         # Apply monster damage
         if taunt_unit is not None:
-            taunt_unit[1].use(monster_damage, monster_target, taunt_unit[0], self.monster)
+            # Knight Taunt ability implementation
+            blocked_damage = 0
+
+            if type(monster_target) is list or type(monster_target) is tuple:
+                # Deal Damage to other units
+                damage = math.floor(monster_damage * 0.5)
+                for target in monster_target:
+                    blocked_damage += monster_damage - damage
+
+                    if target.unit_class is UnitClass.brawler:
+                        # record brawler damage
+                        brawler_damage += damage
+
+                    if target is not self:
+                        target.current_health -= damage
+                        if target.current_health < 0: target.current_health = 0
+
+                        print("{0} deals {1} damage to {2}".format(
+                            self.monster.name,
+                            damage,
+                            target.name))
+            else:
+                # Calculate Damage
+                damage = math.floor(monster_damage * 0.85)
+
+            blocked_damage += monster_damage - damage
+
+            # Apply Damage to self
+            taunt_unit.current_health -= damage
+            if taunt_unit.current_health < 0: taunt_unit.current_health = 0
+
+            print("{0} deals {1} damage to {2}".format(
+                self.monster.name,
+                damage,
+                taunt_unit.name))
+            print("{0} blocked {1} damage due to taunt.".format(taunt_unit.name, blocked_damage))
+
         else:
-            if len(monster_target) == 1:
+            # Normal Damage ( without taunt) implementation
+            if type(monster_target) is not list:
                 monster_target = [ monster_target ]
 
-            for mt in monster_target:
-                mt.current_health -= monster_damage
+            for u in monster_target:
+                u.current_health -= monster_damage
 
-                if mt.current_health < 0:
-                    mt.current_health = 0
+                if u.unit_class is UnitClass.brawler:
+                    # record brawler damage
+                    brawler_damage += monster_damage
+
+                if u.current_health < 0:
+                    u.current_health = 0
 
                 print("{0} deals {1} damage to {2}".format(
                     self.monster.name,
                     monster_damage,
-                    mt.name))
+                    u.name))
 
 
         # apply unit damage to monster
@@ -338,6 +369,12 @@ class CombatManager:
                 if unit.class_type in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ]:
                     print("{} uses {}".format(unit.name, unit.spell_3.name))
                     weapon = unit.spell_4
+
+            elif unit.combat_action == CombatAction.special_ability:
+                sa = get_special_ability(unit.unit_class)
+
+                if unit.unit_class is UnitClass.brawler:
+                    sa.use(unit, self.monster, brawler_damage)
 
 
             # calculate normal combat damage
