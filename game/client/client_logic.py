@@ -36,9 +36,11 @@ class ClientLogic:
 
         turn_result = self.turn(turn_data)
 
+        serialized_turn_result = self.serialize(turn_result)
+
         self.send({
             "type": "client_turn",
-            "payload":turn_result
+            "payload": serialized_turn_result
         })
 
     def turn(self):
@@ -54,15 +56,15 @@ class ClientLogic:
         self.started_game = True
 
     def deserialize(self, turn_data):
-        
+
         # load units
-        units = [] 
+        units = []
         if "units" in turn_data:
             for u in turn_data["units"]:
-                new_unit = get_unit(u["unit_class"]) 
+                new_unit = get_unit(u["unit_class"])
                 new_unit.from_dict(u)
                 units.append(new_unit)
-        
+
         turn_data["units"] = units
 
         # load message type specific data
@@ -83,6 +85,15 @@ class ClientLogic:
         return turn_data
 
     def serialize(self, turn_result):
+
+        if turn_result["message_type"] == MessageType.combat_round:
+            serialized_units = []
+
+            for u in turn_result["units"]:
+                serialized_units.append( u.to_dict() )
+
+            turn_result["units"] = serialized_units
+
         return turn_result
 
 

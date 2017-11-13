@@ -15,6 +15,7 @@ class CustomClient(ClientLogic):
 
     def turn(self, turn_data):
 
+        print()
         print("CLIENT TICK: {}".format(self.tick_no))
 
         if turn_data["message_type"] == MessageType.unit_choice:
@@ -59,22 +60,19 @@ class CustomClient(ClientLogic):
 
         elif turn_data["message_type"] == MessageType.combat_round:
             print("COMBAT!")
-            print(turn_data["monster"].summary())    
+            print(turn_data["monster"].summary())
             for u in turn_data["units"]:
                 print(u.summary())
 
-            return_data = { "message_type": MessageType.combat_round, "actions": {}}
+            return_data = { "message_type": MessageType.combat_round }
 
             for u in turn_data["units"]:
-
-                # TODO: switch this process out for a method on the unit classes called take_action, which returns
-                #  a boolean indicating if the action was valid or not based on the unit's current internal state.
-                #  then instead of manually needing to generate the response, the intended action could be fetched
-                #  automatically from the unit classes in the post_turn code.
-                if CombatAction.primary_weapon in u.availiable_combat_actions:
-                    return_data["actions"][u.name] = CombatAction.primary_weapon
+                if u.unit_class == UnitClass.knight:
+                    u.taunt()
                 else:
-                    return_data["actions"][u.name] = CombatAction.wait
+                    u.wait()
+
+            return_data["units"] = turn_data["units"]
             return return_data
 
         else:

@@ -8,15 +8,6 @@ from game.common.enums import *
 
 def get_unit(unit_class, name=""):
 
-    knight = 1
-    brawler = 2
-    pikeman = 3
-    rogue = 4
-    wizard = 5
-    sorcerer = 6
-    alchemist = 7
-    magus = 8
-
     if unit_class == UnitClass.knight:
         new_unit = Knight()
     elif unit_class == UnitClass.brawler:
@@ -40,13 +31,30 @@ def get_unit(unit_class, name=""):
     return new_unit
 
 
-    primary_weapon = 1
-    secondary_1 = 2
-    secondary_2 = 3
-    secondary_3 = 4
-    secondary_4 = 5
-    special_ability = 6
-    wait = 7
+def load_unit(unit_class, unit_data):
+    if unit_class == UnitClass.knight:
+        new_unit = Knight()
+    elif unit_class == UnitClass.brawler:
+        new_unit = Brawler()
+    elif unit_class == UnitClass.pikeman:
+        new_unit = Pikeman()
+    elif unit_class == UnitClass.rogue:
+        new_unit = Rogue()
+
+    elif unit_class == UnitClass.magus:
+        new_unit = Magus()
+    elif unit_class == UnitClass.wizard:
+        new_unit = Wizard()
+    elif unit_class == UnitClass.sorcerer:
+        new_unit = Sorcerer()
+    elif unit_class == UnitClass.alchemist:
+        new_unit = Alchemist()
+
+    new_unit.from_dict(unit_data)
+
+    return new_unit
+
+
 
 
 class Knight(Unit):
@@ -56,41 +64,17 @@ class Knight(Unit):
             name,
             "Knight",
             UnitClass.knight,
-            5000,
-            [
-                ItemClass.melee,
-                ItemType.sword
-            ],
-            0,
-            [
-                CombatAction.primary_weapon,
-                CombatAction.special_ability,
-                CombatAction.wait
-            ])
+            10000,
+            ItemType.sword)
 
-    def to_dict(self):
-        data = Unit.to_dict()
+    def attack(self):
+        self.combat_action = CombatAction.primary_weapon
 
-    def from_dict(self, data):
-        data = Unit.from_dict(data)
+    def taunt(self):
+        self.combat_action = CombatAction.special_ability
 
-    def _special_ability(self, damage, targets):
-
-        if type(targets) is list or type(targets) is tuple:
-            # Deal Damage to other units
-            damage = math.floor(damage * 0.5)
-            for target in targets:
-                if target is not self:
-                    target.current_health -= damage
-                    if target.current_health < 0: target.current_health = 0
-        else:
-            # Calculate Damage
-            damage = math.floor(damage * 0.85)
-
-        # Apply Damage to self
-        self.current_health -= damage
-        if self.current_health < 0: self.current_health = 0
-
+    def wait(self):
+        self.combat_action = CombatAction.wait
 
 
 class Brawler(Unit):
@@ -99,56 +83,17 @@ class Brawler(Unit):
             name,
             "Brawler",
             UnitClass.brawler,
-            5000, # health
-            [
-                ItemClass.melee,
-                ItemType.mace
-            ],
-            0, #item slots
-            [
-                CombatAction.primary_weapon,
-                CombatAction.special_ability,
-                CombatAction.wait
-            ])
+            10000, # health
+            ItemType.mace)
 
-        self.ability_charged = False
-        self.ability_damage_taken = 0
+    def attack(self):
+        self.combat_action = CombatAction.primary_weapon
 
-    def to_dict(self, safe=False):
-        data = Unit.to_dict(safe)
+    def fit_of_rage(self):
+        self.combat_action = CombatAction.special_ability
 
-        data["ability_charged"] = self.ability_charged
-        data["ability_damage_taken"] = self.ability_damage_taken
-
-    def from_dict(self, data, safe=False):
-        data = Unit.from_dict(data, safe)
-
-        self.ability_charged = data["ability_charged"]
-        self.ability_damage_taken = data["ability_damage_taken"]
-
-    def _special_ability(self, damage, monster):
-
-        if not self.ability_charged:
-            self.special_ability_timer += 1
-            self.ability_damage_taken += damage
-
-            if self.special_ability_timer > 2:
-                self.ability_charged = True
-
-        else:
-            n = 1.0
-            if math.floor(self.health * 0.25) < damage < math.floor(self.health * 0.5):
-                n = 2.0
-            elif math.floor(self.health * 0.5) < damage < math.floor(self.health * 75):
-                n = 3.0
-            elif damage > math.floor(self.health * 0.75):
-                n = 3.5
-
-            monster.damage = math.floor( self.primary_weapon.damage * ( 2.5 + ( n * 0.5) ) )
-            if monster.damage < 0: monster.damage = 0
-
-            self.ability_charged = False
-            self.special_ability_timer = 0
+    def wait(self):
+        self.combat_action = CombatAction.wait
 
 
 
@@ -158,41 +103,17 @@ class Pikeman(Unit):
             name,
             "Pikeman",
             UnitClass.pikeman,
-            5000, #health
-            [
-                ItemClass.melee,
-                ItemType.spear
-            ],
-            0, #item slots
-            [
-                CombatAction.primary_weapon,
-                CombatAction.special_ability,
-                CombatAction.wait
-            ])
+            10000, # health
+            ItemType.spear)
 
-        self.ability_charged = False
+    def attack(self):
+        self.combat_action = CombatAction.primary_weapon
 
-    def to_dict(self, safe=False):
-        data = Unit.to_dict(safe)
+    def target_weakness(self):
+        self.combat_action = CombatAction.special_ability
 
-        data["ability_charged"] = self.ability_charged
-
-    def from_dict(self, data, safe=False):
-        data = Unit.from_dict(data, safe)
-
-        self.ability_charged = data["ability_charged"]
-
-    def _special_ability(self, monster):
-
-        if not self.ability_charged:
-            self.charged = True
-
-        else:
-            self.charged = False
-
-            monster.current_health = math.floor( self.primary_weapon.damage * 2.5 )
-            if monster.current_health < 0: monster.current_health = 0
-
+    def wait(self):
+        self.combat_action = CombatAction.wait
 
 
 class Rogue(Unit):
@@ -200,39 +121,152 @@ class Rogue(Unit):
         Unit.init(self, name,
             "Rogue",
             UnitClass.rogue,
-            5000, #health
-            [
-                ItemClass.melee,
-                ItemType.dagger
-            ],
-            2, #item slots
-            [
-                CombatAction.primary_weapon,
-                CombatAction.secondary_1,
-                CombatAction.secondary_2,
-                CombatAction.wait
-            ])
+            10000, # health
+            ItemType.dagger)
+
+        self.bomb_1 = None
+        self.bomb_1_quantity = 0
+
+        self.bomb_2 = None
+        self.bomb_2_quantity = 0
+
+        self.bomb_3 = None
+        self.bomb_3_quantity = 0
+
+    def to_dict(self):
+        data = Unit.to_dict(self)
+
+        if self.bomb_1 is None:
+            data["bomb_1"] = None
+        else:
+            data["bomb_1"] = self.bomb_1.to_dict()
+        data["bomb_1_quantity"] = self.bomb_1_quantity
+
+        if self.bomb_2 is None:
+            data["bomb_2"] = None
+        else:
+            data["bomb_2"] = self.bomb_2.to_dict()
+        data["bomb_2_quantity"] = self.bomb_2_quantity
+
+        if self.bomb_3 is None:
+            data["bomb_3"] = None
+        else:
+            data["bomb_3"] = self.bomb_3.to_dict()
+        data["bomb_3_quantity"] = self.bomb_3_quantity
+
+        return data
+
+    def from_dict(self, data):
+        Unit.from_dict(self, data)
+
+        if data["bomb_1"] is not None:
+            self.bomb_1 = load_item(data["bomb_1"]["item_type"], data["bomb_1"])
+        else:
+            self.bomb_1 = None
+        self.bomb_1_quantity = data["bomb_1_quantity"]
+
+        if data["bomb_2"] is not None:
+            self.bomb_2 = load_item(data["bomb_2"]["item_type"], data["bomb_2"])
+        else:
+            self.bomb_2 = None
+        self.bomb_2_quantity = data["bomb_2_quantity"]
+
+        if data["bomb_3"] is not None:
+            self.bomb_3 = load_item(data["bomb_3"]["item_type"], data["bomb_3"])
+        else:
+            self.bomb_3 = None
+        self.bomb_3_quantity = data["bomb_3_quantity"]
+
+    def use_bomb_1(self):
+        self.combat_action = CombatAction.secondary_1
+
+    def use_bomb_2(self):
+        self.combat_action = CombatAction.secondary_2
+
+    def use_bomb_3(self):
+        self.combat_action = CombatAction.secondary_3
+
+    def wait(self):
+        self.combat_action = CombatAction.wait
 
 class Magus(Unit):
     def init(self, name):
         Unit.init(self,
             name, "Magus",
             UnitClass.magus,
-            5000, #health
-            [
-                ItemClass.magic,
-                ItemType.staff
-            ],
-            4, #item slots
-            [
-                CombatAction.primary_weapon,
-                CombatAction.secondary_1,
-                CombatAction.secondary_2,
-                CombatAction.secondary_3,
-                CombatAction.secondary_4,
-                CombatAction.special_ability,
-                CombatAction.wait
-            ])
+            10000, # health
+            ItemType.staff)
+
+        self.spell_1 = None
+        self.spell_2 = None
+        self.spell_3 = None
+        self.spell_4 = None
+
+    def to_dict(self):
+        data = Unit.to_dict(self)
+
+        if self.spell_1 is None:
+            data["spell_1"] = None
+        else:
+            data["spell_1"] = self.spell_1.to_dict()
+
+        if self.spell_2 is None:
+            data["spell_2"] = None
+        else:
+            data["spell_2"] = self.spell_2.to_dict()
+
+        if self.spell_3 is None:
+            data["spell_3"] = None
+        else:
+            data["spell_3"] = self.spell_3.to_dict()
+
+        if self.spell_4 is None:
+            data["spell_4"] = None
+        else:
+            data["spell_4"] = self.spell_4.to_dict()
+
+        return data
+
+    def from_dict(self, data):
+
+        if data["spell_1"] is not None:
+            self.spell_1 = load_item(data["spell_1"]["item_type"], data["spell_1"])
+        else:
+            self.spell_1 = None
+
+        if data["spell_2"] is not None:
+            self.spell_2 = load_item(data["spell_2"]["item_type"], data["spell_2"])
+        else:
+            self.spell_2 = None
+
+        if data["spell_3"] is not None:
+            self.spell_3 = load_item(data["spell_3"]["item_type"], data["spell_3"])
+        else:
+            self.spell_3 = None
+
+        if data["spell_4"] is not None:
+            self.spell_4 = load_item(data["spell_4"]["item_type"], data["spell_4"])
+        else:
+            self.spell_4 = None
+
+    def use_spell_1(self):
+        self.combat_action = CombatAction.secondary_1
+
+    def use_spell_2(self):
+        self.combat_action = CombatAction.secondary_2
+
+    def use_spell_3(self):
+        self.combat_action = CombatAction.secondary_3
+
+    def use_spell_4(self):
+        self.combat_action = CombatAction.secondary_4
+
+    def elemental_burst(self):
+        self.combat_action = CombatAction.special_ability
+
+    def wait(self):
+        self.combat_action = CombatAction.wait
+
 
 class Wizard(Unit):
     def init(self, name):
@@ -240,21 +274,80 @@ class Wizard(Unit):
             name,
             "Wizard",
             UnitClass.wizard,
-            5000, # health
-            [
-                ItemClass.magic,
-                ItemType.wand
-            ],
-            4, #item slots
-            [
-                CombatAction.primary_weapon,
-                CombatAction.secondary_1,
-                CombatAction.secondary_2,
-                CombatAction.secondary_3,
-                CombatAction.secondary_4,
-                CombatAction.special_ability,
-                CombatAction.wait
-            ])
+            10000, # health
+            ItemType.wand)
+
+        self.spell_1 = None
+        self.spell_2 = None
+        self.spell_3 = None
+        self.spell_4 = None
+
+    def to_dict(self):
+        data = Unit.to_dict(self)
+
+        if self.spell_1 is None:
+            data["spell_1"] = None
+        else:
+            data["spell_1"] = self.spell_1.to_dict()
+
+        if self.spell_2 is None:
+            data["spell_2"] = None
+        else:
+            data["spell_2"] = self.spell_2.to_dict()
+
+        if self.spell_3 is None:
+            data["spell_3"] = None
+        else:
+            data["spell_3"] = self.spell_3.to_dict()
+
+        if self.spell_4 is None:
+            data["spell_4"] = None
+        else:
+            data["spell_4"] = self.spell_4.to_dict()
+
+        return data
+
+    def from_dict(self, data):
+
+        if data["spell_1"] is not None:
+            self.spell_1 = load_item(data["spell_1"]["item_type"], data["spell_1"])
+        else:
+            self.spell_1 = None
+
+        if data["spell_2"] is not None:
+            self.spell_2 = load_item(data["spell_2"]["item_type"], data["spell_2"])
+        else:
+            self.spell_2 = None
+
+        if data["spell_3"] is not None:
+            self.spell_3 = load_item(data["spell_3"]["item_type"], data["spell_3"])
+        else:
+            self.spell_3 = None
+
+        if data["spell_4"] is not None:
+            self.spell_4 = load_item(data["spell_4"]["item_type"], data["spell_4"])
+        else:
+            self.spell_4 = None
+
+    def use_spell_1(self):
+        self.combat_action = CombatAction.secondary_1
+
+    def use_spell_2(self):
+        self.combat_action = CombatAction.secondary_2
+
+    def use_spell_3(self):
+        self.combat_action = CombatAction.secondary_3
+
+    def use_spell_4(self):
+        self.combat_action = CombatAction.secondary_4
+
+    def invigorate(self, target):
+        self.combat_action = CombatAction.special_ability
+        self.combat_action_targets = target.id
+
+    def wait(self):
+        self.combat_action = CombatAction.wait
+
 
 class Sorcerer(Unit):
     def init(self, name):
@@ -262,21 +355,81 @@ class Sorcerer(Unit):
             name,
             "Sorcerer",
             UnitClass.sorcerer,
-            5000, #health
-            [
-                ItemClass.magic,
-                ItemType.spell_book
-            ],
-            4, #item slots
-            [
-                CombatAction.primary_weapon,
-                CombatAction.secondary_1,
-                CombatAction.secondary_2,
-                CombatAction.secondary_3,
-                CombatAction.secondary_4,
-                CombatAction.special_ability,
-                CombatAction.wait
-            ])
+            10000, # health
+            ItemType.spell_book)
+
+        self.spell_1 = None
+        self.spell_2 = None
+        self.spell_3 = None
+        self.spell_4 = None
+
+    def to_dict(self):
+        data = Unit.to_dict(self)
+
+        if self.spell_1 is None:
+            data["spell_1"] = None
+        else:
+            data["spell_1"] = self.spell_1.to_dict()
+
+        if self.spell_2 is None:
+            data["spell_2"] = None
+        else:
+            data["spell_2"] = self.spell_2.to_dict()
+
+        if self.spell_3 is None:
+            data["spell_3"] = None
+        else:
+            data["spell_3"] = self.spell_3.to_dict()
+
+        if self.spell_4 is None:
+            data["spell_4"] = None
+        else:
+            data["spell_4"] = self.spell_4.to_dict()
+
+        return data
+
+    def from_dict(self, data):
+
+        if data["spell_1"] is not None:
+            self.spell_1 = load_item(data["spell_1"]["item_type"], data["spell_1"])
+        else:
+            self.spell_1 = None
+
+        if data["spell_2"] is not None:
+            self.spell_2 = load_item(data["spell_2"]["item_type"], data["spell_2"])
+        else:
+            self.spell_2 = None
+
+        if data["spell_3"] is not None:
+            self.spell_3 = load_item(data["spell_3"]["item_type"], data["spell_3"])
+        else:
+            self.spell_3 = None
+
+        if data["spell_4"] is not None:
+            self.spell_4 = load_item(data["spell_4"]["item_type"], data["spell_4"])
+        else:
+            self.spell_4 = None
+
+    def use_spell_1(self):
+        self.combat_action = CombatAction.secondary_1
+
+    def use_spell_2(self):
+        self.combat_action = CombatAction.secondary_2
+
+    def use_spell_3(self):
+        self.combat_action = CombatAction.secondary_3
+
+    def use_spell_4(self):
+        self.combat_action = CombatAction.secondary_4
+
+    def illusion(self, target_1, target_2):
+        self.combat_action = CombatAction.special_ability
+        self.combat_action_targets = [ target_1.id, target_2.id ]
+
+    def wait(self):
+        self.combat_action = CombatAction.wait
+
+
 
 class Alchemist(Unit):
     def init(self, name):
@@ -284,20 +437,57 @@ class Alchemist(Unit):
             name,
             "Alchemist",
             UnitClass.alchemist,
-            5000, #health
-            [
-                ItemClass.magic,
-                ItemType.alchemy_supplies
-            ],
-            3, #item slots
-            [
-                CombatAction.secondary_1,
-                CombatAction.secondary_2,
-                CombatAction.secondary_3,
-                CombatAction.special_ability,
-                CombatAction.wait
-            ])
+            10000, # health
+            ItemType.alchemy_supplies)
 
 
+        self.bomb_1 = None
+        self.bomb_1_quantity = 0
+
+        self.bomb_2 = None
+        self.bomb_2_quantity = 0
+
+    def to_dict(self):
+        data = Unit.to_dict(self)
+
+        if self.bomb_1 is None:
+            data["bomb_1"] = None
+        else:
+            data["bomb_1"] = self.bomb_1.to_dict()
+        data["bomb_1_quantity"] = self.bomb_1_quantity
+
+        if self.bomb_2 is None:
+            data["bomb_2"] = None
+        else:
+            data["bomb_2"] = self.bomb_2.to_dict()
+        data["bomb_2_quantity"] = self.bomb_2_quantity
+
+        return data
+
+    def from_dict(self, data):
+
+        if data["bomb_1"] is not None:
+            self.bomb_1 = load_item(data["bomb_1"]["item_type"], data["bomb_1"])
+        else:
+            self.bomb_1 = None
+        self.bomb_1_quantity = data["bomb_1_quantity"]
+
+        if data["bomb_2"] is not None:
+            self.bomb_2 = load_item(data["bomb_2"]["item_type"], data["bomb_2"])
+        else:
+            self.bomb_1 = None
+        self.bomb_2_quantity = data["bomb_2_quantity"]
 
 
+    def use_bomb_1(self):
+        self.combat_action = CombatAction.secondary_1
+
+    def use_bomb_2(self):
+        self.combat_action = CombatAction.secondary_2
+
+    def illusion(self, bomb_type):
+        self.combat_action = CombatAction.special_ability
+        self.combat_action_targets = bomb_type.item_type
+
+    def wait(self):
+        self.combat_action = CombatAction.wait

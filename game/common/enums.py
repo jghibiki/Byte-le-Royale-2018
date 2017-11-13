@@ -6,8 +6,8 @@ class CombatAction:
     secondary_3 = 4
     secondary_4 = 5
     special_ability = 6
-    wait = 7
-    none = 8
+    wait = 8
+    none = 9
 
 class UnitClass:
     knight = 1
@@ -50,6 +50,18 @@ class ItemType:
     ice_spike = 11
 
     rope = 12
+
+    fire_bomb = 13
+    frost_bomb = 14
+    shock_bomb = 15
+    acid_bomb = 16
+    flash_bomb = 17
+    frost_bomb = 14
+    shock_bomb = 15
+    acid_bomb = 16
+    flash_bomb = 17
+    spike_bomb = 18
+    concussion_bomb = 19
 
 class ItemClass:
     melee = 1

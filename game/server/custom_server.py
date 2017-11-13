@@ -2,7 +2,7 @@ from game.server.server_control import ServerControl
 from game.utils.generate_game import load
 from game.common.node_types import *
 from game.common.enums import *
-from game.common.unit_classes import get_unit
+from game.common.unit_classes import get_unit, load_unit
 from game.server.combat import CombatManager
 
 
@@ -19,6 +19,8 @@ class CustomServer(ServerControl):
             print("Game Data Loaded")
 
         self.current_location = self.game_map.pop(0)[0]
+
+        self.trophies = 0
 
         self.started = False
 
@@ -56,12 +58,11 @@ class CustomServer(ServerControl):
     def post_turn(self):
         self.print("SERVER POST TURN")
 
-        client_id = self._client_ids[0]
+        self.deserialize_turn_data()
 
         # handle response if we got one
-        if client_id in self.client_turn_data and self.client_turn_data[client_id] is not None:
-            data = self.client_turn_data[client_id]
-            print(data)
+        if self.turn_data is not None:
+            data = self.turn_data
 
             if "message_type" not in data:
                 return # bad turn
@@ -92,7 +93,7 @@ class CustomServer(ServerControl):
 
             else:
 
-                #TODO remove this 
+                #TODO remove this
                 if isinstance(self.current_location, Town) or isinstance(self.current_location, TrapRoom):
                     self.print("Skip Town or TrapRoom")
                     self.current_location.resolved = True
@@ -112,29 +113,24 @@ class CustomServer(ServerControl):
                         self.print("Combat against {}".format(self.current_location.monster.get_description()))
                         self.print("Do combat with for user.")
 
-                        if "actions" in data:
-                            actions = []
-                            for name, action in data["actions"].items():
-                                for unit in self.units:
-                                    if name == unit.name:
-                                        actions.append( [ unit, action ] )
-                                        break
-                                    
 
-                            self.print("Valid data, running combat round.")
-                            self.combat_manager.play_round(actions)
+                        self.print("Valid data, running combat round.")
+                        self.combat_manager.units = data["units"]
+                        self.combat_manager.play_round()
 
-                            if self.combat_manager.done:
-                                if self.combat_manager.success is True:
-                                    print("Combat Resolved!")
-                                    self.current_location.resolved = True
-                                    self.combat_manager = None
-                                    return 
-                                elif self.combat_manager.success is False:
-                                    print("Party Killed! GAME OVER!")
-                                    self._quit = True # die safely
-                                    return
-                        
+                        if self.combat_manager.done:
+                            if self.combat_manager.success is True:
+                                print("Combat Resolved!")
+                                self.trophies += 1
+                                self.current_location.resolved = True
+                                self.combat_manager = None
+                                return
+                            elif self.combat_manager.success is False:
+                                print("Party Killed! GAME OVER!")
+                                print("Trophies Earned: {}".format(self.trophies))
+                                self._quit = True # die safely
+                                return
+
 
 
                     elif isinstance(self.current_location, TrapRoom):
@@ -160,9 +156,9 @@ class CustomServer(ServerControl):
                                 # TODO: LOG location change
                                 self.check_end()
 
-		
 
-            self.client_turn_data[client_id] = None
+
+            self.client_turn_data = None
 
 
 
@@ -190,7 +186,7 @@ class CustomServer(ServerControl):
                     payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
                 elif isinstance(self.current_location, MonsterRoom):
-                    self.print("Town")
+                    self.print("Monster Room")
                     payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
 
@@ -203,7 +199,7 @@ class CustomServer(ServerControl):
                 if isinstance(self.current_location, MonsterRoom):
                     self.print("Combat against {}".format(self.current_location.monster.get_description()))
                     #payload[i] = self.generate_room_option_payload(self.current_location.nodes)
-                    
+
                     payload[i] = self.combat_manager.serialize_combat_state()
 
             # send turn data to clients
@@ -243,6 +239,22 @@ class CustomServer(ServerControl):
             units.append( u.to_dict() )
 
         return units
+
+    def deserialize_units(self, units):
+        deserialized_units = []
+        for u in self.turn_data["units"]:
+            unit = load_unit(u["unit_class"], u)
+            deserialized_units.append(unit)
+        return deserialized_units
+
+
+    def deserialize_turn_data(self):
+
+        if self.turn_data is not None:
+            if self.turn_data["message_type"] != MessageType.unit_choice:
+                if "units" in self.turn_data:
+                    self.turn_data["units"] = self.deserialize_units(self.turn_data["units"])
+                    self.units = self.turn_data["units"]
 
 
     def check_end(self):

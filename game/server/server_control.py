@@ -20,8 +20,8 @@ class ServerControl:
         # Game Configuration options
         self.turn_time = 0.01
         self.game_tick_no = 0
-        self.max_game_tick = 1e5
-        self.client_turn_data = {}
+        self.max_game_tick = 10
+        self.turn_data = None
 
     def initialize(self):
         if self.verbose:
@@ -41,17 +41,16 @@ class ServerControl:
     def notify_client_connect(self, client_id):
         self._clients_connected += 1
         self._client_ids.append(client_id)
-        self.client_turn_data[client_id] = None
+        self.turn_data = None
 
-    def notify_client_turn(self, client_id,  turn_data):
-        if client_id not in self.client_turn_data:
-            self.client_turn_data[client_id] = turn_data
+    def notify_client_turn(self, turn_data):
+        self.turn_data = turn_data
 
     def pre_tick(self):
         if self.verbose: print("SERVER TICK: {}".format(self.game_tick_no))
         self.game_tick_no += 1
 
-        self.client_turn_data = {}
+        self.turn_data = None
 
         self.pre_turn()
 
