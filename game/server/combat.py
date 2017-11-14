@@ -157,37 +157,45 @@ class TargetWeakness(SpecialAbility):
 
 class ElementalBurst(SpecialAbility):
 
-    def charge(self):
-        self.charge_timer -= 1
-        if self.charge_timer <= 0:
-            self.charged = True
-
     def use(self, unit, monster):
 
-        if not self.ability_charged:
-            self.charge_timer = 2
+        if not self.charged:
+            print("{0} charges up magical energy.".format(unit.name))
+            if not self.charging:
+                self.charge_timer = 2
+                self.charging = True
+            else:
+                self.charge_timer -= 1
+                if self.charge_timer <= 0:
+                    self.charged = True
+                    self.charging = False
 
         else:
-            dmg_multiplier = 1.0
+            dmg_multiplier = 2.0
             for damage_type in [ DamageType.cold, DamageType.fire, DamageType.electricity ]:
                 if damage_type in monster.weaknesses:
                     dmg_multiplier += 0.25
 
-            monster.current_health = math.floor( self.primary_weapon.damage * dmg_multiplier )
+            damage = math.floor( unit.primary_weapon.damage * dmg_multiplier )
+            monster.current_health -= damage
             if monster.current_health < 0: monster.current_health = 0
+
+            print("With a burst of elemental energy, {0} deals {1} damage to {2}".format(unit.name, damage, monster.name))
 
             self.reset()
 
     def reset(self):
         self.charged = False
+        self.charging = False
         self.charge_timer = 0
 
 class Invigorate(SpecialAbility):
 
-    def use(self, target):
+    def use(self):
         if self.cooldown_timer <= 0:
-            target.invigorated = True
             self.cooldown_timer = 3
+        else:
+            self.cooldown_timer -= 1
 
 class Illusion(SpecialAbility):
 
@@ -258,6 +266,7 @@ class CombatManager:
 
         taunt_unit = None
         brawler_damage = 0
+        invigorated_unit = None
 
         # handle early special abilities
         for unit in self.units:
@@ -266,6 +275,25 @@ class CombatManager:
 
                 if unit.unit_class is UnitClass.knight:
                     taunt_unit = unit
+
+                elif unit.unit_class == UnitClass.wizard:
+                    print("We have a wizard!")
+                    if sa.cooldown_timer <= 0:
+                        print("Wizard's ability is good to go")
+                        print(unit.combat_action_target_1)
+                        for u in self.units:
+                            print(u.id)
+                            if u.id == unit.combat_action_target_1:
+                                invigorated_unit = u
+                                break
+                        if invigorated_unit is not None:
+                            print("{0} casts invigorate on {1}".format(unit.name, invigorated_unit.name))
+
+        # verify that invigorated_unit is not taunt_unit
+        if invigorated_unit is not None:
+            if taunt_unit is not None  and taunt_unit == invigorated_unit:
+                # cancel taunt if unit is invigorated
+                taunt_unit = None
 
 
         # Apply monster damage
@@ -380,13 +408,25 @@ class CombatManager:
                 if unit.unit_class is UnitClass.brawler:
                     sa.use(unit, self.monster, brawler_damage)
 
-                if unit.unit_class is UnitClass.pikeman:
+                elif unit.unit_class is UnitClass.pikeman:
                     sa.use(unit, self.monster)
+
+                elif unit.unit_class is UnitClass.magus:
+                    sa.use(unit, self.monster)
+
+                elif unit.unit_class is UnitClass.wizard:
+                    sa.use()
+
+
 
 
             # calculate normal combat damage
             if weapon is not None:
                 dmg_multiplier = 1.0
+
+                if unit is invigorated_unit: # deal more damage if target was invigorated
+                    dmg_multiplier += 1.5
+
                 for damage_type in weapon.damage_types:
                     if damage_type in self.monster.weaknesses:
                         dmg_multiplier += 0.25

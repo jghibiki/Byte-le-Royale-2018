@@ -39,7 +39,7 @@ class CustomClient(ClientLogic):
                     },
                     {
                         "name": "Thomas",
-                        "class": UnitClass.rogue
+                        "class": UnitClass.wizard
                     }
                 ]
             }
@@ -67,8 +67,10 @@ class CustomClient(ClientLogic):
             return_data = { "message_type": MessageType.combat_round }
 
             for u in turn_data["units"]:
-                if u.unit_class == UnitClass.pikeman:
-                    u.target_weakness()
+                if u.unit_class == UnitClass.wizard:
+                    u.invigorate(turn_data["units"][0])
+                elif u.unit_class == UnitClass.knight:
+                    u.attack()
                 else:
                     u.wait()
 

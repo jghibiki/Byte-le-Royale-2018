@@ -228,6 +228,7 @@ class Magus(Unit):
         return data
 
     def from_dict(self, data):
+        Unit.from_dict(self, data)
 
         if data["spell_1"] is not None:
             self.spell_1 = load_item(data["spell_1"]["item_type"], data["spell_1"])
@@ -308,6 +309,7 @@ class Wizard(Unit):
         return data
 
     def from_dict(self, data):
+        Unit.from_dict(self, data)
 
         if data["spell_1"] is not None:
             self.spell_1 = load_item(data["spell_1"]["item_type"], data["spell_1"])
@@ -343,7 +345,7 @@ class Wizard(Unit):
 
     def invigorate(self, target):
         self.combat_action = CombatAction.special_ability
-        self.combat_action_targets = target.id
+        self.combat_action_target_1 = target.id
 
     def wait(self):
         self.combat_action = CombatAction.wait
@@ -389,6 +391,7 @@ class Sorcerer(Unit):
         return data
 
     def from_dict(self, data):
+        Unit.from_dict(self, data)
 
         if data["spell_1"] is not None:
             self.spell_1 = load_item(data["spell_1"]["item_type"], data["spell_1"])
@@ -424,7 +427,8 @@ class Sorcerer(Unit):
 
     def illusion(self, target_1, target_2):
         self.combat_action = CombatAction.special_ability
-        self.combat_action_targets = [ target_1.id, target_2.id ]
+        self.combat_action_target_1 = target_1.id
+        self.combat_action_target_2 = target_2.id
 
     def wait(self):
         self.combat_action = CombatAction.wait
@@ -465,6 +469,7 @@ class Alchemist(Unit):
         return data
 
     def from_dict(self, data):
+        Unit.from_dict(self, data)
 
         if data["bomb_1"] is not None:
             self.bomb_1 = load_item(data["bomb_1"]["item_type"], data["bomb_1"])
@@ -487,7 +492,7 @@ class Alchemist(Unit):
 
     def illusion(self, bomb_type):
         self.combat_action = CombatAction.special_ability
-        self.combat_action_targets = bomb_type.item_type
+        self.combat_action_target_1 = bomb_type.item_type
 
     def wait(self):
         self.combat_action = CombatAction.wait

@@ -34,7 +34,8 @@ class Unit(Serializable):
         self.current_health = self.health
 
         self.combat_action = CombatAction.none
-        self.combat_action_targets = None
+        self.combat_action_target_1 = None
+        self.combat_action_target_2 = None
 
         self.invigorated = False
 
@@ -57,7 +58,8 @@ class Unit(Serializable):
         self.unit_class = d["unit_class"]
 
         self.combat_action = d["combat_action"]
-        self.combat_action_targets = d["combat_action_targets"]
+        self.combat_action_target_1 = d["combat_action_target_1"]
+        self.combat_action_target_2 = d["combat_action_target_2"]
 
         self.invigorated = d["invigorated"]
 
@@ -91,7 +93,8 @@ class Unit(Serializable):
         data["unit_class"] =  self.unit_class
 
         data["combat_action"] = self.combat_action
-        data["combat_action_targets"] = self.combat_action_targets
+        data["combat_action_target_1"] = self.combat_action_target_1
+        data["combat_action_target_2"] = self.combat_action_target_2
 
         data["invigorated"] = self.invigorated
 
