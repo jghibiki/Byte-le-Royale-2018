@@ -1,12 +1,41 @@
-from game.common.message_types import MessageType
-from game.common.node_types import *
+from game.common.enums import *
+from game.common.node_types import get_node
+from game.common.unit_classes import get_unit
+from game.common.monster_types import get_monster
+
+import sys
+
+class ClientStorefront:
+    def __init__(self, turn_data):
+        self.items = turn_data["items"]
+        self.purchases = []
+        self.town_number = turn_data["town_number"]
+
+    def get_town_number(self):
+        return self.town_number
+
+
+    def purchase(self, unit, item_slot, item, item_level):
+        self.purchases.append( {
+            "unit": unit.id,
+            "slot": 2,
+            "item": ItemType.fire_bomb,
+            "item_level": 1
+        } )
+
+    def get_return_data(self):
+        return {
+            "message_type": MessageType.town,
+            "purchases": self.purchases
+        }
 
 class ClientLogic:
 
-    def __init__(self, verbose):
+    def __init__(self, verbose, player_client):
         self._loop = None
         self._socket_client = None
         self.verbose = verbose
+        self.player_client = player_client
 
         # Public properties availiable to users
 
@@ -32,14 +61,40 @@ class ClientLogic:
 
         turn_result = self.turn(turn_data)
 
+        serialized_turn_result = self.serialize(turn_result)
+
         self.send({
             "type": "client_turn",
-            "payload":turn_result
+            "payload": serialized_turn_result
         })
 
-    def turn(self):
-        """ Implement game logic here."""
-        pass
+    def turn(self, turn_data):
+
+        if turn_data["message_type"] == MessageType.unit_choice:
+            choices = self.player_client.unit_choice()
+            return {
+                "message_type": MessageType.unit_choice,
+                "units": choices
+            }
+
+        elif turn_data["message_type"] == MessageType.town:
+            units = turn_data["units"]
+            gold = turn_data["gold"]
+            store = ClientStorefront(turn_data)
+            self.player_client.town(units, gold, store)
+            return store.get_return_data()
+
+        elif turn_data["message_type"] == MessageType.room_choice:
+            units = turn_data["units"]
+            options = turn_data["options"]
+            direction = self.player_client.room_choice(units, options)
+            return { "message_type": MessageType.room_choice, "choice": direction }
+
+        elif turn_data["message_type"] == MessageType.combat_round:
+            monster = turn_data["monster"]
+            units = turn_data["units"]
+            self.player_client.combat_round(monster, units)
+            return { "message_type": MessageType.combat_round, "units": units }
 
     def send(self, data):
         self._socket_client.send(data)
@@ -51,15 +106,43 @@ class ClientLogic:
 
     def deserialize(self, turn_data):
 
+        # load units
+        units = []
+        if "units" in turn_data:
+            for u in turn_data["units"]:
+                new_unit = get_unit(u["unit_class"])
+                new_unit.from_dict(u)
+                units.append(new_unit)
+
+        turn_data["units"] = units
+
+        # load message type specific data
         if turn_data["message_type"] == MessageType.room_choice:
+            # deserialize rooms
             for direction, room in turn_data["options"].items():
                new_room = get_node(room["node_type"])
                new_room.from_dict(room)
                turn_data["options"][direction] = new_room
 
+        if turn_data["message_type"] == MessageType.combat_round:
+            # deserialize monster
+            monster = get_monster(turn_data["monster"]["monster_type"])
+            monster.from_dict(turn_data["monster"])
+            turn_data["monster"] = monster
+
+
         return turn_data
 
     def serialize(self, turn_result):
+
+        if turn_result["message_type"] == MessageType.combat_round:
+            serialized_units = []
+
+            for u in turn_result["units"]:
+                serialized_units.append( u.to_dict() )
+
+            turn_result["units"] = serialized_units
+
         return turn_result
 
 

@@ -22,51 +22,57 @@ class Unit(Serializable):
     __str__ = __repr__
 
 
-    def init(self, name, class_name,  max_health, primary_weapon_types):
+    def init(self, name, class_name, unit_class, max_health, primary_weapon_type):
         """Manually initialize obj"""
 
         self.id = str(uuid4())
         self.name = name
         self.class_name = class_name
+        self.unit_class = unit_class
 
         self.health = max_health
         self.current_health = self.health
 
-        self.items = [
-            get_item(*primary_weapon_types, 1)
-        ]
+        self.combat_action = CombatAction.none
+        self.combat_action_target_1 = None
+        self.combat_action_target_2 = None
+
+        self.invigorated = False
+
+        self.primary_weapon = get_item(primary_weapon_type, 1)
 
         self.initialized = True
 
-    def fromDict(self, d, safe=False):
+    def from_dict(self, d, safe=False):
         """ Load obj from dict that has been deserialized from json """
 
         if not safe:
             # values that should not be exposed to user
-            pass
+            self.current_health = d["current_health"]
 
         # these values should have matching properties on game.safe.user.
         self.id = d["id"]
         self.name = d["name"]
 
         self.class_name = d["class_name"]
+        self.unit_class = d["unit_class"]
+
+        self.combat_action = d["combat_action"]
+        self.combat_action_target_1 = d["combat_action_target_1"]
+        self.combat_action_target_2 = d["combat_action_target_2"]
+
+        self.invigorated = d["invigorated"]
 
         self.health = d["health"]
-        self.current_health = d["current_health"]
 
-        # load items
-        self.items = []
-        for item in d["items"]:
-            i = load_item(item[0], item[1], item[2])
-            self.items.append(item)
-
-
-
+        self.primary_weapon = load_item(
+            d["primary_weapon"][0],
+            d["primary_weapon"][1])
 
         self.initialized = True
 
 
-    def toDict(self, safe=False):
+    def to_dict(self, safe=False):
         """
         Dump obj data to a dict to prepare it for json serialization.
 
@@ -84,12 +90,22 @@ class Unit(Serializable):
         data["id"] = self.id
         data["name"] =  self.name
         data["class_name"] =  self.class_name
+        data["unit_class"] =  self.unit_class
+
+        data["combat_action"] = self.combat_action
+        data["combat_action_target_1"] = self.combat_action_target_1
+        data["combat_action_target_2"] = self.combat_action_target_2
+
+        data["invigorated"] = self.invigorated
 
         data["health"] = self.health
+        data["current_health"] = self.current_health
 
-        data["items"] = []
-        for item in self.items:
-            i = [ item.item_class, item.item_type, item.to_dict() ]
+        data["primary_weapon"] = [
+            self.primary_weapon.item_type,
+            self.primary_weapon.to_dict()
+        ]
+
 
         return data
 
@@ -108,19 +124,27 @@ class Unit(Serializable):
 
         return out
 
-    def is_alive(self):
-        return self.current_health > 0
-
-    def select_combat_action(self, target):
-        if len(self.items) > 0:
-            return self.items[0]
-        else:
-            return None
-
     def reset_health(self):
         self.current_health = self.health
 
+    def _special_ability(self):
+        raise Exception("{0} missing implementation of _special_ability()".format(self.__class__.__name__))
 
+
+
+    ## PUBLIC Methods
+
+    def special_ability(self):
+        self.current_combat_action = CombatAction.special_ability
+
+    def attack(self):
+        self.current_combat_action = CombatAction.primary_weapon
+
+    def wait(self):
+        self.current_combat_action = CombatAction.wait
+
+    def is_alive(self):
+        return self.current_health > 0
 
 
 
