@@ -1,6 +1,8 @@
 import pygame, sys 
 from pygame.locals import *
 
+from game.visualizer.health_bar import HealthBar
+
 pygame.init()
 fpsClock = pygame.time.Clock()
 
@@ -28,6 +30,8 @@ def start(verbose):
     player1HP = 5000
     player1MaxHP = 5000
     player1Name = 'DoodBro'
+    player1HP = HealthBar(102, 544, player1MaxHP)
+
     
     if(verbose):
         print("Visualizer")
@@ -37,7 +41,6 @@ def start(verbose):
         goldSurfaceObj = fontObj.render('Gold: {0}'.format(str(gold)),False,goldColor)
         trophiesSurfaceObj = fontObj.render('Trophies: {0}'.format(str(trophies)),False,goldColor)
         player1InfoSurface = fontObj.render('{0}'.format(player1Name),False,whiteColor)
-        player1HPSurface = fontObj.render('HP: {0}'.format(str(player1HP)),False,whiteColor)
         
         teamRectObj = teamSurfaceObj.get_rect()
         teamRectObj.topleft = (10,20)
@@ -47,19 +50,14 @@ def start(verbose):
         trophiesRectObj.topleft = (10,52)
         player1InfoRect = player1InfoSurface.get_rect()
         player1InfoRect.topleft = (100,500)
-        player1HPRect = player1HPSurface.get_rect()
-        player1HPRect.topleft = (102,544)
         
         windowSurfaceObj.blit(bgSurfaceObj,(0,0))
         windowSurfaceObj.blit(teamSurfaceObj,teamRectObj)
         windowSurfaceObj.blit(goldSurfaceObj,goldRectObj)
         windowSurfaceObj.blit(trophiesSurfaceObj,trophiesRectObj)
         windowSurfaceObj.blit(player1InfoSurface,player1InfoRect)
+        player1HP.draw(windowSurfaceObj)
         
-        pygame.draw.rect(windowSurfaceObj,blackColor,(105,524,250,16),0)
-        pygame.draw.rect(windowSurfaceObj,greenColor,(105,524,(player1HP/player1MaxHP)*250,16),0)
-        pygame.draw.rect(windowSurfaceObj,whiteColor,(104,521,252,18),4)
-        windowSurfaceObj.blit(player1HPSurface,player1HPRect)
         
         #pixArr = pygame.PixelArray(windowSurfaceObj)
         #for x in range(100,200,4):
@@ -67,17 +65,18 @@ def start(verbose):
         #      pixArr[x][y] = redColor
         #del pixArr
         
-        player1HP = player1HP - 10
+        player1HP.set_current_health(player1HP.current - 10)
         #player1HP = 0
         
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            #elif event.type == MOUSEBUTTONUP:
-            #   mousex,mousey = event.pos
-            #   if event.button in (1, 2, 3):
-            #       trophies -= 5
-            #       msg = 'yay'
+            elif event.type == MOUSEMOTION:
+                mousex, mousey = event.pos
+            elif event.type == MOUSEBUTTONUP:
+               mousex,mousey = event.pos
+               if event.button in (1, 2, 3):
+                   msg = 'yay'
         pygame.display.update()
         fpsClock.tick(30)
