@@ -260,10 +260,6 @@ class CombatManager:
     def play_round(self):
         living_units = [ u for u in self.units if u.is_alive() ]
 
-        # pick targets / moves
-        monster_target = self.monster.attack(living_units)
-        monster_damage = self.monster.damage
-
         taunt_unit = None
         brawler_damage = 0
         invigorated_unit = None
@@ -289,11 +285,35 @@ class CombatManager:
                         if invigorated_unit is not None:
                             print("{0} casts invigorate on {1}".format(unit.name, invigorated_unit.name))
 
+                elif unit.unit_class == unit_class.sorcerer:
+                    if sa.cooldown_timer <= 0:
+                        sa.use()
+                        idx_1 = None
+                        idx_2 = None
+                        for idx, u in enumerate(living_units):
+                            if unit.combat_action_target_1 == u.id:
+                                idx_1 = idx
+                            elif unit.combat_action_target_2 == u.id:
+                                idx_2 = idx
+
+                        if idx_1 is not None and idx_2 is not None:
+                            print("{0} casts illusion on {1} disguising them as {2}".format(
+                                unit.name,
+                                living_units[idx_1].name,
+                                living_units[idx_2].name))
+                            living_units[idx_1] = living_units[idx_2]
+
+
         # verify that invigorated_unit is not taunt_unit
         if invigorated_unit is not None:
             if taunt_unit is not None  and taunt_unit == invigorated_unit:
                 # cancel taunt if unit is invigorated
                 taunt_unit = None
+
+        # pick targets / moves
+        monster_target = self.monster.attack(living_units)
+        monster_damage = self.monster.damage
+
 
 
         # Apply monster damage
@@ -366,41 +386,6 @@ class CombatManager:
             if unit.combat_action == CombatAction.primary_weapon:
                 print("{} uses primary weapon".format(unit.name))
                 weapon = unit.primary_weapon
-            elif unit.combat_action == CombatAction.secondary_1 and unit.item_slots > 0 and unit.items[0] is not None:
-
-                if unit.class_type in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer]:
-                    print("{} uses {}".format(unit.name, unit.spell_1.name))
-                    weapon = unit.spell_1
-
-                elif unit.class_type in [ UnitClass.rogue, UnitClass.alchemist]:
-                    print("{} uses {}".format(unit.name, unit.bomb_1.name))
-                    weapon = unit.bomb_1
-
-            elif unit.combat_action == CombatAction.secondary_2 and unit.item_slots > 1 and unit.items[1] is not None:
-
-                if unit.class_type in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer]:
-                    print("{} uses {}".format(unit.name, unit.spell_2.name))
-                    weapon = unit.spell_2
-
-                elif unit.class_type in [ UnitClass.rogue, UnitClass.alchemist]:
-                    print("{} uses {}".format(unit.name, unit.bomb_2.name))
-                    weapon = unit.bomb_2
-
-            elif unit.combat_action == CombatAction.secondary_3 and unit.item_slots > 2 and unit.items[2] is not None:
-
-                if unit.class_type in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer]:
-                    print("{} uses {}".format(unit.name, unit.spell_3.name))
-                    weapon = unit.spell_3
-
-                elif unit.class_type == UnitClass.rogue:
-                    print("{} uses {}".format(unit.name, unit.bomb_3.name))
-                    weapon = unit.bomb_3
-
-            elif unit.combat_action == CombatAction.secondary_4 and unit.item_slots > 3 and unit.items[3] is not None:
-
-                if unit.class_type in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ]:
-                    print("{} uses {}".format(unit.name, unit.spell_3.name))
-                    weapon = unit.spell_4
 
             elif unit.combat_action == CombatAction.special_ability:
                 sa = get_special_ability(unit.unit_class)
@@ -416,8 +401,47 @@ class CombatManager:
 
                 elif unit.unit_class is UnitClass.wizard:
                     sa.use()
+            else:
+                if unit.unit_class is UnitClass.rogue: # Hanble Rogue Items
+                    if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None:
+                        print("{} uses {}".format(unit.name, unit.bomb_1.name))
+                        weapon = unit.bomb_1
+
+                    elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None:
+                        print("{} uses {}".format(unit.name, unit.bomb_2.name))
+                        weapon = unit.bomb_2
+
+                    elif unit.combat_action == CombatAction.secondary_3 and unit.bomb_3 is not None:
+                        print("{} uses {}".format(unit.name, unit.bomb_3.name))
+                        weapon = unit.bomb_3
+
+                elif unit.unit_class is UnitClass.alchemist: # Handle Alchemist Items
+                    if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None:
+                        print("{} uses {}".format(unit.name, unit.bomb_1.name))
+                        weapon = unit.bomb_1
+
+                    elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None:
+                        print("{} uses {}".format(unit.name, unit.bomb_2.name))
+                        weapon = unit.bomb_2
+
+                elif unit.unit_class in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer]:
+                    if unit.combat_action == CombatAction.secondary_1 and unit.spell_1 is not None:
+                        print("{} uses {}".format(unit.name, unit.spell_1.name))
+                        weapon = unit.spell_1
+
+                    elif unit.combat_action == CombatAction.secondary_2 and unit.spell_2 is not None:
+                        print("{} uses {}".format(unit.name, unit.spell_2.name))
+                        weapon = unit.spell_2
 
 
+                    elif unit.combat_action == CombatAction.secondary_3 and unit.spell_3 is not None:
+                        print("{} uses {}".format(unit.name, unit.spell_3.name))
+                        weapon = unit.spell_3
+
+
+                    elif unit.combat_action == CombatAction.secondary_4 and unit.spell_4 is not None:
+                        print("{} uses {}".format(unit.name, unit.spell_3.name))
+                        weapon = unit.spell_4
 
 
             # calculate normal combat damage

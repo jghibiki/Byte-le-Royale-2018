@@ -20,7 +20,7 @@ class ServerControl:
         # Game Configuration options
         self.turn_time = 0.01
         self.game_tick_no = 0
-        self.max_game_tick = 10
+        self.max_game_tick = 10 #1e5
         self.turn_data = None
 
     def initialize(self):

@@ -25,12 +25,28 @@ def get_item(item_type, level, init=False):
         new_item = AlchemicalSupplies()
 
     # spells
-    elif item_type == ItemType.fireball:
+    elif item_type == ItemType.fire_ball:
         new_item = Fireball()
     elif item_type == ItemType.thunderbolt:
         new_item = Thunderbolt()
     elif item_type == ItemType.ice_spike:
         new_item = Thunderbolt()
+
+    # Bombs
+    elif item_type == ItemType.fire_bomb:
+        new_item = FireBomb()
+    elif item_type == ItemType.frost_bomb:
+        new_item == FrostBomb()
+    elif item_type == ItemType.shock_bomb:
+        new_item = ShockBomb()
+    elif item_type == ItemType.acid_bomb:
+        new_item = AcidBomb()
+    elif item_type == ItemType.flash_bomb:
+        new_item = FlashBomb()
+    elif item_type == ItemType.spike_bomb:
+        new_item = SpikeBomb()
+    elif item_type == ItemType.concussion_bomb:
+        new_item = ConcussionBomb()
 
     else:
         raise Exception("Invalid item type: {0}".format(item_type))
@@ -57,12 +73,28 @@ def load_item(item_type, data):
         new_item = SpellBook()
     elif item_type == ItemType.alchemical_supplies:
         new_item = AlchemicalSupplies()
-    elif item_type == ItemType.fireball:
+    elif item_type == ItemType.fire_ball:
         new_item = Fireball()
     elif item_type == ItemType.thunderbolt:
         new_item = Thunderbolt()
     elif item_type == ItemType.ice_spike:
         new_item = Thunderbolt()
+
+    # Bombs
+    elif item_type == ItemType.fire_bomb:
+        new_item = FireBomb()
+    elif item_type == ItemType.frost_bomb:
+        new_item == FrostBomb()
+    elif item_type == ItemType.shock_bomb:
+        new_item = ShockBomb()
+    elif item_type == ItemType.acid_bomb:
+        new_item = AcidBomb()
+    elif item_type == ItemType.flash_bomb:
+        new_item = FlashBomb()
+    elif item_type == ItemType.spike_bomb:
+        new_item = SpikeBomb()
+    elif item_type == ItemType.concussion_bomb:
+        new_item = ConcussionBomb()
 
     # utility items
 
@@ -123,18 +155,49 @@ class AlchemicalSupplies(CombatItem):
 
 class Fireball(CombatItem):
     def init(self, level):
-        CombatItem.init(self, "Fireball", 100, [ DamageType.fire ], level)
+        CombatItem.init(self, "Fireball", 100, [ DamageType.fire ], level, ItemType.fire_ball)
 
-class Thundrbolt(CombatItem):
+class Thunderbolt(CombatItem):
     def init(self, level):
-        CombatItem.init(self, "Thunderbolt", 100, [ DamageType.electricity ], level)
+        CombatItem.init(self, "Thunderbolt", 100, [ DamageType.electricity ], level, ItemType.thunderbolt)
 
 
 class IceSpike(CombatItem):
     def init(self, level):
-        CombatItem.init(self, "Ice Spike", 100, [ DamageType.cold ], level)
+        CombatItem.init(self, "Ice Spike", 100, [ DamageType.cold ], level, ItemType.ice_spike)
 
 
+#########
+# Bombs #
+#########
+
+class FireBomb(CombatItem):
+    def init(self, level):
+        CombatItem.init(self, "Fire Bomb", 100, [ DamageType.fire ], level, ItemType.fire_bomb)
+
+class FrostBomb(CombatItem):
+    def init(self, level):
+        CombatItem.init(self, "Frost Bomb", 100, [ DamageType.cold ], level, ItemType.frost_bomb)
+
+class ShockBomb(CombatItem):
+    def init(self, level):
+        CombatItem.init(self, "Shock Bomb", 100, [ DamageType.electricity ], level, ItemType.shock_bomb)
+
+class AcidBomb(CombatItem):
+    def init(self, level):
+        CombatItem.init(self, "Acid Bomb", 100, [ DamageType.acid ], level, ItemType.acid_bomb)
+
+class FlashBomb(CombatItem):
+    def init(self, level):
+        CombatItem.init(self, "Flash Bomb", 100, [ DamageType.sonic ], level, ItemType.flash_bomb)
+
+class SpikeBomb(CombatItem):
+    def init(self, level):
+        CombatItem.init(self, "Spike Bomb", 100, [ DamageType.piercing ], level, ItemType.spike_bomb)
+
+class ConcussionBomb(CombatItem):
+    def init(self, level):
+        CombatItem.init(self, "Concussion Bomb", 100, [ DamageType.bludgeoning ], level, ItemType.concussion_bomb)
 
 #################
 # Utility Items #

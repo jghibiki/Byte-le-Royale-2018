@@ -4,6 +4,8 @@ from game.common.node_types import *
 from game.common.enums import *
 from game.common.unit_classes import get_unit, load_unit
 from game.server.combat import CombatManager
+from game.common.town_store_options import *
+from game.common.item_types import get_item
 
 
 class CustomServer(ServerControl):
@@ -21,6 +23,8 @@ class CustomServer(ServerControl):
         self.current_location = self.game_map.pop(0)[0]
 
         self.trophies = 0
+        self.towns = 0
+        self.gold = 300
 
         self.started = False
 
@@ -36,23 +40,26 @@ class CustomServer(ServerControl):
             # first turn, ask for what units the team should be made up of
             return # purposefully short circuit to get to send data
 
-        if isinstance(self.current_location, Town):
-            self.print("Town")
+        if not self.current_location.resolved:
+            if isinstance(self.current_location, Town):
+                self.print("Town")
 
-            #for u in units:
-            #    u.reset_health()
+                print("Welcome to town.")
+                print("Your entire party spends a night in an inn and wakes feeling refreshed.")
+                for u in self.units:
+                    u.reset_health()
 
-        elif isinstance(self.current_location, MonsterRoom):
-            self.print("Combat against {}".format(self.current_location.monster.get_description()))
-
-
-            if self.combat_manager is None:
-                self.print("Init new combat manager")
-                self.combat_manager = CombatManager(self.current_location.monster, self.units)
+            elif isinstance(self.current_location, MonsterRoom):
+                self.print("Combat against {}".format(self.current_location.monster.get_description()))
 
 
-        elif isinstance(self.current_location, TrapRoom):
-            self.print("Navgating trap {}".format(self.current_location.trap.get_description()))
+                if self.combat_manager is None:
+                    self.print("Init new combat manager")
+                    self.combat_manager = CombatManager(self.current_location.monster, self.units)
+
+
+            elif isinstance(self.current_location, TrapRoom):
+                self.print("Navgating trap {}".format(self.current_location.trap.get_description()))
 
 
     def post_turn(self):
@@ -94,8 +101,8 @@ class CustomServer(ServerControl):
             else:
 
                 #TODO remove this
-                if isinstance(self.current_location, Town) or isinstance(self.current_location, TrapRoom):
-                    self.print("Skip Town or TrapRoom")
+                if  isinstance(self.current_location, TrapRoom):
+                    self.print("Skip TrapRoom")
                     self.current_location.resolved = True
 
                 # HANDLE ROOM NOT RESOLVED
@@ -106,8 +113,12 @@ class CustomServer(ServerControl):
                     if isinstance(self.current_location, Town):
                         self.print("Notify Player they are in town Town")
 
-                        #for u in units:
-                        #    u.reset_health()
+                        self.handle_town_purchases()
+
+                        # handle purchases
+                        self.current_location.resolved = True
+
+
 
                     elif isinstance(self.current_location, MonsterRoom) and data["message_type"] == MessageType.combat_round:
                         self.print("Combat against {}".format(self.current_location.monster.get_description()))
@@ -196,7 +207,11 @@ class CustomServer(ServerControl):
 
             elif not self.current_location.resolved:
 
-                if isinstance(self.current_location, MonsterRoom):
+                if isinstance(self.current_location, Town):
+                    payload[i] = self.generate_town_option_payload()
+
+
+                elif isinstance(self.current_location, MonsterRoom):
                     self.print("Combat against {}".format(self.current_location.monster.get_description()))
                     #payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
@@ -267,5 +282,144 @@ class CustomServer(ServerControl):
     def print(self, msg):
         if self.verbose:
             print(msg)
+
+
+    def generate_town_option_payload(self):
+
+        payload = {
+            "message_type": MessageType.town,
+            "gold": self.gold,
+            "town_number": self.towns,
+            "units": self.serialize_units()
+        }
+
+        payload["items"] = self.get_shop_items()
+
+        return payload
+
+    def get_shop_items(self):
+        shop_items = list(town_0)
+
+        if self.towns >= 1:
+            shop_items += list(town_1)
+
+        if self.towns >= 2:
+            shop_items += list(town_2)
+
+        if self.towns >= 3:
+            shop_items += list(town_3)
+
+        if self.towns >= 4:
+            shop_items += list(town_4)
+
+        if self.towns >= 5:
+            shop_items += list(town_5)
+
+        if self.towns >= 6:
+            shop_items += list(town_6)
+
+        if self.towns >= 7:
+            shop_items += list(town_7)
+
+        if self.towns >= 8:
+            shop_items += list(town_8)
+
+        if self.towns >= 9:
+            shop_items += list(town_9)
+
+    def get_unit_by_id(self, id):
+        for unit in self.units:
+            if unit.id == id:
+                return unit
+        return None
+
+    def handle_town_purchases(self):
+
+        if self.turn_data["message_type"] == MessageType.town:
+            print("Buying items:")
+
+            shop_items = self.get_shop_items()
+
+            for purchase in self.turn_data["purchases"]:
+
+                unit = self.get_unit_by_id(purchase["unit"])
+
+                item_type = purchase["item"]
+                item_level = purchase["item_level"]
+                if "slot" in purchase:
+                    item_slot = purchase["slot"]
+                else:
+                    item_slot = None
+
+                if ( item_type in valid_purchasers
+                     and unit.unit_class in valid_purchasers[item_type]
+                     and (self.gold - item_data[item_type][item_level]["cost"]) >= 0 ):
+
+                    item_cost = item_data[item_type][item_level]["cost"]
+
+                    item = None
+
+
+                    if unit.unit_class in [ UnitClass.knight, UnitClass.brawler, UnitClass.pikeman ]:
+                        self.gold -= item_data[item_type][item_level]
+                        item = get_item(item_type, item_level)
+                        unit.primary_weapon = item
+
+                    if unit.unit_class == UnitClass.rogue:
+                        if item_slot is None:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.primary_weapon = item
+                        elif item_slot == 1:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.bomb_1 = item
+                        elif item_slot == 2:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.bomb_2 = item
+                        elif item_slot == 3:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.bomb_3 = item
+
+                    elif unit.unit_class == UnitClass.alchemist:
+                        if item_slot is None:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.primary_weapon = item
+                        elif item_slot == 1:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.bomb_1 = item
+                        elif item_slot == 2:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.bomb_2 = item
+
+                    elif unit.unit_class in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ]:
+                        if item_slot is None:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.primary_weapon = item
+                        elif item_slot == 1:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.spell_1 = item
+                        elif item_slot == 2:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.spell_2 = item
+                        elif item_slot == 3:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.spell_3 = item
+                        elif item_slot == 4:
+                            self.gold -= item_cost
+                            item = get_item(item_type, item_level)
+                            unit.spell_4 = item
+
+                    if item is not None:
+                        print("{0} purchased {1}".format(unit.name, item.name))
 
 

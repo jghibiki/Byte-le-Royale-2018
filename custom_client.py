@@ -34,15 +34,35 @@ class CustomClient(ClientLogic):
                         "class": UnitClass.brawler
                     },
                     {
-                        "name": "Ed",
+                        "name": "Alphonse",
                         "class": UnitClass.pikeman
                     },
                     {
                         "name": "Thomas",
-                        "class": UnitClass.wizard
+                        "class": UnitClass.alchemist
                     }
                 ]
             }
+
+        elif turn_data["message_type"] == MessageType.town:
+
+            print("Gold: {}".format(turn_data["gold"]))
+
+
+            return_data = { "message_type": MessageType.town, "purchases": []}
+
+            if turn_data["town_number"] is 0:
+                unit = self.get_unit("thomas", turn_data["units"])
+                if unit is not None:
+                    purchase = {
+                        "unit": unit.id,
+                        "slot": 2,
+                        "item": ItemType.fire_bomb,
+                        "item_level": 1
+                    }
+                    return_data["purchases"].append(purchase)
+
+            return return_data
 
 
         elif turn_data["message_type"] == MessageType.room_choice:
@@ -67,10 +87,8 @@ class CustomClient(ClientLogic):
             return_data = { "message_type": MessageType.combat_round }
 
             for u in turn_data["units"]:
-                if u.unit_class == UnitClass.wizard:
-                    u.invigorate(turn_data["units"][0])
-                elif u.unit_class == UnitClass.knight:
-                    u.attack()
+                if u.unit_class == UnitClass.alchemist:
+                    u.use_bomb_2()
                 else:
                     u.wait()
 
@@ -82,5 +100,11 @@ class CustomClient(ClientLogic):
 
 
 
+
+    def get_unit(self, name, units):
+        for unit in units:
+            if unit.name.lower() == name.lower():
+                return unit
+        return None
 
 

@@ -442,7 +442,7 @@ class Alchemist(Unit):
             "Alchemist",
             UnitClass.alchemist,
             10000, # health
-            ItemType.alchemy_supplies)
+            ItemType.alchemical_supplies)
 
 
         self.bomb_1 = None
