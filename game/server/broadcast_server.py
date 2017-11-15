@@ -17,6 +17,8 @@ class BroadcastServerProtocol(WebSocketServerProtocol):
 
         # copy verbosity
         self.verbose = self.factory.verbose
+        if self.verbose:
+            print("Client Connected")
 
     def onConnect(self, client):
         if self.verbose:
@@ -42,7 +44,7 @@ class BroadcastServerProtocol(WebSocketServerProtocol):
             self.factory.notify_client_connect_cb(obj["id"])
 
         elif obj["type"] == "client_turn":
-            self.factory.notify_client_turn_cb(obj["id"], obj["payload"])
+            self.factory.notify_client_turn_cb(obj["payload"])
 
 
     def connectionLost(self, reason):

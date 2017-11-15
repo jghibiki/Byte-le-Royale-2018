@@ -1,28 +1,24 @@
 import random
 import math
 
-from game.common.damage import *
+from game.common.enums import *
 from game.common.monster import Monster
 
-class MON_TYPE:
-    chimera = 1
-    beholder = 2
-    goblin = 3
 
 
 def get_monster(monster_type):
-    if monster_type == MON_TYPE.chimera:
+    if monster_type == MonsterType.chimera:
         return Chimera()
-    elif monster_type == MON_TYPE.beholder:
+    elif monster_type == MonsterType.beholder:
         return Beholder()
-    elif monster_type == MON_TYPE.goblin:
+    elif monster_type == MonsterType.goblin:
         return Goblin()
 
 def get_random_monster():
     mon =  random.choice([
-        MON_TYPE.chimera,
-        MON_TYPE.beholder,
-        MON_TYPE.goblin
+        MonsterType.chimera,
+        MonsterType.beholder,
+        MonsterType.goblin
     ])
 
     return get_monster(mon)
@@ -30,7 +26,7 @@ def get_random_monster():
 
 class Chimera(Monster):
     def init(self, level):
-        Monster.init(self, "Chimera", level)
+        Monster.init(self, "Chimera", MonsterType.chimera, level)
 
         self.health = 9000
         self.current_health = self.health
@@ -41,13 +37,11 @@ class Chimera(Monster):
             DamageType.cold
         ]
 
-    def get_type(self):
-        return MON_TYPE.chimera
 
 
 class Beholder(Monster):
     def init(self, level):
-        Monster.init(self, "Beholder", level)
+        Monster.init(self, "Beholder", MonsterType.beholder, level)
 
         self.health = 6000
         self.current_health = self.health
@@ -61,12 +55,10 @@ class Beholder(Monster):
         ]
 
 
-    def get_type(self):
-        return MON_TYPE.beholder
 
 class Goblin(Monster):
     def init(self, level):
-        Monster.init(self, "Goblin", level)
+        Monster.init(self, "Goblin", MonsterType.goblin, level)
 
         self.health = 6000
         self.current_health = self.health
@@ -81,6 +73,4 @@ class Goblin(Monster):
             DamageType.electricity
         ]
 
-    def get_type(self):
-        return MON_TYPE.goblin
 

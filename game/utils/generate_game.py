@@ -141,9 +141,14 @@ def generate(num=None):
     nodes.append(root)
     nodes_per_turn.append([root])
 
+    first_town = Town.new_node()
+    nodes_per_turn.append([first_town])
+
+    root.add_node(first_town)
+
     end = EndRoom.new_node()
 
-    current = root
+    current = first_town
 
     for i in range(num):
         print("Generate Level {}".format(i+1))

@@ -9,11 +9,12 @@ class Monster(Serializable):
         self.initialized = False
 
 
-    def init(self, name, level):
+    def init(self, name, monster_type, level):
         """Manually initialize obj"""
 
         self.id = str(uuid4())
         self.name = name
+        self.monster_type = monster_type
         self.level = level
         self.damage = 5
         self.defense = 5
@@ -35,6 +36,7 @@ class Monster(Serializable):
 
         self.id = d["id"]
         self.name = d["name"]
+        self.monster_type = d["monster_type"]
         self.level = d["level"]
         self.damage = d["damage"]
         self.cumulative_damage = d["cumulative_damage"]
@@ -57,6 +59,7 @@ class Monster(Serializable):
 
         data["id"] = self.id
         data["name"] = self.name
+        data["monster_type"] = self.monster_type
         data["level"] = self.level
         data["damage"] = self.damage
         data["cumulative_damage"] = self.cumulative_damage
@@ -66,7 +69,6 @@ class Monster(Serializable):
         data["attack_state"] = self.attack_state
         data["weaknesses"] = self.weaknesses
 
-        data["monster_type"] = self.get_type()
 
         return data
 
@@ -76,9 +78,6 @@ class Monster(Serializable):
 
         # default attack pattern - randomly attack any target
         return random.choice(targets)
-
-    def get_type(self):
-        raise Exception("{0} missing implementation of get_type()".format(self.__class__.__name__))
 
     def get_description(self):
         return "{0}(Level {1})".format(self.name, self.level)
