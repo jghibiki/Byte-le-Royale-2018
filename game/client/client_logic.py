@@ -5,12 +5,37 @@ from game.common.monster_types import get_monster
 
 import sys
 
+class ClientStorefront:
+    def __init__(self, turn_data):
+        self.items = turn_data["items"]
+        self.purchases = []
+        self.town_number = turn_data["town_number"]
+
+    def get_town_number(self):
+        return self.town_number
+
+
+    def purchase(self, unit, item_slot, item, item_level):
+        self.purchases.append( {
+            "unit": unit.id,
+            "slot": 2,
+            "item": ItemType.fire_bomb,
+            "item_level": 1
+        } )
+
+    def get_return_data(self):
+        return {
+            "message_type": MessageType.town,
+            "purchases": self.purchases
+        }
+
 class ClientLogic:
 
-    def __init__(self, verbose):
+    def __init__(self, verbose, player_client):
         self._loop = None
         self._socket_client = None
         self.verbose = verbose
+        self.player_client = player_client
 
         # Public properties availiable to users
 
@@ -43,9 +68,23 @@ class ClientLogic:
             "payload": serialized_turn_result
         })
 
-    def turn(self):
-        """ Implement game logic here."""
-        pass
+    def turn(self, turn_data):
+
+        if turn_data["message_type"] == MessageType.unit_choice:
+            return self.player_client.unit_choice(turn_data)
+
+        elif turn_data["message_type"] == MessageType.town:
+            units = turn_data["units"]
+            gold = turn_data["gold"]
+            store = ClientStorefront(turn_data)
+            self.player_client.town(units, gold, store)
+            return store.get_return_data()
+
+        elif turn_data["message_type"] == MessageType.room_choice:
+            return self.player_client.room_choice(turn_data)
+
+        elif turn_data["message_type"] == MessageType.combat_round:
+            return self.player_client.combat_round(turn_data)
 
     def send(self, data):
         self._socket_client.send(data)

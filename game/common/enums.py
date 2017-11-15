@@ -1,4 +1,16 @@
 
+class ItemSlot:
+    spell_1 = 1
+    bomb_1 = 1
+
+    spell_2 = 2
+    bomb_2 = 2
+
+    spell_3 = 3
+    bomb_3 = 3
+
+    spell_4 = 4
+
 class CombatAction:
     primary_weapon = 1
     secondary_1 = 2
