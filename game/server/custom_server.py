@@ -185,7 +185,8 @@ class CustomServer(ServerControl):
             if not self.started:
                 if self.verbose: print("Requesting Unit Choice")
                 payload[i] = {
-                        "message_type":  MessageType.unit_choice
+                        "message_type":  MessageType.unit_choice,
+                        "units": self.serialize_units()
                 }
 
             elif self.current_location.resolved:

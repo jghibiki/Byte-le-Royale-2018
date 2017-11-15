@@ -9,12 +9,10 @@ class CustomClient(UserClient):
         """ Use the constructor to initialize any variables you would like to track between turns. """
         pass
 
-    def unit_choice(self, turn_data):
+    def unit_choice(self):
         print("Sending Unit Choices")
 
-        return {
-            "message_type": MessageType.unit_choice,
-            "units": [
+        return [
                 {
                     "name": "Martin",
                     "class": UnitClass.knight
@@ -32,7 +30,6 @@ class CustomClient(UserClient):
                     "class": UnitClass.alchemist
                 }
             ]
-        }
 
 
     def town(self, units, gold, store):
@@ -44,35 +41,29 @@ class CustomClient(UserClient):
                 store.purchase( unit, 2, ItemType.fire_bomb, 1)
 
 
-    def room_choice(self, turn_data):
+    def room_choice(self, units, options):
 
-        if len(turn_data["options"]) == 1:
+        if len(options) == 1:
+            return Direction.forward
 
-            return { "message_type": MessageType.room_choice, "choice": Direction.forward }
-
-        if len(turn_data["options"]) == 2:
-
-            return { "message_type": MessageType.room_choice, "choice": Direction.left }
+        elif len(options) == 2:
+            return Direction.left
 
         else:
-            return { "message_type": MessageType.null }
+            return MessageType.null
 
-    def combat_round(self, turn_data):
+    def combat_round(self, monster, units):
         print("COMBAT!")
-        print(turn_data["monster"].summary())
-        for u in turn_data["units"]:
+        print(monster.summary())
+        for u in units:
             print(u.summary())
 
-        return_data = { "message_type": MessageType.combat_round }
-
-        for u in turn_data["units"]:
+        for u in units:
             if u.unit_class == UnitClass.alchemist:
                 u.use_bomb_2()
             else:
                 u.wait()
 
-        return_data["units"] = turn_data["units"]
-        return return_data
 
 
     ##################

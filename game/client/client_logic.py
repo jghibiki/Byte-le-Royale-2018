@@ -71,7 +71,11 @@ class ClientLogic:
     def turn(self, turn_data):
 
         if turn_data["message_type"] == MessageType.unit_choice:
-            return self.player_client.unit_choice(turn_data)
+            choices = self.player_client.unit_choice()
+            return {
+                "message_type": MessageType.unit_choice,
+                "units": choices
+            }
 
         elif turn_data["message_type"] == MessageType.town:
             units = turn_data["units"]
@@ -81,10 +85,16 @@ class ClientLogic:
             return store.get_return_data()
 
         elif turn_data["message_type"] == MessageType.room_choice:
-            return self.player_client.room_choice(turn_data)
+            units = turn_data["units"]
+            options = turn_data["options"]
+            direction = self.player_client.room_choice(units, options)
+            return { "message_type": MessageType.room_choice, "choice": direction }
 
         elif turn_data["message_type"] == MessageType.combat_round:
-            return self.player_client.combat_round(turn_data)
+            monster = turn_data["monster"]
+            units = turn_data["units"]
+            self.player_client.combat_round(monster, units)
+            return { "message_type": MessageType.combat_round, "units": units }
 
     def send(self, data):
         self._socket_client.send(data)
