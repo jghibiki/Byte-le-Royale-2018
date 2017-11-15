@@ -1,5 +1,9 @@
-from game.common.message_types import MessageType
-from game.common.node_types import *
+from game.common.enums import *
+from game.common.node_types import get_node
+from game.common.unit_classes import get_unit
+from game.common.monster_types import get_monster
+
+import sys
 
 class ClientLogic:
 
@@ -32,9 +36,11 @@ class ClientLogic:
 
         turn_result = self.turn(turn_data)
 
+        serialized_turn_result = self.serialize(turn_result)
+
         self.send({
             "type": "client_turn",
-            "payload":turn_result
+            "payload": serialized_turn_result
         })
 
     def turn(self):
@@ -51,15 +57,43 @@ class ClientLogic:
 
     def deserialize(self, turn_data):
 
+        # load units
+        units = []
+        if "units" in turn_data:
+            for u in turn_data["units"]:
+                new_unit = get_unit(u["unit_class"])
+                new_unit.from_dict(u)
+                units.append(new_unit)
+
+        turn_data["units"] = units
+
+        # load message type specific data
         if turn_data["message_type"] == MessageType.room_choice:
+            # deserialize rooms
             for direction, room in turn_data["options"].items():
                new_room = get_node(room["node_type"])
                new_room.from_dict(room)
                turn_data["options"][direction] = new_room
 
+        if turn_data["message_type"] == MessageType.combat_round:
+            # deserialize monster
+            monster = get_monster(turn_data["monster"]["monster_type"])
+            monster.from_dict(turn_data["monster"])
+            turn_data["monster"] = monster
+
+
         return turn_data
 
     def serialize(self, turn_result):
+
+        if turn_result["message_type"] == MessageType.combat_round:
+            serialized_units = []
+
+            for u in turn_result["units"]:
+                serialized_units.append( u.to_dict() )
+
+            turn_result["units"] = serialized_units
+
         return turn_result
 
 

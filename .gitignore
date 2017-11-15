@@ -102,3 +102,7 @@ ENV/
 
 */**/game_log/*.json
 *.json
+
+*.txt
+
+*.swp
