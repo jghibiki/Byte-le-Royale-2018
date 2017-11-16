@@ -27,10 +27,18 @@ def start(verbose):
     team = 'Doodz'
     gold = 1000
     trophies = 50
-    player1HP = 5000
     player1MaxHP = 5000
+    player2MaxHP = 5000
+    player3MaxHP = 5000
+    player4MaxHP = 5000
     player1Name = 'DoodBro'
-    player1HP = HealthBar(102, 544, player1MaxHP)
+    player2Name = 'BroDood'
+    player3Name = 'BoodDro'
+    player4Name = 'Carlos'
+    player1HP = HealthBar(94, 544, player1MaxHP)
+    player2HP = HealthBar(376, 544, player2MaxHP)
+    player3HP = HealthBar(656, 544, player3MaxHP)
+    player4HP = HealthBar(940, 544, player4MaxHP)
 
     
     if(verbose):
@@ -41,7 +49,10 @@ def start(verbose):
         goldSurfaceObj = fontObj.render('Gold: {0}'.format(str(gold)),False,goldColor)
         trophiesSurfaceObj = fontObj.render('Trophies: {0}'.format(str(trophies)),False,goldColor)
         player1InfoSurface = fontObj.render('{0}'.format(player1Name),False,whiteColor)
-        
+        player2InfoSurface = fontObj.render('{0}'.format(player2Name),False,whiteColor)
+        player3InfoSurface = fontObj.render('{0}'.format(player3Name),False,whiteColor)
+        player4InfoSurface = fontObj.render('{0}'.format(player4Name),False,whiteColor)
+       
         teamRectObj = teamSurfaceObj.get_rect()
         teamRectObj.topleft = (10,20)
         goldRectObj = goldSurfaceObj.get_rect()
@@ -49,14 +60,27 @@ def start(verbose):
         trophiesRectObj = trophiesSurfaceObj.get_rect()
         trophiesRectObj.topleft = (10,52)
         player1InfoRect = player1InfoSurface.get_rect()
-        player1InfoRect.topleft = (100,500)
+        player1InfoRect.topleft = (92,524)
+        player2InfoRect = player2InfoSurface.get_rect()
+        player2InfoRect.topleft = (374,524)
+        player3InfoRect = player3InfoSurface.get_rect()
+        player3InfoRect.topleft = (654,524)
+        player4InfoRect = player4InfoSurface.get_rect()
+        player4InfoRect.topleft = (938,524)
         
         windowSurfaceObj.blit(bgSurfaceObj,(0,0))
         windowSurfaceObj.blit(teamSurfaceObj,teamRectObj)
         windowSurfaceObj.blit(goldSurfaceObj,goldRectObj)
         windowSurfaceObj.blit(trophiesSurfaceObj,trophiesRectObj)
         windowSurfaceObj.blit(player1InfoSurface,player1InfoRect)
+        windowSurfaceObj.blit(player2InfoSurface,player2InfoRect)
+        windowSurfaceObj.blit(player3InfoSurface,player3InfoRect)
+        windowSurfaceObj.blit(player4InfoSurface,player4InfoRect)
+        
         player1HP.draw(windowSurfaceObj)
+        player2HP.draw(windowSurfaceObj)
+        player3HP.draw(windowSurfaceObj)
+        player4HP.draw(windowSurfaceObj)
         
         
         #pixArr = pygame.PixelArray(windowSurfaceObj)
@@ -65,7 +89,7 @@ def start(verbose):
         #      pixArr[x][y] = redColor
         #del pixArr
         
-        player1HP.set_current_health(player1HP.current - 10)
+        #player1HP.set_current_health(player1HP.current - 10)
         #player1HP = 0
         
         for event in pygame.event.get():
