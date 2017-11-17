@@ -86,3 +86,52 @@ class IconBackSprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        
+class MonsterSprite(pygame.sprite.Sprite):
+    def __init__(self, sprite_sheet_path, frames, x, y, h, w, animation_speed):
+        super().__init__()
+        
+        self.frames = frames
+        self.index = 0
+        self.tick_counter = 0
+        self.animation_speed = animation_speed
+        
+        self.h = h
+        self.w = w
+        
+        self.sprite_sheet = SpriteSheet(sprite_sheet_path)
+        
+        self.image = self.sprite_sheet.get_image( 
+                                                self.frames[self.index][0],
+                                                self.frames[self.index][1],
+                                                self.h,
+                                                self.w
+                                                )
+                                            
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        
+    def update(self):
+        self.tick_counter += 1
+        if self.tick_counter % self.animation_speed is 0:
+            if self.index < len(self.frames)-1:
+                self.index += 1
+            else:
+                self.index = 0
+        self.image = self.sprite_sheet.get_image( 
+                                                self.frames[self.index][0],
+                                                self.frames[self.index][1],
+                                                self.h,
+                                                self.w
+                                                )
+            
+            
+class BeholderSprite(MonsterSprite):
+    def __init__(self, x, y):
+        MonsterSprite.__init__(self, "game/visualizer/assets/beholder.png", [
+            [0, 0],
+            [128, 0],
+            [0, 128],
+            [128, 128]
+        ], x, y, 128, 128, 4)

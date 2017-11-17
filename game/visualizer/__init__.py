@@ -5,6 +5,8 @@ from game.visualizer.health_bar import HealthBar
 from game.visualizer.spritesheet_functions import SpriteSheet
 from game.common.enums import *
 from game.visualizer.sprite_sheets import *
+from game.common.monster_types import get_monster
+
 
 pygame.init()
 fpsClock = pygame.time.Clock()
@@ -30,6 +32,7 @@ def start(verbose):
     team = 'Doodz'
     gold = 1000
     trophies = 50
+    
     player1MaxHP = 5000
     player2MaxHP = 5000
     player3MaxHP = 5000
@@ -38,13 +41,28 @@ def start(verbose):
     player2Name = 'BroDood'
     player3Name = 'BoodDro'
     player4Name = 'Carlos'
+    
+    monster = get_monster(MonsterType.beholder)
+    
+    
+    
+    monster.init(1)
+    
     unit_types = [UnitClass.rogue, UnitClass.knight, UnitClass.pikeman, UnitClass.magus]
     player1HP = HealthBar(94, 544, player1MaxHP)
     player2HP = HealthBar(376, 544, player2MaxHP)
     player3HP = HealthBar(656, 544, player3MaxHP)
     player4HP = HealthBar(940, 544, player4MaxHP)
+    monsterHP = HealthBar(550,200,monster.health)
     unit_icon_sprite_group = pygame.sprite.Group()
     icon_back_group = pygame.sprite.Group()
+    monster_group = pygame.sprite.Group()
+    
+    monster_pos = (610,60)
+    
+    if monster.monster_type is MonsterType.beholder:
+        monster_group.add( BeholderSprite(*monster_pos) )
+    
     
     icon_sprite_positions = [(92,504), (374,504), (654,504), (938,504)]
     icon_sprite_backs = [IconBackSprite(pos[0]-4, pos[1]-4) for pos in icon_sprite_positions]
@@ -132,6 +150,10 @@ def start(verbose):
         player2HP.draw(windowSurfaceObj)
         player3HP.draw(windowSurfaceObj)
         player4HP.draw(windowSurfaceObj)
+        monsterHP.draw(windowSurfaceObj)
+        monster_group.draw(windowSurfaceObj)
+        
+        monster_group.update()
         
         icon_back_group.draw(windowSurfaceObj)
         unit_icon_sprite_group.draw(windowSurfaceObj)
