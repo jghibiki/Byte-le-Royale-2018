@@ -38,18 +38,56 @@ def start(verbose):
     player2Name = 'BroDood'
     player3Name = 'BoodDro'
     player4Name = 'Carlos'
-    unit_types = [UnitClass.knight]
+    unit_types = [UnitClass.rogue, UnitClass.knight, UnitClass.pikeman, UnitClass.magus]
     player1HP = HealthBar(94, 544, player1MaxHP)
     player2HP = HealthBar(376, 544, player2MaxHP)
     player3HP = HealthBar(656, 544, player3MaxHP)
     player4HP = HealthBar(940, 544, player4MaxHP)
     unit_icon_sprite_group = pygame.sprite.Group()
+    icon_back_group = pygame.sprite.Group()
     
-    icon_sprite_positions = [(92,512)]
+    icon_sprite_positions = [(92,504), (374,504), (654,504), (938,504)]
+    icon_sprite_backs = [IconBackSprite(pos[0]-4, pos[1]-4) for pos in icon_sprite_positions]
+    icon_back_group.add(icon_sprite_backs)
     icon_sprite_number = 0
     for unit_type in unit_types:
         if unit_type is UnitClass.knight:
             unit_icon_sprite_group.add( KnightIconSprite(
+                *icon_sprite_positions[icon_sprite_number]
+            ) ) 
+            icon_sprite_number += 1
+        elif unit_type is UnitClass.brawler:
+            unit_icon_sprite_group.add( BrawlerIconSprite(
+                *icon_sprite_positions[icon_sprite_number]
+            ) ) 
+            icon_sprite_number += 1
+        elif unit_type is UnitClass.pikeman:
+            unit_icon_sprite_group.add( PikemanIconSprite(
+                *icon_sprite_positions[icon_sprite_number]
+            ) ) 
+            icon_sprite_number += 1
+        elif unit_type is UnitClass.rogue:
+            unit_icon_sprite_group.add( RogueIconSprite(
+                *icon_sprite_positions[icon_sprite_number]
+            ) ) 
+            icon_sprite_number += 1
+        elif unit_type is UnitClass.magus:
+            unit_icon_sprite_group.add( MagusIconSprite(
+                *icon_sprite_positions[icon_sprite_number]
+            ) ) 
+            icon_sprite_number += 1
+        elif unit_type is UnitClass.wizard:
+            unit_icon_sprite_group.add( WizardIconSprite(
+                *icon_sprite_positions[icon_sprite_number]
+            ) ) 
+            icon_sprite_number += 1
+        elif unit_type is UnitClass.sorcerer:
+            unit_icon_sprite_group.add( SorcererIconSprite(
+                *icon_sprite_positions[icon_sprite_number]
+            ) ) 
+            icon_sprite_number += 1
+        elif unit_type is UnitClass.alchemist:
+            unit_icon_sprite_group.add( AlchemistIconSprite(
                 *icon_sprite_positions[icon_sprite_number]
             ) ) 
             icon_sprite_number += 1
@@ -73,13 +111,13 @@ def start(verbose):
         trophiesRectObj = trophiesSurfaceObj.get_rect()
         trophiesRectObj.topleft = (10,52)
         player1InfoRect = player1InfoSurface.get_rect()
-        player1InfoRect.topleft = (124,519)      
+        player1InfoRect.topleft = (128,512)      
         player2InfoRect = player2InfoSurface.get_rect()
-        player2InfoRect.topleft = (374,524)
+        player2InfoRect.topleft = (414,512)
         player3InfoRect = player3InfoSurface.get_rect()
-        player3InfoRect.topleft = (654,524)
+        player3InfoRect.topleft = (694,512)
         player4InfoRect = player4InfoSurface.get_rect()
-        player4InfoRect.topleft = (938,524)
+        player4InfoRect.topleft = (978,512)
         
         windowSurfaceObj.blit(bgSurfaceObj,(0,0))
         windowSurfaceObj.blit(teamSurfaceObj,teamRectObj)
@@ -95,6 +133,7 @@ def start(verbose):
         player3HP.draw(windowSurfaceObj)
         player4HP.draw(windowSurfaceObj)
         
+        icon_back_group.draw(windowSurfaceObj)
         unit_icon_sprite_group.draw(windowSurfaceObj)
         
         #pixArr = pygame.PixelArray(windowSurfaceObj)

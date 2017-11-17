@@ -74,3 +74,15 @@ class AlchemistIconSprite(UnitIconSprite):
             0, UnitClass.alchemist * 32,
             32, 32
         ], x, y)
+        
+class IconBackSprite(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        
+        sprite_sheet = SpriteSheet("game/visualizer/assets/icon_back.png")
+        
+        self.image = sprite_sheet.get_image(0, 0, 40, 40)
+                                            
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
