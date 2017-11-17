@@ -3,6 +3,8 @@
 
 ## Wisp
 
+![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/wisp.png?raw=true)
+
 **Stats:**
 ```eval_rst
 +-------+--------+--------+------------+
@@ -35,6 +37,8 @@
 
 ## Beholder
 
+![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/beholder.png?raw=true)
+
 **Stats:**
 ```eval_rst
 +-------+--------+--------+------------+
@@ -65,6 +69,8 @@
 **Attack Logic:**
 
 ## Dragon
+
+![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/dragon.png?raw=true)
 
 **Stats:**
 ```eval_rst
@@ -97,6 +103,8 @@
 
 ## Minotaur
 
+![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/minotaur.png?raw=true)
+
 **Stats:**
 ```eval_rst
 +-------+--------+--------+------------+
@@ -126,7 +134,41 @@
 
 **Attack Logic:**
 
+## Slime
+
+![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/slime.png?raw=true)
+
+**Stats:**
+```eval_rst
++-------+--------+--------+------------+
+| Level | Health | Damage | Gold Value |
++=======+========+========+============+
+| 1     |        |        |            |
++-------+--------+--------+------------+
+| 2     |        |        |            |
++-------+--------+--------+------------+
+| 3     |        |        |            |
++-------+--------+--------+------------+
+| 4     |        |        |            |
++-------+--------+--------+------------+
+| 5     |        |        |            |
++-------+--------+--------+------------+
+| 6     |        |        |            |
++-------+--------+--------+------------+
+| 7     |        |        |            |
++-------+--------+--------+------------+
+| 8     |        |        |            |
++-------+--------+--------+------------+
+| 9     |        |        |            |
++-------+--------+--------+------------+
+| 10    |        |        |            |
++-------+--------+--------+------------+
+```
+
+**Attack Logic:** 
+
 ## Goblin
+
 **Stats:**
 ```eval_rst
 +-------+--------+--------+------------+
