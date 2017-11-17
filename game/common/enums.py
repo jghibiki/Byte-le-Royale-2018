@@ -112,6 +112,15 @@ class Direction:
 
 
 class MonsterType:
-    chimera = 1
-    beholder = 2
-    goblin = 3
+    wisp = 0
+    beholder = 1
+    goblin = 2
+    dragon = 3
+    minotaur = 4
+    slime = 5
+
+
+
+
+
+
