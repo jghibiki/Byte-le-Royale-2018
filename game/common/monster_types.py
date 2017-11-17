@@ -13,12 +13,21 @@ def get_monster(monster_type):
         return Beholder()
     elif monster_type == MonsterType.goblin:
         return Goblin()
+    elif monster_type == MonsterType.dragon:
+        return Dragon()
+    elif monster_type == MonsterType.minotuar:
+        return Minotaur()
+    elif monster_type == MonsterType.slime:
+        return Slime()
 
 def get_random_monster():
     mon =  random.choice([
         MonsterType.wisp,
         MonsterType.beholder,
-        MonsterType.goblin
+        MonsterType.goblin,
+        MonsterType.dragon,
+        MonsterType.minotuar,
+        MonsterType.slim
     ])
 
     return get_monster(mon)
