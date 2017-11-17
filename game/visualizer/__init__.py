@@ -2,6 +2,9 @@ import pygame, sys
 from pygame.locals import *
 
 from game.visualizer.health_bar import HealthBar
+from game.visualizer.spritesheet_functions import SpriteSheet
+from game.common.enums import *
+from game.visualizer.sprite_sheets import *
 
 pygame.init()
 fpsClock = pygame.time.Clock()
@@ -35,11 +38,21 @@ def start(verbose):
     player2Name = 'BroDood'
     player3Name = 'BoodDro'
     player4Name = 'Carlos'
+    unit_types = [UnitClass.knight]
     player1HP = HealthBar(94, 544, player1MaxHP)
     player2HP = HealthBar(376, 544, player2MaxHP)
     player3HP = HealthBar(656, 544, player3MaxHP)
     player4HP = HealthBar(940, 544, player4MaxHP)
-
+    unit_icon_sprite_group = pygame.sprite.Group()
+    
+    icon_sprite_positions = [(92,512)]
+    icon_sprite_number = 0
+    for unit_type in unit_types:
+        if unit_type is UnitClass.knight:
+            unit_icon_sprite_group.add( KnightIconSprite(
+                *icon_sprite_positions[icon_sprite_number]
+            ) ) 
+            icon_sprite_number += 1
     
     if(verbose):
         print("Visualizer")
@@ -60,7 +73,7 @@ def start(verbose):
         trophiesRectObj = trophiesSurfaceObj.get_rect()
         trophiesRectObj.topleft = (10,52)
         player1InfoRect = player1InfoSurface.get_rect()
-        player1InfoRect.topleft = (92,524)
+        player1InfoRect.topleft = (124,519)      
         player2InfoRect = player2InfoSurface.get_rect()
         player2InfoRect.topleft = (374,524)
         player3InfoRect = player3InfoSurface.get_rect()
@@ -82,6 +95,7 @@ def start(verbose):
         player3HP.draw(windowSurfaceObj)
         player4HP.draw(windowSurfaceObj)
         
+        unit_icon_sprite_group.draw(windowSurfaceObj)
         
         #pixArr = pygame.PixelArray(windowSurfaceObj)
         #for x in range(100,200,4):
