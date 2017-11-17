@@ -179,7 +179,7 @@ source_parsers = {
 }
 
 # At the bottom of conf.py
-github_doc_root = "https://github.com/"
+github_doc_root = "https://jghibiki.github.io/Mini-MechMania-2017-2018/"
 def setup(app):
     app.add_config_value('recommonmark_config', {
             'url_resolver': lambda url: github_doc_root + url,
