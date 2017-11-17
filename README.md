@@ -4,7 +4,7 @@ Now with or without nuts. (Advertised as seen)
 
 # Documentation
 
-The documentation for the competition can be found on the [Documentation Website](https://github.com/jghibiki/Mini-MechMania-2017-2018)
+The documentation for the competition can be found on the [Documentation Website](https://jghibiki.github.io/Mini-MechMania-2017-2018/)
 
 # Scripts
 
