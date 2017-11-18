@@ -7,35 +7,26 @@ from game.common.monster import Monster
 
 
 def get_monster(monster_type):
-    if monster_type == MonsterType.wisp:
-        return Wisp()
+    if monster_type == MonsterType.chimera:
+        return Chimera()
     elif monster_type == MonsterType.beholder:
         return Beholder()
     elif monster_type == MonsterType.goblin:
         return Goblin()
-    elif monster_type == MonsterType.dragon:
-        return Dragon()
-    elif monster_type == MonsterType.minotuar:
-        return Minotaur()
-    elif monster_type == MonsterType.slime:
-        return Slime()
 
 def get_random_monster():
     mon =  random.choice([
-        MonsterType.wisp,
+        MonsterType.chimera,
         MonsterType.beholder,
-        MonsterType.goblin,
-        MonsterType.dragon,
-        MonsterType.minotuar,
-        MonsterType.slim
+        MonsterType.goblin
     ])
 
     return get_monster(mon)
 
 
-class Wisp(Monster):
+class Chimera(Monster):
     def init(self, level):
-        Monster.init(self, "Wisp", MonsterType.wisp, level)
+        Monster.init(self, "Chimera", MonsterType.chimera, level)
 
         self.health = 9000
         self.current_health = self.health
@@ -45,6 +36,7 @@ class Wisp(Monster):
             DamageType.slashing,
             DamageType.cold
         ]
+
 
 
 class Beholder(Monster):
@@ -62,38 +54,6 @@ class Beholder(Monster):
             DamageType.cold
         ]
 
-class Dragon(Monster):
-    def init(self, level):
-        Monster.init(self, "Dragon", MonsterType.dragon, level)
-
-        self.health = 6000
-        self.current_health = self.health
-        self.damage = 250 * math.floor(0.5 * level)
-
-        self.weaknesses = [
-        ]
-
-class Minotaur(Monster):
-    def init(self, level):
-        Monster.init(self, "Minotuar", MonsterType.minotaur, level)
-
-        self.health = 6000
-        self.current_health = self.health
-        self.damage = 250 * math.floor(0.5 * level)
-
-        self.weaknesses = [
-        ]
-
-class Slime(Monster):
-    def init(self, level):
-        Monster.init(self, "Slime", MonsterType.slime, level)
-
-        self.health = 6000
-        self.current_health = self.health
-        self.damage = 250 * math.floor(0.5 * level)
-
-        self.weaknesses = [
-        ]
 
 
 class Goblin(Monster):

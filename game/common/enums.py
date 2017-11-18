@@ -22,14 +22,14 @@ class CombatAction:
     none = 9
 
 class UnitClass:
-    knight = 0
-    brawler = 1
-    pikeman = 2
-    rogue = 3
-    magus = 4
-    wizard = 5
-    sorcerer = 6
-    alchemist = 7
+    knight = 1
+    brawler = 2
+    pikeman = 3
+    rogue = 4
+    magus = 5
+    wizard = 6
+    sorcerer = 7
+    alchemist = 8
 
 
 class MessageType:
@@ -112,15 +112,6 @@ class Direction:
 
 
 class MonsterType:
-    wisp = 0
-    beholder = 1
-    goblin = 2
-    dragon = 3
-    minotaur = 4
-    slime = 5
-
-
-
-
-
-
+    chimera = 1
+    beholder = 2
+    goblin = 3
