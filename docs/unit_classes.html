@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Unit Classes &mdash; Mini-MechMania 9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/accordion.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Mini-MechMania 9 documentation" href="index.html"/>
+        <link rel="next" title="Items" href="items.html"/>
+        <link rel="prev" title="Overview" href="overview.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Mini-MechMania
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Version 0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Unit Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#knight">Knight</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-methods">Combat Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#brawler">Brawler</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-methods">Combat Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pikeman">Pikeman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-methods">Combat Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rogue">Rogue</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-methods">Combat Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#magus">Magus</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-methods">Combat Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wizard">Wizard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-methods">Combat Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sorcerer">Sorcerer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-methods">Combat Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#alchemist">Alchemist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-methods">Combat Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="items.html">Items</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monsters.html">Monsters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="damage_types.html">Damage Types</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mini-MechMania</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Unit Classes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/unit_classes.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="unit-classes">
+<span id="unit-classes"></span><h1>Unit Classes<a class="headerlink" href="#unit-classes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="knight">
+<span id="knight"></span><h2>Knight<a class="headerlink" href="#knight" title="Permalink to this headline">¶</a></h2>
+<p><strong>Primary Weapon:</strong> Sword</p>
+<button class="accordion">Sword Images Level 1-10</button>
+<div class="panel">
+    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/sword.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
+</div>
+<br><p><strong>Unique Ability:</strong> Taunt: If a monster attacks one unit, this unit absorbs 85% damage from the attack and the original target takes none. If a monster attacks multiple units, this unit absorbs 50% of the total damage that would be dealt to each unit. Each unit that was originally targeted receives 50% of the damage originally intended for them.</p>
+<div class="section" id="combat-methods">
+<span id="combat-methods"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Knight.attack()</span></code> Attack monster with Sword.</li>
+<li><code class="docutils literal"><span class="pre">Knight.taunt()</span></code> Use Taunt ability.</li>
+<li><code class="docutils literal"><span class="pre">Knight.wait()</span></code> Do nothing for this turn.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="brawler">
+<span id="brawler"></span><h2>Brawler<a class="headerlink" href="#brawler" title="Permalink to this headline">¶</a></h2>
+<p><strong>Primary Weapon:</strong> Mace</p>
+<button class="accordion">Mace Images Level 1-10</button>
+<div class="panel">
+    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/mace.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
+</div>
+<br><p><strong>Unique Ability:</strong> Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal <code class="docutils literal"><span class="pre">(normal</span> <span class="pre">damage)</span> <span class="pre">*</span> <span class="pre">(2.5</span> <span class="pre">+</span> <span class="pre">(N</span> <span class="pre">*</span> <span class="pre">0.5))</span></code> damage. Where N is determined by the table below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">N</th>
+<th class="head">Damage Taken</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>damage &lt; (unit max health) * 0.25</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>(unit max health) * 0.25 &lt;= damage &lt; (unit max health) * 0.5</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>damage &gt;= (unit max health) * 0.75</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="combat-methods">
+<span id="id1"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Brawler.attack()</span></code> Attack monster with Mace.</li>
+<li><code class="docutils literal"><span class="pre">Brawler.fit_of_rage()</span></code> Use Fit of Rage ability.</li>
+<li><code class="docutils literal"><span class="pre">Brawler.wait()</span></code> Do nothing for this turn.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="pikeman">
+<span id="pikeman"></span><h2>Pikeman<a class="headerlink" href="#pikeman" title="Permalink to this headline">¶</a></h2>
+<p><strong>Primary Weapon:</strong> Spear</p>
+<p><img alt="" src="_images/" /></p>
+<button class="accordion">Spear Images Level 1-10</button>
+<div class="panel">
+    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/spear.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
+</div>
+<br><p><strong>Unique Ability:</strong> Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.</p>
+<div class="section" id="combat-methods">
+<span id="id2"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Pikeman.attack()</span></code> Attack monster with Mace.</li>
+<li><code class="docutils literal"><span class="pre">Pikeman.target_weakness()</span></code> Use Target Weakness ability.</li>
+<li><code class="docutils literal"><span class="pre">Pikeman.wait()</span></code> Do nothing for this turn.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="rogue">
+<span id="rogue"></span><h2>Rogue<a class="headerlink" href="#rogue" title="Permalink to this headline">¶</a></h2>
+<p><strong>Primary Weapon:</strong> Dagger</p>
+<p><strong>Bomb Slots:</strong> 3</p>
+<p><strong>Unique Ability:</strong> Trap expert: <strong>need to flush out once trap mechanics are figured out</strong></p>
+<div class="section" id="combat-methods">
+<span id="id3"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Rogue.attack()</span></code> Attack monster with Dagger.</li>
+<li><code class="docutils literal"><span class="pre">Rogue.bomb_1()</span></code> Attack monster with Bomb in Bomb Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Rogue.bomb_2()</span></code> Attack monster with Bomb in Bomb Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Rogue.bomb_3()</span></code> Attack monster with Bomb in Bomb Slot 3.</li>
+<li><code class="docutils literal"><span class="pre">Rogue.wait()</span></code> Do nothing for this turn.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="magus">
+<span id="magus"></span><h2>Magus<a class="headerlink" href="#magus" title="Permalink to this headline">¶</a></h2>
+<p><strong>Primary Weapon:</strong> Staff</p>
+<p><strong>Spell Slots:</strong> 4</p>
+<p><strong>Unique Ability:</strong> Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.</p>
+<div class="section" id="combat-methods">
+<span id="id4"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Magus.attack()</span></code> Attack monster with Staff.</li>
+<li><code class="docutils literal"><span class="pre">Magus.spell_1()</span></code> Attack monster with Spell in Spell Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Magus.spell_2()</span></code> Attack monster with Spell in Spell Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Magus.spell_3()</span></code> Attack monster with Spell in Spell Slot 3.</li>
+<li><code class="docutils literal"><span class="pre">Magus.spell_4()</span></code> Attack monster with Spell in Spell Slot 4.</li>
+<li><code class="docutils literal"><span class="pre">Magus.elemental_burst()</span></code> Use Elemental Burst ability.</li>
+<li><code class="docutils literal"><span class="pre">Magus.wait()</span></code> Do nothing for this turn.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="wizard">
+<span id="wizard"></span><h2>Wizard<a class="headerlink" href="#wizard" title="Permalink to this headline">¶</a></h2>
+<p><strong>Primary Weapon:</strong> Wand</p>
+<p><strong>Spell Slots:</strong> 4</p>
+<p><strong>Unique Ability:</strong> Invigorate: Charm one ally to deal 1.5 times damage for a turn. Cancels any other damage modifiers that would be in effect for that unit including the effects of Elemental Burst, and Fit of Rage. Can be cast once every 3 turns.</p>
+<div class="section" id="combat-methods">
+<span id="id5"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Wizard.attack()</span></code> Attack monster with Wand.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.spell_1()</span></code> Attack monster with Spell in Spell Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.spell_2()</span></code> Attack monster with Spell in Spell Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.spell_3()</span></code> Attack monster with Spell in Spell Slot 3.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.spell_4()</span></code> Attack monster with Spell in Spell Slot 4.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.invigorate(target)</span></code> Use Invigorate ability.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.wait()</span></code> Do nothing for this turn.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="sorcerer">
+<span id="sorcerer"></span><h2>Sorcerer<a class="headerlink" href="#sorcerer" title="Permalink to this headline">¶</a></h2>
+<p><strong>Primary Weapon:</strong> Spell Book</p>
+<p><strong>Spell Slots:</strong> 4</p>
+<p><strong>Unique Ability:</strong> Illusion: Cast an illusion that disguises one player unit as another on the next turn. Monsters will be unable to tell the difference between the two units for that turn. Can be cast once every 5 turns.</p>
+<div class="section" id="combat-methods">
+<span id="id6"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Sorcerer.attack()</span></code> Attack monster with Spell Book.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.spell_1()</span></code> Attack monster with Spell in Spell Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.spell_2()</span></code> Attack monster with Spell in Spell Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.spell_3()</span></code> Attack monster with Spell in Spell Slot 3.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.spell_4()</span></code> Attack monster with Spell in Spell Slot 4.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.illusion(unit_to_disguise,</span> <span class="pre">unit_to_be_disguised)</span></code> Use Illusion ability.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.wait()</span></code> Do nothing for this turn.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="alchemist">
+<span id="alchemist"></span><h2>Alchemist<a class="headerlink" href="#alchemist" title="Permalink to this headline">¶</a></h2>
+<p><strong>Primary Weapon:</strong> Alchemical Supplies</p>
+<p><strong>Bomb Slots:</strong> 2</p>
+<p><strong>Unique Ability:</strong> Resupply: Spend one turn to regenerate one of bomb of the types currently possessed.</p>
+<div class="section" id="combat-methods">
+<span id="id7"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Alchemist.bomb_1()</span></code> Attack monster with Bomb in Bomb Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Alchemist.bomb_2()</span></code> Attack monster with Bomb in Bomb Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Alchemist.resupply(bomb_type_to_resupply)</span></code> Use Resupply ability.</li>
+<li><code class="docutils literal"><span class="pre">Alchemist.wait()</span></code> Do nothing for this turn.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="items.html" class="btn btn-neutral float-right" title="Items" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview.html" class="btn btn-neutral" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jordan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/accordion.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
