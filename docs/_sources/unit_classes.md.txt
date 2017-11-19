@@ -68,6 +68,12 @@
 ## Rogue
 **Primary Weapon:** Dagger
 
+<button class="accordion">Dagger Images Level 1-10</button>
+<div class="panel">
+    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/dagger.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
+</div>
+<br>
+
 **Bomb Slots:** 3
 
 **Unique Ability:** Trap expert: **need to flush out once trap mechanics are figured out**
