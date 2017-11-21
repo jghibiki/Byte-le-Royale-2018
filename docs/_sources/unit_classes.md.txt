@@ -89,6 +89,12 @@
 ## Magus
 **Primary Weapon:** Staff
 
+<button class="accordion">Staff Images Level 1-10</button>
+<div class="panel">
+    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/staff.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
+</div>
+<br>
+
 **Spell Slots:** 4
 
 **Unique Ability:** Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.
