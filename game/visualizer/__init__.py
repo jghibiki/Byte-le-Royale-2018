@@ -42,24 +42,26 @@ def start(verbose):
     player3Name = 'BoodDro'
     player4Name = 'Carlos'
     
-    monster = get_monster(MonsterType.wisp)
+    monster = get_monster(MonsterType.beholder)
+    
+    
     
     monster.init(1)
-    
     
     unit_types = [UnitClass.rogue, UnitClass.knight, UnitClass.pikeman, UnitClass.magus]
     player1HP = HealthBar(94, 544, player1MaxHP)
     player2HP = HealthBar(376, 544, player2MaxHP)
     player3HP = HealthBar(656, 544, player3MaxHP)
     player4HP = HealthBar(940, 544, player4MaxHP)
-    monsterHP = HealthBar(530,100,monster.health)
+    monsterHP = HealthBar(550,200,monster.health)
     unit_icon_sprite_group = pygame.sprite.Group()
     icon_back_group = pygame.sprite.Group()
     monster_group = pygame.sprite.Group()
     
-    monster_pos = (585,160)
+    monster_pos = (610,60)
     
-    monster_group.add( get_monster_sprite(monster.monster_type, monster_pos) )
+    if monster.monster_type is MonsterType.beholder:
+        monster_group.add( BeholderSprite(*monster_pos) )
     
     
     icon_sprite_positions = [(92,504), (374,504), (654,504), (938,504)]
@@ -119,7 +121,6 @@ def start(verbose):
         player2InfoSurface = fontObj.render('{0}'.format(player2Name),False,whiteColor)
         player3InfoSurface = fontObj.render('{0}'.format(player3Name),False,whiteColor)
         player4InfoSurface = fontObj.render('{0}'.format(player4Name),False,whiteColor)
-        monsterNameSurface = fontObj.render('{0}'.format(monster.name),False,whiteColor)
        
         teamRectObj = teamSurfaceObj.get_rect()
         teamRectObj.topleft = (10,20)
@@ -135,8 +136,6 @@ def start(verbose):
         player3InfoRect.topleft = (694,512)
         player4InfoRect = player4InfoSurface.get_rect()
         player4InfoRect.topleft = (978,512)
-        monsterInfoRect = monsterNameSurface.get_rect()
-        monsterInfoRect.topleft = (530,70)
         
         windowSurfaceObj.blit(bgSurfaceObj,(0,0))
         windowSurfaceObj.blit(teamSurfaceObj,teamRectObj)
@@ -146,7 +145,6 @@ def start(verbose):
         windowSurfaceObj.blit(player2InfoSurface,player2InfoRect)
         windowSurfaceObj.blit(player3InfoSurface,player3InfoRect)
         windowSurfaceObj.blit(player4InfoSurface,player4InfoRect)
-        windowSurfaceObj.blit(monsterNameSurface,monsterInfoRect)
         
         player1HP.draw(windowSurfaceObj)
         player2HP.draw(windowSurfaceObj)

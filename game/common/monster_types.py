@@ -15,7 +15,7 @@ def get_monster(monster_type):
         return Goblin()
     elif monster_type == MonsterType.dragon:
         return Dragon()
-    elif monster_type == MonsterType.minotaur:
+    elif monster_type == MonsterType.minotuar:
         return Minotaur()
     elif monster_type == MonsterType.slime:
         return Slime()
@@ -26,8 +26,8 @@ def get_random_monster():
         MonsterType.beholder,
         MonsterType.goblin,
         MonsterType.dragon,
-        MonsterType.minotaur,
-        MonsterType.slime
+        MonsterType.minotuar,
+        MonsterType.slim
     ])
 
     return get_monster(mon)
@@ -75,7 +75,7 @@ class Dragon(Monster):
 
 class Minotaur(Monster):
     def init(self, level):
-        Monster.init(self, "Minotaur", MonsterType.minotaur, level)
+        Monster.init(self, "Minotuar", MonsterType.minotaur, level)
 
         self.health = 6000
         self.current_health = self.health
