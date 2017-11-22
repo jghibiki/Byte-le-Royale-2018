@@ -135,3 +135,149 @@ class BeholderSprite(MonsterSprite):
             [0, 128],
             [128, 128]
         ], x, y, 128, 128, 4)
+        
+class SlimeSprite(MonsterSprite):
+    def __init__(self, x, y):
+        MonsterSprite.__init__(self, "game/visualizer/assets/slime.png", [
+            [0, 0],
+            [128, 0],
+            [256,0],
+            [384,0],
+            [0, 128],
+            [128,128],
+            [256,128],
+            [384,128],
+            [0,256],
+            [128,256],
+            [256,256],
+            [384,256],
+            [0,384],
+            [128,384],
+        ], x, y, 128, 128,2)
+        
+class MinotaurSprite(MonsterSprite):
+    def __init__(self, x, y):
+        MonsterSprite.__init__(self, "game/visualizer/assets/minotaur.png", [
+            [0, 0],
+            [128, 0],
+            [256,0],
+            [384,0],
+            [0, 128],
+            [128,128],
+            [256,128],
+            [384,128],
+            [0,256],
+            [128,256],
+            [256,256],
+            [384,256],
+            [0,384],
+            [128,384],
+            [256,384],
+            [384,384]
+        ], x, y, 128, 128,3)
+        
+class DragonSprite(MonsterSprite):
+    def __init__(self, x, y):
+        MonsterSprite.__init__(self, "game/visualizer/assets/dragon.png", [
+            [0, 0],
+            [128, 0],
+            [256,0],
+            [384,0],
+            [512,0],
+            [0, 128],
+            [128,128],
+            [256,128],
+            [384,128],
+            [512,128],
+            [0,256],
+            [128,256],
+            [256,256],
+            [384,256],
+            [512,256],
+            [0,384],
+            [128,384],
+            [256,384],
+            [384,384],
+            [512,384],
+            [0,512],
+            [128,512],
+            [256,512]
+        ], x, y, 128, 128,5)
+        
+class WraithSprite(MonsterSprite):
+    def __init__(self, x, y):
+        MonsterSprite.__init__(self, "game/visualizer/assets/wraith.png", [
+            [0, 0],
+            [128, 0],
+            [256,0],
+            [384,0],
+            [512,0],
+            [0, 128],
+            [128,128],
+            [256,128],
+            [384,128],
+            [512,128],
+            [0,256],
+            [128,256],
+            [256,256],
+            [384,256],
+            [512,256],
+            [0,384],
+            [128,384],
+            [256,384],
+            [384,384],
+            [512,384],
+            [0,512],
+            [128,512],
+            [256,512],
+            [384,512],
+            [512,512],
+            [0,640],
+            [128,640],
+            [256,640],
+            [384,640],
+            [512,640]
+        ], x, y, 128, 128,5)
+        
+class WispSprite(MonsterSprite):
+    def __init__(self, x, y):
+        MonsterSprite.__init__(self, "game/visualizer/assets/wisp.png", [
+            [0, 0],
+            [128, 0],
+            [256,0],
+            [384,0],
+            [512,0],
+            [0, 128],
+            [128,128],
+            [256,128],
+            [384,128],
+            [512,128],
+            [0,256],
+            [128,256],
+            [256,256],
+            [384,256],
+            [512,256],
+            [0,384],
+            [128,384],
+            [256,384],
+            [384,384],
+            [512,384],
+            [0,512],
+            [128,512],
+            [256,512],
+            [384,512]
+        ], x, y, 128, 128,3)
+        
+def get_monster_sprite(monster_type, pos):
+    if monster_type is MonsterType.beholder:
+        return BeholderSprite(*pos) 
+    elif monster_type is MonsterType.slime:
+        return SlimeSprite(*pos) 
+    elif monster_type is MonsterType.minotaur:
+        return MinotaurSprite(*pos) 
+    elif monster_type is MonsterType.dragon:
+        return DragonSprite(*pos)
+    ##elif monster_type is MonsterType.wraith:
+    ##    return WraithSprite(*pos)
+    elif monster_type is MonsterType.wisp:
+        return WispSprite(*pos)
