@@ -62,7 +62,7 @@ class CustomClient(UserClient):
             if u.unit_class == UnitClass.alchemist:
                 u.use_bomb_2()
             else:
-                u.wait()
+                u.attack()
 
 
 

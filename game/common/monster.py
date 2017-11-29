@@ -21,6 +21,7 @@ class Monster(Serializable):
         self.cumulative_damage = 0
         self.health = 5
         self.current_health = 5
+        self.gold = 0
         self.weaknesses = []
 
         self.attack_state = {}
@@ -45,6 +46,7 @@ class Monster(Serializable):
         self.current_health = d["current_health"]
         self.attack_state = d["attack_state"]
         self.weaknesses = d["weaknesses"]
+        self.gold = d["gold"]
 
         self.initialized = True
 
@@ -68,6 +70,7 @@ class Monster(Serializable):
         data["current_health"] = self.current_health
         data["attack_state"] = self.attack_state
         data["weaknesses"] = self.weaknesses
+        data["gold"] = self.gold
 
 
         return data
@@ -88,12 +91,12 @@ class Monster(Serializable):
         bar_size = 50
         percent_bar = math.floor( bar_size * percent_health)
 
+        out = "{0}:".format(self.name).rjust(20)
 
-        out = "{0}: ({1:04d}/{2:04d})[{3}]".format(
-                self.name,
+        out += "({0:04d}/{1:04d})[{2}]".format(
                 self.current_health,
                 self.health,
-                ("="*percent_bar).ljust(bar_size, " "))
+                ("="*percent_bar).ljust(bar_size, " ")).rjust(65)
 
         return out
 

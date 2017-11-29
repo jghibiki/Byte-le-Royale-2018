@@ -1,5 +1,28 @@
+class NodeType:
+    monster = 1
+    trap = 2
+    town = 3
+    start = 4
+    end = 5
+
+class Event:
+    unit_health_restored = 0
+    begin_combat = 1
+    set_location = 2
+    purchase_item = 3
+    combat_resolved = 4
+    party_killed = 5
+    special_ability = 6
+    special_ability_charging = 7
+    special_ability_attack = 8
+    monster_attack = 9
+    unit_attack = 10
+    room_choice = 11
+
 
 class ItemSlot:
+    primary = 0
+
     spell_1 = 1
     bomb_1 = 1
 

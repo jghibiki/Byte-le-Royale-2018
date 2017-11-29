@@ -3,36 +3,30 @@ import random
 from game.common.node import Node
 from game.common.trap_types import *
 from game.common.monster_types import *
+from game.common.enums import *
 
-
-class NODE_TYPES:
-    monster = 1
-    trap = 2
-    town = 3
-    start = 4
-    end = 5
 
 def get_random_node():
     node_type = random.choice([
-        NODE_TYPES.monster,
-        NODE_TYPES.trap
+        NodeType.monster,
+        NodeType.trap
     ])
 
-    if node_type == NODE_TYPES.monster:
+    if node_type == NodeType.monster:
         return MonsterRoom.new_node()
-    elif node_type == NODE_TYPES.trap:
+    elif node_type == NodeType.trap:
         return TrapRoom.new_node()
 
 def get_node(node_type):
-    if node_type == NODE_TYPES.monster:
+    if node_type == NodeType.monster:
         return MonsterRoom()
-    elif node_type == NODE_TYPES.trap:
+    elif node_type == NodeType.trap:
         return TrapRoom()
-    elif node_type == NODE_TYPES.town:
+    elif node_type == NodeType.town:
         return Town()
-    elif node_type == NODE_TYPES.start:
+    elif node_type == NodeType.start:
         return StartRoom()
-    elif node_type == NODE_TYPES.end:
+    elif node_type == NodeType.end:
         return EndRoom()
 
 
@@ -43,8 +37,8 @@ class StartRoom(Node):
         node.init()
         return node
 
-    def get_type(self):
-        return NODE_TYPES.start
+    def __init__(self):
+        Node.__init__(self, NodeType.start)
 
     def get_description(self):
         return "Start Room"
@@ -60,8 +54,8 @@ class EndRoom(Node):
         node.init()
         return node
 
-    def get_type(self):
-        return NODE_TYPES.end
+    def __init__(self):
+        Node.__init__(self, NodeType.end)
 
     def get_description(self):
         return "End Room"
@@ -78,8 +72,8 @@ class Town(Node):
         node.init()
         return node
 
-    def get_type(self):
-        return NODE_TYPES.town
+    def __init__(self):
+        Node.__init__(self, NodeType.town)
 
     def get_description(self):
         return "You see a town"
@@ -91,6 +85,9 @@ class MonsterRoom(Node):
         node = MonsterRoom()
         node.init()
         return node
+
+    def __init__(self):
+        Node.__init__(self, NodeType.monster)
 
     def init(self):
         Node.init(self)
@@ -116,9 +113,6 @@ class MonsterRoom(Node):
         return "A {} stands guard.".format(self.monster.get_description())
 
 
-    def get_type(self):
-        return NODE_TYPES.monster
-
 
 class TrapRoom(Node):
     @staticmethod
@@ -127,8 +121,8 @@ class TrapRoom(Node):
         node.init()
         return node
 
-    def get_type(self):
-        return NODE_TYPES.trap
+    def __init__(self):
+        Node.__init__(self, NodeType.trap)
 
     def init(self):
         Node.init(self)

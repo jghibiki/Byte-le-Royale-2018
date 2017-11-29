@@ -10,8 +10,9 @@ class Node(Serializable):
         n.init()
         return n
 
-    def __init__(self):
+    def __init__(self, node_type):
         self.initialized = False
+        self.node_type = node_type
 
 
     def init(self):
@@ -39,7 +40,7 @@ class Node(Serializable):
         return {
             "id": self.id,
             "node_ids": self.node_ids,
-            "node_type": self.get_type(),
+            "node_type": self.node_type,
             "resolved": self.resolved
         }
 
@@ -55,9 +56,6 @@ class Node(Serializable):
     def add_node(self, node):
         self.nodes.append(node)
         self.node_ids.append(node.id)
-
-    def get_type(self):
-        raise Exception("{0} missing implementation of get_type()".format(self.__class__.__name__))
 
     def get_description(self):
         raise Exception("{0} missing implementation of get_description()".format(self.__class__.__name__))
