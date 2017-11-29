@@ -113,8 +113,8 @@ def start(verbose):
     while True:
         windowSurfaceObj.fill(whiteColor)
         teamSurfaceObj = fontObj.render('Team: {0}'.format(team[0:15]),False,whiteColor)
-        goldSurfaceObj = fontObj.render('Gold: {0}'.format(str(gold)),False,goldColor)
-        trophiesSurfaceObj = fontObj.render('Trophies: {0}'.format(str(trophies)),False,goldColor)
+        goldSurfaceObj = fontObj.render('Gold: {0}'.format(str(gold)),False,whiteColor)
+        trophiesSurfaceObj = fontObj.render('Trophies: {0}'.format(str(trophies)),False,whiteColor)
         player1InfoSurface = fontObj.render('{0}'.format(player1Name),False,whiteColor)
         player2InfoSurface = fontObj.render('{0}'.format(player2Name),False,whiteColor)
         player3InfoSurface = fontObj.render('{0}'.format(player3Name),False,whiteColor)
