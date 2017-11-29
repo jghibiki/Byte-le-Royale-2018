@@ -91,7 +91,7 @@ class Monster(Serializable):
         bar_size = 50
         percent_bar = math.floor( bar_size * percent_health)
 
-        out = "{0}:".format(self.name).rjust(20)
+        out = "{0}:".format(self.name).rjust(15)
 
         out += "({0:04d}/{1:04d})[{2}]".format(
                 self.current_health,
