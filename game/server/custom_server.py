@@ -171,7 +171,9 @@ class CustomServer(ServerControl):
                                 self.turn_log["events"].append({
                                     "type": Event.party_killed,
                                     "trophies": self.trophies,
-                                    "gold": self.gold
+                                    "gold": self.gold,
+                                    "total_gold": self.total_gold,
+                                    "levels_cleared": self.towns-1
                                 })
 
                                 self._quit = True # die safely

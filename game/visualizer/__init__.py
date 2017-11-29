@@ -1,34 +1,46 @@
 import pygame, sys
 from pygame.locals import *
 
-from game.visualizer.health_bar import HealthBar
-from game.visualizer.spritesheet_functions import SpriteSheet
 from game.common.enums import *
-from game.visualizer.sprite_sheets import *
 from game.common.monster_types import get_monster
 
-
-pygame.init()
-fpsClock = pygame.time.Clock()
-
-windowSurfaceObj = pygame.display.set_mode((1280,720))
-pygame.display.set_caption('DnD Visualizer')
-
-bgSurfaceObj = pygame.image.load('game/visualizer/assets/brick_wall.png')
-bgSurfaceObj = pygame.transform.scale(bgSurfaceObj,(1280,720))
-
-redColor = pygame.Color(255,0,0)
-greenColor = pygame.Color(0,255,0)
-blueColor = pygame.Color(0,0,255)
-whiteColor = pygame.Color(255,255,255)
-goldColor = pygame.Color(255,215,0)
-blackColor = pygame.Color(0,0,0)
-mousex, mousey = 0, 0
+from game.visualizer.health_bar import HealthBar
+from game.visualizer.spritesheet_functions import SpriteSheet
+from game.visualizer.sprite_sheets import *
+from game.visualizer.game_log_parser import GameLogParser
 
 
-fontObj = pygame.font.Font('freesansbold.ttf',20)
 
 def start(verbose):
+
+    if len(sys.argv) == 3:
+        log_path = sys.argv[2]
+    else:
+        log_path = "./game_log"
+
+    log_parser = GameLogParser(log_path)
+    units, events = log_parser.get_turn()
+
+    pygame.init()
+    fpsClock = pygame.time.Clock()
+
+    windowSurfaceObj = pygame.display.set_mode((1280,720))
+    pygame.display.set_caption('DnD Visualizer')
+
+    bgSurfaceObj = pygame.image.load('game/visualizer/assets/brick_wall.png')
+    bgSurfaceObj = pygame.transform.scale(bgSurfaceObj,(1280,720))
+
+    redColor = pygame.Color(255,0,0)
+    greenColor = pygame.Color(0,255,0)
+    blueColor = pygame.Color(0,0,255)
+    whiteColor = pygame.Color(255,255,255)
+    goldColor = pygame.Color(255,215,0)
+    blackColor = pygame.Color(0,0,0)
+    mousex, mousey = 0, 0
+
+
+    fontObj = pygame.font.Font('freesansbold.ttf',20)
+
     team = 'Doodz'
     gold = 1000
     trophies = 50
@@ -47,11 +59,10 @@ def start(verbose):
     monster.init(1)
 
 
-    unit_types = [UnitClass.rogue, UnitClass.knight, UnitClass.pikeman, UnitClass.magus]
-    player1HP = HealthBar(94, 544, player1MaxHP)
-    player2HP = HealthBar(376, 544, player2MaxHP)
-    player3HP = HealthBar(656, 544, player3MaxHP)
-    player4HP = HealthBar(940, 544, player4MaxHP)
+    player1HP = HealthBar(94, 544, units[0].health)
+    player2HP = HealthBar(376, 544, units[1].health)
+    player3HP = HealthBar(656, 544, units[2].health)
+    player4HP = HealthBar(940, 544, units[3].health)
     monsterHP = HealthBar(530,100,monster.health)
     unit_icon_sprite_group = pygame.sprite.Group()
     icon_back_group = pygame.sprite.Group()
@@ -66,7 +77,8 @@ def start(verbose):
     icon_sprite_backs = [IconBackSprite(pos[0]-4, pos[1]-4) for pos in icon_sprite_positions]
     icon_back_group.add(icon_sprite_backs)
     icon_sprite_number = 0
-    for unit_type in unit_types:
+    for unit in units:
+        unit_type = unit.unit_class
         if unit_type is UnitClass.knight:
             unit_icon_sprite_group.add( KnightIconSprite(
                 *icon_sprite_positions[icon_sprite_number]
@@ -115,10 +127,10 @@ def start(verbose):
         teamSurfaceObj = fontObj.render('Team: {0}'.format(team[0:15]),False,whiteColor)
         goldSurfaceObj = fontObj.render('Gold: {0}'.format(str(gold)),False,goldColor)
         trophiesSurfaceObj = fontObj.render('Trophies: {0}'.format(str(trophies)),False,goldColor)
-        player1InfoSurface = fontObj.render('{0}'.format(player1Name),False,whiteColor)
-        player2InfoSurface = fontObj.render('{0}'.format(player2Name),False,whiteColor)
-        player3InfoSurface = fontObj.render('{0}'.format(player3Name),False,whiteColor)
-        player4InfoSurface = fontObj.render('{0}'.format(player4Name),False,whiteColor)
+        player1InfoSurface = fontObj.render('{0}'.format(units[0].name),False,whiteColor)
+        player2InfoSurface = fontObj.render('{0}'.format(units[1].name),False,whiteColor)
+        player3InfoSurface = fontObj.render('{0}'.format(units[2].name),False,whiteColor)
+        player4InfoSurface = fontObj.render('{0}'.format(units[3].name),False,whiteColor)
         monsterNameSurface = fontObj.render('{0}'.format(monster.name),False,whiteColor)
 
         teamRectObj = teamSurfaceObj.get_rect()
