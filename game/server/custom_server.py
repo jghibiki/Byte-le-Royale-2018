@@ -67,7 +67,7 @@ class CustomServer(ServerControl):
 
                 if self.combat_manager is None:
                     self.print("Init new combat manager")
-                    self.combat_manager = CombatManager(self.current_location.monster, self.units)
+                    self.combat_manager = CombatManager(self.current_location.monster, self.units, self.verbose)
                     self.turn_log["events"].append({ "type": Event.begin_combat })
 
 

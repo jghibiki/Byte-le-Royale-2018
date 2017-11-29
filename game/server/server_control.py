@@ -1,6 +1,7 @@
 import random
 import os
 import json
+import platform
 from datetime import datetime, timedelta
 
 
@@ -18,7 +19,12 @@ class ServerControl:
 
 
         # Game Configuration options
-        self.turn_time = 0.01
+        system = platform.system()
+        if system == "Windows":
+            self.turn_time = 0.025
+        else:
+            self.turn_time = 0.01
+
         self.game_tick_no = 0
         self.max_game_tick = 1e5
         self.turn_data = None

@@ -5,46 +5,46 @@ from game.common.unit import *
 
 special_abilities = {}
 
-def get_special_ability(unit_class):
+def get_special_ability(unit_class, verbose):
     global special_abilities
 
     # melee units
 
     if unit_class == UnitClass.knight:
         if UnitClass.knight not in special_abilities:
-            special_abilities[UnitClass.knight] = Taunt()
+            special_abilities[UnitClass.knight] = Taunt(verbose)
         return special_abilities[UnitClass.knight]
 
     elif unit_class == UnitClass.brawler:
         if UnitClass.brawler not in special_abilities:
-            special_abilities[UnitClass.brawler] = FitOfRage()
+            special_abilities[UnitClass.brawler] = FitOfRage(verbose)
         return special_abilities[UnitClass.brawler]
 
     elif unit_class == UnitClass.pikeman:
         if UnitClass.pikeman not in special_abilities:
-            special_abilities[UnitClass.pikeman] = TargetWeakness()
+            special_abilities[UnitClass.pikeman] = TargetWeakness(verbose)
         return special_abilities[UnitClass.pikeman]
 
     # magic units
 
     elif unit_class == UnitClass.magus:
         if UnitClass.magus not in special_abilities:
-            special_abilities[UnitClass.magus] = ElementalBurst()
+            special_abilities[UnitClass.magus] = ElementalBurst(verbose)
         return special_abilities[UnitClass.magus]
 
     elif unit_class == UnitClass.wizard:
         if UnitClass.wizard not in special_abilities:
-            special_abilities[UnitClass.wizard] = Invigorate()
+            special_abilities[UnitClass.wizard] = Invigorate(verbose)
         return special_abilities[UnitClass.wizard]
 
     elif unit_class == UnitClass.sorcerer:
         if UnitClass.sorcerer not in special_abilities:
-            special_abilities[UnitClass.sorcerer] = Illusion()
+            special_abilities[UnitClass.sorcerer] = Illusion(verbose)
         return special_abilities[UnitClass.sorcerer]
 
     elif unit_class == UnitClass.alchemist:
         if UnitClass.alchemist not in special_abilities:
-            special_abilities[UnitClass.alchemist] = Resupply()
+            special_abilities[UnitClass.alchemist] = Resupply(verbose)
         return special_abilities[UnitClass.alchemist]
 
 def reset_special_abilities():
@@ -60,7 +60,7 @@ def cooldown_abilities(self):
 
 class SpecialAbility:
 
-    def __init__(self):
+    def __init__(self, verbose):
         self.charged = False
         self.charging = False
 
@@ -68,6 +68,8 @@ class SpecialAbility:
         self.charge_timer = 0
 
         self.target = None
+
+        self.verbose = verbose
 
 
     def cooldown(self):
@@ -84,6 +86,10 @@ class SpecialAbility:
     def reset(self):
         pass
 
+    def print(self, msg):
+        if self.verbose:
+            print(msg)
+
 class Taunt(SpecialAbility):
 
     def use(self, damage, targets, unit, monster):
@@ -92,15 +98,15 @@ class Taunt(SpecialAbility):
 
 class FitOfRage(SpecialAbility):
 
-    def __init__(self):
-        SpecialAbility.__init__(self)
+    def __init__(self, verbose):
+        SpecialAbility.__init__(self, verbose)
 
         self.damage_taken = 0
 
     def use(self, turn_log, unit, monster, damage):
 
         if not self.charged:
-            print("{0} is becoming enraged".format(unit.name))
+            self.print("{0} is becoming enraged".format(unit.name))
 
             turn_log["events"].append({
                 "type": Event.special_ability_charging,
@@ -135,7 +141,7 @@ class FitOfRage(SpecialAbility):
                 "damage": damage
             })
 
-            print("In a Fit of Rage, {0} deals {1} damage to {2}".format(unit.name, damage, monster.name))
+            self.print("In a Fit of Rage, {0} deals {1} damage to {2}".format(unit.name, damage, monster.name))
 
             self.reset()
 
@@ -151,7 +157,7 @@ class TargetWeakness(SpecialAbility):
     def use(self, turn_log, unit, monster):
         if not self.charged:
             self.charged = True
-            print("{} searches {} for weaknesses.".format(unit.name, monster.name))
+            self.print("{} searches {} for weaknesses.".format(unit.name, monster.name))
 
             turn_log["events"].append({
                 "type": Event.special_ability_charging,
@@ -171,7 +177,7 @@ class TargetWeakness(SpecialAbility):
                 "damage": damage
             })
 
-            print("Seeing a weakness, {} strikes at {} for {} damage.".format(unit.name, monster.name, damage))
+            self.print("Seeing a weakness, {} strikes at {} for {} damage.".format(unit.name, monster.name, damage))
 
     def reset(self):
         self.charged = False
@@ -182,7 +188,7 @@ class ElementalBurst(SpecialAbility):
     def use(self, turn_log, unit, monster):
 
         if not self.charged:
-            print("{0} charges up magical energy.".format(unit.name))
+            self.print("{0} charges up magical energy.".format(unit.name))
 
             turn_log["events"].append({
                 "type": Event.special_ability_charging,
@@ -214,7 +220,7 @@ class ElementalBurst(SpecialAbility):
                 "damage": damage
             })
 
-            print("With a burst of elemental energy, {0} deals {1} damage to {2}".format(unit.name, damage, monster.name))
+            self.print("With a burst of elemental energy, {0} deals {1} damage to {2}".format(unit.name, damage, monster.name))
 
             self.reset()
 
@@ -233,8 +239,8 @@ class Invigorate(SpecialAbility):
 
 class Illusion(SpecialAbility):
 
-    def __init__(self):
-        SpecialAbility.__init__(self)
+    def __init__(self, verbose):
+        SpecialAbility.__init__(self, verbose)
         self.target_1 = None
         self.target_2 = None
 
@@ -256,7 +262,7 @@ class Resupply(SpecialAbility):
 
 class CombatManager:
 
-    def __init__(self, monster, units):
+    def __init__(self, monster, units, verbose):
         self.round = 1
 
         self.monster = monster
@@ -265,6 +271,8 @@ class CombatManager:
         self.done = False
         self.done_reason = ""
         self.success = None
+
+        self.verbose = verbose
 
         # reset special abilities
         reset_special_abilities()
@@ -301,7 +309,7 @@ class CombatManager:
         # handle early special abilities
         for unit in self.units:
             if unit.combat_action == CombatAction.special_ability:
-                sa = get_special_ability(unit.unit_class)
+                sa = get_special_ability(unit.unit_class, self.verbose)
 
                 if unit.unit_class is UnitClass.knight:
                     taunt_unit = unit
@@ -314,14 +322,12 @@ class CombatManager:
 
                 elif unit.unit_class == UnitClass.wizard:
                     if sa.cooldown_timer <= 0:
-                        print(unit.combat_action_target_1)
                         for u in self.units:
-                            print(u.id)
                             if u.id == unit.combat_action_target_1:
                                 invigorated_unit = u
                                 break
                         if invigorated_unit is not None:
-                            print("{0} casts invigorate on {1}".format(unit.name, invigorated_unit.name))
+                            self.print("{0} casts invigorate on {1}".format(unit.name, invigorated_unit.name))
                             turn_log["events"].append({
                                 "type": Event.special_ability,
                                 "unit": unit.id,
@@ -341,7 +347,7 @@ class CombatManager:
                                 idx_2 = idx
 
                         if idx_1 is not None and idx_2 is not None:
-                            print("{0} casts illusion on {1} disguising them as {2}".format(
+                            self.print("{0} casts illusion on {1} disguising them as {2}".format(
                                 unit.name,
                                 living_units[idx_1].name,
                                 living_units[idx_2].name))
@@ -393,7 +399,7 @@ class CombatManager:
                             "damage": damage
                         })
 
-                        print("{0} deals {1} damage to {2}".format(
+                        self.print("{0} deals {1} damage to {2}".format(
                             self.monster.name,
                             damage,
                             target.name))
@@ -413,11 +419,11 @@ class CombatManager:
                 "damage": damage
             })
 
-            print("{0} deals {1} damage to {2}".format(
+            self.print("{0} deals {1} damage to {2}".format(
                 self.monster.name,
                 damage,
                 taunt_unit.name))
-            print("{0} blocked {1} damage due to taunt.".format(taunt_unit.name, blocked_damage))
+            self.print("{0} blocked {1} damage due to taunt.".format(taunt_unit.name, blocked_damage))
 
         else:
             # Normal Damage ( without taunt) implementation
@@ -440,7 +446,7 @@ class CombatManager:
                 if u.current_health < 0:
                     u.current_health = 0
 
-                print("{0} deals {1} damage to {2}".format(
+                self.print("{0} deals {1} damage to {2}".format(
                     self.monster.name,
                     monster_damage,
                     u.name))
@@ -454,7 +460,7 @@ class CombatManager:
 
             # get appropriate weapon
             if unit.combat_action == CombatAction.primary_weapon:
-                print("{} uses primary weapon".format(unit.name))
+                self.print("{} uses primary weapon".format(unit.name))
                 weapon = unit.primary_weapon
                 item_slot = ItemSlot.primary
 
@@ -475,51 +481,51 @@ class CombatManager:
             else:
                 if unit.unit_class is UnitClass.rogue: # Hanble Rogue Items
                     if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None:
-                        print("{} uses {}".format(unit.name, unit.bomb_1.name))
+                        self.print("{} uses {}".format(unit.name, unit.bomb_1.name))
                         weapon = unit.bomb_1
                         item_slot = ItemSlot.bomb_1
 
                     elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None:
-                        print("{} uses {}".format(unit.name, unit.bomb_2.name))
+                        self.print("{} uses {}".format(unit.name, unit.bomb_2.name))
                         weapon = unit.bomb_2
                         item_slot = ItemSlot.bomb_2
 
                     elif unit.combat_action == CombatAction.secondary_3 and unit.bomb_3 is not None:
-                        print("{} uses {}".format(unit.name, unit.bomb_3.name))
+                        self.print("{} uses {}".format(unit.name, unit.bomb_3.name))
                         weapon = unit.bomb_3
                         item_slot = ItemSlot.bomb_3
 
                 elif unit.unit_class is UnitClass.alchemist: # Handle Alchemist Items
                     if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None:
-                        print("{} uses {}".format(unit.name, unit.bomb_1.name))
+                        self.print("{} uses {}".format(unit.name, unit.bomb_1.name))
                         weapon = unit.bomb_1
                         item_slot = ItemSlot.bomb_1
 
                     elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None:
-                        print("{} uses {}".format(unit.name, unit.bomb_2.name))
+                        self.print("{} uses {}".format(unit.name, unit.bomb_2.name))
                         weapon = unit.bomb_2
                         item_slot = ItemSlot.bomb_2
 
                 elif unit.unit_class in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer]:
                     if unit.combat_action == CombatAction.secondary_1 and unit.spell_1 is not None:
-                        print("{} uses {}".format(unit.name, unit.spell_1.name))
+                        self.print("{} uses {}".format(unit.name, unit.spell_1.name))
                         weapon = unit.spell_1
                         item_slot = ItemSlot.spell_1
 
                     elif unit.combat_action == CombatAction.secondary_2 and unit.spell_2 is not None:
-                        print("{} uses {}".format(unit.name, unit.spell_2.name))
+                        self.print("{} uses {}".format(unit.name, unit.spell_2.name))
                         weapon = unit.spell_2
                         item_slot = ItemSlot.spell_2
 
 
                     elif unit.combat_action == CombatAction.secondary_3 and unit.spell_3 is not None:
-                        print("{} uses {}".format(unit.name, unit.spell_3.name))
+                        self.print("{} uses {}".format(unit.name, unit.spell_3.name))
                         weapon = unit.spell_3
                         item_slot = ItemSlot.spell_3
 
 
                     elif unit.combat_action == CombatAction.secondary_4 and unit.spell_4 is not None:
-                        print("{} uses {}".format(unit.name, unit.spell_3.name))
+                        self.print("{} uses {}".format(unit.name, unit.spell_3.name))
                         weapon = unit.spell_4
                         item_slot = ItemSlot.spell_4
 
@@ -538,7 +544,7 @@ class CombatManager:
                 # apply damage * damage multiplier
                 dmg += math.floor(weapon.damage * dmg_multiplier)
 
-                print("{0} deals {1} damage to {2}".format(
+                self.print("{0} deals {1} damage to {2}".format(
                     unit.name,
                     dmg,
                     self.monster.name))
@@ -579,5 +585,9 @@ class CombatManager:
         print()
         for u in units:
             print(u.summary())
+
+    def print(self, msg):
+        if self.verbose:
+            print(msg)
 
 
