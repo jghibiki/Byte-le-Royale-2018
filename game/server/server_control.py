@@ -71,6 +71,11 @@ class ServerControl:
         else:
             if self.verbose:
                 print("Game Completed")
+
+            # Dump Game log manifest
+            with open("game_log/manifest.json", "w") as f:
+                json.dump({"ticks": self.game_tick_no}, f)
+
             self._socket_client.close()
             self.schedule(exit, 3)
 

@@ -33,6 +33,11 @@ class CustomClient(UserClient):
 
 
     def town(self, units, gold, store):
+        print()
+        print("*"*50)
+        print("Town")
+        print("*"*50)
+
         print("Gold: {}".format(gold))
 
         if store.get_town_number() is 0:
@@ -53,7 +58,10 @@ class CustomClient(UserClient):
             return MessageType.null
 
     def combat_round(self, monster, units):
-        print("COMBAT!")
+        print()
+        print("*"*50)
+        print("Combat")
+        print("*"*50)
         print(monster.summary())
         for u in units:
             print(u.summary())

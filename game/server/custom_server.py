@@ -171,7 +171,9 @@ class CustomServer(ServerControl):
                                 self.turn_log["events"].append({
                                     "type": Event.party_killed,
                                     "trophies": self.trophies,
-                                    "gold": self.gold
+                                    "gold": self.gold,
+                                    "total_gold": self.total_gold,
+                                    "levels_cleared": self.towns-1
                                 })
 
                                 self._quit = True # die safely
@@ -187,41 +189,41 @@ class CustomServer(ServerControl):
                     if data["message_type"] == MessageType.room_choice:
 
                         if len(self.current_location.nodes) == 1 and data["choice"] == Direction.forward:
-                            self.current_location = self.current_location.nodes[0]
 
                             self.turn_log["events"].append({
                                 "type": Event.room_choice,
-                                "room_1": self.current_location.nodes[0],
+                                "room_1": self.current_location.nodes[0].to_dict(),
                                 "room_2": None,
                                 "choice": "room_1"
                             })
 
+                            self.current_location = self.current_location.nodes[0]
                             self.check_end()
 
 
                         elif len(self.current_location.nodes) == 2:
                             if data["choice"] == Direction.left:
-                                self.current_location = self.current_location.nodes[0]
 
                                 self.turn_log["events"].append({
                                     "type": Event.room_choice,
-                                    "room_1": self.current_location.nodes[0],
-                                    "room_2": self.current_location.nodes[1],
+                                    "room_1": self.current_location.nodes[0].to_dict(),
+                                    "room_2": self.current_location.nodes[1].to_dict(),
                                     "choice": "room_1"
                                 })
 
+                                self.current_location = self.current_location.nodes[0]
                                 self.check_end()
 
                             elif data["choice"] == Direction.right:
-                                self.current_location = self.current_location.nodes[1]
 
                                 self.turn_log["events"].append({
                                     "type": Event.room_choice,
-                                    "room_1": self.current_location.nodes[0],
-                                    "room_2": self.current_location.nodes[1],
+                                    "room_1": self.current_location.nodes[0].to_dict(),
+                                    "room_2": self.current_location.nodes[1].to_dict(),
                                     "choice": "room_2"
                                 })
 
+                                self.current_location = self.current_location.nodes[1]
                                 self.check_end()
 
 

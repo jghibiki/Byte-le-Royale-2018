@@ -64,7 +64,7 @@ class Knight(Unit):
             name,
             "Knight",
             UnitClass.knight,
-            10000,
+            11000,
             ItemType.sword)
 
     def attack(self):
@@ -83,7 +83,7 @@ class Brawler(Unit):
             name,
             "Brawler",
             UnitClass.brawler,
-            10000, # health
+            12000, # health
             ItemType.mace)
 
     def attack(self):
@@ -103,7 +103,7 @@ class Pikeman(Unit):
             name,
             "Pikeman",
             UnitClass.pikeman,
-            10000, # health
+            13000, # health
             ItemType.spear)
 
     def attack(self):
@@ -121,7 +121,7 @@ class Rogue(Unit):
         Unit.init(self, name,
             "Rogue",
             UnitClass.rogue,
-            10000, # health
+            14000, # health
             ItemType.dagger)
 
         self.bomb_1 = None
@@ -194,7 +194,7 @@ class Magus(Unit):
         Unit.init(self,
             name, "Magus",
             UnitClass.magus,
-            10000, # health
+            15000, # health
             ItemType.staff)
 
         self.spell_1 = None
@@ -275,7 +275,7 @@ class Wizard(Unit):
             name,
             "Wizard",
             UnitClass.wizard,
-            10000, # health
+            16000, # health
             ItemType.wand)
 
         self.spell_1 = None
@@ -357,7 +357,7 @@ class Sorcerer(Unit):
             name,
             "Sorcerer",
             UnitClass.sorcerer,
-            10000, # health
+            17000, # health
             ItemType.spell_book)
 
         self.spell_1 = None
@@ -441,7 +441,7 @@ class Alchemist(Unit):
             name,
             "Alchemist",
             UnitClass.alchemist,
-            10000, # health
+            18000, # health
             ItemType.alchemical_supplies)
 
 
