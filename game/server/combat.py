@@ -97,10 +97,15 @@ class FitOfRage(SpecialAbility):
 
         self.damage_taken = 0
 
-    def use(self, unit, monster, damage):
+    def use(self, turn_log, unit, monster, damage):
 
         if not self.charged:
             print("{0} is becoming enraged".format(unit.name))
+
+            turn_log["events"].append({
+                "type": Event.special_ability_charging,
+                "unit": unit.id,
+            })
             self.damage_taken += damage
 
             if not self.charging:
@@ -124,6 +129,12 @@ class FitOfRage(SpecialAbility):
             monster.current_health -= damage
             if monster.current_health < 0: monster.current_health = 0
 
+            turn_log["events"].append({
+                "type": Event.special_ability_attack,
+                "unit": unit.id,
+                "damage": damage
+            })
+
             print("In a Fit of Rage, {0} deals {1} damage to {2}".format(unit.name, damage, monster.name))
 
             self.reset()
@@ -137,10 +148,15 @@ class FitOfRage(SpecialAbility):
 
 class TargetWeakness(SpecialAbility):
 
-    def use(self, unit, monster):
+    def use(self, turn_log, unit, monster):
         if not self.charged:
             self.charged = True
             print("{} searches {} for weaknesses.".format(unit.name, monster.name))
+
+            turn_log["events"].append({
+                "type": Event.special_ability_charging,
+                "unit": unit.id,
+            })
 
         else:
             self.charged = False
@@ -148,6 +164,12 @@ class TargetWeakness(SpecialAbility):
             damage = math.floor( unit.primary_weapon.damage * 2.5 )
             monster.current_health -= damage
             if monster.current_health < 0: monster.current_health = 0
+
+            turn_log["events"].append({
+                "type": Event.special_ability_attack,
+                "unit": unit.id,
+                "damage": damage
+            })
 
             print("Seeing a weakness, {} strikes at {} for {} damage.".format(unit.name, monster.name, damage))
 
@@ -157,10 +179,16 @@ class TargetWeakness(SpecialAbility):
 
 class ElementalBurst(SpecialAbility):
 
-    def use(self, unit, monster):
+    def use(self, turn_log, unit, monster):
 
         if not self.charged:
             print("{0} charges up magical energy.".format(unit.name))
+
+            turn_log["events"].append({
+                "type": Event.special_ability_charging,
+                "unit": unit.id,
+            })
+
             if not self.charging:
                 self.charge_timer = 2
                 self.charging = True
@@ -179,6 +207,12 @@ class ElementalBurst(SpecialAbility):
             damage = math.floor( unit.primary_weapon.damage * dmg_multiplier )
             monster.current_health -= damage
             if monster.current_health < 0: monster.current_health = 0
+
+            turn_log["events"].append({
+                "type": Event.special_ability_attack,
+                "unit": unit.id,
+                "damage": damage
+            })
 
             print("With a burst of elemental energy, {0} deals {1} damage to {2}".format(unit.name, damage, monster.name))
 
@@ -257,7 +291,7 @@ class CombatManager:
 
 
 
-    def play_round(self):
+    def play_round(self, turn_log):
         living_units = [ u for u in self.units if u.is_alive() ]
 
         taunt_unit = None
@@ -271,11 +305,15 @@ class CombatManager:
 
                 if unit.unit_class is UnitClass.knight:
                     taunt_unit = unit
+                    turn_log["events"].append({
+                        "type": Event.special_ability,
+                        "unit": unit.id,
+                        "target_1": None,
+                        "target_2": None
+                    })
 
                 elif unit.unit_class == UnitClass.wizard:
-                    print("We have a wizard!")
                     if sa.cooldown_timer <= 0:
-                        print("Wizard's ability is good to go")
                         print(unit.combat_action_target_1)
                         for u in self.units:
                             print(u.id)
@@ -284,6 +322,12 @@ class CombatManager:
                                 break
                         if invigorated_unit is not None:
                             print("{0} casts invigorate on {1}".format(unit.name, invigorated_unit.name))
+                            turn_log["events"].append({
+                                "type": Event.special_ability,
+                                "unit": unit.id,
+                                "target_1": invigorated_unit.id,
+                                "target_2": None
+                            })
 
                 elif unit.unit_class == unit_class.sorcerer:
                     if sa.cooldown_timer <= 0:
@@ -303,6 +347,13 @@ class CombatManager:
                                 living_units[idx_2].name))
                             living_units[idx_1] = living_units[idx_2]
 
+                            turn_log["events"].append({
+                                "type": Event.special_ability,
+                                "unit": unit.id,
+                                "target_1": unit.combat_action_target_1,
+                                "target_2": unit.combat_action_target_2
+                            })
+
 
         # verify that invigorated_unit is not taunt_unit
         if invigorated_unit is not None:
@@ -313,6 +364,7 @@ class CombatManager:
         # pick targets / moves
         monster_target = self.monster.attack(living_units)
         monster_damage = self.monster.damage
+
 
 
 
@@ -335,6 +387,12 @@ class CombatManager:
                         target.current_health -= damage
                         if target.current_health < 0: target.current_health = 0
 
+                        turn_log["events"].append({
+                            "type": Event.monster_attack,
+                            "unit": target.id,
+                            "damage": damage
+                        })
+
                         print("{0} deals {1} damage to {2}".format(
                             self.monster.name,
                             damage,
@@ -349,6 +407,12 @@ class CombatManager:
             taunt_unit.current_health -= damage
             if taunt_unit.current_health < 0: taunt_unit.current_health = 0
 
+            turn_log["events"].append({
+                "type": Event.monster_attack,
+                "unit": taunt_unit.id,
+                "damage": damage
+            })
+
             print("{0} deals {1} damage to {2}".format(
                 self.monster.name,
                 damage,
@@ -362,6 +426,12 @@ class CombatManager:
 
             for u in monster_target:
                 u.current_health -= monster_damage
+
+                turn_log["events"].append({
+                    "type": Event.monster_attack,
+                    "unit": u.id,
+                    "damage": monster_damage
+                })
 
                 if u.unit_class is UnitClass.brawler:
                     # record brawler damage
@@ -386,62 +456,72 @@ class CombatManager:
             if unit.combat_action == CombatAction.primary_weapon:
                 print("{} uses primary weapon".format(unit.name))
                 weapon = unit.primary_weapon
+                item_slot = ItemSlot.primary
 
             elif unit.combat_action == CombatAction.special_ability:
                 sa = get_special_ability(unit.unit_class)
 
                 if unit.unit_class is UnitClass.brawler:
-                    sa.use(unit, self.monster, brawler_damage)
+                    sa.use(turn_log, unit, self.monster, brawler_damage)
 
                 elif unit.unit_class is UnitClass.pikeman:
-                    sa.use(unit, self.monster)
+                    sa.use(turn_log, unit, self.monster)
 
                 elif unit.unit_class is UnitClass.magus:
-                    sa.use(unit, self.monster)
+                    sa.use(turn_log, unit, self.monster)
 
                 elif unit.unit_class is UnitClass.wizard:
-                    sa.use()
+                    sa.use(turn_log)
             else:
                 if unit.unit_class is UnitClass.rogue: # Hanble Rogue Items
                     if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None:
                         print("{} uses {}".format(unit.name, unit.bomb_1.name))
                         weapon = unit.bomb_1
+                        item_slot = ItemSlot.bomb_1
 
                     elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None:
                         print("{} uses {}".format(unit.name, unit.bomb_2.name))
                         weapon = unit.bomb_2
+                        item_slot = ItemSlot.bomb_2
 
                     elif unit.combat_action == CombatAction.secondary_3 and unit.bomb_3 is not None:
                         print("{} uses {}".format(unit.name, unit.bomb_3.name))
                         weapon = unit.bomb_3
+                        item_slot = ItemSlot.bomb_3
 
                 elif unit.unit_class is UnitClass.alchemist: # Handle Alchemist Items
                     if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None:
                         print("{} uses {}".format(unit.name, unit.bomb_1.name))
                         weapon = unit.bomb_1
+                        item_slot = ItemSlot.bomb_1
 
                     elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None:
                         print("{} uses {}".format(unit.name, unit.bomb_2.name))
                         weapon = unit.bomb_2
+                        item_slot = ItemSlot.bomb_2
 
                 elif unit.unit_class in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer]:
                     if unit.combat_action == CombatAction.secondary_1 and unit.spell_1 is not None:
                         print("{} uses {}".format(unit.name, unit.spell_1.name))
                         weapon = unit.spell_1
+                        item_slot = ItemSlot.spell_1
 
                     elif unit.combat_action == CombatAction.secondary_2 and unit.spell_2 is not None:
                         print("{} uses {}".format(unit.name, unit.spell_2.name))
                         weapon = unit.spell_2
+                        item_slot = ItemSlot.spell_2
 
 
                     elif unit.combat_action == CombatAction.secondary_3 and unit.spell_3 is not None:
                         print("{} uses {}".format(unit.name, unit.spell_3.name))
                         weapon = unit.spell_3
+                        item_slot = ItemSlot.spell_3
 
 
                     elif unit.combat_action == CombatAction.secondary_4 and unit.spell_4 is not None:
                         print("{} uses {}".format(unit.name, unit.spell_3.name))
                         weapon = unit.spell_4
+                        item_slot = ItemSlot.spell_4
 
 
             # calculate normal combat damage
@@ -469,6 +549,12 @@ class CombatManager:
                     self.monster.current_health = 0
                     break
 
+                turn_log["events"].append({
+                    "type": Event.unit_attack,
+                    "unit": u.id,
+                    "damage":dmg,
+                    "item_used": item_slot
+                })
 
 
         self.round += 1

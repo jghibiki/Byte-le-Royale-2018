@@ -25,16 +25,27 @@ class CustomServer(ServerControl):
         self.trophies = 0
         self.towns = 0
         self.gold = 300
+        self.total_gold = 300
 
         self.started = False
 
         self.combat_manager = None
         self.units = []
 
+        self.turn_log = None
+
 
     def pre_turn(self):
         self.print("#"*70)
         self.print("SERVER PRE TURN")
+
+        # reset turn result
+        self.turn_log = { "events":[
+            {
+                "type": Event.set_location,
+                "location": self.current_location.to_dict()
+            }
+        ] }
 
         if not self.started:
             # first turn, ask for what units the team should be made up of
@@ -49,17 +60,20 @@ class CustomServer(ServerControl):
                 for u in self.units:
                     u.reset_health()
 
+                self.turn_log["events"].append({"type":Event.unit_health_restored})
+
             elif isinstance(self.current_location, MonsterRoom):
                 self.print("Combat against {}".format(self.current_location.monster.get_description()))
-
 
                 if self.combat_manager is None:
                     self.print("Init new combat manager")
                     self.combat_manager = CombatManager(self.current_location.monster, self.units)
+                    self.turn_log["events"].append({ "type": Event.begin_combat })
 
 
             elif isinstance(self.current_location, TrapRoom):
                 self.print("Navgating trap {}".format(self.current_location.trap.get_description()))
+                self.current_location.resolved = True
 
 
     def post_turn(self):
@@ -100,10 +114,6 @@ class CustomServer(ServerControl):
 
             else:
 
-                #TODO remove this
-                if  isinstance(self.current_location, TrapRoom):
-                    self.print("Skip TrapRoom")
-                    self.current_location.resolved = True
 
                 # HANDLE ROOM NOT RESOLVED
                 if not self.current_location.resolved:
@@ -115,9 +125,10 @@ class CustomServer(ServerControl):
 
                         self.handle_town_purchases()
 
+                        self.towns += 1
+
                         # handle purchases
                         self.current_location.resolved = True
-
 
 
                     elif isinstance(self.current_location, MonsterRoom) and data["message_type"] == MessageType.combat_round:
@@ -127,18 +138,42 @@ class CustomServer(ServerControl):
 
                         self.print("Valid data, running combat round.")
                         self.combat_manager.units = data["units"]
-                        self.combat_manager.play_round()
+                        self.combat_manager.play_round(self.turn_log)
 
                         if self.combat_manager.done:
+
+
                             if self.combat_manager.success is True:
                                 print("Combat Resolved!")
                                 self.trophies += 1
+                                self.gold += self.current_location.monster.gold
+                                self.total_gold += self.current_location.monster.gold
+
+                                self.turn_log["events"].append({
+                                    "type": Event.combat_resolved,
+                                    "trophies": self.trophies,
+                                    "gold": self.gold
+                                })
+
                                 self.current_location.resolved = True
                                 self.combat_manager = None
                                 return
                             elif self.combat_manager.success is False:
+                                print()
+                                print("*"*50)
                                 print("Party Killed! GAME OVER!")
                                 print("Trophies Earned: {}".format(self.trophies))
+                                print("Current Gold: {}".format(self.gold))
+                                print("Total Gold: {}".format(self.total_gold))
+                                print("Levels Cleared: {}".format(self.towns-1))
+                                print("*"*50)
+
+                                self.turn_log["events"].append({
+                                    "type": Event.party_killed,
+                                    "trophies": self.trophies,
+                                    "gold": self.gold
+                                })
+
                                 self._quit = True # die safely
                                 return
 
@@ -153,18 +188,40 @@ class CustomServer(ServerControl):
 
                         if len(self.current_location.nodes) == 1 and data["choice"] == Direction.forward:
                             self.current_location = self.current_location.nodes[0]
-                            # TODO: LOG location change
+
+                            self.turn_log["events"].append({
+                                "type": Event.room_choice,
+                                "room_1": self.current_location.nodes[0],
+                                "room_2": None,
+                                "choice": "room_1"
+                            })
+
                             self.check_end()
+
 
                         elif len(self.current_location.nodes) == 2:
                             if data["choice"] == Direction.left:
                                 self.current_location = self.current_location.nodes[0]
-                                # TODO: LOG location change
+
+                                self.turn_log["events"].append({
+                                    "type": Event.room_choice,
+                                    "room_1": self.current_location.nodes[0],
+                                    "room_2": self.current_location.nodes[1],
+                                    "choice": "room_1"
+                                })
+
                                 self.check_end()
 
                             elif data["choice"] == Direction.right:
                                 self.current_location = self.current_location.nodes[1]
-                                # TODO: LOG location change
+
+                                self.turn_log["events"].append({
+                                    "type": Event.room_choice,
+                                    "room_1": self.current_location.nodes[0],
+                                    "room_2": self.current_location.nodes[1],
+                                    "choice": "room_2"
+                                })
+
                                 self.check_end()
 
 
@@ -201,7 +258,6 @@ class CustomServer(ServerControl):
                     self.print("Monster Room")
                     payload[i] = self.generate_room_option_payload(self.current_location.nodes)
 
-
                 elif isinstance(self.current_location, TrapRoom):
                     self.print("Trap Room")
                     payload[i] = self.generate_room_option_payload(self.current_location.nodes)
@@ -229,7 +285,8 @@ class CustomServer(ServerControl):
 
     def log(self):
         return {
-            "client_turn_data": self.client_turn_data
+            "turn_result": self.turn_log,
+            "units": self.serialize_units()
         }
 
 
@@ -366,59 +423,160 @@ class CustomServer(ServerControl):
                         item = get_item(item_type, item_level)
                         unit.primary_weapon = item
 
+                        self.turn_log["events"].append({
+                            "event": Event.purchase_item,
+                            "gold": self.gold,
+                            "unit": unit.id,
+                            "slot": ItemSlot.primary
+                        })
+
                     if unit.unit_class == UnitClass.rogue:
                         if item_slot is None:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.primary_weapon = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.primary
+                            })
+
                         elif item_slot == 1:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.bomb_1 = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.bomb_1
+                            })
+
                         elif item_slot == 2:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.bomb_2 = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.bomb_2
+                            })
+
                         elif item_slot == 3:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.bomb_3 = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.bomb_3
+                            })
+
 
                     elif unit.unit_class == UnitClass.alchemist:
                         if item_slot is None:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.primary_weapon = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.primary
+                            })
+
                         elif item_slot == 1:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.bomb_1 = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.bomb_1
+                            })
+
                         elif item_slot == 2:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.bomb_2 = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.bomb_2
+                            })
 
                     elif unit.unit_class in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ]:
                         if item_slot is None:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.primary_weapon = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.primary
+                            })
+
                         elif item_slot == 1:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.spell_1 = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.spell_1
+                            })
+
                         elif item_slot == 2:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.spell_2 = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.spell_2
+                            })
+
                         elif item_slot == 3:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.spell_3 = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.spell_3
+                            })
+
                         elif item_slot == 4:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.spell_4 = item
+
+                            self.turn_log["events"].append({
+                                "event": Event.purchase_item,
+                                "gold": self.gold,
+                                "unit": unit.id,
+                                "slot": ItemSlot.spell_4
+                            })
 
                     if item is not None:
                         print("{0} purchased {1}".format(unit.name, item.name))

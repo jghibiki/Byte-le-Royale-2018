@@ -114,13 +114,12 @@ class Unit(Serializable):
         bar_size = 50
         percent_bar = math.floor( bar_size * percent_health)
 
+        out = "{0}:".format(self.name).rjust(15)
 
-        out = "{0}({1}): ({2:04d}/{3:04d})[{4}]".format(
-                self.name,
-                self.class_name,
+        out += "({0:04d}/{1:04d})[{2}]".format(
                 self.current_health,
                 self.health,
-                ("="*percent_bar).ljust(bar_size, " "))
+                ("="*percent_bar).ljust(bar_size, " ")).rjust(65)
 
         return out
 
