@@ -177,7 +177,7 @@ def start(verbose):
                     event["handled"] = True
 
 
-        if location.node_type == NodeType.monster and location_change:
+        if location.node_type == NodeType.monster:
             monster = location.monster
 
             monster_name_surface = fontObj.render(monster.name, True, whiteColor)
@@ -190,11 +190,13 @@ def start(verbose):
             monster_hp_bar.add(bar)
 
             # clear monster_group
-            monster_group.empty()
 
-            monster_sprite = get_monster_sprite(monster.monster_type, monster_pos)
-            monster_sprite.rect.x = 640 - math.floor(monster_sprite.rect.w/2)
-            monster_group.add( monster_sprite )
+            if location_change:
+                monster_group.empty()
+
+                monster_sprite = get_monster_sprite(monster.monster_type, monster_pos)
+                monster_sprite.rect.x = 640 - math.floor(monster_sprite.rect.w/2)
+                monster_group.add( monster_sprite )
 
         if location.node_type == NodeType.town:
             monster_hp_bar.empty()
@@ -253,6 +255,10 @@ def start(verbose):
         monster_info_rect = monster_name_surface.get_rect()
         monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 70)
 
+        unit_hp_bars.update(units)
+
+        monster_hp_bar.update([monster])
+
         #####
         # Begin Drawing to screen
         #####
@@ -281,10 +287,8 @@ def start(verbose):
         global_surf.blit( monster_name_surface, monster_info_rect)
 
         # draw player hitpoints
-        unit_hp_bars.update(units)
         unit_hp_bars.draw(global_surf)
 
-        monster_hp_bar.update([monster])
         monster_hp_bar.draw(global_surf)
 
         monster_group.draw(global_surf)
