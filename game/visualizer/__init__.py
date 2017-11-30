@@ -8,6 +8,7 @@ from game.visualizer.health_bar import HealthBar
 from game.visualizer.spritesheet_functions import SpriteSheet
 from game.visualizer.sprite_sheets import *
 from game.visualizer.game_log_parser import GameLogParser
+from game.visualizer.floating_number import FloatingNumber
 
 
 
@@ -58,6 +59,8 @@ def start(verbose):
 
     monster_hp_bar = pygame.sprite.Group()
     monster_hp_bar.add( HealthBar(530, 90, 300, 50, monster.id) )
+    
+    floating_number_group = pygame.sprite.Group()
 
     unit_icon_sprite_group = pygame.sprite.Group()
     icon_back_group = pygame.sprite.Group()
@@ -258,6 +261,10 @@ def start(verbose):
         unit_hp_bars.update(units)
 
         monster_hp_bar.update([monster])
+        
+        monster_group.update()
+        
+        floating_number_group.update(floating_number_group)
 
         #####
         # Begin Drawing to screen
@@ -293,18 +300,11 @@ def start(verbose):
 
         monster_group.draw(global_surf)
 
-        monster_group.update()
-
         icon_back_group.draw(global_surf)
         unit_icon_sprite_group.draw(global_surf)
-
-        #pixArr = pygame.PixelArray(global_surf)
-        #for x in range(100,200,4):
-        #   for y in range(100,200,4):
-        #      pixArr[x][y] = redColor
-        #del pixArr
-
-
+        
+        floating_number_group.draw(global_surf)
+        
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -312,9 +312,11 @@ def start(verbose):
             elif event.type == MOUSEMOTION:
                 mousex, mousey = event.pos
             elif event.type == MOUSEBUTTONUP:
-               mousex,mousey = event.pos
-               if event.button in (1, 2, 3):
-                   msg = 'yay'
+               mousex, mousey = event.pos
+               if event.button == 1:
+                    mouse_x, mouse_y = event.pos
+                    fn = FloatingNumber(mouse_x, mouse_y, '-5000', whiteColor)
+                    floating_number_group.add(fn)
 
         first_loop = False
 
