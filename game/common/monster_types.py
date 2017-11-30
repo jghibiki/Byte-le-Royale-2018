@@ -24,7 +24,7 @@ def get_random_monster():
     mon =  random.choice([
         MonsterType.wisp,
         MonsterType.beholder,
-        MonsterType.goblin,
+        #MonsterType.goblin,
         MonsterType.dragon,
         MonsterType.minotaur,
         MonsterType.slime

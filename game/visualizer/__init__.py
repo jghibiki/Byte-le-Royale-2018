@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, math
 from pygame.locals import *
 
 from game.common.enums import *
@@ -21,10 +21,12 @@ def start(verbose):
     log_parser = GameLogParser(log_path)
     units, events = log_parser.get_turn()
 
+    location = None # current location
+
     pygame.init()
     fpsClock = pygame.time.Clock()
 
-    windowSurfaceObj = pygame.display.set_mode((1280,720))
+    global_surf = pygame.display.set_mode((1280,720))
     pygame.display.set_caption('DnD Visualizer')
 
     bgSurfaceObj = pygame.image.load('game/visualizer/assets/brick_wall.png')
@@ -42,38 +44,33 @@ def start(verbose):
     fontObj = pygame.font.Font('freesansbold.ttf',20)
 
     team = 'Doodz'
-    gold = 1000
-    trophies = 50
-
-    player1MaxHP = 5000
-    player2MaxHP = 5000
-    player3MaxHP = 5000
-    player4MaxHP = 5000
-    player1Name = 'DoodBro'
-    player2Name = 'BroDood'
-    player3Name = 'BoodDro'
-    player4Name = 'Carlos'
+    gold = 300
+    trophies = 0
 
     monster = get_monster(MonsterType.dragon)
-
     monster.init(1)
 
+    unit_hp_bars = pygame.sprite.Group()
+    unit_hp_bars.add( HealthBar(20,  544, 300, 50, units[0].id) )
+    unit_hp_bars.add( HealthBar(332, 544, 300, 50, units[1].id) )
+    unit_hp_bars.add( HealthBar(644, 544, 300, 50, units[2].id) )
+    unit_hp_bars.add( HealthBar(956, 544, 300, 50, units[3].id) )
 
-    player1HP = HealthBar(94, 544, units[0].health)
-    player2HP = HealthBar(376, 544, units[1].health)
-    player3HP = HealthBar(656, 544, units[2].health)
-    player4HP = HealthBar(940, 544, units[3].health)
-    monsterHP = HealthBar(530,100,monster.health)
+    monster_hp_bar = pygame.sprite.Group()
+    monster_hp_bar.add( HealthBar(530, 90, 300, 50, monster.id) )
+
     unit_icon_sprite_group = pygame.sprite.Group()
     icon_back_group = pygame.sprite.Group()
     monster_group = pygame.sprite.Group()
 
-    monster_pos = (585,160)
+    monster_pos = (585,120)
+    monster_name_surface = fontObj.render(monster.name, True, whiteColor)
 
     monster_group.add( get_monster_sprite(monster.monster_type, monster_pos) )
 
+    teamSurfaceObj = fontObj.render('Team: {0}'.format(team[0:15]), True, whiteColor)
 
-    icon_sprite_positions = [(92,504), (374,504), (654,504), (938,504)]
+    icon_sprite_positions = [(20,504), (332,504), (644,504), (956,504)]
     icon_sprite_backs = [IconBackSprite(pos[0]-4, pos[1]-4) for pos in icon_sprite_positions]
     icon_back_group.add(icon_sprite_backs)
     icon_sprite_number = 0
@@ -120,66 +117,189 @@ def start(verbose):
             ) )
             icon_sprite_number += 1
 
+    # load background image sprites
+    background_group = pygame.sprite.Group()
+
+    town_shop_sprite = TownShopSprite()
+    monster_room_sprite = MonsterRoomSprite()
+
     if(verbose):
         print("Visualizer")
+
+    first_loop = True
+    next_turn_counter = 0
+    background = NodeType.town
+
     while True:
-        windowSurfaceObj.fill(whiteColor)
-        teamSurfaceObj = fontObj.render('Team: {0}'.format(team[0:15]),False,whiteColor)
-        goldSurfaceObj = fontObj.render('Gold: {0}'.format(str(gold)),False,goldColor)
-        trophiesSurfaceObj = fontObj.render('Trophies: {0}'.format(str(trophies)),False,goldColor)
-        player1InfoSurface = fontObj.render('{0}'.format(units[0].name),False,whiteColor)
-        player2InfoSurface = fontObj.render('{0}'.format(units[1].name),False,whiteColor)
-        player3InfoSurface = fontObj.render('{0}'.format(units[2].name),False,whiteColor)
-        player4InfoSurface = fontObj.render('{0}'.format(units[3].name),False,whiteColor)
-        monsterNameSurface = fontObj.render('{0}'.format(monster.name),False,whiteColor)
+
+        # per loop flags
+        draw_gold = False
+        draw_trophies = False
+        location_change = False
+
+        if log_parser.check_finished():
+            sys.exit()
+
+        if next_turn_counter <= 0:
+            units, events = log_parser.get_turn()
+
+        # read through the events
+        for event in events:
+            if not event["handled"]:
+                if event["type"] == Event.set_location:
+
+                    if location is not None and location.id != event["location"].id:
+                        location_change = True
+
+                    location = event["location"]
+
+                    background = location.node_type
+
+                    next_turn_counter += 5
+                    if location.node_type == NodeType.town:
+                        next_turn_counter += 5
+
+                    event["handled"] = True
+
+                elif event["type"] == Event.combat_resolved:
+                    gold = event["gold"]
+                    trophies = event["trophies"]
+                    draw_gold = True
+                    draw_trophies = True
+
+                    event["handled"] = True
+
+                elif event["type"] == Event.purchase_item:
+                    #TODO finish handling event
+                    gold = event["gold"]
+                    draw_gold = True
+
+                    event["handled"] = True
+
+
+        if location.node_type == NodeType.monster and location_change:
+            monster = location.monster
+
+            monster_name_surface = fontObj.render(monster.name, True, whiteColor)
+
+            # clear monster hp bar
+            monster_hp_bar.empty()
+
+            bar = HealthBar(530, 90, 300, 50, monster.id)
+            bar.rect.x = 640 - math.floor(bar.rect.w/2)
+            monster_hp_bar.add(bar)
+
+            # clear monster_group
+            monster_group.empty()
+
+            monster_sprite = get_monster_sprite(monster.monster_type, monster_pos)
+            monster_sprite.rect.x = 640 - math.floor(monster_sprite.rect.w/2)
+            monster_group.add( monster_sprite )
+
+        if location.node_type == NodeType.town:
+            monster_hp_bar.empty()
+            monster_group.empty()
+
+
+        # swap background image
+        if background == NodeType.monster:
+            background_group.empty()
+            background_group.add( monster_room_sprite )
+        if background == NodeType.town:
+            background_group.empty()
+            background_group.add( town_shop_sprite )
+        else:
+            pass
+
+        #####
+        # Rendering Stuff
+        #####
+
+        # render gold text if changed
+        if draw_gold or first_loop:
+            goldSurfaceObj = fontObj.render('Gold: {0}'.format(str(gold)), True, goldColor)
+
+        # render trophies text if changed
+        if draw_trophies or first_loop:
+            trophiesSurfaceObj = fontObj.render('Trophies: {0}'.format(str(trophies)), True, goldColor)
+
+        player1InfoSurface = fontObj.render(units[0].name, True, whiteColor)
+        player2InfoSurface = fontObj.render(units[1].name, True, whiteColor)
+        player3InfoSurface = fontObj.render(units[2].name, True, whiteColor)
+        player4InfoSurface = fontObj.render(units[3].name, True, whiteColor)
+
 
         teamRectObj = teamSurfaceObj.get_rect()
         teamRectObj.topleft = (10,20)
+
         goldRectObj = goldSurfaceObj.get_rect()
-        goldRectObj.topleft = (10,36)
+        goldRectObj.topleft = (10,40)
+
         trophiesRectObj = trophiesSurfaceObj.get_rect()
-        trophiesRectObj.topleft = (10,52)
+        trophiesRectObj.topleft = (10, 60)
+
         player1InfoRect = player1InfoSurface.get_rect()
-        player1InfoRect.topleft = (128,512)
+        player1InfoRect.topleft = (58, 512)
+
         player2InfoRect = player2InfoSurface.get_rect()
-        player2InfoRect.topleft = (414,512)
+        player2InfoRect.topleft = (370, 512)
+
         player3InfoRect = player3InfoSurface.get_rect()
-        player3InfoRect.topleft = (694,512)
+        player3InfoRect.topleft = (682, 512)
+
         player4InfoRect = player4InfoSurface.get_rect()
-        player4InfoRect.topleft = (978,512)
-        monsterInfoRect = monsterNameSurface.get_rect()
-        monsterInfoRect.topleft = (530,70)
+        player4InfoRect.topleft = (994, 512)
 
-        windowSurfaceObj.blit(bgSurfaceObj,(0,0))
-        windowSurfaceObj.blit(teamSurfaceObj,teamRectObj)
-        windowSurfaceObj.blit(goldSurfaceObj,goldRectObj)
-        windowSurfaceObj.blit(trophiesSurfaceObj,trophiesRectObj)
-        windowSurfaceObj.blit(player1InfoSurface,player1InfoRect)
-        windowSurfaceObj.blit(player2InfoSurface,player2InfoRect)
-        windowSurfaceObj.blit(player3InfoSurface,player3InfoRect)
-        windowSurfaceObj.blit(player4InfoSurface,player4InfoRect)
-        windowSurfaceObj.blit(monsterNameSurface,monsterInfoRect)
+        monster_info_rect = monster_name_surface.get_rect()
+        monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 70)
 
-        player1HP.draw(windowSurfaceObj)
-        player2HP.draw(windowSurfaceObj)
-        player3HP.draw(windowSurfaceObj)
-        player4HP.draw(windowSurfaceObj)
-        monsterHP.draw(windowSurfaceObj)
-        monster_group.draw(windowSurfaceObj)
+        #####
+        # Begin Drawing to screen
+        #####
+
+        # clear screen, fill with white
+        global_surf.fill(whiteColor)
+
+
+        background_group.update()
+        background_group.draw(global_surf)
+
+        # draw team name
+        global_surf.blit(teamSurfaceObj,teamRectObj)
+
+        # draw gold text
+        global_surf.blit(goldSurfaceObj,goldRectObj)
+
+        # draw trohpy text
+        global_surf.blit(trophiesSurfaceObj,trophiesRectObj)
+
+        # draw unit info text
+        global_surf.blit( player1InfoSurface, player1InfoRect)
+        global_surf.blit( player2InfoSurface, player2InfoRect)
+        global_surf.blit( player3InfoSurface, player3InfoRect)
+        global_surf.blit( player4InfoSurface, player4InfoRect)
+        global_surf.blit( monster_name_surface, monster_info_rect)
+
+        # draw player hitpoints
+        unit_hp_bars.update(units)
+        unit_hp_bars.draw(global_surf)
+
+        monster_hp_bar.update([monster])
+        monster_hp_bar.draw(global_surf)
+
+        monster_group.draw(global_surf)
 
         monster_group.update()
 
-        icon_back_group.draw(windowSurfaceObj)
-        unit_icon_sprite_group.draw(windowSurfaceObj)
+        icon_back_group.draw(global_surf)
+        unit_icon_sprite_group.draw(global_surf)
 
-        #pixArr = pygame.PixelArray(windowSurfaceObj)
+        #pixArr = pygame.PixelArray(global_surf)
         #for x in range(100,200,4):
         #   for y in range(100,200,4):
         #      pixArr[x][y] = redColor
         #del pixArr
 
-        #player1HP.set_current_health(player1HP.current - 10)
-        #player1HP = 0
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -191,5 +311,11 @@ def start(verbose):
                mousex,mousey = event.pos
                if event.button in (1, 2, 3):
                    msg = 'yay'
+
+        first_loop = False
+
+        if next_turn_counter > 0:
+            next_turn_counter -= 1
+
         pygame.display.update()
         fpsClock.tick(30)

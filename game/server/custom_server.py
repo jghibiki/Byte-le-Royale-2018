@@ -426,7 +426,7 @@ class CustomServer(ServerControl):
                         unit.primary_weapon = item
 
                         self.turn_log["events"].append({
-                            "event": Event.purchase_item,
+                            "type": Event.purchase_item,
                             "gold": self.gold,
                             "unit": unit.id,
                             "slot": ItemSlot.primary
@@ -439,7 +439,7 @@ class CustomServer(ServerControl):
                             unit.primary_weapon = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.primary
@@ -451,7 +451,7 @@ class CustomServer(ServerControl):
                             unit.bomb_1 = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.bomb_1
@@ -463,7 +463,7 @@ class CustomServer(ServerControl):
                             unit.bomb_2 = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.bomb_2
@@ -475,7 +475,7 @@ class CustomServer(ServerControl):
                             unit.bomb_3 = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.bomb_3
@@ -489,7 +489,7 @@ class CustomServer(ServerControl):
                             unit.primary_weapon = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.primary
@@ -501,7 +501,7 @@ class CustomServer(ServerControl):
                             unit.bomb_1 = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.bomb_1
@@ -513,7 +513,7 @@ class CustomServer(ServerControl):
                             unit.bomb_2 = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.bomb_2
@@ -526,7 +526,7 @@ class CustomServer(ServerControl):
                             unit.primary_weapon = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.primary
@@ -538,7 +538,7 @@ class CustomServer(ServerControl):
                             unit.spell_1 = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.spell_1
@@ -550,7 +550,7 @@ class CustomServer(ServerControl):
                             unit.spell_2 = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.spell_2
@@ -562,7 +562,7 @@ class CustomServer(ServerControl):
                             unit.spell_3 = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.spell_3
@@ -574,7 +574,7 @@ class CustomServer(ServerControl):
                             unit.spell_4 = item
 
                             self.turn_log["events"].append({
-                                "event": Event.purchase_item,
+                                "type": Event.purchase_item,
                                 "gold": self.gold,
                                 "unit": unit.id,
                                 "slot": ItemSlot.spell_4

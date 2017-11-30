@@ -27,7 +27,12 @@ class GameLogParser:
 
         units, events = self._parse_turn(turn)
 
+        self.tick += 1
+
         return units, events
+
+    def check_finished(self):
+        return self.tick > self.max_ticks
 
 
     def _parse_turn(self, turn):
@@ -38,6 +43,8 @@ class GameLogParser:
         location = None
 
         for event in turn["turn_result"]["events"]:
+            # mark that the event hasn't been handled
+            event["handled"] = False
 
             if event["type"] == Event.unit_health_restored:
                 pass # do nothing, just a signal
