@@ -11,8 +11,8 @@ def get_monster(monster_type):
         return Wisp()
     elif monster_type == MonsterType.beholder:
         return Beholder()
-    elif monster_type == MonsterType.goblin:
-        return Goblin()
+    #elif monster_type == MonsterType.goblin:
+    #    return Goblin()
     elif monster_type == MonsterType.dragon:
         return Dragon()
     elif monster_type == MonsterType.minotaur:
@@ -26,7 +26,7 @@ def get_random_monster():
     mon =  random.choice([
         MonsterType.wisp,
         MonsterType.beholder,
-        MonsterType.goblin,
+    #    MonsterType.goblin,
         MonsterType.dragon,
         MonsterType.minotaur,
         MonsterType.slime,
@@ -115,7 +115,7 @@ class Goblin(Monster):
             DamageType.fire,
             DamageType.electricity
         ]
-        
+
 class Wraith(Monster):
     def init(self, level):
         Monster.init(self, "Wraith", MonsterType.wraith, level)
