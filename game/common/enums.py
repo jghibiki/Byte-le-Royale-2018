@@ -141,6 +141,7 @@ class MonsterType:
     dragon = 3
     minotaur = 4
     slime = 5
+    wraith = 6
 
 
 

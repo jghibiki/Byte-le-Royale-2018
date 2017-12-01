@@ -19,15 +19,18 @@ def get_monster(monster_type):
         return Minotaur()
     elif monster_type == MonsterType.slime:
         return Slime()
+    elif monster_type == MonsterType.wraith:
+        return Wraith()
 
 def get_random_monster():
     mon =  random.choice([
         MonsterType.wisp,
         MonsterType.beholder,
-        #MonsterType.goblin,
+        MonsterType.goblin,
         MonsterType.dragon,
         MonsterType.minotaur,
-        MonsterType.slime
+        MonsterType.slime,
+        MonsterType.wraith
     ])
 
     return get_monster(mon)
@@ -112,5 +115,21 @@ class Goblin(Monster):
             DamageType.fire,
             DamageType.electricity
         ]
+        
+class Wraith(Monster):
+    def init(self, level):
+        Monster.init(self, "Wraith", MonsterType.wraith, level)
 
+        self.health = 6000
+        self.current_health = self.health
+        self.damage = 150 * level
+
+        self.weaknesses = [
+            DamageType.piercing,
+            DamageType.slashing,
+            DamageType.acid,
+            DamageType.cold,
+            DamageType.fire,
+            DamageType.electricity
+        ]
 

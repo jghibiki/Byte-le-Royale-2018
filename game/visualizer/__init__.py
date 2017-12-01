@@ -8,6 +8,7 @@ from game.visualizer.health_bar import HealthBar
 from game.visualizer.spritesheet_functions import SpriteSheet
 from game.visualizer.sprite_sheets import *
 from game.visualizer.game_log_parser import GameLogParser
+from game.visualizer.floating_number import FloatingNumber
 
 
 
@@ -47,8 +48,7 @@ def start(verbose):
     gold = 300
     trophies = 0
 
-    monster = get_monster(MonsterType.dragon)
-    monster.init(1)
+    monster = None
 
     unit_hp_bars = pygame.sprite.Group()
     unit_hp_bars.add( HealthBar(20,  544, 300, 50, units[0].id) )
@@ -57,16 +57,15 @@ def start(verbose):
     unit_hp_bars.add( HealthBar(956, 544, 300, 50, units[3].id) )
 
     monster_hp_bar = pygame.sprite.Group()
-    monster_hp_bar.add( HealthBar(530, 90, 300, 50, monster.id) )
+    monster_name_surface = None
+    
+    floating_number_group = pygame.sprite.Group()
 
     unit_icon_sprite_group = pygame.sprite.Group()
     icon_back_group = pygame.sprite.Group()
     monster_group = pygame.sprite.Group()
 
     monster_pos = (585,120)
-    monster_name_surface = fontObj.render(monster.name, True, whiteColor)
-
-    monster_group.add( get_monster_sprite(monster.monster_type, monster_pos) )
 
     teamSurfaceObj = fontObj.render('Team: {0}'.format(team[0:15]), True, whiteColor)
 
@@ -201,6 +200,7 @@ def start(verbose):
         if location.node_type == NodeType.town:
             monster_hp_bar.empty()
             monster_group.empty()
+            monster_name_surface = None
 
 
         # swap background image
@@ -252,19 +252,24 @@ def start(verbose):
         player4InfoRect = player4InfoSurface.get_rect()
         player4InfoRect.topleft = (994, 512)
 
-        monster_info_rect = monster_name_surface.get_rect()
-        monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 70)
+        if monster_name_surface is not None:
+            monster_info_rect = monster_name_surface.get_rect()
+            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 70)
 
         unit_hp_bars.update(units)
 
         monster_hp_bar.update([monster])
+        
+        monster_group.update()
+        
+        floating_number_group.update(floating_number_group)
 
         #####
         # Begin Drawing to screen
         #####
 
         # clear screen, fill with white
-        global_surf.fill(whiteColor)
+        global_surf.fill(blackColor)
 
 
         background_group.update()
@@ -284,7 +289,8 @@ def start(verbose):
         global_surf.blit( player2InfoSurface, player2InfoRect)
         global_surf.blit( player3InfoSurface, player3InfoRect)
         global_surf.blit( player4InfoSurface, player4InfoRect)
-        global_surf.blit( monster_name_surface, monster_info_rect)
+        if monster_name_surface is not None:
+            global_surf.blit( monster_name_surface, monster_info_rect)
 
         # draw player hitpoints
         unit_hp_bars.draw(global_surf)
@@ -293,18 +299,11 @@ def start(verbose):
 
         monster_group.draw(global_surf)
 
-        monster_group.update()
-
         icon_back_group.draw(global_surf)
         unit_icon_sprite_group.draw(global_surf)
-
-        #pixArr = pygame.PixelArray(global_surf)
-        #for x in range(100,200,4):
-        #   for y in range(100,200,4):
-        #      pixArr[x][y] = redColor
-        #del pixArr
-
-
+        
+        floating_number_group.draw(global_surf)
+        
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -312,9 +311,11 @@ def start(verbose):
             elif event.type == MOUSEMOTION:
                 mousex, mousey = event.pos
             elif event.type == MOUSEBUTTONUP:
-               mousex,mousey = event.pos
-               if event.button in (1, 2, 3):
-                   msg = 'yay'
+               mousex, mousey = event.pos
+               if event.button == 1:
+                    mouse_x, mouse_y = event.pos
+                    fn = FloatingNumber(mouse_x, mouse_y, '-5000', whiteColor)
+                    floating_number_group.add(fn)
 
         first_loop = False
 
