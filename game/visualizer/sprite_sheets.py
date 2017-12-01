@@ -240,7 +240,7 @@ class WraithSprite(MonsterSprite):
             [256,640],
             [384,640],
             [512,640]
-        ], x, y, 128, 128,5)
+        ], x, y, 128, 128,3)
 
 class WispSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -280,8 +280,8 @@ def get_monster_sprite(monster_type, pos):
         return MinotaurSprite(*pos)
     elif monster_type is MonsterType.dragon:
         return DragonSprite(*pos)
-    ##elif monster_type is MonsterType.wraith:
-    ##    return WraithSprite(*pos)
+    elif monster_type is MonsterType.wraith:
+        return WraithSprite(*pos)
     elif monster_type is MonsterType.wisp:
         return WispSprite(*pos)
 

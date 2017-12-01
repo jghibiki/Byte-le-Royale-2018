@@ -48,8 +48,7 @@ def start(verbose):
     gold = 300
     trophies = 0
 
-    monster = get_monster(MonsterType.dragon)
-    monster.init(1)
+    monster = None
 
     unit_hp_bars = pygame.sprite.Group()
     unit_hp_bars.add( HealthBar(20,  544, 300, 50, units[0].id) )
@@ -58,7 +57,7 @@ def start(verbose):
     unit_hp_bars.add( HealthBar(956, 544, 300, 50, units[3].id) )
 
     monster_hp_bar = pygame.sprite.Group()
-    monster_hp_bar.add( HealthBar(530, 90, 300, 50, monster.id) )
+    monster_name_surface = None
     
     floating_number_group = pygame.sprite.Group()
 
@@ -67,9 +66,6 @@ def start(verbose):
     monster_group = pygame.sprite.Group()
 
     monster_pos = (585,120)
-    monster_name_surface = fontObj.render(monster.name, True, whiteColor)
-
-    monster_group.add( get_monster_sprite(monster.monster_type, monster_pos) )
 
     teamSurfaceObj = fontObj.render('Team: {0}'.format(team[0:15]), True, whiteColor)
 
@@ -204,6 +200,7 @@ def start(verbose):
         if location.node_type == NodeType.town:
             monster_hp_bar.empty()
             monster_group.empty()
+            monster_name_surface = None
 
 
         # swap background image
@@ -255,8 +252,9 @@ def start(verbose):
         player4InfoRect = player4InfoSurface.get_rect()
         player4InfoRect.topleft = (994, 512)
 
-        monster_info_rect = monster_name_surface.get_rect()
-        monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 70)
+        if monster_name_surface is not None:
+            monster_info_rect = monster_name_surface.get_rect()
+            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 70)
 
         unit_hp_bars.update(units)
 
@@ -271,7 +269,7 @@ def start(verbose):
         #####
 
         # clear screen, fill with white
-        global_surf.fill(whiteColor)
+        global_surf.fill(blackColor)
 
 
         background_group.update()
@@ -291,7 +289,8 @@ def start(verbose):
         global_surf.blit( player2InfoSurface, player2InfoRect)
         global_surf.blit( player3InfoSurface, player3InfoRect)
         global_surf.blit( player4InfoSurface, player4InfoRect)
-        global_surf.blit( monster_name_surface, monster_info_rect)
+        if monster_name_surface is not None:
+            global_surf.blit( monster_name_surface, monster_info_rect)
 
         # draw player hitpoints
         unit_hp_bars.draw(global_surf)
