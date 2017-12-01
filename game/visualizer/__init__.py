@@ -183,8 +183,8 @@ def start(verbose):
 
                     if attack_counter <= 0:
                         print(event["unit"])
-                        attack_counter = 10
-                        next_turn_counter += 10
+                        attack_counter = 4
+                        next_turn_counter += 4
 
                         event["handled"] = True
 

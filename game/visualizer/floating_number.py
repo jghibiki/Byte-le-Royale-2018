@@ -23,7 +23,7 @@ class FloatingNumber(pygame.sprite.Sprite):
         if self.counter > 0:
             c = self.counter * self.direction
             y = ((((self.counter * 0.75)-10) ** 2) + 2 * (self.counter * 0.75) + 0)
-            self.rect.topleft = (self.rect.x+(3 * self.direction), y+self.y)
+            self.rect.topleft = (self.rect.x+(4 * self.direction), y+self.y)
         else:
             if self in group.sprites():
                 group.remove(self)
