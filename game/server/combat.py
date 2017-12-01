@@ -557,7 +557,7 @@ class CombatManager:
 
                 turn_log["events"].append({
                     "type": Event.unit_attack,
-                    "unit": u.id,
+                    "unit": unit.id,
                     "damage":dmg,
                     "item_used": item_slot
                 })

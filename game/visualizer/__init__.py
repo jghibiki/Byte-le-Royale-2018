@@ -1,4 +1,6 @@
-import pygame, sys, math
+import sys, math, random
+
+import pygame
 from pygame.locals import *
 
 from game.common.enums import *
@@ -58,7 +60,7 @@ def start(verbose):
 
     monster_hp_bar = pygame.sprite.Group()
     monster_name_surface = None
-    
+
     floating_number_group = pygame.sprite.Group()
 
     unit_icon_sprite_group = pygame.sprite.Group()
@@ -128,6 +130,7 @@ def start(verbose):
     first_loop = True
     next_turn_counter = 0
     background = NodeType.town
+    attack_counter = 0
 
     while True:
 
@@ -140,6 +143,7 @@ def start(verbose):
             sys.exit()
 
         if next_turn_counter <= 0:
+            print("Game Turn: " + str(log_parser.tick))
             units, events = log_parser.get_turn()
 
         # read through the events
@@ -174,6 +178,30 @@ def start(verbose):
                     draw_gold = True
 
                     event["handled"] = True
+
+                elif event["type"] == Event.unit_attack:
+
+                    if attack_counter <= 0:
+                        print(event["unit"])
+                        attack_counter = 10
+                        next_turn_counter += 10
+
+                        event["handled"] = True
+
+                        fn = FloatingNumber(520 + random.randint(-15, 15) , 10 , '-{}'.format(event["damage"]), random.choice([pygame.Color("#FF0000"), pygame.Color("#00FF00"), pygame.Color("#0000FF")]))
+                        floating_number_group.add(fn)
+
+
+
+                elif event["type"] == Event.combat_resolved:
+
+                    next_turn_counter += 30
+
+                    event["handled"] = True
+
+
+        attack_counter -= 1
+
 
 
         if location.node_type == NodeType.monster:
@@ -259,9 +287,9 @@ def start(verbose):
         unit_hp_bars.update(units)
 
         monster_hp_bar.update([monster])
-        
+
         monster_group.update()
-        
+
         floating_number_group.update(floating_number_group)
 
         #####
@@ -301,9 +329,9 @@ def start(verbose):
 
         icon_back_group.draw(global_surf)
         unit_icon_sprite_group.draw(global_surf)
-        
+
         floating_number_group.draw(global_surf)
-        
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()

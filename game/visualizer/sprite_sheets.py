@@ -177,7 +177,7 @@ class MinotaurSprite(MonsterSprite):
             [128,384],
             [256,384],
             [384,384]
-        ], x, y, 128, 128,2)
+        ], x, y, 128, 128, 3)
 
 class DragonSprite(MonsterSprite):
     def __init__(self, x, y):
