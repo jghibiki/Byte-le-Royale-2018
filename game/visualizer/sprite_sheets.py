@@ -137,7 +137,7 @@ class BeholderSprite(MonsterSprite):
             [128, 0],
             [0, 128],
             [128, 128]
-        ], x, y, 128, 128, 4)
+        ], x, y, 128, 128, 8)
 
 class SlimeSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -156,7 +156,7 @@ class SlimeSprite(MonsterSprite):
             [384,256],
             [0,384],
             [128,384],
-        ], x, y, 128, 128,2)
+        ], x, y, 128, 128,4)
 
 class MinotaurSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -177,7 +177,7 @@ class MinotaurSprite(MonsterSprite):
             [128,384],
             [256,384],
             [384,384]
-        ], x, y, 128, 128, 3)
+        ], x, y, 128, 128, 5)
 
 class DragonSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -240,7 +240,7 @@ class WraithSprite(MonsterSprite):
             [256,640],
             [384,640],
             [512,640]
-        ], x, y, 128, 128,3)
+        ], x, y, 128, 128,6)
 
 class WispSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -269,7 +269,7 @@ class WispSprite(MonsterSprite):
             [128,512],
             [256,512],
             [384,512]
-        ], x, y, 128, 128,3)
+        ], x, y, 128, 128,6)
 
 def get_monster_sprite(monster_type, pos):
     if monster_type is MonsterType.beholder:
@@ -337,3 +337,52 @@ class MonsterRoomSprite(BackgroundSprite):
         BackgroundSprite.__init__(self, "game/visualizer/assets/monster_room.png", [
             [ 0, 0 ],
         ], 0, 0, 1280, 720, 1)
+		
+class AttackAnimation(pygame.sprite.Sprite):
+    def __init__(self, x, y, color):
+        super().__init__()
+
+        self.frames = [
+			[0,0],
+			[128, 0],
+			[0, 128],
+			[128, 128],
+            [0, 256],
+            [128, 256]
+
+		]
+        self.index = 0
+        self.tick_counter = 0
+        self.animation_speed = 5
+
+        self.h = 128
+        self.w = 128
+
+        self.sprite_sheet = SpriteSheet("game/visualizer/assets/attack.png")
+
+        self.image = self.sprite_sheet.get_image(
+                                                self.frames[self.index][0],
+                                                self.frames[self.index][1],
+                                                self.h,
+                                                self.w
+                                                )
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self, group):
+        self.tick_counter += 1
+        if self.tick_counter % self.animation_speed is 0:
+            if self.index < len(self.frames)-1:
+                self.index += 1
+            else:
+                del self.image
+                group.remove(self)
+
+        self.image = self.sprite_sheet.get_image(
+                                                self.frames[self.index][0],
+                                                self.frames[self.index][1],
+                                                self.h,
+                                                self.w
+                                                )

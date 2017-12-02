@@ -11,15 +11,21 @@ class FloatingNumber(pygame.sprite.Sprite):
         self.font_obj = pygame.font.Font('freesansbold.ttf',16)
         self.value = value
         self.color = color
-        self.image = self.font_obj.render(self.value, True, self.color)
+        self.image = pygame.Surface((1,1))
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
         self.counter = 20
+        self.delay = 10
         self.y = y
 
         self.direction = random.choice([-1, 1])
 
     def update(self, group):
+        
+        if self.delay > 0:
+            self.delay -= 1
+            return
+        
         if self.counter > 0:
             c = self.counter * self.direction
             y = ((((self.counter * 0.75)-10) ** 2) + 2 * (self.counter * 0.75) + 0)
