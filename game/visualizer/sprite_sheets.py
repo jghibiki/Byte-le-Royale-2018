@@ -353,10 +353,12 @@ class AttackAnimation(pygame.sprite.Sprite):
 		]
         self.index = 0
         self.tick_counter = 0
-        self.animation_speed = 5
+        self.animation_speed = 2
 
         self.h = 128
         self.w = 128
+        
+        self.color = color
 
         self.sprite_sheet = SpriteSheet("game/visualizer/assets/attack.png")
 
@@ -366,6 +368,13 @@ class AttackAnimation(pygame.sprite.Sprite):
                                                 self.h,
                                                 self.w
                                                 )
+                                                
+        pa = pygame.PixelArray(self.image)
+        pa.replace(pygame.Color(0, 0, 0, 255), self.color)
+        del pa
+        
+
+
 
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -386,3 +395,14 @@ class AttackAnimation(pygame.sprite.Sprite):
                                                 self.h,
                                                 self.w
                                                 )
+        pa = pygame.PixelArray(self.image)
+        pa.replace(pygame.Color(255, 255, 255, 255), self.color)
+        d = 60
+        r = self.color.r if self.color.r-d < 0 else self.color.r-d
+        g = self.color.g if self.color.g-d < 0 else self.color.g-d
+        b = self.color.b if self.color.b-d < 0 else self.color.b-d
+        pa.replace(pygame.Color("#a5a5a5"), pygame.Color ( r, g, b, 255))
+        del pa         
+
+        
+

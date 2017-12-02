@@ -15,7 +15,7 @@ class FloatingNumber(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
         self.counter = 20
-        self.delay = 10
+        self.delay = 0
         self.y = y
 
         self.direction = random.choice([-1, 1])
