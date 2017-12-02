@@ -23,6 +23,18 @@ def start(verbose):
 
     log_parser = GameLogParser(log_path)
     units, events = log_parser.get_turn()
+    
+    # assign unit colors
+    unit_colors = {}
+    colors = [ 
+        pygame.Color("#05AFE8"), 
+        pygame.Color("#AF05E8"), 
+        pygame.Color("#E83E05"), 
+        pygame.Color("#3EE805")
+    ]
+    for unit in units:
+        unit_colors[unit.id] = colors.pop() 
+    del colors
 
     location = None # current location
 
@@ -62,10 +74,11 @@ def start(verbose):
     monster_name_surface = None
 
     floating_number_group = pygame.sprite.Group()
-
+    attack_animation_group = pygame.sprite.Group()
     unit_icon_sprite_group = pygame.sprite.Group()
     icon_back_group = pygame.sprite.Group()
     monster_group = pygame.sprite.Group()
+
 
     monster_pos = (585,120)
 
@@ -182,14 +195,22 @@ def start(verbose):
                 elif event["type"] == Event.unit_attack:
 
                     if attack_counter <= 0:
-                        print(event["unit"])
+
                         attack_counter = 4
                         next_turn_counter += 4
 
                         event["handled"] = True
-
-                        fn = FloatingNumber(520 + random.randint(-15, 15) , 10 , '-{}'.format(event["damage"]), random.choice([pygame.Color("#FF0000"), pygame.Color("#00FF00"), pygame.Color("#0000FF")]))
+                        
+                        color = unit_colors[event["unit"]]
+             
+                        fn = FloatingNumber(520 + random.randint(-15, 15) , 10 , '-{}'.format(event["damage"]), color)
                         floating_number_group.add(fn)
+
+                        aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
+                        attack_animation_group.add(aa)
+                        
+                        if monster is not None:
+                            monster.current_health -= event["damage"]
 
 
 
@@ -292,6 +313,8 @@ def start(verbose):
 
         floating_number_group.update(floating_number_group)
 
+        attack_animation_group.update(attack_animation_group)
+
         #####
         # Begin Drawing to screen
         #####
@@ -331,6 +354,7 @@ def start(verbose):
         unit_icon_sprite_group.draw(global_surf)
 
         floating_number_group.draw(global_surf)
+        attack_animation_group.draw(global_surf)
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -351,4 +375,4 @@ def start(verbose):
             next_turn_counter -= 1
 
         pygame.display.update()
-        fpsClock.tick(30)
+        fpsClock.tick(60)
