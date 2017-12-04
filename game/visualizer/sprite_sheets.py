@@ -1,3 +1,5 @@
+import random
+
 import pygame
 
 from game.visualizer.spritesheet_functions import SpriteSheet
@@ -332,12 +334,45 @@ class TownShopSprite(BackgroundSprite):
             [ 0, 720 ]
         ], 0, 0, 1280, 720, 3)
 
-class MonsterRoomSprite(BackgroundSprite):
+class BrownDungeonSprite(BackgroundSprite):
     def __init__(self):
         BackgroundSprite.__init__(self, "game/visualizer/assets/monster_room.png", [
             [ 0, 0 ],
         ], 0, 0, 1280, 720, 1)
-		
+
+class GreyDungeonSprite(BackgroundSprite):
+    def __init__(self):
+        BackgroundSprite.__init__(self, "game/visualizer/assets/monster_room_1.png", [
+            [ 0, 0 ],
+        ], 0, 0, 1280, 720, 1)
+
+class OrangeDungeonSprite(BackgroundSprite):
+    def __init__(self):
+        BackgroundSprite.__init__(self, "game/visualizer/assets/monster_room_2.png", [
+            [ 0, 0 ],
+        ], 0, 0, 1280, 720, 1)
+
+class GreenDungeonSprite(BackgroundSprite):
+    def __init__(self):
+        BackgroundSprite.__init__(self, "game/visualizer/assets/monster_room_3.png", [
+            [ 0, 0 ],
+        ], 0, 0, 1280, 720, 1)
+
+loaded_monster_room_sprites = {}
+
+def get_monster_room_sprite():
+    cls = random.choice([
+        BrownDungeonSprite,
+        GreyDungeonSprite,
+        OrangeDungeonSprite,
+        GreenDungeonSprite
+    ])
+
+    if cls not in loaded_monster_room_sprites:
+        loaded_monster_room_sprites[cls] = cls()
+    return loaded_monster_room_sprites[cls]
+
+
 class AttackAnimation(pygame.sprite.Sprite):
     def __init__(self, x, y, color):
         super().__init__()
@@ -357,7 +392,7 @@ class AttackAnimation(pygame.sprite.Sprite):
 
         self.h = 128
         self.w = 128
-        
+
         self.color = color
 
         self.sprite_sheet = SpriteSheet("game/visualizer/assets/attack.png")
@@ -368,11 +403,11 @@ class AttackAnimation(pygame.sprite.Sprite):
                                                 self.h,
                                                 self.w
                                                 )
-                                                
+
         pa = pygame.PixelArray(self.image)
         pa.replace(pygame.Color(0, 0, 0, 255), self.color)
         del pa
-        
+
 
 
 
@@ -402,7 +437,7 @@ class AttackAnimation(pygame.sprite.Sprite):
         g = self.color.g if self.color.g-d < 0 else self.color.g-d
         b = self.color.b if self.color.b-d < 0 else self.color.b-d
         pa.replace(pygame.Color("#a5a5a5"), pygame.Color ( r, g, b, 255))
-        del pa         
+        del pa
 
-        
+
 

@@ -23,17 +23,17 @@ def start(verbose):
 
     log_parser = GameLogParser(log_path)
     units, events = log_parser.get_turn()
-    
+
     # assign unit colors
     unit_colors = {}
-    colors = [ 
-        pygame.Color("#05AFE8"), 
-        pygame.Color("#AF05E8"), 
-        pygame.Color("#E83E05"), 
+    colors = [
+        pygame.Color("#05AFE8"),
+        pygame.Color("#AF05E8"),
+        pygame.Color("#E83E05"),
         pygame.Color("#3EE805")
     ]
     for unit in units:
-        unit_colors[unit.id] = colors.pop() 
+        unit_colors[unit.id] = colors.pop()
     del colors
 
     location = None # current location
@@ -65,10 +65,20 @@ def start(verbose):
     monster = None
 
     unit_hp_bars = pygame.sprite.Group()
-    unit_hp_bars.add( HealthBar(20,  544, 300, 50, units[0].id) )
-    unit_hp_bars.add( HealthBar(332, 544, 300, 50, units[1].id) )
-    unit_hp_bars.add( HealthBar(644, 544, 300, 50, units[2].id) )
-    unit_hp_bars.add( HealthBar(956, 544, 300, 50, units[3].id) )
+
+    unit_hp_bar_pos = [(20, 544), (332, 544), (644, 544), (956, 544)]
+
+    for idx, pos in enumerate(unit_hp_bar_pos):
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+
+    unit_damage_number_pos = {}
+
+    for idx, pos in enumerate(unit_hp_bar_pos):
+        unit_damage_number_pos[ units[idx].id ] = ( pos[0]+20, pos[1]-80 )
+
 
     monster_hp_bar = pygame.sprite.Group()
     monster_name_surface = None
@@ -135,7 +145,7 @@ def start(verbose):
     background_group = pygame.sprite.Group()
 
     town_shop_sprite = TownShopSprite()
-    monster_room_sprite = MonsterRoomSprite()
+    monster_room_sprite = get_monster_room_sprite()
 
     if(verbose):
         print("Visualizer")
@@ -200,19 +210,29 @@ def start(verbose):
                         next_turn_counter += 4
 
                         event["handled"] = True
-                        
+
                         color = unit_colors[event["unit"]]
-             
+
                         fn = FloatingNumber(520 + random.randint(-15, 15) , 10 , '-{}'.format(event["damage"]), color)
                         floating_number_group.add(fn)
 
-                        aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
-                        attack_animation_group.add(aa)
-                        
-                        if monster is not None:
-                            monster.current_health -= event["damage"]
+                elif event["type"] == Event.monster_attack:
+                    if attack_counter <= 0:
+                        attack_counter = 10
+                        next_turn_counter += 10
 
+                        event["handled"] = True
 
+                        u_pos = unit_damage_number_pos[event["unit"]]
+                        color = pygame.Color("#FF0000")
+
+                        fn = FloatingNumber(
+                                u_pos[0] + random.randint(-15, 15),
+                                u_pos[1],
+                                '-{}'.format(event["damage"]),
+                                color,
+                                size=24)
+                        floating_number_group.add(fn)
 
                 elif event["type"] == Event.combat_resolved:
 
@@ -253,14 +273,15 @@ def start(verbose):
 
 
         # swap background image
-        if background == NodeType.monster:
-            background_group.empty()
-            background_group.add( monster_room_sprite )
-        if background == NodeType.town:
-            background_group.empty()
-            background_group.add( town_shop_sprite )
-        else:
-            pass
+        if location_change:
+            if background == NodeType.monster:
+                background_group.empty()
+                background_group.add( get_monster_room_sprite() )
+            if background == NodeType.town:
+                background_group.empty()
+                background_group.add( town_shop_sprite )
+            else:
+                pass
 
         #####
         # Rendering Stuff
