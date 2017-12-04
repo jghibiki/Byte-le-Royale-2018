@@ -13,6 +13,37 @@ from game.visualizer.game_log_parser import GameLogParser
 from game.visualizer.floating_number import FloatingNumber
 
 
+def party_killed_screen(global_surf, fps_clock, data):
+    big_font = pygame.font.Font('freesansbold.ttf',70)
+    little_font = pygame.font.Font('freesansbold.ttf',20)
+
+    you_have_died = big_font.render("Game Over", True, pygame.Color("#FFFFFF"))
+
+
+    while True:
+        global_surf.fill(pygame.Color("#000000"))
+
+        width = math.floor(1280/2.0)
+
+        # center and print game over
+        rect = you_have_died.get_rect()
+        pos = ( width-math.floor(rect.w/2), 200)
+        global_surf.blit(you_have_died, pos)
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    pygame.quit()
+                    sys.exit()
+
+
+        pygame.display.update()
+        fps_clock.tick(60)
+
+
 
 def start(verbose):
 
@@ -206,8 +237,8 @@ def start(verbose):
 
                     if attack_counter <= 0:
 
-                        attack_counter = 4
-                        next_turn_counter += 4
+                        attack_counter = 0
+                        next_turn_counter += 0
 
                         event["handled"] = True
 
@@ -218,8 +249,8 @@ def start(verbose):
 
                 elif event["type"] == Event.monster_attack:
                     if attack_counter <= 0:
-                        attack_counter = 10
-                        next_turn_counter += 10
+                        attack_counter = 0
+                        next_turn_counter += 0
 
                         event["handled"] = True
 
@@ -240,9 +271,11 @@ def start(verbose):
 
                     event["handled"] = True
 
+                elif event["type"] == Event.party_killed:
+                    party_killed_screen(global_surf, fpsClock, event)
+
 
         attack_counter -= 1
-
 
 
         if location.node_type == NodeType.monster:
@@ -398,3 +431,5 @@ def start(verbose):
 
         pygame.display.update()
         fpsClock.tick(60)
+
+
