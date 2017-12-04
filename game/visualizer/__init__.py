@@ -110,6 +110,9 @@ def start(verbose):
     for idx, pos in enumerate(unit_hp_bar_pos):
         unit_damage_number_pos[ units[idx].id ] = ( pos[0]+20, pos[1]-80 )
 
+    unit_damage_animation_pos = {}
+    for idx, pos in enumerate(unit_hp_bar_pos):
+        unit_damage_animation_pos[ units[idx].id ] = (pos[0], pos[1]- 200)
 
     monster_hp_bar = pygame.sprite.Group()
     monster_name_surface = None
@@ -249,6 +252,7 @@ def start(verbose):
 
                         aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
                         attack_animation_group.add(aa)
+
                         if monster is not None:
                             monster.current_health -= event["damage"]
 
@@ -261,6 +265,7 @@ def start(verbose):
 
                         u_pos = unit_damage_number_pos[event["unit"]]
                         color = pygame.Color("#FF0000")
+                        unit_animation_pos  = unit_damage_animation_pos[event["unit"]]
 
                         fn = FloatingNumber(
                                 u_pos[0] + random.randint(-15, 15),
@@ -269,6 +274,11 @@ def start(verbose):
                                 color,
                                 size=24)
                         floating_number_group.add(fn)
+
+                        aa = AttackAnimation(unit_animation_pos[0], unit_animation_pos[1], pygame.Color("#FF0000"))
+                        attack_animation_group.add(aa)
+
+
 
                 elif event["type"] == Event.combat_resolved:
 
