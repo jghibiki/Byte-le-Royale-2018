@@ -247,6 +247,11 @@ def start(verbose):
                         fn = FloatingNumber(520 + random.randint(-15, 15) , 10 , '-{}'.format(event["damage"]), color)
                         floating_number_group.add(fn)
 
+                        aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
+                        attack_animation_group.add(aa)
+                        if monster is not None:
+                            monster.current_health -= event["damage"]
+
                 elif event["type"] == Event.monster_attack:
                     if attack_counter <= 0:
                         attack_counter = 0
