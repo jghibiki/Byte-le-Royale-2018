@@ -9,7 +9,7 @@ class HealthBar(pygame.sprite.Sprite):
         self.unit_id = unit_id
         self.max = 0
         self.current = 0
-        self.font_obj = pygame.font.Font('freesansbold.ttf', 16)
+        self.font_obj = pygame.font.Font('game/visualizer/assets/manaspc.ttf', 16)
 
         self.rect = pygame.Rect(x, y, w, h)
         self.image = pygame.Surface((w, h), pygame.SRCALPHA)
@@ -34,8 +34,8 @@ class HealthBar(pygame.sprite.Sprite):
         if updates:
 
             # render text
-            self.text_surf = self.font_obj.render('HP: {0}'.format(
-                str(self.current).rjust(6, "0")), True, pygame.Color("#2a2b2b"))
+            self.text_surf = self.font_obj.render('HP:{0}'.format(
+                str(self.current).rjust(5, "0")), True, pygame.Color("#2a2b2b"))
 
             text_rect = self.text_surf.get_rect()
 

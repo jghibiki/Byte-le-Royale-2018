@@ -6,10 +6,9 @@ import pygame
 import ptext
 
 class FloatingNumber(pygame.sprite.Sprite):
-    def __init__(self, x, y, value, color, size=16):
+    def __init__(self, x, y, value, color, size=24):
         super().__init__()
         self.size = size
-        self.font_obj = pygame.font.Font('freesansbold.ttf', self.size)
         self.value = value
         self.color = color
         self.image = pygame.Surface((1,1))
@@ -39,6 +38,6 @@ class FloatingNumber(pygame.sprite.Sprite):
         alpha = math.floor( (self.counter/20) * 255 )
 
 
-        self.image = ptext.draw(self.value, (0,0), color=self.color, owidth=1.0, ocolor=(0, 0, 0), alpha=alpha/255, fontsize=self.size)[0]
+        self.image = ptext.draw(self.value, (0,0), color=self.color, owidth=1.0, ocolor=(0, 0, 0), alpha=alpha/255, fontsize=self.size, fontname='game/visualizer/assets/manaspc.ttf')[0]
 
         self.counter -= 1

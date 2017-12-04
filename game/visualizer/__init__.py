@@ -14,8 +14,8 @@ from game.visualizer.floating_number import FloatingNumber
 
 
 def party_killed_screen(global_surf, fps_clock, data):
-    big_font = pygame.font.Font('freesansbold.ttf',70)
-    little_font = pygame.font.Font('freesansbold.ttf',20)
+    big_font = pygame.font.Font('game/visualizer/assets/manaspc.ttf',70)
+    little_font = pygame.font.Font('game/visualizer/assets/manaspc.ttf',20)
 
     you_have_died = big_font.render("Game Over", True, pygame.Color("#FFFFFF"))
 
@@ -87,7 +87,7 @@ def start(verbose):
     mousex, mousey = 0, 0
 
 
-    fontObj = pygame.font.Font('freesansbold.ttf',20)
+    fontObj = pygame.font.Font('game/visualizer/assets/manaspc.ttf',20)
 
     team = 'Doodz'
     gold = 300
@@ -445,6 +445,6 @@ def start(verbose):
             next_turn_counter -= 1
 
         pygame.display.update()
-        fpsClock.tick(60)
+        #fpsClock.tick(60)
 
 
