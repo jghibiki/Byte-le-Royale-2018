@@ -1,4 +1,4 @@
-import random
+import random, math
 
 import pygame
 
@@ -438,6 +438,201 @@ class AttackAnimation(pygame.sprite.Sprite):
         b = self.color.b if self.color.b-d < 0 else self.color.b-d
         pa.replace(pygame.Color("#a5a5a5"), pygame.Color ( r, g, b, 255))
         del pa
+
+
+
+class UnitSprite(pygame.sprite.Sprite):
+    def __init__(self, sprite_sheet_path, frames, x, y, h, w, animation_speed):
+        super().__init__()
+
+        self.frames = frames
+        self.index = 0
+        self.tick_counter = 0
+        self.animation_speed = animation_speed
+
+        self.h = h
+        self.w = w
+
+        self.sprite_sheet = SpriteSheet(sprite_sheet_path)
+
+        self.image = self.sprite_sheet.get_image(
+                                                self.frames[self.index][0],
+                                                self.frames[self.index][1],
+                                                self.h,
+                                                self.w
+                                                )
+
+        self.image = pygame.transform.scale(self.image, (self.h*2, self.w*2))
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self):
+        self.tick_counter += 1
+        if self.tick_counter % self.animation_speed is 0:
+            if self.index < len(self.frames)-1:
+                self.index += 1
+            else:
+                self.index = 0
+        self.image = self.sprite_sheet.get_image(
+                                                self.frames[self.index][0],
+                                                self.frames[self.index][1],
+                                                self.h,
+                                                self.w
+                                                )
+
+        self.image = pygame.transform.scale(self.image, (math.floor(self.h*1.5), math.floor(self.w*1.5)))
+
+class KnightSprite(UnitSprite):
+    def __init__(self, x, y):
+            UnitSprite.__init__(
+                    self,
+                    "game/visualizer/assets/spearman.png",
+                    [
+                        [0,   0], [128,   0], [256,   0], [384,   0],
+                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 256], [128, 256], [256, 256], [384, 256],
+                        [0, 384], [128, 384], [256, 384], [384, 384]
+
+                    ],
+                    x, y,
+                    128, 128,
+                    2)
+
+class BrawlerSprite(UnitSprite):
+    def __init__(self, x, y):
+            UnitSprite.__init__(
+                    self,
+                    "game/visualizer/assets/spearman.png",
+                    [
+                        [0,   0], [128,   0], [256,   0], [384,   0],
+                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 256], [128, 256], [256, 256], [384, 256],
+                        [0, 384], [128, 384], [256, 384], [384, 384]
+
+                    ],
+                    x, y,
+                    128, 128,
+                    2)
+
+class PikemanSprite(UnitSprite):
+    def __init__(self, x, y):
+            UnitSprite.__init__(
+                    self,
+                    "game/visualizer/assets/spearman.png",
+                    [
+                        [0,   0], [128,   0], [256,   0], [384,   0],
+                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 256], [128, 256], [256, 256], [384, 256],
+                        [0, 384], [128, 384], [256, 384], [384, 384]
+
+                    ],
+                    x, y,
+                    128, 128,
+                    2)
+
+class RogueSprite(UnitSprite):
+    def __init__(self, x, y):
+            UnitSprite.__init__(
+                    self,
+                    "game/visualizer/assets/spearman.png",
+                    [
+                        [0,   0], [128,   0], [256,   0], [384,   0],
+                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 256], [128, 256], [256, 256], [384, 256],
+                        [0, 384], [128, 384], [256, 384], [384, 384]
+
+                    ],
+                    x, y,
+                    128, 128,
+                    2)
+
+class MagusSprite(UnitSprite):
+    def __init__(self, x, y):
+            UnitSprite.__init__(
+                    self,
+                    "game/visualizer/assets/spearman.png",
+                    [
+                        [0,   0], [128,   0], [256,   0], [384,   0],
+                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 256], [128, 256], [256, 256], [384, 256],
+                        [0, 384], [128, 384], [256, 384], [384, 384]
+
+                    ],
+                    x, y,
+                    128, 128,
+                    2)
+
+class WizardSprite(UnitSprite):
+    def __init__(self, x, y):
+            UnitSprite.__init__(
+                    self,
+                    "game/visualizer/assets/spearman.png",
+                    [
+                        [0,   0], [128,   0], [256,   0], [384,   0],
+                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 256], [128, 256], [256, 256], [384, 256],
+                        [0, 384], [128, 384], [256, 384], [384, 384]
+
+                    ],
+                    x, y,
+                    128, 128,
+                    2)
+
+class SorcererSprite(UnitSprite):
+    def __init__(self, x, y):
+            UnitSprite.__init__(
+                    self,
+                    "game/visualizer/assets/spearman.png",
+                    [
+                        [0,   0], [128,   0], [256,   0], [384,   0],
+                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 256], [128, 256], [256, 256], [384, 256],
+                        [0, 384], [128, 384], [256, 384], [384, 384]
+
+                    ],
+                    x, y,
+                    128, 128,
+                    2)
+
+class AlchemistSprite(UnitSprite):
+    def __init__(self, x, y):
+            UnitSprite.__init__(
+                    self,
+                    "game/visualizer/assets/spearman.png",
+                    [
+                        [0,   0], [128,   0], [256,   0], [384,   0],
+                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 256], [128, 256], [256, 256], [384, 256],
+                        [0, 384], [128, 384], [256, 384], [384, 384]
+
+                    ],
+                    x, y,
+                    128, 128,
+                    2)
+
+
+def get_unit_sprite(unit_class, xy):
+    if unit_class is UnitClass.knight:
+        return KnightSprite(*xy)
+    elif unit_class is UnitClass.brawler:
+        return BrawlerSprite(*xy)
+    elif unit_class is UnitClass.pikeman:
+        return PikemanSprite(*xy)
+    elif unit_class is UnitClass.rogue:
+        return RogueSprite(*xy)
+    elif unit_class is UnitClass.magus:
+        return MagusSprite(*xy)
+    elif unit_class is UnitClass.wizard:
+        return WizardSprite(*xy)
+    elif unit_class is UnitClass.sorcerer:
+        return SorcererSprite(*xy)
+    elif unit_class is UnitClass.alchemist:
+        return AlchemistSprite(*xy)
+    else:
+        return None
+
 
 
 

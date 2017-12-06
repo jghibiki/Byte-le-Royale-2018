@@ -6,7 +6,7 @@ import pygame
 import ptext
 
 class FloatingNumber(pygame.sprite.Sprite):
-    def __init__(self, x, y, value, color, size=24):
+    def __init__(self, x, y, value, color, size=30):
         super().__init__()
         self.size = size
         self.value = value

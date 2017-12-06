@@ -87,7 +87,7 @@ def start(verbose):
     mousex, mousey = 0, 0
 
 
-    fontObj = pygame.font.Font('game/visualizer/assets/visitor2.ttf',40)
+    fontObj = pygame.font.Font('game/visualizer/assets/visitor2.ttf',50)
 
     team = 'Doodz'
     gold = 300
@@ -96,8 +96,10 @@ def start(verbose):
     monster = None
 
     unit_hp_bars = pygame.sprite.Group()
+    unit_sprite_group = pygame.sprite.Group()
 
     unit_hp_bar_pos = [(20, 544), (332, 544), (644, 544), (956, 544)]
+    unit_sprite_pos = [(80, 320), (392, 320), (704, 320), (1016, 320)]
 
     for idx, pos in enumerate(unit_hp_bar_pos):
         unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
@@ -112,7 +114,12 @@ def start(verbose):
 
     unit_damage_animation_pos = {}
     for idx, pos in enumerate(unit_hp_bar_pos):
-        unit_damage_animation_pos[ units[idx].id ] = (pos[0], pos[1]- 200)
+        unit_damage_animation_pos[ units[idx].id ] = (pos[0]+80, pos[1]- 200)
+
+    for idx, pos in enumerate(unit_sprite_pos):
+        unit_sprite = get_unit_sprite( units[idx].unit_class, pos)
+        unit_sprite_group.add( unit_sprite )
+
 
     monster_hp_bar = pygame.sprite.Group()
     monster_name_surface = None
@@ -272,7 +279,7 @@ def start(verbose):
                                 u_pos[1],
                                 '-{}'.format(event["damage"]),
                                 color,
-                                size=24)
+                                size=35)
                         floating_number_group.add(fn)
 
                         aa = AttackAnimation(unit_animation_pos[0], unit_animation_pos[1], pygame.Color("#FF0000"))
@@ -373,7 +380,9 @@ def start(verbose):
 
         if monster_name_surface is not None:
             monster_info_rect = monster_name_surface.get_rect()
-            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 70)
+            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 60)
+
+        unit_sprite_group.update()
 
         unit_hp_bars.update(units)
 
@@ -416,13 +425,20 @@ def start(verbose):
         # draw player hitpoints
         unit_hp_bars.draw(global_surf)
 
+        # draw monster hp bars
         monster_hp_bar.draw(global_surf)
 
+        # draw monsters
         monster_group.draw(global_surf)
 
+        # draw units
+        unit_sprite_group.draw(global_surf)
+
+        # draw unit icons
         icon_back_group.draw(global_surf)
         unit_icon_sprite_group.draw(global_surf)
 
+        # draw floating numbers
         floating_number_group.draw(global_surf)
         attack_animation_group.draw(global_surf)
 

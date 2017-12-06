@@ -35,7 +35,7 @@ class HealthBar(pygame.sprite.Sprite):
 
             # render text
             self.text_surf = self.font_obj.render('HP:{0}'.format(
-                str(self.current).rjust(5, "0")), True, pygame.Color("#2a2b2b"))
+                str(self.current).rjust(6, "0")), True, pygame.Color("#2a2b2b"))
 
             text_rect = self.text_surf.get_rect()
 
