@@ -9,7 +9,7 @@ class HealthBar(pygame.sprite.Sprite):
         self.unit_id = unit_id
         self.max = 0
         self.current = 0
-        self.font_obj = pygame.font.Font('game/visualizer/assets/manaspc.ttf', 16)
+        self.font_obj = pygame.font.Font('game/visualizer/assets/visitor2.ttf', 24)
 
         self.rect = pygame.Rect(x, y, w, h)
         self.image = pygame.Surface((w, h), pygame.SRCALPHA)
@@ -41,7 +41,7 @@ class HealthBar(pygame.sprite.Sprite):
 
             #Choose where to draw the amount of HP left
             text_rect.topleft = (4, 3)
-            self.image.fill(pygame.Color("#696969"), (0, 1, 300, 20))
+            self.image.fill(pygame.Color("#DEDEDE"), (0, 1, 300, 20))
             self.image.blit(self.text_surf, text_rect)
 
             #Draw health bars

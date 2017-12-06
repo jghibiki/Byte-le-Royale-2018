@@ -87,7 +87,7 @@ def start(verbose):
     mousex, mousey = 0, 0
 
 
-    fontObj = pygame.font.Font('game/visualizer/assets/manaspc.ttf',20)
+    fontObj = pygame.font.Font('game/visualizer/assets/visitor2.ttf',40)
 
     team = 'Doodz'
     gold = 300

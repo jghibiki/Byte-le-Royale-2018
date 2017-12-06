@@ -38,6 +38,6 @@ class FloatingNumber(pygame.sprite.Sprite):
         alpha = math.floor( (self.counter/20) * 255 )
 
 
-        self.image = ptext.draw(self.value, (0,0), color=self.color, owidth=1.0, ocolor=(0, 0, 0), alpha=alpha/255, fontsize=self.size, fontname='game/visualizer/assets/manaspc.ttf')[0]
+        self.image = ptext.draw(self.value, (0,0), color=self.color, owidth=1.0, ocolor=(0, 0, 0), alpha=alpha/255, fontsize=self.size, fontname='game/visualizer/assets/visitor2.ttf')[0]
 
         self.counter -= 1
