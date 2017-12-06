@@ -42,7 +42,7 @@ class Wisp(Monster):
 
         self.health = 9000
         self.current_health = self.health
-        self.damage = 500 * math.floor(0.5 * level)
+        self.damage = 100 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
             DamageType.slashing,
@@ -56,7 +56,7 @@ class Beholder(Monster):
 
         self.health = 6000
         self.current_health = self.health
-        self.damage = 250 * math.floor(0.5 * level)
+        self.damage = 250 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
             DamageType.piercing,
@@ -71,7 +71,7 @@ class Dragon(Monster):
 
         self.health = 6000
         self.current_health = self.health
-        self.damage = 250 * math.floor(0.5 * level)
+        self.damage = 250 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
         ]
@@ -82,7 +82,7 @@ class Minotaur(Monster):
 
         self.health = 6000
         self.current_health = self.health
-        self.damage = 250 * math.floor(0.5 * level)
+        self.damage = 250 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
         ]
@@ -93,7 +93,7 @@ class Slime(Monster):
 
         self.health = 6000
         self.current_health = self.health
-        self.damage = 250 * math.floor(0.5 * level)
+        self.damage = 250 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
         ]
@@ -105,7 +105,7 @@ class Goblin(Monster):
 
         self.health = 6000
         self.current_health = self.health
-        self.damage = 150 * level
+        self.damage = 250 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
             DamageType.piercing,
@@ -122,7 +122,7 @@ class Wraith(Monster):
 
         self.health = 6000
         self.current_health = self.health
-        self.damage = 150 * level
+        self.damage = 250 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
             DamageType.piercing,

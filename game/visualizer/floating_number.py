@@ -6,9 +6,9 @@ import pygame
 import ptext
 
 class FloatingNumber(pygame.sprite.Sprite):
-    def __init__(self, x, y, value, color):
+    def __init__(self, x, y, value, color, size=30):
         super().__init__()
-        self.font_obj = pygame.font.Font('freesansbold.ttf',16)
+        self.size = size
         self.value = value
         self.color = color
         self.image = pygame.Surface((1,1))
@@ -21,11 +21,11 @@ class FloatingNumber(pygame.sprite.Sprite):
         self.direction = random.choice([-1, 1])
 
     def update(self, group):
-        
+
         if self.delay > 0:
             self.delay -= 1
             return
-        
+
         if self.counter > 0:
             c = self.counter * self.direction
             y = ((((self.counter * 0.75)-10) ** 2) + 2 * (self.counter * 0.75) + 0)
@@ -38,6 +38,6 @@ class FloatingNumber(pygame.sprite.Sprite):
         alpha = math.floor( (self.counter/20) * 255 )
 
 
-        self.image = ptext.draw(self.value, (0,0), color=self.color, owidth=1.0, ocolor=(0, 0, 0), alpha=alpha/255)[0]
+        self.image = ptext.draw(self.value, (0,0), color=self.color, owidth=1.0, ocolor=(0, 0, 0), alpha=alpha/255, fontsize=self.size, fontname='game/visualizer/assets/visitor2.ttf')[0]
 
         self.counter -= 1

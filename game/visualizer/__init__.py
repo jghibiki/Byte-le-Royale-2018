@@ -13,6 +13,37 @@ from game.visualizer.game_log_parser import GameLogParser
 from game.visualizer.floating_number import FloatingNumber
 
 
+def party_killed_screen(global_surf, fps_clock, data):
+    big_font = pygame.font.Font('game/visualizer/assets/manaspc.ttf',70)
+    little_font = pygame.font.Font('game/visualizer/assets/manaspc.ttf',20)
+
+    you_have_died = big_font.render("Game Over", True, pygame.Color("#FFFFFF"))
+
+
+    while True:
+        global_surf.fill(pygame.Color("#000000"))
+
+        width = math.floor(1280/2.0)
+
+        # center and print game over
+        rect = you_have_died.get_rect()
+        pos = ( width-math.floor(rect.w/2), 200)
+        global_surf.blit(you_have_died, pos)
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    pygame.quit()
+                    sys.exit()
+
+
+        pygame.display.update()
+        fps_clock.tick(60)
+
+
 
 def start(verbose):
 
@@ -23,17 +54,17 @@ def start(verbose):
 
     log_parser = GameLogParser(log_path)
     units, events = log_parser.get_turn()
-    
+
     # assign unit colors
     unit_colors = {}
-    colors = [ 
-        pygame.Color("#05AFE8"), 
-        pygame.Color("#AF05E8"), 
-        pygame.Color("#E83E05"), 
+    colors = [
+        pygame.Color("#05AFE8"),
+        pygame.Color("#AF05E8"),
+        pygame.Color("#E83E05"),
         pygame.Color("#3EE805")
     ]
     for unit in units:
-        unit_colors[unit.id] = colors.pop() 
+        unit_colors[unit.id] = colors.pop()
     del colors
 
     location = None # current location
@@ -56,7 +87,7 @@ def start(verbose):
     mousex, mousey = 0, 0
 
 
-    fontObj = pygame.font.Font('freesansbold.ttf',20)
+    fontObj = pygame.font.Font('game/visualizer/assets/visitor2.ttf',50)
 
     team = 'Doodz'
     gold = 300
@@ -65,10 +96,30 @@ def start(verbose):
     monster = None
 
     unit_hp_bars = pygame.sprite.Group()
-    unit_hp_bars.add( HealthBar(20,  544, 300, 50, units[0].id) )
-    unit_hp_bars.add( HealthBar(332, 544, 300, 50, units[1].id) )
-    unit_hp_bars.add( HealthBar(644, 544, 300, 50, units[2].id) )
-    unit_hp_bars.add( HealthBar(956, 544, 300, 50, units[3].id) )
+    unit_sprite_group = pygame.sprite.Group()
+
+    unit_hp_bar_pos = [(20, 544), (332, 544), (644, 544), (956, 544)]
+    unit_sprite_pos = [(80, 320), (392, 320), (704, 320), (1016, 320)]
+
+    for idx, pos in enumerate(unit_hp_bar_pos):
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+
+    unit_damage_number_pos = {}
+
+    for idx, pos in enumerate(unit_hp_bar_pos):
+        unit_damage_number_pos[ units[idx].id ] = ( pos[0]+20, pos[1]-80 )
+
+    unit_damage_animation_pos = {}
+    for idx, pos in enumerate(unit_hp_bar_pos):
+        unit_damage_animation_pos[ units[idx].id ] = (pos[0]+80, pos[1]- 200)
+
+    for idx, pos in enumerate(unit_sprite_pos):
+        unit_sprite = get_unit_sprite( units[idx].unit_class, pos)
+        unit_sprite_group.add( unit_sprite )
+
 
     monster_hp_bar = pygame.sprite.Group()
     monster_name_surface = None
@@ -135,7 +186,7 @@ def start(verbose):
     background_group = pygame.sprite.Group()
 
     town_shop_sprite = TownShopSprite()
-    monster_room_sprite = MonsterRoomSprite()
+    monster_room_sprite = get_monster_room_sprite()
 
     if(verbose):
         print("Visualizer")
@@ -196,21 +247,43 @@ def start(verbose):
 
                     if attack_counter <= 0:
 
-                        attack_counter = 4
-                        next_turn_counter += 4
+                        attack_counter = 0
+                        next_turn_counter += 0
 
                         event["handled"] = True
-                        
+
                         color = unit_colors[event["unit"]]
-             
+
                         fn = FloatingNumber(520 + random.randint(-15, 15) , 10 , '-{}'.format(event["damage"]), color)
                         floating_number_group.add(fn)
 
                         aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
                         attack_animation_group.add(aa)
-                        
+
                         if monster is not None:
                             monster.current_health -= event["damage"]
+
+                elif event["type"] == Event.monster_attack:
+                    if attack_counter <= 0:
+                        attack_counter = 0
+                        next_turn_counter += 0
+
+                        event["handled"] = True
+
+                        u_pos = unit_damage_number_pos[event["unit"]]
+                        color = pygame.Color("#FF0000")
+                        unit_animation_pos  = unit_damage_animation_pos[event["unit"]]
+
+                        fn = FloatingNumber(
+                                u_pos[0] + random.randint(-15, 15),
+                                u_pos[1],
+                                '-{}'.format(event["damage"]),
+                                color,
+                                size=35)
+                        floating_number_group.add(fn)
+
+                        aa = AttackAnimation(unit_animation_pos[0], unit_animation_pos[1], pygame.Color("#FF0000"))
+                        attack_animation_group.add(aa)
 
 
 
@@ -220,9 +293,11 @@ def start(verbose):
 
                     event["handled"] = True
 
+                elif event["type"] == Event.party_killed:
+                    party_killed_screen(global_surf, fpsClock, event)
+
 
         attack_counter -= 1
-
 
 
         if location.node_type == NodeType.monster:
@@ -253,14 +328,16 @@ def start(verbose):
 
 
         # swap background image
-        if background == NodeType.monster:
-            background_group.empty()
-            background_group.add( monster_room_sprite )
-        if background == NodeType.town:
-            background_group.empty()
-            background_group.add( town_shop_sprite )
-        else:
-            pass
+        if location_change:
+            if background == NodeType.monster:
+                background_group.empty()
+                background_group.add( get_monster_room_sprite() )
+            if background == NodeType.town:
+                background_group.empty()
+                background_group.add( town_shop_sprite )
+            else:
+                pass
+
 
         #####
         # Rendering Stuff
@@ -303,7 +380,9 @@ def start(verbose):
 
         if monster_name_surface is not None:
             monster_info_rect = monster_name_surface.get_rect()
-            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 70)
+            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 60)
+
+        unit_sprite_group.update()
 
         unit_hp_bars.update(units)
 
@@ -346,13 +425,20 @@ def start(verbose):
         # draw player hitpoints
         unit_hp_bars.draw(global_surf)
 
+        # draw monster hp bars
         monster_hp_bar.draw(global_surf)
 
+        # draw monsters
         monster_group.draw(global_surf)
 
+        # draw units
+        unit_sprite_group.draw(global_surf)
+
+        # draw unit icons
         icon_back_group.draw(global_surf)
         unit_icon_sprite_group.draw(global_surf)
 
+        # draw floating numbers
         floating_number_group.draw(global_surf)
         attack_animation_group.draw(global_surf)
 
@@ -375,4 +461,6 @@ def start(verbose):
             next_turn_counter -= 1
 
         pygame.display.update()
-        fpsClock.tick(60)
+        #fpsClock.tick(60)
+
+
