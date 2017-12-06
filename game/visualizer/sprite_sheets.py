@@ -139,7 +139,7 @@ class BeholderSprite(MonsterSprite):
             [128, 0],
             [0, 128],
             [128, 128]
-        ], x, y, 128, 128, 8)
+        ], x, y, 128, 128, 3)
 
 class SlimeSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -158,7 +158,7 @@ class SlimeSprite(MonsterSprite):
             [384,256],
             [0,384],
             [128,384],
-        ], x, y, 128, 128,4)
+        ], x, y, 128, 128,2)
 
 class MinotaurSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -179,7 +179,7 @@ class MinotaurSprite(MonsterSprite):
             [128,384],
             [256,384],
             [384,384]
-        ], x, y, 128, 128, 5)
+        ], x, y, 128, 128, 3)
 
 class DragonSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -207,7 +207,7 @@ class DragonSprite(MonsterSprite):
             [0,512],
             [128,512],
             [256,512]
-        ], x, y, 128, 128,5)
+        ], x, y, 128, 128,3)
 
 class WraithSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -242,7 +242,7 @@ class WraithSprite(MonsterSprite):
             [256,640],
             [384,640],
             [512,640]
-        ], x, y, 128, 128,6)
+        ], x, y, 128, 128,4)
 
 class WispSprite(MonsterSprite):
     def __init__(self, x, y):
@@ -271,7 +271,7 @@ class WispSprite(MonsterSprite):
             [128,512],
             [256,512],
             [384,512]
-        ], x, y, 128, 128,6)
+        ], x, y, 128, 128,3)
 
 def get_monster_sprite(monster_type, pos):
     if monster_type is MonsterType.beholder:
@@ -388,7 +388,7 @@ class AttackAnimation(pygame.sprite.Sprite):
 		]
         self.index = 0
         self.tick_counter = 0
-        self.animation_speed = 2
+        self.animation_speed = 1
 
         self.h = 128
         self.w = 128
