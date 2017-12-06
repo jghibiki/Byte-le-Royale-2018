@@ -71,9 +71,11 @@ class ClientLogic:
     def turn(self, turn_data):
 
         if turn_data["message_type"] == MessageType.unit_choice:
+            team_name = self.player_client.team_name()
             choices = self.player_client.unit_choice()
             return {
                 "message_type": MessageType.unit_choice,
+                "team_name": team_name,
                 "units": choices
             }
 

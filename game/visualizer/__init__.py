@@ -45,15 +45,10 @@ def party_killed_screen(global_surf, fps_clock, data):
 
 
 
-def start(verbose):
-
-    if len(sys.argv) == 3:
-        log_path = sys.argv[2]
-    else:
-        log_path = "./game_log"
+def start(verbose, log_path, gamma):
 
     log_parser = GameLogParser(log_path)
-    units, events = log_parser.get_turn()
+    team_name, units, events = log_parser.get_turn()
 
     # assign unit colors
     unit_colors = {}
@@ -75,13 +70,15 @@ def start(verbose):
     global_surf = pygame.display.set_mode((1280,720))
     pygame.display.set_caption('DnD Visualizer')
 
+    pygame.display.set_gamma(gamma)
+
     bgSurfaceObj = pygame.image.load('game/visualizer/assets/brick_wall.png')
     bgSurfaceObj = pygame.transform.scale(bgSurfaceObj,(1280,720))
 
     redColor = pygame.Color(255,0,0)
     greenColor = pygame.Color(0,255,0)
     blueColor = pygame.Color(0,0,255)
-    whiteColor = pygame.Color(255,255,255)
+    color_white = pygame.Color(255,255,255)
     goldColor = pygame.Color(255,215,0)
     blackColor = pygame.Color(0,0,0)
     mousex, mousey = 0, 0
@@ -89,7 +86,7 @@ def start(verbose):
 
     fontObj = pygame.font.Font('game/visualizer/assets/visitor2.ttf',50)
 
-    team = 'Doodz'
+    team_name = ''
     gold = 300
     trophies = 0
 
@@ -133,7 +130,6 @@ def start(verbose):
 
     monster_pos = (585,120)
 
-    teamSurfaceObj = fontObj.render('Team: {0}'.format(team[0:15]), True, whiteColor)
 
     icon_sprite_positions = [(20,504), (332,504), (644,504), (956,504)]
     icon_sprite_backs = [IconBackSprite(pos[0]-4, pos[1]-4) for pos in icon_sprite_positions]
@@ -208,7 +204,7 @@ def start(verbose):
 
         if next_turn_counter <= 0:
             print("Game Turn: " + str(log_parser.tick))
-            units, events = log_parser.get_turn()
+            team_name, units, events = log_parser.get_turn()
 
         # read through the events
         for event in events:
@@ -303,7 +299,7 @@ def start(verbose):
         if location.node_type == NodeType.monster:
             monster = location.monster
 
-            monster_name_surface = fontObj.render(monster.name, True, whiteColor)
+            monster_name_surface = fontObj.render("Lvl{} {}".format(monster.level, monster.name), True, color_white)
 
             # clear monster hp bar
             monster_hp_bar.empty()
@@ -345,36 +341,64 @@ def start(verbose):
 
         # render gold text if changed
         if draw_gold or first_loop:
-            goldSurfaceObj = fontObj.render('Gold: {0}'.format(str(gold)), True, goldColor)
+            gold_surf = fontObj.render('Gold: {0:06d}'.format(gold), True, goldColor)
+
+            _pos = (1270, 10)
+            correct_rect = pygame.Rect(*_pos, *fontObj.size('Gold: {0:06d}'.format(0)))
+
+            # handle font shifting when rendering a to a different width as a result of a narrow character such as 1
+            gold_rect = gold_surf.get_rect()
+
+            width_diff = correct_rect.w - gold_rect.w
+            gold_rect.topright= (_pos[0] - width_diff, _pos[1])
+
 
         # render trophies text if changed
         if draw_trophies or first_loop:
-            trophiesSurfaceObj = fontObj.render('Trophies: {0}'.format(str(trophies)), True, goldColor)
+            trophiesSurfaceObj = fontObj.render('Trophies: {0:06d}'.format(trophies), True, goldColor)
 
-        player1InfoSurface = fontObj.render(units[0].name, True, whiteColor)
-        player2InfoSurface = fontObj.render(units[1].name, True, whiteColor)
-        player3InfoSurface = fontObj.render(units[2].name, True, whiteColor)
-        player4InfoSurface = fontObj.render(units[3].name, True, whiteColor)
+            _pos = (1270, 30)
+            correct_rect = pygame.Rect(*_pos, *fontObj.size('Trophies: {0:06d}'.format(0)))
+            trophies_rect = trophiesSurfaceObj.get_rect()
+
+            # handle font shifting when rendering a to a different width as a result of a narrow character such as 1
+            width_diff = correct_rect.w - trophies_rect.w
+            trophies_rect.topright= (_pos[0] - width_diff, _pos[1])
+
+        # render gold and trophies bg
+        if trophies_rect and gold_rect and first_loop:
+            trophy_gold_background_rect = trophies_rect.union(gold_rect)
+            trophy_gold_background_rect.inflate_ip(10, 10)
 
 
-        teamRectObj = teamSurfaceObj.get_rect()
-        teamRectObj.topleft = (10,20)
+        # render team name
+        if first_loop:
+            team_name_surf = fontObj.render(team_name[0:20], True, color_white)
+            team_name_rect = team_name_surf.get_rect()
+            team_name_rect.topleft = (10,10)
 
-        goldRectObj = goldSurfaceObj.get_rect()
-        goldRectObj.topleft = (10,40)
+            # calculate rect for team name background
+            team_background_rect = team_name_rect.copy()
+            team_background_rect.inflate_ip(10, 10)
 
-        trophiesRectObj = trophiesSurfaceObj.get_rect()
-        trophiesRectObj.topleft = (10, 60)
 
+        # draw unit 1 name
+        player1InfoSurface = fontObj.render(units[0].name, True, color_white)
         player1InfoRect = player1InfoSurface.get_rect()
         player1InfoRect.topleft = (58, 512)
 
+        # draw unit 2 name
+        player2InfoSurface = fontObj.render(units[1].name, True, color_white)
         player2InfoRect = player2InfoSurface.get_rect()
         player2InfoRect.topleft = (370, 512)
 
+        # draw unit 3 name
+        player3InfoSurface = fontObj.render(units[2].name, True, color_white)
         player3InfoRect = player3InfoSurface.get_rect()
         player3InfoRect.topleft = (682, 512)
 
+        # draw unit 4 name
+        player4InfoSurface = fontObj.render(units[3].name, True, color_white)
         player4InfoRect = player4InfoSurface.get_rect()
         player4InfoRect.topleft = (994, 512)
 
@@ -401,18 +425,22 @@ def start(verbose):
         # clear screen, fill with white
         global_surf.fill(blackColor)
 
-
         background_group.update()
         background_group.draw(global_surf)
 
+        # draw team name background
+        global_surf.fill(pygame.Color(54, 54, 54, 200), rect=team_background_rect, special_flags=pygame.BLEND_RGBA_SUB)
+
         # draw team name
-        global_surf.blit(teamSurfaceObj,teamRectObj)
+        global_surf.blit(team_name_surf, team_name_rect)
+
+        global_surf.fill(pygame.Color(54, 54, 54, 200), rect=trophy_gold_background_rect, special_flags=pygame.BLEND_RGBA_SUB)
 
         # draw gold text
-        global_surf.blit(goldSurfaceObj,goldRectObj)
+        global_surf.blit(gold_surf, gold_rect)
 
         # draw trohpy text
-        global_surf.blit(trophiesSurfaceObj,trophiesRectObj)
+        global_surf.blit(trophiesSurfaceObj,trophies_rect)
 
         # draw unit info text
         global_surf.blit( player1InfoSurface, player1InfoRect)
@@ -452,7 +480,7 @@ def start(verbose):
                mousex, mousey = event.pos
                if event.button == 1:
                     mouse_x, mouse_y = event.pos
-                    fn = FloatingNumber(mouse_x, mouse_y, '-5000', whiteColor)
+                    fn = FloatingNumber(mouse_x, mouse_y, '-5000', color_white)
                     floating_number_group.add(fn)
 
         first_loop = False

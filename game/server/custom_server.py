@@ -31,6 +31,7 @@ class CustomServer(ServerControl):
 
         self.combat_manager = None
         self.units = []
+        self.team_name = "[No team name set]"
 
         self.turn_log = None
 
@@ -45,7 +46,9 @@ class CustomServer(ServerControl):
                 "type": Event.set_location,
                 "location": self.current_location.to_dict()
             }
-        ] }
+        ],
+            "team_name": self.team_name
+        }
 
         if not self.started:
             # first turn, ask for what units the team should be made up of
@@ -90,6 +93,7 @@ class CustomServer(ServerControl):
 
             if not self.started:
                 if data["message_type"] == MessageType.unit_choice:
+                    self.team_name = data["team_name"]
                     self.units = []
 
                     # validate unit classes
@@ -110,10 +114,10 @@ class CustomServer(ServerControl):
                         self.print("Client Successfully Sent Desired Unit Types")
                         for u in self.units:
                             self.print(u)
+
                     self.started = True
 
             else:
-
 
                 # HANDLE ROOM NOT RESOLVED
                 if not self.current_location.resolved:

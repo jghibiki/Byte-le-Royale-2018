@@ -9,6 +9,11 @@ class CustomClient(UserClient):
         """ Use the constructor to initialize any variables you would like to track between turns. """
         pass
 
+    def team_name(self):
+        print("Sending Team Name")
+
+        return "Team Coffee !@#$$%%^&^**()(*&^%$#"
+
     def unit_choice(self):
         print("Sending Unit Choices")
 

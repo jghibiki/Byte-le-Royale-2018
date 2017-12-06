@@ -25,11 +25,11 @@ class GameLogParser:
         with open("{0}/{1:05d}.json".format(self.log_dir, self.tick), "r") as f:
             turn = json.load(f)
 
-        units, events = self._parse_turn(turn)
+        team_name, units, events = self._parse_turn(turn)
 
         self.tick += 1
 
-        return units, events
+        return team_name, units, events
 
     def check_finished(self):
         return self.tick > self.max_ticks
@@ -95,7 +95,7 @@ class GameLogParser:
                     node.from_dict(event["room_2"])
                     event["room_2"] = node
 
-        return units, turn["turn_result"]["events"]
+        return turn["turn_result"]["team_name"], units, turn["turn_result"]["events"]
 
 
     def _deserialize_units(self, units):
