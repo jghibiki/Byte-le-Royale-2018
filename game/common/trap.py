@@ -8,11 +8,12 @@ class Trap(Serializable):
         self.initialized = False
 
 
-    def init(self, name):
+    def init(self, name, level):
         """Manually initialize obj"""
 
         self.id = str(uuid4())
         self.name = name
+        self.level = level
 
         self.initialized = True
 
@@ -21,6 +22,7 @@ class Trap(Serializable):
 
         self.id = d["id"]
         self.name = d["name"]
+        self.level = d["level"]
 
         self.initialized = True
 
@@ -30,6 +32,7 @@ class Trap(Serializable):
         return {
             "id": self.id,
             "name": self.name,
+            "level": self.level,
             "trap_type": self.get_type()
         }
 

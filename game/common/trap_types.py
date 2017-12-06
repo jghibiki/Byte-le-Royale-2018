@@ -31,8 +31,8 @@ def get_random_trap():
 
 
 class PitTrap(Trap):
-    def init(self):
-        Trap.init(self, "Pit Trap")
+    def init(self, level):
+        Trap.init(self, "Pit Trap", level)
 
         self.counters = [
 
@@ -43,32 +43,32 @@ class PitTrap(Trap):
 
 
 class SpikeTrap(Trap):
-    def init(self):
-        Trap.init(self, "Spike Trap")
+    def init(self, level):
+        Trap.init(self, "Spike Trap", level)
 
     def get_type(self):
         return TRAP_TYPE.spike_trap
 
 
 class BoulderTrap(Trap):
-    def init(self):
-        Trap.init(self, "Boulder Trap")
+    def init(self, level):
+        Trap.init(self, "Boulder Trap", level)
 
     def get_type(self):
         return TRAP_TYPE.boulder_trap
 
 
 class DartTrap(Trap):
-    def init(self):
-        Trap.init(self, "Dart Trap")
+    def init(self, level):
+        Trap.init(self, "Dart Trap", level)
 
     def get_type(self):
         return TRAP_TYPE.dart_trap
 
 
 class NarrowBridge(Trap):
-    def init(self):
-        Trap.init(self, "Narrow Bridge")
+    def init(self, level):
+        Trap.init(self, "Narrow Bridge", level)
 
     def get_type(self):
         return TRAP_TYPE.narrow_bridge

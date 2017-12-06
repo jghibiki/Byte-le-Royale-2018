@@ -30,7 +30,7 @@ def random_room_type(self):
     random.choice([0, 0, 1])
 
 
-def generate_sections(num, nodes, tail=None):
+def generate_sections(level, nodes, tail=None):
     #   a
     #  / \
     # .....
@@ -43,18 +43,18 @@ def generate_sections(num, nodes, tail=None):
     #  \ /
     #   i
 
-    first_right = get_random_node()
-    first_left = get_random_node()
+    first_right = get_random_node(level+1)
+    first_left = get_random_node(level+1)
 
     b = first_right
     c = first_left
 
     nodes.append([b, c])
 
-    for _ in range(num+1):
-        d = get_random_node()
-        e = get_random_node()
-        f = get_random_node()
+    for _ in range(level+1):
+        d = get_random_node(level+1)
+        e = get_random_node(level+1)
+        f = get_random_node(level+1)
 
         nodes.append([d, e, f])
 
@@ -64,9 +64,9 @@ def generate_sections(num, nodes, tail=None):
         c.add_node(e)
         c.add_node(f)
 
-        g = get_random_node()
+        g = get_random_node(level+1)
 
-        h = get_random_node()
+        h = get_random_node(level+1)
 
         d.add_node(g)
 

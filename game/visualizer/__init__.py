@@ -14,21 +14,59 @@ from game.visualizer.floating_number import FloatingNumber
 
 
 def party_killed_screen(global_surf, fps_clock, data):
-    big_font = pygame.font.Font('game/visualizer/assets/manaspc.ttf',70)
-    little_font = pygame.font.Font('game/visualizer/assets/manaspc.ttf',20)
+    width = math.floor(1280/2.0)
+
+    big_font = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf',70)
+    med_font = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf',45)
+    little_font = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf',30)
 
     you_have_died = big_font.render("Game Over", True, pygame.Color("#FFFFFF"))
+
+    trophies = little_font.render(    "    Trophies: {0:06d}".format(data["trophies"]), True, pygame.Color("#FFFFFF"))
+
+    current_gold = little_font.render("Current Gold: {0:06d}".format(data["gold"]), True, pygame.Color("#FFFFFF"))
+
+    total_gold = little_font.render(  "  Total Gold: {0:06d}".format(data["total_gold"]), True, pygame.Color("#FFFFFF"))
+
+    press_space_to_exit = med_font.render("Press Space to Exit...", True, pygame.Color("#FFFFFF"))
+
+    # compute info rect
+    info_rect = trophies.get_rect().unionall([current_gold.get_rect(), total_gold.get_rect()])
+
+    # center info rect
+    info_rect.x = (width-math.floor(info_rect.w/2))
 
 
     while True:
         global_surf.fill(pygame.Color("#000000"))
 
-        width = math.floor(1280/2.0)
 
         # center and print game over
         rect = you_have_died.get_rect()
-        pos = ( width-math.floor(rect.w/2), 200)
+        pos = ( width-math.floor(rect.w/2), 100)
         global_surf.blit(you_have_died, pos)
+
+
+        # draw trophies
+        rect = trophies.get_rect()
+        pos = ( info_rect.x + (math.floor(info_rect.w/2)-math.floor(rect.w/2)), 200)
+        global_surf.blit(trophies, pos)
+
+        # draw current gold
+        rect = current_gold.get_rect()
+        pos = ( info_rect.x + (math.floor(info_rect.w/2)-math.floor(rect.w/2)), 230)
+        global_surf.blit(current_gold, pos)
+
+        # draw total gold
+        rect = total_gold.get_rect()
+        pos = ( info_rect.x + (math.floor(info_rect.w/2)-math.floor(rect.w/2)), 260)
+        global_surf.blit(total_gold, pos)
+
+
+        # center and print press space to exit
+        rect = press_space_to_exit.get_rect()
+        pos = ( width-math.floor(rect.w/2), 600)
+        global_surf.blit(press_space_to_exit, pos)
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -53,10 +91,10 @@ def start(verbose, log_path, gamma):
     # assign unit colors
     unit_colors = {}
     colors = [
-        pygame.Color("#05AFE8"),
-        pygame.Color("#AF05E8"),
-        pygame.Color("#E83E05"),
-        pygame.Color("#3EE805")
+        pygame.Color("#FFFB00"),
+        pygame.Color("#FF0084"),
+        pygame.Color("#0005FF"),
+        pygame.Color("#00FF7A")
     ]
     for unit in units:
         unit_colors[unit.id] = colors.pop()
@@ -84,7 +122,7 @@ def start(verbose, log_path, gamma):
     mousex, mousey = 0, 0
 
 
-    fontObj = pygame.font.Font('game/visualizer/assets/visitor2.ttf',50)
+    fontObj = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf',20)
 
     team_name = ''
     gold = 300
@@ -184,8 +222,6 @@ def start(verbose, log_path, gamma):
     town_shop_sprite = TownShopSprite()
     monster_room_sprite = get_monster_room_sprite()
 
-    if(verbose):
-        print("Visualizer")
 
     first_loop = True
     next_turn_counter = 0
@@ -203,7 +239,8 @@ def start(verbose, log_path, gamma):
             sys.exit()
 
         if next_turn_counter <= 0:
-            print("Game Turn: " + str(log_parser.tick))
+            if (verbose):
+                print("Game Turn: " + str(log_parser.tick))
             team_name, units, events = log_parser.get_turn()
 
         # read through the events
@@ -275,7 +312,7 @@ def start(verbose, log_path, gamma):
                                 u_pos[1],
                                 '-{}'.format(event["damage"]),
                                 color,
-                                size=35)
+                                size=25)
                         floating_number_group.add(fn)
 
                         aa = AttackAnimation(unit_animation_pos[0], unit_animation_pos[1], pygame.Color("#FF0000"))
@@ -344,26 +381,20 @@ def start(verbose, log_path, gamma):
             gold_surf = fontObj.render('Gold: {0:06d}'.format(gold), True, goldColor)
 
             _pos = (1270, 10)
-            correct_rect = pygame.Rect(*_pos, *fontObj.size('Gold: {0:06d}'.format(0)))
 
             # handle font shifting when rendering a to a different width as a result of a narrow character such as 1
             gold_rect = gold_surf.get_rect()
-
-            width_diff = correct_rect.w - gold_rect.w
-            gold_rect.topright= (_pos[0] - width_diff, _pos[1])
+            gold_rect.topright= _pos
 
 
         # render trophies text if changed
         if draw_trophies or first_loop:
             trophiesSurfaceObj = fontObj.render('Trophies: {0:06d}'.format(trophies), True, goldColor)
 
-            _pos = (1270, 30)
-            correct_rect = pygame.Rect(*_pos, *fontObj.size('Trophies: {0:06d}'.format(0)))
-            trophies_rect = trophiesSurfaceObj.get_rect()
+            _pos = (1270, 35)
 
-            # handle font shifting when rendering a to a different width as a result of a narrow character such as 1
-            width_diff = correct_rect.w - trophies_rect.w
-            trophies_rect.topright= (_pos[0] - width_diff, _pos[1])
+            trophies_rect = trophiesSurfaceObj.get_rect()
+            trophies_rect.topright = _pos
 
         # render gold and trophies bg
         if trophies_rect and gold_rect and first_loop:

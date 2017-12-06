@@ -6,16 +6,69 @@ from game.common.monster_types import *
 from game.common.enums import *
 
 
-def get_random_node():
+def weighted_choice(dist):
+    total = sum(dist)
+    r = random.uniform(0, total)
+    upto = 0
+    for i, w in enumerate(dist):
+        if upto + w >= r:
+            return i
+        upto += w
+
+
+def difficulty_distribution(level):
+
+    dist = [1.0, 0.0, 0.0]
+
+    if level is 1:
+        dist = [ 0.75, 0.20, 0.5 ]
+    if level is 2:
+        dist = [ 0.75, 0.20, 0.5 ]
+    if level is 3:
+        dist = [ 0.75, 0.20, 0.5 ]
+
+    # little harder
+    if level is 4:
+        dist = [ 0.75, 0.13, 0.12 ]
+    if level is 5:
+        dist = [ 0.75, 0.13, 0.12 ]
+    if level is 6:
+        dist = [ 0.75, 0.13, 0.12 ]
+
+    # harder
+    if level is 7:
+        dist = [ 0.50, 0.25, 0.25 ]
+    if level is 8:
+        dist = [ 0.50, 0.25, 0.25 ]
+    if level is 9:
+        dist = [ 0.50, 0.25, 0.25 ]
+
+    # even harder
+    if level is 9:
+        dist = [ 0.34, 0.33, 0.33 ]
+    if level is 10:
+        dist = [ 0.34, 0.33, 0.35 ]
+    if level is 11:
+        dist = [ 0.34, 0.33, 0.33 ]
+
+    if level > 11:
+        dist = [ 0.34, 0.33, 0.33 ]
+
+    w = weighted_choice(dist)
+    return w + level
+
+
+
+def get_random_node(level):
     node_type = random.choice([
         NodeType.monster,
         NodeType.trap
     ])
 
     if node_type == NodeType.monster:
-        return MonsterRoom.new_node()
+        return MonsterRoom.new_node(level)
     elif node_type == NodeType.trap:
-        return TrapRoom.new_node()
+        return TrapRoom.new_node(level)
 
 def get_node(node_type):
     if node_type == NodeType.monster:
@@ -81,20 +134,19 @@ class Town(Node):
 
 class MonsterRoom(Node):
     @staticmethod
-    def new_node():
+    def new_node(level):
         node = MonsterRoom()
-        node.init()
+        node.init(level)
         return node
 
     def __init__(self):
         Node.__init__(self, NodeType.monster)
 
-    def init(self):
+    def init(self, level):
         Node.init(self)
 
-        lvl = random.randint(1,5)
-        self.monster = get_random_monster()
-        self.monster.init(lvl)
+        self.monster = get_random_monster( difficulty_distribution(level) )
+        self.monster.init(level)
 
     def from_dict(self, d, safe=False):
         Node.from_dict(self, d, safe=safe)
@@ -116,19 +168,19 @@ class MonsterRoom(Node):
 
 class TrapRoom(Node):
     @staticmethod
-    def new_node():
+    def new_node(level):
         node = TrapRoom()
-        node.init()
+        node.init(level)
         return node
 
     def __init__(self):
         Node.__init__(self, NodeType.trap)
 
-    def init(self):
+    def init(self, level):
         Node.init(self)
 
         self.trap = get_random_trap()
-        self.trap.init()
+        self.trap.init( difficulty_distribution(level) )
 
     def from_dict(self, d, safe=False):
         Node.from_dict(self, d, safe=safe)

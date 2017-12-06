@@ -22,7 +22,7 @@ def get_monster(monster_type):
     elif monster_type == MonsterType.wraith:
         return Wraith()
 
-def get_random_monster():
+def get_random_monster(level):
     mon =  random.choice([
         MonsterType.wisp,
         MonsterType.beholder,
@@ -43,6 +43,7 @@ class Wisp(Monster):
         self.health = 9000
         self.current_health = self.health
         self.damage = 100 * (math.floor(0.5 * level) + 1)
+        self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
             DamageType.slashing,
@@ -57,6 +58,7 @@ class Beholder(Monster):
         self.health = 6000
         self.current_health = self.health
         self.damage = 250 * (math.floor(0.5 * level) + 1)
+        self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
             DamageType.piercing,
@@ -72,6 +74,7 @@ class Dragon(Monster):
         self.health = 6000
         self.current_health = self.health
         self.damage = 250 * (math.floor(0.5 * level) + 1)
+        self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
         ]
@@ -83,6 +86,7 @@ class Minotaur(Monster):
         self.health = 6000
         self.current_health = self.health
         self.damage = 250 * (math.floor(0.5 * level) + 1)
+        self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
         ]
@@ -94,6 +98,7 @@ class Slime(Monster):
         self.health = 6000
         self.current_health = self.health
         self.damage = 250 * (math.floor(0.5 * level) + 1)
+        self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
         ]
@@ -106,6 +111,7 @@ class Goblin(Monster):
         self.health = 6000
         self.current_health = self.health
         self.damage = 250 * (math.floor(0.5 * level) + 1)
+        self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
             DamageType.piercing,
@@ -123,6 +129,7 @@ class Wraith(Monster):
         self.health = 6000
         self.current_health = self.health
         self.damage = 250 * (math.floor(0.5 * level) + 1)
+        self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
             DamageType.piercing,

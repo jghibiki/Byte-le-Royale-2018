@@ -9,7 +9,7 @@ class HealthBar(pygame.sprite.Sprite):
         self.unit_id = unit_id
         self.max = 0
         self.current = 0
-        self.font_obj = pygame.font.Font('game/visualizer/assets/visitor2.ttf', 24)
+        self.font_obj = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf', 12)
 
         self.rect = pygame.Rect(x, y, w, h)
         self.image = pygame.Surface((w, h), pygame.SRCALPHA)
@@ -46,8 +46,8 @@ class HealthBar(pygame.sprite.Sprite):
 
             #Draw health bars
             self.image.fill(pygame.Color("#FFFFFF"),(96, 2, 202, 18))
-            self.image.fill(pygame.Color("#BA0000"),(97, 3, 200, 16))
-            self.image.fill(pygame.Color("#00BA03"),(97, 3, math.floor((self.current/float(self.max))*200), 16))
+            self.image.fill(pygame.Color("#FF0000"),(97, 3, 200, 16))
+            self.image.fill(pygame.Color("#33BF00"),(97, 3, math.floor((self.current/float(self.max))*200), 16))
 
 
     def get_unit(self, units):
