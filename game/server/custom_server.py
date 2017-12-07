@@ -451,8 +451,15 @@ class CustomServer(ServerControl):
 
                         elif item_slot == 1:
                             self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.bomb_1 = item
+
+                            if(unit.bomb_1 is not None and
+                               item_type is unit.bomb_1.item_type and
+                               unit.bomb_1_quantity < 2):
+                                    unit.bomb_1_quantity += 1
+                            else:
+                                item = get_item(item_type, item_level)
+                                unit.bomb_1 = item
+                                unit.bomb_1_quantity = 1
 
                             self.turn_log["events"].append({
                                 "type": Event.purchase_item,
@@ -463,8 +470,15 @@ class CustomServer(ServerControl):
 
                         elif item_slot == 2:
                             self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.bomb_2 = item
+
+                            if(unit.bomb_2 is not None and
+                               item_type is unit.bomb_2.item_type and
+                               unit.bomb_2_quantity < 2):
+                                unit.bomb_2_quantity += 1
+                            else:
+                                item = get_item(item_type, item_level)
+                                unit.bomb_2 = item
+                                unit.bomb_2_quantity = 1
 
                             self.turn_log["events"].append({
                                 "type": Event.purchase_item,
@@ -475,8 +489,15 @@ class CustomServer(ServerControl):
 
                         elif item_slot == 3:
                             self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.bomb_3 = item
+
+                            if(unit.bomb_3 is not None and
+                               item_type is unit.bomb_3.item_type and
+                               unit.bomb_3_quantity < 2):
+                                unit.bomb_3_quantity += 1
+                            else:
+                                item = get_item(item_type, item_level)
+                                unit.bomb_3 = item
+                                unit.bomb_3_quantity = 1
 
                             self.turn_log["events"].append({
                                 "type": Event.purchase_item,
@@ -501,8 +522,15 @@ class CustomServer(ServerControl):
 
                         elif item_slot == 1:
                             self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.bomb_1 = item
+
+                            if(unit.bomb_1 is not None and
+                               item_type is unit.bomb_1.item_type and
+                               unit.bomb_1_quantity < 2):
+                                unit.bomb_1_quantity += 1
+                            else:
+                                item = get_item(item_type, item_level)
+                                unit.bomb_1 = item
+                                unit.bomb_1_quantity = 1
 
                             self.turn_log["events"].append({
                                 "type": Event.purchase_item,
@@ -513,8 +541,16 @@ class CustomServer(ServerControl):
 
                         elif item_slot == 2:
                             self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.bomb_2 = item
+
+                            if(unit.bomb_2 is not None and
+                               item_type is unit.bomb_2.item_type and
+                               unit.bomb_2_quantity < 2):
+
+                                unit.bomb_2_quantity += 1
+                            else:
+                                item = get_item(item_type, item_level)
+                                unit.bomb_2 = item
+                                unit.bomb_2_quantity = 1
 
                             self.turn_log["events"].append({
                                 "type": Event.purchase_item,

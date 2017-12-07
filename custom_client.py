@@ -49,6 +49,7 @@ class CustomClient(UserClient):
             unit = self.get_unit("thomas", units)
             if unit is not None:
                 store.purchase( unit, 2, ItemType.fire_bomb, 1)
+                store.purchase( unit, 2, ItemType.fire_bomb, 1)
 
 
     def room_choice(self, units, options):
@@ -73,7 +74,10 @@ class CustomClient(UserClient):
 
         for u in units:
             if u.unit_class == UnitClass.alchemist:
-                u.use_bomb_2()
+                if u.bomb_2_quantity > 0:
+                    u.use_bomb_2()
+                else:
+                    u.resupply(2)
             else:
                 u.attack()
 

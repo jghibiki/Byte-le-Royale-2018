@@ -82,6 +82,96 @@ def party_killed_screen(global_surf, fps_clock, data):
         fps_clock.tick(60)
 
 
+def unit_text(font, upper_left, unit):
+
+    text_parts = []
+
+    primary_weapon_text = font.render("Lvl{0} {1}".format(
+        unit.primary_weapon.level,
+        unit.primary_weapon.name), True, pygame.Color("#FFFFFF"))
+    primary_weapon_rect = primary_weapon_text.get_rect()
+
+    primary_weapon_rect.topleft = upper_left
+
+    text_parts.append([
+        primary_weapon_text,
+        primary_weapon_rect])
+
+    if unit.unit_class is UnitClass.knight:
+        pass
+
+    elif unit.unit_class is UnitClass.brawler:
+        pass
+
+    elif unit.unit_class is UnitClass.rogue:
+        if unit.bomb_1 is not None:
+            bomb_1_text = font.render("Lvl{0} {1} x {2}".format(
+                unit.bomb_1.level,
+                unit.bomb_1.name,
+                unit.bomb_1_quantity), True, pygame.Color("#FFFFFF"))
+            bomb_1_rect = bomb_1_text.get_rect()
+            bomb_1_rect.topleft = (upper_left[0], upper_left[1]+20)
+
+            text_parts.append([
+                bomb_1_text,
+                bomb_1_rect
+            ])
+
+        if unit.bomb_2 is not None:
+            bomb_2_text = font.render("Lvl{0} {1} x {2}".format(
+                unit.bomb_2.level,
+                unit.bomb_2.name,
+                unit.bomb_2_quantity), True, pygame.Color("#FFFFFF"))
+            bomb_2_rect = bomb_2_text.get_rect()
+            bomb_2_rect.topleft = (upper_left[0], upper_left[1]+40)
+
+            text_parts.append([
+                bomb_2_text,
+                bomb_2_rect
+            ])
+
+        if unit.bomb_3 is not None:
+            bomb_3_text = font.render("Lvl{0} {1} x {2}".format(
+                unit.bomb_3.level,
+                unit.bomb_3.name,
+                unit.bomb_3_quantity), True, pygame.Color("#FFFFFF"))
+            bomb_3_rect = bomb_3_text.get_rect()
+            bomb_3_rect.topleft = (upper_left[0], upper_left[1]+60)
+
+            text_parts.append([
+                bomb_3_text,
+                bomb_3_rect
+            ])
+
+    elif unit.unit_class is UnitClass.alchemist:
+        if unit.bomb_1 is not None:
+            bomb_1_text = font.render("Lvl{0} {1} x {2}".format(
+                unit.bomb_1.level,
+                unit.bomb_1.name,
+                unit.bomb_1_quantity), True, pygame.Color("#FFFFFF"))
+            bomb_1_rect = bomb_1_text.get_rect()
+            bomb_1_rect.topleft = (upper_left[0], upper_left[1]+20)
+
+            text_parts.append([
+                bomb_1_text,
+                bomb_1_rect
+            ])
+
+        if unit.bomb_2 is not None:
+            bomb_2_text = font.render("Lvl{0} {1} x {2}".format(
+                unit.bomb_2.level,
+                unit.bomb_2.name,
+                unit.bomb_2_quantity), True, pygame.Color("#FFFFFF"))
+            bomb_2_rect = bomb_2_text.get_rect()
+            bomb_2_rect.topleft = (upper_left[0], upper_left[1]+40)
+
+            text_parts.append([
+                bomb_2_text,
+                bomb_2_rect
+            ])
+
+    return text_parts
+
 
 def start(verbose, log_path, gamma):
 
@@ -123,6 +213,7 @@ def start(verbose, log_path, gamma):
 
 
     fontObj = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf',20)
+    small_font = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf', 14)
 
     team_name = ''
     gold = 300
@@ -376,6 +467,12 @@ def start(verbose, log_path, gamma):
         # Rendering Stuff
         #####
 
+        unit_item_text = []
+        unit_item_text_pos = [(20, 564), (332, 564), (644, 564), (956, 564)]
+        # render unit item text
+        for unit, pos in zip(units, unit_item_text_pos):
+            unit_item_text +=  unit_text(small_font, pos, unit)
+
         # render gold text if changed
         if draw_gold or first_loop:
             gold_surf = fontObj.render('Gold: {0:06d}'.format(gold), True, goldColor)
@@ -413,25 +510,20 @@ def start(verbose, log_path, gamma):
             team_background_rect.inflate_ip(10, 10)
 
 
-        # draw unit 1 name
-        player1InfoSurface = fontObj.render(units[0].name, True, color_white)
-        player1InfoRect = player1InfoSurface.get_rect()
-        player1InfoRect.topleft = (58, 512)
+        # draw unit names
+        unit_name_text_pos = [
+            (58, 512),
+            (370, 512),
+            (682, 512),
+            (994, 512)
+        ]
+        unit_name_texts = []
+        for idx, (unit, pos) in enumerate(zip(units, unit_name_text_pos)):
+            unit_text_surf = fontObj.render(units[idx].name, True, unit_colors[unit.id])
+            unit_text_rect = unit_text_surf.get_rect()
+            unit_text_rect.topleft = pos
 
-        # draw unit 2 name
-        player2InfoSurface = fontObj.render(units[1].name, True, color_white)
-        player2InfoRect = player2InfoSurface.get_rect()
-        player2InfoRect.topleft = (370, 512)
-
-        # draw unit 3 name
-        player3InfoSurface = fontObj.render(units[2].name, True, color_white)
-        player3InfoRect = player3InfoSurface.get_rect()
-        player3InfoRect.topleft = (682, 512)
-
-        # draw unit 4 name
-        player4InfoSurface = fontObj.render(units[3].name, True, color_white)
-        player4InfoRect = player4InfoSurface.get_rect()
-        player4InfoRect.topleft = (994, 512)
+            unit_name_texts.append( [unit_text_surf, unit_text_rect] )
 
         if monster_name_surface is not None:
             monster_info_rect = monster_name_surface.get_rect()
@@ -474,12 +566,15 @@ def start(verbose, log_path, gamma):
         global_surf.blit(trophiesSurfaceObj,trophies_rect)
 
         # draw unit info text
-        global_surf.blit( player1InfoSurface, player1InfoRect)
-        global_surf.blit( player2InfoSurface, player2InfoRect)
-        global_surf.blit( player3InfoSurface, player3InfoRect)
-        global_surf.blit( player4InfoSurface, player4InfoRect)
+        for text, pos in unit_name_texts:
+            global_surf.blit( text, pos )
+
         if monster_name_surface is not None:
             global_surf.blit( monster_name_surface, monster_info_rect)
+
+        # draw unit item text
+        for text, pos in unit_item_text:
+            global_surf.blit(text, pos)
 
         # draw player hitpoints
         unit_hp_bars.draw(global_surf)

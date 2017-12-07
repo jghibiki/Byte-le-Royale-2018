@@ -480,7 +480,7 @@ class Alchemist(Unit):
         if data["bomb_2"] is not None:
             self.bomb_2 = load_item(data["bomb_2"]["item_type"], data["bomb_2"])
         else:
-            self.bomb_1 = None
+            self.bomb_2 = None
         self.bomb_2_quantity = data["bomb_2_quantity"]
 
 
@@ -490,9 +490,9 @@ class Alchemist(Unit):
     def use_bomb_2(self):
         self.combat_action = CombatAction.secondary_2
 
-    def illusion(self, bomb_type):
+    def resupply(self, bomb_slot):
         self.combat_action = CombatAction.special_ability
-        self.combat_action_target_1 = bomb_type.item_type
+        self.combat_action_target_1 = bomb_slot
 
     def wait(self):
         self.combat_action = CombatAction.wait

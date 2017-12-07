@@ -335,7 +335,7 @@ class CombatManager:
                                 "target_2": None
                             })
 
-                elif unit.unit_class == unit_class.sorcerer:
+                elif unit.unit_class == UnitClass.sorcerer:
                     if sa.cooldown_timer <= 0:
                         sa.use()
                         idx_1 = None
@@ -465,13 +465,22 @@ class CombatManager:
                 item_slot = ItemSlot.primary
 
             elif unit.combat_action == CombatAction.special_ability:
-                sa = get_special_ability(unit.unit_class)
+                sa = get_special_ability(unit.unit_class, self.verbose)
 
                 if unit.unit_class is UnitClass.brawler:
                     sa.use(turn_log, unit, self.monster, brawler_damage)
 
                 elif unit.unit_class is UnitClass.pikeman:
                     sa.use(turn_log, unit, self.monster)
+
+                elif unit.unit_class is UnitClass.alchemist:
+                    if unit.combat_action_target_1 is 1:
+                        if unit.bomb_1 is not None and unit.bomb_1_quantity < 2:
+                            unit.bomb_1_quantity = 2
+
+                    if unit.combat_action_target_1 is 2:
+                        if unit.bomb_2 is not None and unit.bomb_2_quantity < 2:
+                            unit.bomb_2_quantity = 2
 
                 elif unit.unit_class is UnitClass.magus:
                     sa.use(turn_log, unit, self.monster)
@@ -480,31 +489,36 @@ class CombatManager:
                     sa.use(turn_log)
             else:
                 if unit.unit_class is UnitClass.rogue: # Hanble Rogue Items
-                    if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None:
+                    if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None and unit.bomb_1_quantity > 0:
                         self.print("{} uses {}".format(unit.name, unit.bomb_1.name))
                         weapon = unit.bomb_1
                         item_slot = ItemSlot.bomb_1
+                        unit.bomb_1_quantity -= 1
 
-                    elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None:
+                    elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None and unit.bomb_2_quantity > 0:
                         self.print("{} uses {}".format(unit.name, unit.bomb_2.name))
                         weapon = unit.bomb_2
                         item_slot = ItemSlot.bomb_2
+                        unit.bomb_2_quantity -= 1
 
-                    elif unit.combat_action == CombatAction.secondary_3 and unit.bomb_3 is not None:
+                    elif unit.combat_action == CombatAction.secondary_3 and unit.bomb_3 is not None and unit.bomb_3_quantity > 0:
                         self.print("{} uses {}".format(unit.name, unit.bomb_3.name))
                         weapon = unit.bomb_3
                         item_slot = ItemSlot.bomb_3
+                        unit.bomb_3_quantity -= 1
 
                 elif unit.unit_class is UnitClass.alchemist: # Handle Alchemist Items
-                    if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None:
+                    if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None and unit.bomb_1_quantity > 0:
                         self.print("{} uses {}".format(unit.name, unit.bomb_1.name))
                         weapon = unit.bomb_1
                         item_slot = ItemSlot.bomb_1
+                        unit.bomb_1_quantity -= 1
 
-                    elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None:
+                    elif unit.combat_action == CombatAction.secondary_2 and unit.bomb_2 is not None and unit.bomb_2_quantity > 0:
                         self.print("{} uses {}".format(unit.name, unit.bomb_2.name))
                         weapon = unit.bomb_2
                         item_slot = ItemSlot.bomb_2
+                        unit.bomb_2_quantity -= 1
 
                 elif unit.unit_class in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer]:
                     if unit.combat_action == CombatAction.secondary_1 and unit.spell_1 is not None:
