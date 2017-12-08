@@ -221,6 +221,8 @@ def start(verbose, log_path, gamma):
 
     monster = None
 
+    archway_group = pygame.sprite.OrderedUpdates()
+
     unit_hp_bars = pygame.sprite.Group()
     unit_sprite_group = pygame.sprite.Group()
 
@@ -318,6 +320,7 @@ def start(verbose, log_path, gamma):
     next_turn_counter = 0
     background = NodeType.town
     attack_counter = 0
+    room_choice = False
 
     while True:
 
@@ -333,6 +336,9 @@ def start(verbose, log_path, gamma):
             if (verbose):
                 print("Game Turn: " + str(log_parser.tick))
             team_name, units, events = log_parser.get_turn()
+
+            room_choice = False
+            archway_group.empty()
 
         # read through the events
         for event in events:
@@ -420,6 +426,83 @@ def start(verbose, log_path, gamma):
                 elif event["type"] == Event.party_killed:
                     party_killed_screen(global_surf, fpsClock, event)
 
+                elif event["type"] == Event.room_choice:
+                    room_choice = True
+
+                    if event["room_1"] is not None and event["room_2"] is not None:
+                        room_1_pos = (200, 120)
+                        room_2_pos = (760, 120)
+                    else:
+                        room_1_pos = (480, 120)
+
+                    rm_1 = None
+                    rm_2 = None
+
+                    if event["room_1"] is not None:
+                        if event["room_1"].node_type is NodeType.monster:
+                            rm_1 = ArchwaySprite(
+                                *room_1_pos,
+                                "Lvl{}\n{}".format(
+                                    event["room_1"].monster.level,
+                                    event["room_1"].monster.name
+                                ),
+                                event["choice"] == "room_1")
+
+                        elif event["room_1"].node_type is NodeType.trap:
+                            rm_1 = ArchwaySprite(
+                                *room_1_pos,
+                                "Lvl{}\n{}".format(
+                                    event["room_1"].trap.level,
+                                    event["room_1"].trap.name
+                                ),
+                                event["choice"] == "room_1")
+
+                        elif event["room_1"].node_type is NodeType.town:
+                            rm_1 = ArchwaySprite(
+                                *room_1_pos,
+                                "Town",
+                                event["choice"] == "room_1")
+
+                    # room 2
+                    if event["room_2"] is not None:
+                        if event["room_2"].node_type is NodeType.monster:
+                            rm_2 = ArchwaySprite(
+                                *room_2_pos,
+                                "Lvl{}\n{}".format(
+                                    event["room_2"].monster.level,
+                                    event["room_2"].monster.name
+                                ),
+                                event["choice"] == "room_2")
+
+                        elif event["room_2"].node_type is NodeType.trap:
+                            rm_2 = ArchwaySprite(
+                                *room_2_pos,
+                                "Lvl{}\n{}".format(
+                                    event["room_2"].trap.level,
+                                    event["room_2"].trap.name
+                                ),
+                                event["choice"] == "room_2")
+
+                        elif event["room_2"].node_type is NodeType.town:
+                            rm_2 = ArchwaySprite(
+                                *room_2_pos,
+                                "Town",
+                                event["choice"] == "room_2")
+
+                    if rm_1 is not None and rm_2 is not None:
+                        if event["choice"] == "room_1":
+                            archway_group.add(rm_2)
+                            archway_group.add(rm_1)
+                        else:
+                            archway_group.add(rm_1)
+                            archway_group.add(rm_2)
+                    elif rm_1 is not None:
+                        archway_group.add(rm_1)
+
+
+                    next_turn_counter += 50
+
+                    event["handled"] = True
 
         attack_counter -= 1
 
@@ -529,6 +612,8 @@ def start(verbose, log_path, gamma):
             monster_info_rect = monster_name_surface.get_rect()
             monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 60)
 
+        archway_group.update()
+
         unit_sprite_group.update()
 
         unit_hp_bars.update(units)
@@ -551,6 +636,7 @@ def start(verbose, log_path, gamma):
         background_group.update()
         background_group.draw(global_surf)
 
+
         # draw team name background
         global_surf.fill(pygame.Color(54, 54, 54, 200), rect=team_background_rect, special_flags=pygame.BLEND_RGBA_SUB)
 
@@ -564,6 +650,7 @@ def start(verbose, log_path, gamma):
 
         # draw trohpy text
         global_surf.blit(trophiesSurfaceObj,trophies_rect)
+
 
         # draw unit info text
         for text, pos in unit_name_texts:
@@ -585,6 +672,8 @@ def start(verbose, log_path, gamma):
         # draw monsters
         monster_group.draw(global_surf)
 
+        archway_group.draw(global_surf)
+
         # draw units
         unit_sprite_group.draw(global_surf)
 
@@ -595,6 +684,7 @@ def start(verbose, log_path, gamma):
         # draw floating numbers
         floating_number_group.draw(global_surf)
         attack_animation_group.draw(global_surf)
+
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -614,7 +704,8 @@ def start(verbose, log_path, gamma):
         if next_turn_counter > 0:
             next_turn_counter -= 1
 
+
         pygame.display.update()
-        #fpsClock.tick(60)
+        fpsClock.tick(60)
 
 

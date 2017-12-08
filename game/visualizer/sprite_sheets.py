@@ -1,6 +1,7 @@
 import random, math
 
 import pygame
+import ptext
 
 from game.visualizer.spritesheet_functions import SpriteSheet
 from game.common.enums import *
@@ -632,6 +633,80 @@ def get_unit_sprite(unit_class, xy):
         return AlchemistSprite(*xy)
     else:
         return None
+
+
+
+class ArchwaySprite(pygame.sprite.Sprite):
+    def __init__(self, x, y, text, show_arrow):
+        super().__init__()
+
+        self.tick_counter = 0
+
+        self.text = text
+
+        self.first = True
+
+        self.h = 64
+        self.w = 64
+
+        self.x = x
+        self.y = y
+
+        self.show_arrow = show_arrow
+        self.scale = 6
+
+        self.cache = pygame.image.load("game/visualizer/assets/archway.png")
+        self.cache  = pygame.transform.scale(self.cache, (math.floor(self.h*self.scale), math.floor(self.w*self.scale)))
+
+        self.arrow = pygame.image.load("game/visualizer/assets/arrow.png")
+        arrow_rect = self.arrow.get_rect()
+        self.arrow = pygame.transform.scale(self.arrow, (arrow_rect.w*5, arrow_rect.h*4))
+
+
+
+    def update(self):
+        if self.first or self.show_arrow:
+            self.first = False
+
+            self.tick_counter += 1
+
+            if self.tick_counter > 10:
+                self.tick_counter = 0
+
+            self.image = self.cache.copy()
+
+            text = ptext.draw(
+                    self.text,
+                    (0,0),
+                    color=pygame.Color("#FFFFFF"),
+                    owidth=1.0,
+                    ocolor=(0, 0, 0),
+                    alpha=1.0,
+                    fontsize=14,
+                    fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
+            # center text in arch
+            text_rect = text.get_rect()
+            image_rect = self.image.get_rect()
+
+            text_pos = [
+                math.floor(image_rect.w/2.0) - math.floor(text_rect.w/2.0),
+                120
+            ]
+
+            # blit text onto image
+
+            self.image.blit(text, text_pos)
+
+            if self.show_arrow and self.tick_counter >= 5:
+                arrow_rect = self.arrow.get_rect()
+                self.image.blit(self.arrow, (
+                    math.floor(image_rect.w/2.0) - math.floor(arrow_rect.w/2.0),
+                    130))
+
+            self.rect = self.image.get_rect()
+            self.rect.x = self.x
+            self.rect.y = self.y
 
 
 

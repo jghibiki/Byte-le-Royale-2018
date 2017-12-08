@@ -1,3 +1,5 @@
+import random
+
 from game.client.user_client import UserClient
 from game.common.enums import *
 
@@ -58,7 +60,7 @@ class CustomClient(UserClient):
             return Direction.forward
 
         elif len(options) == 2:
-            return Direction.left
+            return random.choice([Direction.right, Direction.left])
 
         else:
             return MessageType.null
