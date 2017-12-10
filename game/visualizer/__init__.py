@@ -706,6 +706,6 @@ def start(verbose, log_path, gamma):
 
 
         pygame.display.update()
-        fpsClock.tick(60)
+        fpsClock.tick(30)
 
 

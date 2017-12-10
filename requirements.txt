@@ -1,3 +1,5 @@
 autobahn
 pygame
 click
+pygame
+numpy
