@@ -430,10 +430,10 @@ def start(verbose, log_path, gamma):
                     room_choice = True
 
                     if event["room_1"] is not None and event["room_2"] is not None:
-                        room_1_pos = (200, 120)
-                        room_2_pos = (760, 120)
+                        room_1_pos = (200, 50)
+                        room_2_pos = (760, 50)
                     else:
-                        room_1_pos = (480, 120)
+                        room_1_pos = (480, 50)
 
                     rm_1 = None
                     rm_2 = None
@@ -500,7 +500,7 @@ def start(verbose, log_path, gamma):
                         archway_group.add(rm_1)
 
 
-                    next_turn_counter += 50
+                    next_turn_counter += 30
 
                     event["handled"] = True
 

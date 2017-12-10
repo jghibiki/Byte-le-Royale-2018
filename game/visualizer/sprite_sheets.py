@@ -653,14 +653,15 @@ class ArchwaySprite(pygame.sprite.Sprite):
         self.y = y
 
         self.show_arrow = show_arrow
-        self.scale = 6
+        self.scale = 2
 
         self.cache = pygame.image.load("game/visualizer/assets/archway.png")
-        self.cache  = pygame.transform.scale(self.cache, (math.floor(self.h*self.scale), math.floor(self.w*self.scale)))
+        rect = self.cache.get_rect()
+        self.cache  = pygame.transform.scale(self.cache, (math.floor(rect.h*self.scale), math.floor(rect.w*self.scale)))
 
         self.arrow = pygame.image.load("game/visualizer/assets/arrow.png")
         arrow_rect = self.arrow.get_rect()
-        self.arrow = pygame.transform.scale(self.arrow, (arrow_rect.w*5, arrow_rect.h*4))
+        self.arrow = pygame.transform.scale(self.arrow, (arrow_rect.w*3, arrow_rect.h*2))
 
 
 
@@ -683,6 +684,7 @@ class ArchwaySprite(pygame.sprite.Sprite):
                     ocolor=(0, 0, 0),
                     alpha=1.0,
                     fontsize=14,
+                    width=100,
                     fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             # center text in arch
@@ -702,7 +704,7 @@ class ArchwaySprite(pygame.sprite.Sprite):
                 arrow_rect = self.arrow.get_rect()
                 self.image.blit(self.arrow, (
                     math.floor(image_rect.w/2.0) - math.floor(arrow_rect.w/2.0),
-                    130))
+                    150))
 
             self.rect = self.image.get_rect()
             self.rect.x = self.x
