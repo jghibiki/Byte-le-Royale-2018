@@ -322,6 +322,7 @@ def start(verbose, log_path, gamma):
     background = NodeType.town
     attack_counter = 0
     room_choice = False
+    room_resolved = False
 
     while True:
 
@@ -355,7 +356,7 @@ def start(verbose, log_path, gamma):
 
                     next_turn_counter += 5
                     if location.node_type == NodeType.town:
-                        next_turn_counter += 5
+                        next_turn_counter += 55
 
                     event["handled"] = True
 
@@ -431,10 +432,10 @@ def start(verbose, log_path, gamma):
                     room_choice = True
 
                     if event["room_1"] is not None and event["room_2"] is not None:
-                        room_1_pos = (200, 48)
-                        room_2_pos = (760, 48)
+                        room_1_pos = (256, 48)
+                        room_2_pos = (768, 48)
                     else:
-                        room_1_pos = (480, 48)
+                        room_1_pos = (512, 48)
 
                     rm_1 = None
                     rm_2 = None
@@ -505,6 +506,10 @@ def start(verbose, log_path, gamma):
                         background_group.empty()
                         background_group.add(HillSprite())
 
+                    monster_hp_bar.empty()
+                    monster_group.empty()
+                    monster_name_surface = pygame.Surface((0,0))
+
                     next_turn_counter += 30
 
                     event["handled"] = True
@@ -512,7 +517,7 @@ def start(verbose, log_path, gamma):
         attack_counter -= 1
 
 
-        if location.node_type == NodeType.monster:
+        if location.node_type == NodeType.monster and not room_choice:
             monster = location.monster
 
             monster_name_surface = fontObj.render("Lvl{} {}".format(monster.level, monster.name), True, color_white)
