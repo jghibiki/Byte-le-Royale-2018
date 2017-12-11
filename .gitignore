@@ -106,3 +106,5 @@ ENV/
 *.txt
 
 *.swp
+
+.idea/
