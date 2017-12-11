@@ -4,7 +4,6 @@ from uuid import uuid4
 
 from game.common.game_serializable import Serializable
 from game.common.item_types import *
-from game.safe.unit import Unit as ClientUnit
 
 
 class Unit(Serializable):

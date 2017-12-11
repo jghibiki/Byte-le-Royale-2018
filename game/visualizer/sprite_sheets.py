@@ -331,8 +331,10 @@ class BackgroundSprite(pygame.sprite.Sprite):
 class TownShopSprite(BackgroundSprite):
     def __init__(self):
         BackgroundSprite.__init__(self, "game/visualizer/assets/town_shop.png", [
-            [ 0, 0 ],
-            [ 0, 720 ]
+            [ 0,    0 ],
+            [ 1280, 0 ],
+            [ 0,    720 ],
+            [ 1280, 720 ],
         ], 0, 0, 1280, 720, 3)
 
 class BrownDungeonSprite(BackgroundSprite):
@@ -356,6 +358,12 @@ class OrangeDungeonSprite(BackgroundSprite):
 class GreenDungeonSprite(BackgroundSprite):
     def __init__(self):
         BackgroundSprite.__init__(self, "game/visualizer/assets/monster_room_3.png", [
+            [ 0, 0 ],
+        ], 0, 0, 1280, 720, 1)
+
+class HillSprite(BackgroundSprite):
+    def __init__(self):
+        BackgroundSprite.__init__(self, "game/visualizer/assets/hill.png", [
             [ 0, 0 ],
         ], 0, 0, 1280, 720, 1)
 

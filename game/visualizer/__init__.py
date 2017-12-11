@@ -311,6 +311,7 @@ def start(verbose, log_path, gamma):
 
     # load background image sprites
     background_group = pygame.sprite.Group()
+    background_group.add(HillSprite())
 
     town_shop_sprite = TownShopSprite()
     monster_room_sprite = get_monster_room_sprite()
@@ -430,10 +431,10 @@ def start(verbose, log_path, gamma):
                     room_choice = True
 
                     if event["room_1"] is not None and event["room_2"] is not None:
-                        room_1_pos = (200, 50)
-                        room_2_pos = (760, 50)
+                        room_1_pos = (200, 48)
+                        room_2_pos = (760, 48)
                     else:
-                        room_1_pos = (480, 50)
+                        room_1_pos = (480, 48)
 
                     rm_1 = None
                     rm_2 = None
@@ -499,6 +500,10 @@ def start(verbose, log_path, gamma):
                     elif rm_1 is not None:
                         archway_group.add(rm_1)
 
+
+                    if background == NodeType.town:
+                        background_group.empty()
+                        background_group.add(HillSprite())
 
                     next_turn_counter += 30
 
