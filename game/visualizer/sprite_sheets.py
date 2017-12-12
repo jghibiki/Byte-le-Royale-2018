@@ -137,10 +137,10 @@ class BeholderSprite(MonsterSprite):
     def __init__(self, x, y):
         MonsterSprite.__init__(self, "game/visualizer/assets/beholder.png", [
             [0, 0],
-            [128, 0],
-            [0, 128],
-            [128, 128]
-        ], x, y, 128, 128, 3)
+            [136, 0],
+            [0, 136],
+            [136, 136]
+        ], x, y, 136, 136, 3)
 
 class SlimeSprite(MonsterSprite):
     def __init__(self, x, y):

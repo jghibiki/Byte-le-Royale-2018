@@ -3,6 +3,8 @@ import sys, math, random
 import pygame
 from pygame.locals import *
 
+import ptext
+
 from game.common.enums import *
 from game.common.monster_types import get_monster
 
@@ -86,9 +88,20 @@ def unit_text(font, upper_left, unit):
 
     text_parts = []
 
-    primary_weapon_text = font.render("Lvl{0} {1}".format(
+    text = "Lvl{0} {1}".format(
         unit.primary_weapon.level,
-        unit.primary_weapon.name), True, pygame.Color("#FFFFFF"))
+        unit.primary_weapon.name
+    )
+
+    primary_weapon_text = ptext.draw(
+        text,
+        (0,0),
+        color=(255, 255, 255),
+        owidth=2.0,
+        ocolor=(0, 0, 0),
+        fontsize=14,
+        fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
     primary_weapon_rect = primary_weapon_text.get_rect()
 
     primary_weapon_rect.topleft = upper_left
@@ -105,10 +118,22 @@ def unit_text(font, upper_left, unit):
 
     elif unit.unit_class is UnitClass.rogue:
         if unit.bomb_1 is not None:
-            bomb_1_text = font.render("Lvl{0} {1} x {2}".format(
+
+            text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_1.level,
                 unit.bomb_1.name,
-                unit.bomb_1_quantity), True, pygame.Color("#FFFFFF"))
+                unit.bomb_1_quantity
+            )
+
+            bomb_1_text = ptext.draw(
+                text,
+                (0,0),
+                color=(255, 255, 255),
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=14,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
             bomb_1_rect = bomb_1_text.get_rect()
             bomb_1_rect.topleft = (upper_left[0], upper_left[1]+20)
 
@@ -118,10 +143,21 @@ def unit_text(font, upper_left, unit):
             ])
 
         if unit.bomb_2 is not None:
-            bomb_2_text = font.render("Lvl{0} {1} x {2}".format(
+            text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_2.level,
                 unit.bomb_2.name,
-                unit.bomb_2_quantity), True, pygame.Color("#FFFFFF"))
+                unit.bomb_2_quantity
+            )
+
+            bomb_2_text = ptext.draw(
+                text,
+                (0,0),
+                color=(255, 255, 255),
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=14,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
             bomb_2_rect = bomb_2_text.get_rect()
             bomb_2_rect.topleft = (upper_left[0], upper_left[1]+40)
 
@@ -131,10 +167,21 @@ def unit_text(font, upper_left, unit):
             ])
 
         if unit.bomb_3 is not None:
-            bomb_3_text = font.render("Lvl{0} {1} x {2}".format(
+            text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_3.level,
                 unit.bomb_3.name,
-                unit.bomb_3_quantity), True, pygame.Color("#FFFFFF"))
+                unit.bomb_3_quantity
+            )
+
+            bomb_3_text = ptext.draw(
+                text,
+                (0,0),
+                color=(255, 255, 255),
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=14,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
             bomb_3_rect = bomb_3_text.get_rect()
             bomb_3_rect.topleft = (upper_left[0], upper_left[1]+60)
 
@@ -145,10 +192,21 @@ def unit_text(font, upper_left, unit):
 
     elif unit.unit_class is UnitClass.alchemist:
         if unit.bomb_1 is not None:
-            bomb_1_text = font.render("Lvl{0} {1} x {2}".format(
+            text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_1.level,
                 unit.bomb_1.name,
-                unit.bomb_1_quantity), True, pygame.Color("#FFFFFF"))
+                unit.bomb_1_quantity
+            )
+
+            bomb_1_text = ptext.draw(
+                text,
+                (0,0),
+                color=(255, 255, 255),
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=14,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
             bomb_1_rect = bomb_1_text.get_rect()
             bomb_1_rect.topleft = (upper_left[0], upper_left[1]+20)
 
@@ -158,10 +216,21 @@ def unit_text(font, upper_left, unit):
             ])
 
         if unit.bomb_2 is not None:
-            bomb_2_text = font.render("Lvl{0} {1} x {2}".format(
+            text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_2.level,
                 unit.bomb_2.name,
-                unit.bomb_2_quantity), True, pygame.Color("#FFFFFF"))
+                unit.bomb_2_quantity
+            )
+
+            bomb_2_text = ptext.draw(
+                text,
+                (0,0),
+                color=(255, 255, 255),
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=14,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
             bomb_2_rect = bomb_2_text.get_rect()
             bomb_2_rect.topleft = (upper_left[0], upper_left[1]+40)
 
@@ -612,7 +681,15 @@ def start(verbose, log_path, gamma):
         ]
         unit_name_texts = []
         for idx, (unit, pos) in enumerate(zip(units, unit_name_text_pos)):
-            unit_text_surf = fontObj.render(units[idx].name, True, unit_colors[unit.id])
+            unit_text_surf = ptext.draw(
+                units[idx].name,
+                (0,0),
+                color=unit_colors[unit.id],
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=20,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
             unit_text_rect = unit_text_surf.get_rect()
             unit_text_rect.topleft = pos
 

@@ -18,9 +18,9 @@ class ClientStorefront:
     def purchase(self, unit, item_slot, item, item_level):
         self.purchases.append( {
             "unit": unit.id,
-            "slot": 2,
+            "slot": item_slot,
             "item": ItemType.fire_bomb,
-            "item_level": 1
+            "item_level": item_level
         } )
 
     def get_return_data(self):

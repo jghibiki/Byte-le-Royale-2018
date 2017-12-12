@@ -410,10 +410,13 @@ class CustomServer(ServerControl):
 
                 item_type = purchase["item"]
                 item_level = purchase["item_level"]
+
+
                 if "slot" in purchase:
                     item_slot = purchase["slot"]
                 else:
                     item_slot = None
+
 
                 if ( item_type in valid_purchasers
                      and unit.unit_class in valid_purchasers[item_type]
@@ -437,6 +440,7 @@ class CustomServer(ServerControl):
                         })
 
                     if unit.unit_class == UnitClass.rogue:
+
                         if item_slot is None:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
@@ -469,6 +473,8 @@ class CustomServer(ServerControl):
                             })
 
                         elif item_slot == 2:
+
+
                             self.gold -= item_cost
 
                             if(unit.bomb_2 is not None and
