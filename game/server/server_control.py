@@ -125,6 +125,10 @@ class ServerControl:
         with open("game_log/{0:05d}.json".format(self.game_tick_no), "w") as f:
             json.dump(data, f)
 
+    def notify_game_over(self):
+        self.send({
+            "type": "game_over"
+        })
 
 
 

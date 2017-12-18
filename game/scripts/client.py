@@ -1,14 +1,22 @@
+import importlib
+import click
+
 from game.client import start
 from game.client.client_logic import ClientLogic
-from custom_client import CustomClient
+#from custom_client import CustomClient
 
-import sys
+
+@click.command()
+@click.option("--client-verbose", is_flag=True)
+@click.option("--client", default="custom_client")
+def start_client(client_verbose, client):
+
+    if client_verbose:
+        print("Client Verbosity: ON")
+
+    mod = importlib.import_module(client)
+
+    start(ClientLogic(client_verbose, mod.CustomClient()), client_verbose)
 
 if __name__ == "__main__":
-
-    verbose = False
-    if len(sys.argv) > 1 and sys.argv[1] == "--client-verbose":
-        print("Client Verbosity: ON")
-        verbose = True
-
-    start(ClientLogic(verbose, CustomClient()), verbose)
+    start_client()

@@ -54,7 +54,7 @@ class BroadcastClientProtocol(WebSocketClientProtocol):
             self.trigger_tick_cb(data)
 
         elif obj["type"] == "game_over":
-            exit()
+            self.factory.notify_game_over_cb()
 
 
     def connectionLost(self, reason):
@@ -189,6 +189,7 @@ def start_client(host, port, client_logic, verbose=False):
     factory.trigger_tick_cb = client_logic.tick
     factory.trigger_initialize_cb = client_logic.initialize
     factory.notify_game_started_cb = client_logic.notify_game_started
+    factory.notify_game_over_cb = client_logic.notify_game_over
 
     loop = asyncio.get_event_loop()
 

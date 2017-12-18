@@ -37,6 +37,9 @@ class ClientLogic:
         self.verbose = verbose
         self.player_client = player_client
 
+        # check to see if the client defiens the quit_in_game_over variable
+        self.quit_on_game_over = getattr(self.player_client, "quit_on_game_over", True)
+
         # Public properties availiable to users
 
         self.started_game = False
@@ -146,6 +149,13 @@ class ClientLogic:
             turn_result["units"] = serialized_units
 
         return turn_result
+
+    def notify_game_over(self):
+        if callable(getattr(self.player_client, "game_over", None)):
+            self.player_client.game_over()
+
+        if self.quit_on_game_over:
+            exit()
 
 
 

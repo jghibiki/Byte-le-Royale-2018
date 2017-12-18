@@ -10,10 +10,12 @@ from game.common.item_types import get_item
 
 class CustomServer(ServerControl):
 
-    def __init__(self, verbose=False):
+    def __init__(self, verbose=False, server_loop=False):
         super().__init__(verbose)
 
         self.verbose = verbose
+        self.server_loop = server_loop
+
         if self.verbose:
             print("Loading Game Data...")
         self.game_map = load()
@@ -35,6 +37,26 @@ class CustomServer(ServerControl):
 
         self.turn_log = None
 
+    def reinit(self):
+        if self.verbose:
+            print("*******Restarting*****")
+
+        self.game_map = load()
+        if self.verbose:
+            print("Game Data Loaded")
+
+        self.current_location = self.game_map.pop(0)[0]
+
+        self.trophies = 0
+        self.towns = 0
+        self.gold = 300
+        self.total_gold = 300
+
+        self.started = False
+
+        self.combat_manager = None
+        self.units = []
+        self.team_name = "[No team name set]"
 
     def pre_turn(self):
         self.print("#"*70)
@@ -180,7 +202,11 @@ class CustomServer(ServerControl):
                                     "levels_cleared": self.towns-1
                                 })
 
-                                self._quit = True # die safely
+                                if self.server_loop:
+                                    self.notify_game_over()
+                                    self.reinit()
+                                else:
+                                    self._quit = True # die safely
                                 return
 
 

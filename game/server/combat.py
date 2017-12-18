@@ -576,6 +576,8 @@ class CombatManager:
                     "item_used": item_slot
                 })
 
+            unit.combat_action = CombatAction.none
+
 
         self.round += 1
 
@@ -588,6 +590,7 @@ class CombatManager:
             self.done = True
             self.done_reason = "Party Defeated!\n Game Over!"
             self.success = False
+
 
 
     def print_summary(self):
