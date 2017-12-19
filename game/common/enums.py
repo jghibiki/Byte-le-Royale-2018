@@ -137,7 +137,11 @@ class DamageType:
 
 
 class TrapType:
-    spike_trap = 1
+    spike_trap = 0
+    falling_ceiling = 1
+    puzzle_box = 2
+    pendulum_bridge = 3
+    riddles_of_the_sphinx = 4
 
 class TrapPassType:
     individual_pass = 0

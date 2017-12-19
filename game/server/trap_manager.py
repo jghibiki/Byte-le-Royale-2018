@@ -26,32 +26,34 @@ class TrapManager:
                 trap_energy = unit.current_focus if self.trap.stat is TrapStat.focus else unit.current_will
 
                 if unit.trap_action is TrapAction.large_effort and trap_energy >= 5:
-                    if self.trap.pass_type is TrapPassType.individual_pass:
-                        self.trap.current_effort[idx] += 4
+
+                    if self.trap.pass_type is TrapPassType.group_pass:
+                        self.trap.current_effort = min(self.trap.required_effort, self.trap.current_effort+4)
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-5)
                         else:
                             unit.current_will = max(0, unit.current_will-5)
 
-                    elif (self.trap.pass_type is TrapPassType.group_pass or
+                    elif (self.trap.pass_type is TrapPassType.individual_pass or
                           self.trap.pass_type is TrapPassType.group_pass_on_first_success):
-                        self.trap_damage_counter += 4
+                        self.trap.current_effort[idx] = min(self.trap.required_effort, self.trap.current_effort[idx]+4)
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-5)
                         else:
                             unit.current_will = max(0, unit.current_will-5)
 
                 elif unit.trap_action is TrapAction.little_effort and trap_energy >= 2:
-                    if self.trap.pass_type is TrapPassType.individual_pass:
-                        self.trap.current_effort[idx] += 2
+
+                    if self.trap.pass_type is TrapPassType.group_pass:
+                        self.trap.current_effort = min(self.trap.required_effort, self.trap.current_effort+2)
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-2)
                         else:
                             unit.current_will = max(0, unit.current_will-2)
 
-                    elif (self.trap.pass_type is TrapPassType.group_pass or
+                    elif (self.trap.pass_type is TrapPassType.individual_pass or
                           self.trap.pass_type is TrapPassType.group_pass_on_first_success):
-                        self.trap_damage_counter += 2
+                        self.trap.current_effort[idx] = min(self.trap.required_effort, self.trap.current_effort[idx]+2)
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-2)
                         else:
@@ -114,7 +116,7 @@ class TrapManager:
             for unit in trap_targets:
                 if unit.trap_action == TrapAction.evade:
                     dmg = math.floor(self.trap.damage * 0.5)
-                    unit.current_health -= dmg
+                    unit.current_health = max(0, unit.current_health-dmg)
 
                     game_log["events"].append({
                         "type": Event.trap_damage,
@@ -122,14 +124,14 @@ class TrapManager:
                         "damage": dmg,
                     })
                 else:
-                    unit.current_health -= self.trap.damage
+                    unit.current_health = max(0, unit.current_health-self.trap.damage)
 
         # reset unit actions
         for unit in self.units:
             unit.trap_action = TrapAction.wait
 
         # regain one point of trap stats
-        for unit in self.units:
+        for unit in living_units:
             unit.current_focus = min(unit.focus, unit.current_focus+1)
             unit.current_will = min(unit.will, unit.current_will+1)
 
@@ -144,14 +146,13 @@ class TrapManager:
             self.success = False
             return
 
-        if self.trap.pass_type is TrapPassType.group_pass_on_first_success:
-            for unit_effort in self.trap.current_effort:
-                if unit_effort >= self.trap.required_effort:
-                    self.done = True
-                    self.success = True
+        if self.trap.pass_type is TrapPassType.group_pass:
+            if self.trap.current_effort >= self.trap.required_effort:
+                self.done = True
+                self.success = True
 
-        elif (self.trap.pass_type is TrapPassType.group_pass or
-              self.trap.pass_type is TrapPassType.individual_pass):
+        elif (self.trap.pass_type is TrapPassType.individual_pass or
+              self.trap.pass_type is TrapPassType.group_pass_on_first_success):
             completed = [ unit_effort >= self.trap.required_effort for unit_effort in self.trap.current_effort ]
             if all(completed):
                 self.done = True

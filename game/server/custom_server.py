@@ -192,8 +192,6 @@ class CustomServer(ServerControl):
                             elif self.combat_manager.success is False:
                                 self.game_over()
 
-
-
                     elif isinstance(self.current_location, TrapRoom):
                         self.print("Navgating trap {}".format(self.current_location.trap.get_description()))
 
@@ -295,7 +293,6 @@ class CustomServer(ServerControl):
 
                 if isinstance(self.current_location, Town):
                     payload[i] = self.generate_town_option_payload()
-
 
                 elif isinstance(self.current_location, MonsterRoom):
                     self.print("Combat against {}".format(self.current_location.monster.get_description()))

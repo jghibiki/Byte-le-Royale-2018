@@ -111,7 +111,7 @@ class CustomClient(UserClient):
             print(u.summary())
 
         for u in units:
-            u.trap_action = TrapAction.little_effort
+            u.trap_action = random.choice([TrapAction.little_effort, TrapAction.large_effort, TrapAction.evade])
 
 
     ##################
