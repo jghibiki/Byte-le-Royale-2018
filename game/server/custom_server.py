@@ -3,7 +3,8 @@ from game.utils.generate_game import load
 from game.common.node_types import *
 from game.common.enums import *
 from game.common.unit_classes import get_unit, load_unit
-from game.server.combat import CombatManager
+from game.server.combat_manager import CombatManager
+from game.server.trap_manager import TrapManager
 from game.common.town_store_options import *
 from game.common.item_types import get_item
 
@@ -32,6 +33,7 @@ class CustomServer(ServerControl):
         self.started = False
 
         self.combat_manager = None
+        self.trap_manager = None
         self.units = []
         self.team_name = "[No team name set]"
 
@@ -55,6 +57,7 @@ class CustomServer(ServerControl):
         self.started = False
 
         self.combat_manager = None
+        self.trap_manager = None
         self.units = []
         self.team_name = "[No team name set]"
 
@@ -98,8 +101,10 @@ class CustomServer(ServerControl):
 
             elif isinstance(self.current_location, TrapRoom):
                 self.print("Navgating trap {}".format(self.current_location.trap.get_description()))
-                self.current_location.resolved = True
 
+                if self.trap_manager is None:
+                    self.trap_manager = TrapManager(self.current_location.trap, self.units, self.verbose)
+                    self.turn_log["events"].append({ "type": Event.begin_trap_evade })
 
     def post_turn(self):
         self.print("SERVER POST TURN")
@@ -185,34 +190,29 @@ class CustomServer(ServerControl):
                                 self.combat_manager = None
                                 return
                             elif self.combat_manager.success is False:
-                                print()
-                                print("*"*50)
-                                print("Party Killed! GAME OVER!")
-                                print("Trophies Earned: {}".format(self.trophies))
-                                print("Current Gold: {}".format(self.gold))
-                                print("Total Gold: {}".format(self.total_gold))
-                                print("Levels Cleared: {}".format(self.towns-1))
-                                print("*"*50)
-
-                                self.turn_log["events"].append({
-                                    "type": Event.party_killed,
-                                    "trophies": self.trophies,
-                                    "gold": self.gold,
-                                    "total_gold": self.total_gold,
-                                    "levels_cleared": self.towns-1
-                                })
-
-                                if self.server_loop:
-                                    self.notify_game_over()
-                                    self.reinit()
-                                else:
-                                    self._quit = True # die safely
-                                return
+                                self.game_over()
 
 
 
                     elif isinstance(self.current_location, TrapRoom):
                         self.print("Navgating trap {}".format(self.current_location.trap.get_description()))
+
+                        self.trap_manager.units = data["units"]
+                        self.trap_manager.play_round(self.turn_log)
+
+                        if self.trap_manager.done:
+
+                            if self.trap_manager.success is True:
+
+                                self.turn_log["events"].append({
+                                    "type": Event.trap_resolved,
+                                })
+
+                                self.trap_manager = None
+                                self.current_location.resolved = True
+
+                            else:
+                                self.game_over()
 
                 # HANDLE ROOM RESOLVED
                 if self.current_location.resolved:
@@ -256,10 +256,7 @@ class CustomServer(ServerControl):
                                 self.current_location = self.current_location.nodes[1]
                                 self.check_end()
 
-
-
             self.client_turn_data = None
-
 
 
 
@@ -302,9 +299,11 @@ class CustomServer(ServerControl):
 
                 elif isinstance(self.current_location, MonsterRoom):
                     self.print("Combat against {}".format(self.current_location.monster.get_description()))
-                    #payload[i] = self.generate_room_option_payload(self.current_location.nodes)
-
                     payload[i] = self.combat_manager.serialize_combat_state()
+
+                elif isinstance(self.current_location, TrapRoom):
+                    self.print("Combat against {}".format(self.current_location.trap.get_description()))
+                    payload[i] = self.trap_manager.serialize_state()
 
             # send turn data to clients
             payload[i]["units"] = self.serialize_units()
@@ -422,6 +421,32 @@ class CustomServer(ServerControl):
             if unit.id == id:
                 return unit
         return None
+
+    def game_over(self):
+
+        print()
+        print("*"*50)
+        print("Party Killed! GAME OVER!")
+        print("Trophies Earned: {}".format(self.trophies))
+        print("Current Gold: {}".format(self.gold))
+        print("Total Gold: {}".format(self.total_gold))
+        print("Levels Cleared: {}".format(self.towns-1))
+        print("*"*50)
+
+        self.turn_log["events"].append({
+            "type": Event.party_killed,
+            "trophies": self.trophies,
+            "gold": self.gold,
+            "total_gold": self.total_gold,
+            "levels_cleared": self.towns-1
+        })
+
+        if self.server_loop:
+            self.notify_game_over()
+            self.reinit()
+        else:
+            self._quit = True # die safely
+        return
 
     def handle_town_purchases(self):
 

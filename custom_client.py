@@ -101,6 +101,17 @@ class CustomClient(UserClient):
             else:
                 u.attack()
 
+    def trap_round(self, trap, units):
+        print()
+        print("*"*50)
+        print("Trap!")
+        print("*"*50)
+        print(trap.summary())
+        for u in units:
+            print(u.summary())
+
+        for u in units:
+            u.trap_action = TrapAction.little_effort
 
 
     ##################

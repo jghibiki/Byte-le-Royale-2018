@@ -13,6 +13,7 @@ Welcome to Mini-MechMania's documentation!
     items
     unit_classes
     monsters
+    traps
     damage_types
 
 

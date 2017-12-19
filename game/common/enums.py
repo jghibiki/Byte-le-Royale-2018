@@ -18,6 +18,10 @@ class Event:
     monster_attack = 9
     unit_attack = 10
     room_choice = 11
+    trap_damage = 12
+    trap_effort = 13
+    begin_trap_evade = 14
+    trap_resolved = 15
 
 
 class ItemSlot:
@@ -44,6 +48,17 @@ class CombatAction:
     wait = 8
     none = 9
 
+class TrapAction:
+    large_effort = 0
+    little_effort = 1
+    evade = 2
+    wait = 3
+
+class TrapPassType:
+    individual_pass = 0
+    group_effort_pass = 1
+    group_pass = 2
+
 class UnitClass:
     knight = 0
     brawler = 1
@@ -64,6 +79,8 @@ class MessageType:
     unit_choice = 6
     null = 7
     town_choice = 8
+    trap_round = 10
+
 
 
 class ItemType:
@@ -119,14 +136,27 @@ class DamageType:
     force = 9
 
 
+class TrapType:
+    spike_trap = 1
 
-class TRAP_TYPE:
-    pit_trap = 1
-    spike_trap = 2
-    boulder_trap = 3
-    dart_trap = 4
-    narrow_bridge = 5
+class TrapPassType:
+    individual_pass = 0
+    group_pass = 1
+    group_pass_on_first_success = 2
 
+
+class TrapStat:
+    focus = 0
+    will = 1
+    willpower = 1
+
+class TrapDamageType:
+    random_one = 0
+    random_two = 1
+    random_three = 2
+    all = 3
+    lowest_health = 4
+    highest_health = 5
 
 class Direction:
     forward = 1

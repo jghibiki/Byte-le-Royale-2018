@@ -2,6 +2,7 @@ from game.common.enums import *
 from game.common.node_types import get_node
 from game.common.unit_classes import get_unit
 from game.common.monster_types import get_monster
+from game.common.trap_types import get_trap
 
 import sys
 
@@ -101,6 +102,12 @@ class ClientLogic:
             self.player_client.combat_round(monster, units)
             return { "message_type": MessageType.combat_round, "units": units }
 
+        elif turn_data["message_type"] == MessageType.trap_round:
+            trap = turn_data["trap"]
+            units = turn_data["units"]
+            self.player_client.trap_round(trap, units)
+            return {"message_type": MessageType.trap_round, "units": units}
+
     def send(self, data):
         self._socket_client.send(data)
 
@@ -129,12 +136,17 @@ class ClientLogic:
                new_room.from_dict(room)
                turn_data["options"][direction] = new_room
 
-        if turn_data["message_type"] == MessageType.combat_round:
+        elif turn_data["message_type"] == MessageType.combat_round:
             # deserialize monster
             monster = get_monster(turn_data["monster"]["monster_type"])
             monster.from_dict(turn_data["monster"])
             turn_data["monster"] = monster
 
+        elif turn_data["message_type"] == MessageType.trap_round:
+            # deserialize trap
+            trap = get_trap(turn_data["trap"]["trap_type"])
+            trap.from_dict(turn_data["trap"])
+            turn_data["trap"] = trap
 
         return turn_data
 
@@ -147,6 +159,15 @@ class ClientLogic:
                 serialized_units.append( u.to_dict() )
 
             turn_result["units"] = serialized_units
+
+        elif turn_result["message_type"] == MessageType.trap_round:
+            serialized_units = []
+
+            for u in turn_result["units"]:
+                serialized_units.append( u.to_dict() )
+
+            turn_result["units"] = serialized_units
+
 
         return turn_result
 
