@@ -96,6 +96,10 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unit_classes.html">Unit Classes</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Items</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#purchasign-items">Purchasign Items</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#client-storefront">Client Storefront:</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#combat-items-spells">Combat Items/Spells</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#combat-item-spell-damage-scaling">Combat Item/Spell Damage Scaling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#combat-item-spell-cost">Combat Item/Spell Cost</a></li>
@@ -169,6 +173,28 @@
             
   <div class="section" id="items">
 <span id="items"></span><h1>Items<a class="headerlink" href="#items" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="purchasign-items">
+<span id="purchasign-items"></span><h2>Purchasign Items<a class="headerlink" href="#purchasign-items" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="client-storefront">
+<span id="client-storefront"></span><h3>Client Storefront:<a class="headerlink" href="#client-storefront" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">get_town_number()</span></code>:<ul>
+<li>Returns: The current town number.</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">purchase(unit,</span> <span class="pre">item_slot,</span> <span class="pre">item,</span> <span class="pre">item_level)</span></code>:<ul>
+<li>Parameters:<ul>
+<li><code class="docutils literal"><span class="pre">unit</span></code>: A unit instance. This is the unit who is buying the item.</li>
+<li><code class="docutils literal"><span class="pre">item_slot</span></code>: The item slot on the provided unit that the item will be placed in.</li>
+<li><code class="docutils literal"><span class="pre">item</span></code>: The ItemType enum value for the item you wish to purchase.</li>
+<li><code class="docutils literal"><span class="pre">item_level</span></code>: The level for the item you wish to purchase. Pricing scales based on level of the item.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" id="combat-items-spells">
 <span id="combat-items-spells"></span><h2>Combat Items/Spells<a class="headerlink" href="#combat-items-spells" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">

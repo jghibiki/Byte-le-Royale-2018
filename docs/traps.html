@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Traps &mdash; Mini-MechMania 9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/accordion.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Mini-MechMania 9 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Mini-MechMania
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Version 0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit_classes.html">Unit Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="items.html">Items</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monsters.html">Monsters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="damage_types.html">Damage Types</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mini-MechMania</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Traps</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/traps.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="traps">
+<span id="traps"></span><h1>Traps<a class="headerlink" href="#traps" title="Permalink to this headline">¶</a></h1>
+<p>-- trap description - describe how the trap portion of the game works --</p>
+<div class="section" id="effort-types">
+<span id="effort-types"></span><h2>Effort Types:<a class="headerlink" href="#effort-types" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Large Effort:</strong><ul>
+<li>Description: The unit invests a large amount of effort in a small amount of time, at the cost of precision.</li>
+<li>Energy cost: 5</li>
+<li>Resulting Effort: 4</li>
+<li>Additional Effects: None</li>
+</ul>
+</li>
+<li><strong>Little Effort:</strong><ul>
+<li>Description: The unit invests only a little effort, but taking time to avoid errors or mistakes.</li>
+<li>Energy cost: 2</li>
+<li>Resulting Effort: 2</li>
+<li>Additional Effects: None</li>
+</ul>
+</li>
+<li><strong>Evade:</strong><ul>
+<li>Description: The unit attempts to avoid receiving damage from the trap.</li>
+<li>Energy cost: 3</li>
+<li>Resulting Effort: 0</li>
+<li>Additional Effects: The unit takes 50% less damage from any trap effects for this round.</li>
+</ul>
+</li>
+<li><strong>Wait:</strong><ul>
+<li>Description: The unit waits.</li>
+<li>Energy cost: 0</li>
+<li>Resulting Effort: 0</li>
+<li>Additional Effects: None</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="trap-pass-types">
+<span id="trap-pass-types"></span><h2>Trap Pass Types<a class="headerlink" href="#trap-pass-types" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Individual Pass:</strong> Each unit must disarm/navigate/avoid the trap on their own to succeed. The party only moves on when all units have succeeded or died.</li>
+<li><strong>Group Effort Pass:</strong> The effort of the entire party contributes to the disarming of one trap. The party only moves on once the trap effort gauge is filled.</li>
+<li><strong>Group Pass on One Success:</strong> Each unit works to disarm/navigate/avoid their own trap. The party is able to move on once one unit succeeds in disarming a trap.</li>
+</ul>
+</div>
+<div class="section" id="trap-types">
+<span id="trap-types"></span><h2>Trap Types<a class="headerlink" href="#trap-types" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="spike-pit">
+<span id="spike-pit"></span><h3>Spike Pit<a class="headerlink" href="#spike-pit" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Description:</strong> A pit (or strip) of spikes.</li>
+<li><strong>Effort Stat:</strong> Willpower</li>
+<li><strong>Effort Required:</strong> 30</li>
+<li><strong>Pass Type:</strong> Individual Pass</li>
+<li><strong>Damage Type</strong>: Random Unit</li>
+<li><strong>Frequency</strong>: Every 1 turns.</li>
+<li><strong>Damage Amount</strong>: 100</li>
+</ul>
+</div>
+<div class="section" id="falling-ceiling">
+<span id="falling-ceiling"></span><h3>Falling Ceiling<a class="headerlink" href="#falling-ceiling" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Description:</strong> The ceiling begins lowering until it squishes adventurers.</li>
+<li><strong>Effort Stat:</strong> Willpower</li>
+<li><strong>Effort Required:</strong> 30</li>
+<li><strong>Pass Type:</strong> Group Pass</li>
+<li><strong>Damage Type</strong>: All Units</li>
+<li><strong>Frequency/Timer</strong>: 3 turns</li>
+<li><strong>Damage Amount</strong>: 999999</li>
+</ul>
+</div>
+<div class="section" id="puzzle-box">
+<span id="puzzle-box"></span><h3>Puzzle Box<a class="headerlink" href="#puzzle-box" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Description:</strong> An arcane, segmented box, glowing with odd runes.</li>
+<li><strong>Effort Stat:</strong> Focus</li>
+<li><strong>Effort Required:</strong> 30</li>
+<li><strong>Pass Type:</strong> Group Pass</li>
+<li><strong>Damage Type</strong>: Unit with lowest health.</li>
+<li><strong>Frequency/Timer</strong>: 2 turns</li>
+<li><strong>Damage Amount</strong>: 100</li>
+</ul>
+</div>
+<div class="section" id="pendulum-bridge">
+<span id="pendulum-bridge"></span><h3>Pendulum Bridge<a class="headerlink" href="#pendulum-bridge" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Description:</strong> A bridge, with many swinging axes between you and the exit. A leaver to disable the axes can be seen on the other side.</li>
+<li><strong>Effort Stat:</strong> Willpower</li>
+<li><strong>Pass Type:</strong> Group Pass on One Success</li>
+<li><strong>Damage Type</strong>: Random unit.</li>
+<li><strong>Frequency/Timer</strong>: every turn</li>
+<li><strong>Damage Amount</strong>: 250</li>
+</ul>
+</div>
+<div class="section" id="riddles-of-the-sphinx">
+<span id="riddles-of-the-sphinx"></span><h3>Riddles of the Sphinx<a class="headerlink" href="#riddles-of-the-sphinx" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Description:</strong> A sphinx, waiting to tickle your mortal brain for eternity. Solve its riddles to escape.</li>
+<li><strong>Effort Stat:</strong> Focus</li>
+<li><strong>Pass Type:</strong> Group Pass on One Success</li>
+<li><strong>Damage Type</strong>: Random unit.</li>
+<li><strong>Frequency/Timer</strong>: every turn</li>
+<li><strong>Damage Amount</strong>: 250</li>
+</ul>
+</div>
+</div>
+<div class="section" id="trap-api">
+<span id="trap-api"></span><h2>Trap API<a class="headerlink" href="#trap-api" title="Permalink to this headline">¶</a></h2>
+<p>-- description of how to check a trap type given a trap object. --</p>
+<p>-- description of the subset of the unit api that is useful for traps --</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jordan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/accordion.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
