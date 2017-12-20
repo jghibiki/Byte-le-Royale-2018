@@ -183,12 +183,12 @@
 <li>Returns: The current town number.</li>
 </ul>
 </li>
-<li><code class="docutils literal"><span class="pre">purchase(unit,</span> <span class="pre">item,</span> <span class="pre">item_level,</span> <span class="pre">item_slot)</span></code>:<ul>
+<li><code class="docutils literal"><span class="pre">purchase(unit,</span> <span class="pre">item,</span> <span class="pre">item_level,</span> <span class="pre">item_slot=None)</span></code>:<ul>
 <li>Parameters:<ul>
 <li><code class="docutils literal"><span class="pre">unit</span></code>: A unit instance. This is the unit who is buying the item.</li>
 <li><code class="docutils literal"><span class="pre">item</span></code>: The ItemType enum value for the item you wish to purchase.</li>
 <li><code class="docutils literal"><span class="pre">item_level</span></code>: The level for the item you wish to purchase. Pricing scales based on level of the item.</li>
-<li><code class="docutils literal"><span class="pre">item_slot</span></code>: The item slot on the provided unit that the item will be placed in.</li>
+<li><code class="docutils literal"><span class="pre">item_slot</span></code>: The item slot on the provided unit that the item will be placed in. Defaults to None. If purchasing a primary weapon leave None.</li>
 </ul>
 </li>
 </ul>
@@ -553,7 +553,8 @@
 <col width="8%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head" colspan="2">Item Type       | 1</th>
+<tr class="row-odd"><th class="head">Item Type</th>
+<th class="head">1</th>
 <th class="head">2</th>
 <th class="head">3</th>
 <th class="head">4</th>
@@ -566,7 +567,8 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td colspan="2">Sword           | 0</td>
+<tr class="row-even"><td>Sword</td>
+<td>0</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
