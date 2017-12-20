@@ -469,18 +469,17 @@ class CustomServer(ServerControl):
                 else:
                     item_slot = None
 
-
                 if ( item_type in valid_purchasers
                      and unit.unit_class in valid_purchasers[item_type]
                      and (self.gold - item_data[item_type][item_level]["cost"]) >= 0 ):
+
 
                     item_cost = item_data[item_type][item_level]["cost"]
 
                     item = None
 
-
                     if unit.unit_class in [ UnitClass.knight, UnitClass.brawler, UnitClass.pikeman ]:
-                        self.gold -= item_data[item_type][item_level]
+                        self.gold -= item_cost
                         item = get_item(item_type, item_level)
                         unit.primary_weapon = item
 
@@ -525,7 +524,6 @@ class CustomServer(ServerControl):
                             })
 
                         elif item_slot == 2:
-
 
                             self.gold -= item_cost
 
