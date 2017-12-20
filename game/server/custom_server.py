@@ -206,6 +206,10 @@ class CustomServer(ServerControl):
                                     "type": Event.trap_resolved,
                                 })
 
+                                for unit in self.units:
+                                    unit.current_focus = unit.focus
+                                    unit.current_will = unit.will
+
                                 self.trap_manager = None
                                 self.current_location.resolved = True
 
