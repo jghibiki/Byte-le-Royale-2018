@@ -307,7 +307,7 @@ class CombatManager:
         invigorated_unit = None
 
         # handle early special abilities
-        for unit in self.units:
+        for unit in living_units:
             if unit.combat_action == CombatAction.special_ability:
                 sa = get_special_ability(unit.unit_class, self.verbose)
 
@@ -453,7 +453,7 @@ class CombatManager:
 
 
         # apply unit damage to monster
-        for unit in self.units:
+        for unit in living_units:
             dmg = 0
             weapon = None
 
