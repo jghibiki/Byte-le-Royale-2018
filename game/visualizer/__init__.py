@@ -299,10 +299,10 @@ def start(verbose, log_path, gamma):
     unit_sprite_pos = [(80, 320), (392, 320), (704, 320), (1016, 320)]
 
     for idx, pos in enumerate(unit_hp_bar_pos):
-        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
-        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
-        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
-        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id, unit=True) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id, unit=True) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id, unit=True) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id, unit=True) )
 
     unit_damage_number_pos = {}
 
@@ -383,7 +383,8 @@ def start(verbose, log_path, gamma):
     background_group.add(HillSprite())
 
     town_shop_sprite = TownShopSprite()
-    monster_room_sprite = get_monster_room_sprite()
+
+    trap_sprite_group = pygame.sprite.Group()
 
 
     first_loop = True
@@ -499,6 +500,8 @@ def start(verbose, log_path, gamma):
 
                 elif event["type"] == Event.room_choice:
                     room_choice = True
+
+                    trap_sprite_group.empty()
 
                     if event["room_1"] is not None and event["room_2"] is not None:
                         room_1_pos = (256, 48)
@@ -617,9 +620,17 @@ def start(verbose, log_path, gamma):
         if location_change:
             if background == NodeType.monster:
                 background_group.empty()
-                background_group.add( get_monster_room_sprite() )
-            if background == NodeType.town:
+                trap_sprite_group.empty()
+                background_group.add( get_room_sprite() )
+
+            elif background == NodeType.trap:
                 background_group.empty()
+                background_group.add( get_room_sprite() )
+                trap_sprite_group.add( get_trap_sprite(location.trap.trap_type) )
+
+            elif background == NodeType.town:
+                background_group.empty()
+                trap_sprite_group.empty()
                 background_group.add( town_shop_sprite )
             else:
                 pass
@@ -630,7 +641,7 @@ def start(verbose, log_path, gamma):
         #####
 
         unit_item_text = []
-        unit_item_text_pos = [(20, 564), (332, 564), (644, 564), (956, 564)]
+        unit_item_text_pos = [(20, 584), (332, 584), (644, 584), (956, 584)]
         # render unit item text
         for unit, pos in zip(units, unit_item_text_pos):
             unit_item_text +=  unit_text(small_font, pos, unit)
@@ -643,7 +654,7 @@ def start(verbose, log_path, gamma):
 
             # handle font shifting when rendering a to a different width as a result of a narrow character such as 1
             gold_rect = gold_surf.get_rect()
-            gold_rect.topright= _pos
+            gold_rect.topright = _pos
 
 
         # render trophies text if changed
@@ -723,6 +734,8 @@ def start(verbose, log_path, gamma):
         background_group.update()
         background_group.draw(global_surf)
 
+        trap_sprite_group.update()
+        trap_sprite_group.draw(global_surf)
 
         # draw team name background
         global_surf.fill(pygame.Color(54, 54, 54, 200), rect=team_background_rect, special_flags=pygame.BLEND_RGBA_SUB)

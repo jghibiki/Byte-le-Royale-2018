@@ -171,8 +171,6 @@ class TrapManager:
 
         return data
 
-
-
     def print(self, msg, force=False):
         if self.verbose or force:
             print(msg)
