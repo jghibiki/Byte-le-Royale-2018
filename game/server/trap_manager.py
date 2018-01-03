@@ -116,6 +116,14 @@ class TrapManager:
             for unit in trap_targets:
                 if unit.trap_action == TrapAction.evade:
                     dmg = math.floor(self.trap.damage * 0.5)
+
+                    # if individual pass and unit has completed the trap
+                    # don't let it take damage from it
+                    if self.trap.trap_type is TrapPassType.individual_pass:
+                        unit_idx = self.units.index(unit)
+                        if self.trap.current_effort[unit_idx] >= self.trap.required_effort:
+                            continue
+
                     unit.current_health = max(0, unit.current_health-dmg)
 
                     game_log["events"].append({
