@@ -202,11 +202,7 @@
 <div class="section" id="knight">
 <span id="knight"></span><h2>Knight<a class="headerlink" href="#knight" title="Permalink to this headline">¶</a></h2>
 <p><strong>Primary Weapon:</strong> Sword</p>
-<button class="accordion">Sword Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/sword.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br><p><strong>Unique Ability:</strong> Taunt: If a monster attacks one unit, this unit absorbs 85% damage from the attack and the original target takes none. If a monster attacks multiple units, this unit absorbs 50% of the total damage that would be dealt to each unit. Each unit that was originally targeted receives 50% of the damage originally intended for them.</p>
+<p><strong>Unique Ability:</strong> Taunt: If a monster attacks one unit, this unit absorbs 85% damage from the attack and the original target takes none. If a monster attacks multiple units, this unit absorbs 50% of the total damage that would be dealt to each unit. Each unit that was originally targeted receives 50% of the damage originally intended for them.</p>
 <div class="section" id="combat-methods">
 <span id="combat-methods"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -219,11 +215,7 @@
 <div class="section" id="brawler">
 <span id="brawler"></span><h2>Brawler<a class="headerlink" href="#brawler" title="Permalink to this headline">¶</a></h2>
 <p><strong>Primary Weapon:</strong> Mace</p>
-<button class="accordion">Mace Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/mace.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br><p><strong>Unique Ability:</strong> Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal <code class="docutils literal"><span class="pre">(normal</span> <span class="pre">damage)</span> <span class="pre">*</span> <span class="pre">(2.5</span> <span class="pre">+</span> <span class="pre">(N</span> <span class="pre">*</span> <span class="pre">0.5))</span></code> damage. Where N is determined by the table below.</p>
+<p><strong>Unique Ability:</strong> Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal <code class="docutils literal"><span class="pre">(normal</span> <span class="pre">damage)</span> <span class="pre">*</span> <span class="pre">(2.5</span> <span class="pre">+</span> <span class="pre">(N</span> <span class="pre">*</span> <span class="pre">0.5))</span></code> damage. Where N is determined by the table below.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="23%" />
@@ -258,12 +250,7 @@
 <div class="section" id="pikeman">
 <span id="pikeman"></span><h2>Pikeman<a class="headerlink" href="#pikeman" title="Permalink to this headline">¶</a></h2>
 <p><strong>Primary Weapon:</strong> Spear</p>
-<p><img alt="" src="_images/" /></p>
-<button class="accordion">Spear Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/spear.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br><p><strong>Unique Ability:</strong> Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.</p>
+<p><strong>Unique Ability:</strong> Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.</p>
 <div class="section" id="combat-methods">
 <span id="id2"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -276,19 +263,15 @@
 <div class="section" id="rogue">
 <span id="rogue"></span><h2>Rogue<a class="headerlink" href="#rogue" title="Permalink to this headline">¶</a></h2>
 <p><strong>Primary Weapon:</strong> Dagger</p>
-<button class="accordion">Dagger Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/dagger.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br><p><strong>Bomb Slots:</strong> 3</p>
+<p><strong>Bomb Slots:</strong> 3</p>
 <p><strong>Unique Ability:</strong> Trap expert: <strong>need to flush out once trap mechanics are figured out</strong></p>
 <div class="section" id="combat-methods">
 <span id="id3"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">Rogue.attack()</span></code> Attack monster with Dagger.</li>
-<li><code class="docutils literal"><span class="pre">Rogue.bomb_1()</span></code> Attack monster with Bomb in Bomb Slot 1.</li>
-<li><code class="docutils literal"><span class="pre">Rogue.bomb_2()</span></code> Attack monster with Bomb in Bomb Slot 2.</li>
-<li><code class="docutils literal"><span class="pre">Rogue.bomb_3()</span></code> Attack monster with Bomb in Bomb Slot 3.</li>
+<li><code class="docutils literal"><span class="pre">Rogue.use_bomb_1()</span></code> Attack monster with Bomb in Bomb Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Rogue.use_bomb_2()</span></code> Attack monster with Bomb in Bomb Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Rogue.use_bomb_3()</span></code> Attack monster with Bomb in Bomb Slot 3.</li>
 <li><code class="docutils literal"><span class="pre">Rogue.wait()</span></code> Do nothing for this turn.</li>
 </ul>
 </div>
@@ -296,20 +279,16 @@
 <div class="section" id="magus">
 <span id="magus"></span><h2>Magus<a class="headerlink" href="#magus" title="Permalink to this headline">¶</a></h2>
 <p><strong>Primary Weapon:</strong> Staff</p>
-<button class="accordion">Staff Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/staff.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br><p><strong>Spell Slots:</strong> 4</p>
+<p><strong>Spell Slots:</strong> 4</p>
 <p><strong>Unique Ability:</strong> Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.</p>
 <div class="section" id="combat-methods">
 <span id="id4"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">Magus.attack()</span></code> Attack monster with Staff.</li>
-<li><code class="docutils literal"><span class="pre">Magus.spell_1()</span></code> Attack monster with Spell in Spell Slot 1.</li>
-<li><code class="docutils literal"><span class="pre">Magus.spell_2()</span></code> Attack monster with Spell in Spell Slot 2.</li>
-<li><code class="docutils literal"><span class="pre">Magus.spell_3()</span></code> Attack monster with Spell in Spell Slot 3.</li>
-<li><code class="docutils literal"><span class="pre">Magus.spell_4()</span></code> Attack monster with Spell in Spell Slot 4.</li>
+<li><code class="docutils literal"><span class="pre">Magus.use_spell_1()</span></code> Attack monster with Spell in Spell Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Magus.use_spell_2()</span></code> Attack monster with Spell in Spell Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Magus.use_spell_3()</span></code> Attack monster with Spell in Spell Slot 3.</li>
+<li><code class="docutils literal"><span class="pre">Magus.use_spell_4()</span></code> Attack monster with Spell in Spell Slot 4.</li>
 <li><code class="docutils literal"><span class="pre">Magus.elemental_burst()</span></code> Use Elemental Burst ability.</li>
 <li><code class="docutils literal"><span class="pre">Magus.wait()</span></code> Do nothing for this turn.</li>
 </ul>
@@ -324,10 +303,10 @@
 <span id="id5"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">Wizard.attack()</span></code> Attack monster with Wand.</li>
-<li><code class="docutils literal"><span class="pre">Wizard.spell_1()</span></code> Attack monster with Spell in Spell Slot 1.</li>
-<li><code class="docutils literal"><span class="pre">Wizard.spell_2()</span></code> Attack monster with Spell in Spell Slot 2.</li>
-<li><code class="docutils literal"><span class="pre">Wizard.spell_3()</span></code> Attack monster with Spell in Spell Slot 3.</li>
-<li><code class="docutils literal"><span class="pre">Wizard.spell_4()</span></code> Attack monster with Spell in Spell Slot 4.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.use_spell_1()</span></code> Attack monster with Spell in Spell Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.use_spell_2()</span></code> Attack monster with Spell in Spell Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.use_spell_3()</span></code> Attack monster with Spell in Spell Slot 3.</li>
+<li><code class="docutils literal"><span class="pre">Wizard.use_spell_4()</span></code> Attack monster with Spell in Spell Slot 4.</li>
 <li><code class="docutils literal"><span class="pre">Wizard.invigorate(target)</span></code> Use Invigorate ability.</li>
 <li><code class="docutils literal"><span class="pre">Wizard.wait()</span></code> Do nothing for this turn.</li>
 </ul>
@@ -342,10 +321,10 @@
 <span id="id6"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">Sorcerer.attack()</span></code> Attack monster with Spell Book.</li>
-<li><code class="docutils literal"><span class="pre">Sorcerer.spell_1()</span></code> Attack monster with Spell in Spell Slot 1.</li>
-<li><code class="docutils literal"><span class="pre">Sorcerer.spell_2()</span></code> Attack monster with Spell in Spell Slot 2.</li>
-<li><code class="docutils literal"><span class="pre">Sorcerer.spell_3()</span></code> Attack monster with Spell in Spell Slot 3.</li>
-<li><code class="docutils literal"><span class="pre">Sorcerer.spell_4()</span></code> Attack monster with Spell in Spell Slot 4.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.use_spell_1()</span></code> Attack monster with Spell in Spell Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.use_spell_2()</span></code> Attack monster with Spell in Spell Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.use_spell_3()</span></code> Attack monster with Spell in Spell Slot 3.</li>
+<li><code class="docutils literal"><span class="pre">Sorcerer.use_spell_4()</span></code> Attack monster with Spell in Spell Slot 4.</li>
 <li><code class="docutils literal"><span class="pre">Sorcerer.illusion(unit_to_disguise,</span> <span class="pre">unit_to_be_disguised)</span></code> Use Illusion ability.</li>
 <li><code class="docutils literal"><span class="pre">Sorcerer.wait()</span></code> Do nothing for this turn.</li>
 </ul>
@@ -359,8 +338,8 @@
 <div class="section" id="combat-methods">
 <span id="id7"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">Alchemist.bomb_1()</span></code> Attack monster with Bomb in Bomb Slot 1.</li>
-<li><code class="docutils literal"><span class="pre">Alchemist.bomb_2()</span></code> Attack monster with Bomb in Bomb Slot 2.</li>
+<li><code class="docutils literal"><span class="pre">Alchemist.use_bomb_1()</span></code> Attack monster with Bomb in Bomb Slot 1.</li>
+<li><code class="docutils literal"><span class="pre">Alchemist.use_bomb_2()</span></code> Attack monster with Bomb in Bomb Slot 2.</li>
 <li><code class="docutils literal"><span class="pre">Alchemist.resupply(bomb_type_to_resupply)</span></code> Use Resupply ability.</li>
 <li><code class="docutils literal"><span class="pre">Alchemist.wait()</span></code> Do nothing for this turn.</li>
 </ul>
