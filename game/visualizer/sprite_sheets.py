@@ -721,13 +721,14 @@ class ArchwaySprite(pygame.sprite.Sprite):
 
 
 class TrapSprite(pygame.sprite.Sprite):
-    def __init__(self, sprite_sheet_path, frames, x, y, h, w, animation_speed):
+    def __init__(self, sprite_sheet_path, frames, x, y, h, w, animation_speed, scale=1):
         super().__init__()
 
         self.frames = frames
         self.index = 0
         self.tick_counter = 0
         self.animation_speed = animation_speed
+        self.scale = scale
 
         self.h = h
         self.w = w
@@ -740,6 +741,8 @@ class TrapSprite(pygame.sprite.Sprite):
             self.h,
             self.w
         )
+
+        self.image = pygame.transform.scale(self.image, (self.h*self.scale, self.w*self.scale))
 
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -758,6 +761,7 @@ class TrapSprite(pygame.sprite.Sprite):
             self.h,
             self.w
         )
+        self.image = pygame.transform.scale(self.image, (self.h*self.scale, self.w*self.scale))
 
 class SpikeTrap(TrapSprite):
 
@@ -765,6 +769,13 @@ class SpikeTrap(TrapSprite):
         TrapSprite.__init__(self, "game/visualizer/assets/spikes.png", [
             [ 0,    0 ]
         ], 0, 290, 1280, 128, 3)
+
+class RiddleOfTheSphinxTrap(TrapSprite):
+
+    def __init__(self):
+        TrapSprite.__init__(self, "game/visualizer/assets/sphinx.png", [
+            [ 0,    0 ]
+        ], 448, 10, 128, 128, 3, scale=3)
 
 
 loaded_trap_sprites = {}
@@ -775,8 +786,10 @@ def get_trap_sprite(trap_type):
 
     if trap_type == TrapType.spike_trap:
         cls = SpikeTrap
+    elif trap_type == TrapType.riddles_of_the_sphinx:
+        cls = RiddleOfTheSphinxTrap
     else:
-        cls = SpikeTrap
+        cls = RiddleOfTheSphinxTrap
 
     if cls is not None and cls not in loaded_trap_sprites:
         loaded_trap_sprites[cls] = cls()
