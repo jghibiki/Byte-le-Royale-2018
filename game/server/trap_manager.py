@@ -153,7 +153,14 @@ class TrapManager:
 
         elif (self.trap.pass_type is TrapPassType.individual_pass or
               self.trap.pass_type is TrapPassType.group_pass_on_first_success):
-            completed = [ unit_effort >= self.trap.required_effort for unit_effort in self.trap.current_effort ]
+
+            completed = []
+            for unit_effort, unit in zip(self.trap.current_effort, self.units):
+                if unit.is_alive():
+                    completed.append( unit_effort >= self.trap.required_effort )
+                else:
+                    completed.append(True)
+
             if all(completed):
                 self.done = True
                 self.success = True
