@@ -84,7 +84,7 @@ def load_item(item_type, data):
     elif item_type == ItemType.fire_bomb:
         new_item = FireBomb()
     elif item_type == ItemType.frost_bomb:
-        new_item == FrostBomb()
+        new_item = FrostBomb()
     elif item_type == ItemType.shock_bomb:
         new_item = ShockBomb()
     elif item_type == ItemType.acid_bomb:
