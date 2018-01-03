@@ -478,9 +478,19 @@ class CombatManager:
                         if unit.bomb_1 is not None and unit.bomb_1_quantity < 2:
                             unit.bomb_1_quantity = 2
 
+                            turn_log["events"].append({
+                                "type": Event.special_ability,
+                                "unit": unit.id
+                            })
+
                     if unit.combat_action_target_1 is 2:
                         if unit.bomb_2 is not None and unit.bomb_2_quantity < 2:
                             unit.bomb_2_quantity = 2
+
+                            turn_log["events"].append({
+                                "type": Event.special_ability,
+                                "unit": unit.id
+                            })
 
                 elif unit.unit_class is UnitClass.magus:
                     sa.use(turn_log, unit, self.monster)
@@ -600,7 +610,7 @@ class CombatManager:
         print(self.monster.summary())
 
         print()
-        for u in units:
+        for u in self.units:
             print(u.summary())
 
     def print(self, msg):

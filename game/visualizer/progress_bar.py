@@ -22,8 +22,6 @@ class ProgressBar(pygame.sprite.Sprite):
 
         current = self.key(objects)
 
-        print(current)
-
         if current is None:
             return
 

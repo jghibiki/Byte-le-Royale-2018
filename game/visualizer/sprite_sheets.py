@@ -794,3 +794,72 @@ def get_trap_sprite(trap_type):
     if cls is not None and cls not in loaded_trap_sprites:
         loaded_trap_sprites[cls] = cls()
     return loaded_trap_sprites[cls]
+
+
+class SpecialAbilityAnimation(pygame.sprite.Sprite):
+    def __init__(self, sprite_sheet_path, frames, x, y, h, w, animation_speed, scale=1):
+        super().__init__()
+
+        self.frames = frames
+        self.index = 0
+        self.tick_counter = 0
+        self.animation_speed = animation_speed
+
+        self.h = h
+        self.w = w
+
+        self.scale = scale
+
+        self.repeat = 1
+
+        self.sprite_sheet = SpriteSheet(sprite_sheet_path)
+
+        self.image = self.sprite_sheet.get_image(
+            self.frames[self.index][0],
+            self.frames[self.index][1],
+            self.h,
+            self.w
+        )
+
+        self.image = pygame.transform.scale(self.image, (self.h*self.scale, self.w*self.scale))
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self, obj):
+
+        self.tick_counter += 1
+        if self.tick_counter % self.animation_speed is 0:
+            if self.index < len(self.frames)-1:
+                self.index += 1
+            else:
+                self.index = 0
+                self.repeat -= 1
+
+        if self.repeat <= 0:
+            print("remove")
+            obj.remove(self)
+
+        self.image = self.sprite_sheet.get_image(
+            self.frames[self.index][0],
+            self.frames[self.index][1],
+            self.h,
+            self.w
+        )
+
+        self.image = pygame.transform.scale(self.image, (self.h*self.scale, self.w*self.scale))
+
+class ResupplyAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/resupply_animation.png",
+            [
+                [0,   0], [32,   0], [64,   0],
+                [0,  32], [32,  32], [64,  32],
+                [0,  64], [32,  64], [64,  64],
+
+            ],
+            x, y,
+            32, 32,
+            2, scale=2)

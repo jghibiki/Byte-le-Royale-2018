@@ -59,29 +59,32 @@ class GameLogParser:
                 event["location"] = node
 
 
-            elif event["type"] == Event.purchase_item:
-                pass #do nothing, a signal wit some display data
+            #elif event["type"] == Event.purchase_item:
+            #    pass #do nothing, a signal wit some display data
 
-            elif event["type"] == Event.combat_resolved:
-                pass #do nothing, a signal with updates for gold an trophies
+            #elif event["type"] == Event.combat_resolved:
+            #    pass #do nothing, a signal with updates for gold an trophies
 
-            elif event["type"] == Event.party_killed:
-                pass # do nothing, just a signal with some display data
+            #elif event["type"] == Event.party_killed:
+            #    pass # do nothing, just a signal with some display data
+
+            #elif event["type"] == Event.special_ability:
+            #    pass # do nothing, just a signal with some display data
+
+            #elif event["type"] == Event.special_ability_charging:
+            #    pass # do nothing, just a signal with some display data
+
+            #elif event["type"] == Event.special_ability_attack:
+            #    pass # do nothing, just a signal with some display data
+
+            #elif event["type"] == Event.monster_attack:
+            #    pass # do nothing, just a signal with some display data
+
+            #elif event["type"] == Event.unit_attack:
+            #    pass # do nothing, just a signal with some display data
 
             elif event["type"] == Event.special_ability:
-                pass # do nothing, just a signal with some display data
-
-            elif event["type"] == Event.special_ability_charging:
-                pass # do nothing, just a signal with some display data
-
-            elif event["type"] == Event.special_ability_attack:
-                pass # do nothing, just a signal with some display data
-
-            elif event["type"] == Event.monster_attack:
-                pass # do nothing, just a signal with some display data
-
-            elif event["type"] == Event.unit_attack:
-                pass # do nothing, just a signal with some display data
+                event["unit"] = self._get_unit(event["unit"], units)
 
             elif event["type"] == Event.room_choice:
 

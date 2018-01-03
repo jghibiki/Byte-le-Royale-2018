@@ -301,6 +301,8 @@ def start(verbose, log_path, gamma):
 
     trap_text_group = pygame.sprite.Group()
 
+    special_ability_group = pygame.sprite.Group()
+
     unit_hp_bar_pos = [(20, 544), (332, 544), (644, 544), (956, 544)]
     unit_sprite_pos = [(80, 320), (392, 320), (704, 320), (1016, 320)]
 
@@ -492,6 +494,24 @@ def start(verbose, log_path, gamma):
 
                         aa = AttackAnimation(unit_animation_pos[0], unit_animation_pos[1], pygame.Color("#FF0000"))
                         attack_animation_group.add(aa)
+
+                elif event["type"] == Event.special_ability:
+                    event["handled"] = True
+
+
+                    if event["unit"].unit_class is UnitClass.alchemist:
+                        idx = units.index(event["unit"])
+
+                        next_turn_counter += 5
+
+                        if idx is 0:
+                            special_ability_group.add( ResupplyAnimation(80, 280) )
+                        elif idx is 1:
+                            special_ability_group.add( ResupplyAnimation(380, 280) )
+                        elif idx is 2:
+                            special_ability_group.add( ResupplyAnimation(690, 280) )
+                        elif idx is 3:
+                            special_ability_group.add( ResupplyAnimation(1010, 280) )
 
                 elif event["type"] == Event.combat_resolved:
 
@@ -763,6 +783,8 @@ def start(verbose, log_path, gamma):
 
         trap_sprite_group.update()
 
+        special_ability_group.update(special_ability_group)
+
         if location is not None and location.node_type is NodeType.trap:
             trap_progress_group.update(location.trap)
 
@@ -822,13 +844,19 @@ def start(verbose, log_path, gamma):
         icon_back_group.draw(global_surf)
         unit_icon_sprite_group.draw(global_surf)
 
+        # Draw unit special ability animations
+        special_ability_group.draw(global_surf)
+
         # draw floating numbers
         floating_number_group.draw(global_surf)
         attack_animation_group.draw(global_surf)
 
+        # draw trap progress
         trap_progress_group.draw(global_surf)
 
+        # draw trap text
         trap_text_group.draw(global_surf)
+
 
         for event in pygame.event.get():
             if event.type == QUIT:
