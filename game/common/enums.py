@@ -54,10 +54,6 @@ class TrapAction:
     evade = 2
     wait = 3
 
-class TrapPassType:
-    individual_pass = 0
-    group_effort_pass = 1
-    group_pass = 2
 
 class UnitClass:
     knight = 0

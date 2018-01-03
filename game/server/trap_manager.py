@@ -29,6 +29,12 @@ class TrapManager:
 
                     if self.trap.pass_type is TrapPassType.group_pass:
                         self.trap.current_effort = min(self.trap.required_effort, self.trap.current_effort+4)
+
+                        game_log["events"].append({
+                            "type": Event.trap_effort,
+                            "current_effort": self.trap.current_effort
+                        })
+
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-5)
                         else:
@@ -37,6 +43,13 @@ class TrapManager:
                     elif (self.trap.pass_type is TrapPassType.individual_pass or
                           self.trap.pass_type is TrapPassType.group_pass_on_first_success):
                         self.trap.current_effort[idx] = min(self.trap.required_effort, self.trap.current_effort[idx]+4)
+
+                        game_log["events"].append({
+                            "type": Event.trap_effort,
+                            "unit_idx": idx,
+                            "current_effort": self.trap.current_effort[idx]
+                        })
+
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-5)
                         else:
@@ -46,6 +59,12 @@ class TrapManager:
 
                     if self.trap.pass_type is TrapPassType.group_pass:
                         self.trap.current_effort = min(self.trap.required_effort, self.trap.current_effort+2)
+
+                        game_log["events"].append({
+                            "type": Event.trap_effort,
+                            "current_effort": self.trap.current_effort
+                        })
+
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-2)
                         else:
@@ -54,6 +73,13 @@ class TrapManager:
                     elif (self.trap.pass_type is TrapPassType.individual_pass or
                           self.trap.pass_type is TrapPassType.group_pass_on_first_success):
                         self.trap.current_effort[idx] = min(self.trap.required_effort, self.trap.current_effort[idx]+2)
+
+                        game_log["events"].append({
+                            "type": Event.trap_effort,
+                            "unit_idx": idx,
+                            "current_effort": self.trap.current_effort[idx]
+                        })
+
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-2)
                         else:

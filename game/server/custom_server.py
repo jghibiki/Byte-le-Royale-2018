@@ -106,6 +106,7 @@ class CustomServer(ServerControl):
                     self.trap_manager = TrapManager(self.current_location.trap, self.units, self.verbose)
                     self.turn_log["events"].append({ "type": Event.begin_trap_evade })
 
+
     def post_turn(self):
         self.print("SERVER POST TURN")
 

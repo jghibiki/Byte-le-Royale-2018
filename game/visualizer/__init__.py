@@ -13,6 +13,8 @@ from game.visualizer.spritesheet_functions import SpriteSheet
 from game.visualizer.sprite_sheets import *
 from game.visualizer.game_log_parser import GameLogParser
 from game.visualizer.floating_number import FloatingNumber
+from game.visualizer.progress_bar import ProgressBar
+from game.visualizer.trap_text import TrapText
 
 
 def party_killed_screen(global_surf, fps_clock, data):
@@ -295,6 +297,10 @@ def start(verbose, log_path, gamma):
     unit_hp_bars = pygame.sprite.Group()
     unit_sprite_group = pygame.sprite.Group()
 
+    trap_progress_group = pygame.sprite.Group()
+
+    trap_text_group = pygame.sprite.Group()
+
     unit_hp_bar_pos = [(20, 544), (332, 544), (644, 544), (956, 544)]
     unit_sprite_pos = [(80, 320), (392, 320), (704, 320), (1016, 320)]
 
@@ -487,13 +493,43 @@ def start(verbose, log_path, gamma):
                         aa = AttackAnimation(unit_animation_pos[0], unit_animation_pos[1], pygame.Color("#FF0000"))
                         attack_animation_group.add(aa)
 
-
-
                 elif event["type"] == Event.combat_resolved:
 
                     next_turn_counter += 30
 
                     event["handled"] = True
+
+                elif event["type"] == Event.begin_trap_evade:
+
+                    event["handled"] = True
+
+                    trap_sprite_group.add( get_trap_sprite(location.trap.trap_type) )
+
+                    trap_text_group.add( TrapText(10, "Lvl{} {}".format(location.trap.level, location.trap.name)))
+
+                    if(location.trap.pass_type is TrapPassType.individual_pass or
+                       location.trap.pass_type is TrapPassType.group_pass_on_first_success):
+
+                        def get_effort(trap, index):
+                            return trap.current_effort[index]
+
+                        trap_progress_group.add( ProgressBar(80, 300, 200, 20, location.trap.required_effort, lambda t: get_effort(t, 0)) )
+                        trap_progress_group.add( ProgressBar(390, 300, 200, 20, location.trap.required_effort, lambda t: get_effort(t, 1)) )
+                        trap_progress_group.add( ProgressBar(700, 300, 200, 20, location.trap.required_effort, lambda t: get_effort(t, 2)) )
+                        trap_progress_group.add( ProgressBar(1010, 300, 200, 20, location.trap.required_effort, lambda t: get_effort(t, 3)) )
+
+                    elif location.trap.pass_type is TrapPassType.group_pass:
+
+                        def get_effort(trap):
+                            return trap.current_effort
+
+                        trap_progress_group.add( ProgressBar(400, 50, 500, 30, location.trap.required_effort, get_effort) )
+
+
+                elif event["type"] == Event.trap_resolved:
+                    event["handled"] = True
+                    trap_progress_group.empty()
+                    trap_text_group.empty()
 
                 elif event["type"] == Event.party_killed:
                     party_killed_screen(global_surf, fpsClock, event)
@@ -626,7 +662,6 @@ def start(verbose, log_path, gamma):
             elif background == NodeType.trap:
                 background_group.empty()
                 background_group.add( get_room_sprite() )
-                trap_sprite_group.add( get_trap_sprite(location.trap.trap_type) )
 
             elif background == NodeType.town:
                 background_group.empty()
@@ -724,6 +759,13 @@ def start(verbose, log_path, gamma):
 
         attack_animation_group.update(attack_animation_group)
 
+        background_group.update()
+
+        trap_sprite_group.update()
+
+        if location is not None and location.node_type is NodeType.trap:
+            trap_progress_group.update(location.trap)
+
         #####
         # Begin Drawing to screen
         #####
@@ -731,11 +773,10 @@ def start(verbose, log_path, gamma):
         # clear screen, fill with white
         global_surf.fill(blackColor)
 
-        background_group.update()
         background_group.draw(global_surf)
 
-        trap_sprite_group.update()
         trap_sprite_group.draw(global_surf)
+
 
         # draw team name background
         global_surf.fill(pygame.Color(54, 54, 54, 200), rect=team_background_rect, special_flags=pygame.BLEND_RGBA_SUB)
@@ -785,6 +826,9 @@ def start(verbose, log_path, gamma):
         floating_number_group.draw(global_surf)
         attack_animation_group.draw(global_surf)
 
+        trap_progress_group.draw(global_surf)
+
+        trap_text_group.draw(global_surf)
 
         for event in pygame.event.get():
             if event.type == QUIT:
