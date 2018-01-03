@@ -79,3 +79,18 @@ Run a custom client defined in the root of the repository (e.g. ```demo_client.p
 python -m game.scripts.client --client demo_client
 ```
 
+#### Run Visualizer
+
+Run the visualizer in `game_log/`
+
+```shell
+python -m game.scripts.visualizer
+```
+
+Run the visualizer and visualize a different game log.
+
+```shell
+python -m game.scripts.visualizer --game-log copied_game_log_path
+```
+
+To adjust the brightness of the game (and possibly throw off the colors of your monitor - restart should fix) try adding ```--gamma 1.1```. ```1.0``` should be the default display colorization. Less than ```1.0``` wil make the display darker, greater than ```1.0``` will make the display brighter. ```2.0``` Does some interesting things.

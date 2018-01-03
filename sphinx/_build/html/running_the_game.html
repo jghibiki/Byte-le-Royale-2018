@@ -105,6 +105,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#easy-run-script">Easy Run Script</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-server">Run Server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-client">Run Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-visualizer">Run Visualizer</a></li>
 </ul>
 </li>
 </ul>
@@ -261,6 +262,18 @@
 <div class="highlight-shell"><div class="highlight"><pre><span></span>python -m game.scripts.client --client demo_client
 </pre></div>
 </div>
+</div>
+<div class="section" id="run-visualizer">
+<span id="run-visualizer"></span><h3>Run Visualizer<a class="headerlink" href="#run-visualizer" title="Permalink to this headline">¶</a></h3>
+<p>Run the visualizer in <code class="docutils literal"><span class="pre">game_log/</span></code></p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>python -m game.scripts.visualizer
+</pre></div>
+</div>
+<p>Run the visualizer and visualize a different game log.</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>python -m game.scripts.visualizer --game-log copied_game_log_path
+</pre></div>
+</div>
+<p>To adjust the brightness of the game (and possibly throw off the colors of your monitor - restart should fix) try adding <code class="docutils literal"><span class="pre">--gamma</span> <span class="pre">1.1</span></code>. <code class="docutils literal"><span class="pre">1.0</span></code> should be the default display colorization. Less than <code class="docutils literal"><span class="pre">1.0</span></code> wil make the display darker, greater than <code class="docutils literal"><span class="pre">1.0</span></code> will make the display brighter. <code class="docutils literal"><span class="pre">2.0</span></code> Does some interesting things.</p>
 </div>
 </div>
 </div>

@@ -30,13 +30,13 @@ def get_item(item_type, level, init=False):
     elif item_type == ItemType.thunderbolt:
         new_item = Thunderbolt()
     elif item_type == ItemType.ice_spike:
-        new_item = Thunderbolt()
+        new_item = IceSpike()
 
     # Bombs
     elif item_type == ItemType.fire_bomb:
         new_item = FireBomb()
     elif item_type == ItemType.frost_bomb:
-        new_item == FrostBomb()
+        new_item = FrostBomb()
     elif item_type == ItemType.shock_bomb:
         new_item = ShockBomb()
     elif item_type == ItemType.acid_bomb:
