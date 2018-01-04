@@ -512,7 +512,7 @@ def start(verbose, log_path, gamma):
                         elif idx is 3:
                             special_ability_group.add( ResupplyAnimation(1000, 280) )
 
-                    if event["unit"].unit_class is UnitClass.sorcerer:
+                    elif event["unit"].unit_class is UnitClass.sorcerer:
 
                         target_idx = units.index(event["target_1"])
 
@@ -525,6 +525,17 @@ def start(verbose, log_path, gamma):
                         elif target_idx is 3:
                             special_ability_group.add( IllusionAnimation(1000, 280) )
 
+                    elif event["unit"].unit_class is UnitClass.sorcerer:
+                        target_idx = units.index(event["target_1"])
+
+                        if target_idx is 0:
+                           special_ability_group.add( InvigorateAnimation(65, 280) )
+                        elif target_idx is 1:
+                           special_ability_group.add( InvigorateAnimation(365, 280) )
+                        elif target_idx is 2:
+                           special_ability_group.add( InvigorateAnimation(675, 280) )
+                        elif target_idx is 3:
+                            special_ability_group.add( InvigorateAnimation(995, 280) )
 
                 elif event["type"] == Event.combat_resolved:
 

@@ -876,3 +876,18 @@ class IllusionAnimation(SpecialAbilityAnimation):
             x, y,
             32, 32,
             2, scale=8)
+
+
+class InvigorateAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/invigorate_animation.png",
+            [
+                [0,   0], [32,   0], [64,   0],
+                [0,  32], [32,  32], [64,  32],
+                [0,  64], [32,  64], [64,  64],
+
+            ],
+            x, y,
+            32, 32,
+            2, scale=8)
