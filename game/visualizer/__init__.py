@@ -498,7 +498,7 @@ def start(verbose, log_path, gamma):
                 elif event["type"] == Event.special_ability:
                     event["handled"] = True
 
-                    next_turn_counter += 4
+                    next_turn_counter += 2
 
                     if event["unit"].unit_class is UnitClass.alchemist:
                         idx = units.index(event["unit"])
@@ -536,6 +536,9 @@ def start(verbose, log_path, gamma):
                            special_ability_group.add( InvigorateAnimation(675, 280) )
                         elif target_idx is 3:
                             special_ability_group.add( InvigorateAnimation(995, 280) )
+
+                    elif event["unit"].unit_class is UnitClass.magus:
+                        special_ability_group.add( ElementalBurstAnimation(480, 110) )
 
                 elif event["type"] == Event.combat_resolved:
 

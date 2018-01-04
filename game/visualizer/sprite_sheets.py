@@ -891,3 +891,18 @@ class InvigorateAnimation(SpecialAbilityAnimation):
             x, y,
             32, 32,
             2, scale=8)
+
+
+class ElementalBurstAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/elemental_burst_animation.png",
+            [
+                [0,   0], [32,   0], [64,   0], [96, 0],
+                [0,  32], [32,  32], [64,  32], [96, 32],
+                [0,  64], [32,  64], [64,  64], [96, 64],
+                [0,  96], [32,  96], [64,  96], [96, 96]
+            ],
+            x, y,
+            32, 32,
+            2, scale=10)
