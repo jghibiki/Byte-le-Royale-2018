@@ -537,6 +537,18 @@ def start(verbose, log_path, gamma):
                         elif target_idx is 3:
                             special_ability_group.add( InvigorateAnimation(995, 280) )
 
+                    elif event["unit"].unit_class is UnitClass.sorcerer:
+                        unit_idx = units.index(event["unit"])
+
+                        if unit_idx is 0:
+                            special_ability_group.add( FitOfRageAnimation(105, 310) )
+                        elif unit_idx is 1:
+                            special_ability_group.add( FitOfRageAnimation(405, 310) )
+                        elif unit_idx is 2:
+                            special_ability_group.add( FitOfRageAnimation(715, 310) )
+                        elif unit_idx is 3:
+                            special_ability_group.add( FitOfRageAnimation(1035, 310) )
+
 
                 elif event["type"] == Event.special_ability_attack:
                     event["handled"] = True

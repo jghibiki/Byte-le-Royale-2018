@@ -922,3 +922,18 @@ class TargetWeaknessAnimation(SpecialAbilityAnimation):
             x, y,
             32, 32,
             1, scale=6)
+
+class FitOfRageAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/fit_of_rage_animation.png",
+            [
+                # 3x4 sprite sheet
+                [0,   0], [64,   0], [128,   0],
+                [0,  64], [64,  64], [128,  64],
+                [0, 128], [64, 128], [128, 128],
+                [0, 192], [64, 192], [128, 192]
+            ],
+            x, y,
+            64, 64,
+            2, scale=1)
