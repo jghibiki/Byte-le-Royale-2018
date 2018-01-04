@@ -498,20 +498,33 @@ def start(verbose, log_path, gamma):
                 elif event["type"] == Event.special_ability:
                     event["handled"] = True
 
+                    next_turn_counter += 4
 
                     if event["unit"].unit_class is UnitClass.alchemist:
                         idx = units.index(event["unit"])
 
-                        next_turn_counter += 5
-
                         if idx is 0:
-                            special_ability_group.add( ResupplyAnimation(80, 280) )
+                            special_ability_group.add( ResupplyAnimation(70, 280) )
                         elif idx is 1:
-                            special_ability_group.add( ResupplyAnimation(380, 280) )
+                            special_ability_group.add( ResupplyAnimation(370, 280) )
                         elif idx is 2:
-                            special_ability_group.add( ResupplyAnimation(690, 280) )
+                            special_ability_group.add( ResupplyAnimation(680, 280) )
                         elif idx is 3:
-                            special_ability_group.add( ResupplyAnimation(1010, 280) )
+                            special_ability_group.add( ResupplyAnimation(1000, 280) )
+
+                    if event["unit"].unit_class is UnitClass.sorcerer:
+
+                        target_idx = units.index(event["target_1"])
+
+                        if target_idx is 0:
+                            special_ability_group.add( IllusionAnimation(70, 280) )
+                        elif target_idx is 1:
+                            special_ability_group.add( IllusionAnimation(370, 280) )
+                        elif target_idx is 2:
+                            special_ability_group.add( IllusionAnimation(680, 280) )
+                        elif target_idx is 3:
+                            special_ability_group.add( IllusionAnimation(1000, 280) )
+
 
                 elif event["type"] == Event.combat_resolved:
 
