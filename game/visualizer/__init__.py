@@ -537,6 +537,15 @@ def start(verbose, log_path, gamma):
                         elif target_idx is 3:
                             special_ability_group.add( InvigorateAnimation(995, 280) )
 
+
+                elif event["type"] == Event.special_ability_attack:
+                    event["handled"] = True
+
+                    next_turn_counter += 2
+
+                    if event["unit"].unit_class is UnitClass.pikeman:
+                        special_ability_group.add( TargetWeaknessAnimation(540, 170) )
+
                     elif event["unit"].unit_class is UnitClass.magus:
                         special_ability_group.add( ElementalBurstAnimation(480, 110) )
 

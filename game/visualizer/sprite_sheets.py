@@ -906,3 +906,19 @@ class ElementalBurstAnimation(SpecialAbilityAnimation):
             x, y,
             32, 32,
             2, scale=10)
+
+class TargetWeaknessAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/target_weakness_animation.png",
+            [
+                [0,   0], [32,   0], [64,   0], [96,    0], [128,   0], [160,   0],
+                [0,  32], [32,  32], [64,  32], [96,   32], [128,  32], [160,  32],
+                [0,  64], [32,  64], [64,  64], [96,   64], [128,  64], [160,  64],
+                [0,  96], [32,  96], [64,  96], [96,   96], [128,  96], [160,  96],
+                [0, 128], [32, 128], [64, 128], [96,  128], [128, 128], [160, 128],
+                [0, 160], [32, 160], [64, 160], [96,  160], [128, 160], [160, 160],
+            ],
+            x, y,
+            32, 32,
+            1, scale=6)
