@@ -797,7 +797,7 @@ def get_trap_sprite(trap_type):
 
 
 class SpecialAbilityAnimation(pygame.sprite.Sprite):
-    def __init__(self, sprite_sheet_path, frames, x, y, h, w, animation_speed, scale=1):
+    def __init__(self, sprite_sheet_path, frames, x, y, h, w, animation_speed, scale=1, repeat=1):
         super().__init__()
 
         self.frames = frames
@@ -810,7 +810,7 @@ class SpecialAbilityAnimation(pygame.sprite.Sprite):
 
         self.scale = scale
 
-        self.repeat = 1
+        self.repeat = repeat
 
         self.sprite_sheet = SpriteSheet(sprite_sheet_path)
 
@@ -937,3 +937,15 @@ class FitOfRageAnimation(SpecialAbilityAnimation):
             x, y,
             64, 64,
             2, scale=1)
+
+class TauntAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/taunt_animation.png",
+            [
+                [0,   0],
+                [0,  64],
+            ],
+            x, y,
+            64, 64,
+            4, scale=1, repeat=3)

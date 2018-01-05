@@ -549,6 +549,19 @@ def start(verbose, log_path, gamma):
                         elif unit_idx is 3:
                             special_ability_group.add( FitOfRageAnimation(1035, 310) )
 
+                    elif event["unit"].unit_class is UnitClass.knight:
+                        unit_idx = units.index(event["unit"])
+
+                        if unit_idx is 0:
+                            special_ability_group.add( TauntAnimation(70, 280) )
+                        elif unit_idx is 1:
+                            special_ability_group.add( TauntAnimation(370, 280) )
+                        elif unit_idx is 2:
+                            special_ability_group.add( TauntAnimation(680, 280) )
+                        elif unit_idx is 3:
+                            special_ability_group.add( TauntAnimation(1000, 280) )
+
+
 
                 elif event["type"] == Event.special_ability_attack:
                     event["handled"] = True
