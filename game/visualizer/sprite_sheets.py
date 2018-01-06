@@ -666,7 +666,7 @@ class RogueSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/rogue.png",
                     [
                         [0,   0], [128,   0], [256,   0], [384,   0],
                         [0, 128], [128, 128], [256, 128], [384, 129],
