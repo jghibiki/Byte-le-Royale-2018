@@ -334,9 +334,24 @@ def start(verbose, log_path, gamma):
     unit_icon_sprite_group = pygame.sprite.Group()
     icon_back_group = pygame.sprite.Group()
     monster_group = pygame.sprite.Group()
+    monster_damage_types_group = pygame.sprite.Group()
 
 
-    monster_pos = (585,120)
+    monster_pos = (585,140)
+
+    monster_damage_types_topleft = 489
+    monster_damage_types_pos = [
+        [monster_damage_types_topleft + (0*42), 90],
+        [monster_damage_types_topleft + (1*42), 90],
+        [monster_damage_types_topleft + (2*42), 90],
+        [monster_damage_types_topleft + (3*42), 90],
+        [monster_damage_types_topleft + (4*42), 90],
+        [monster_damage_types_topleft + (5*42), 90],
+        [monster_damage_types_topleft + (6*42), 90],
+        [monster_damage_types_topleft + (7*42), 90],
+        [monster_damage_types_topleft + (8*42), 90],
+        [monster_damage_types_topleft + (9*42), 90]
+    ]
 
 
     icon_sprite_positions = [(20,504), (332,504), (644,504), (956,504)]
@@ -464,7 +479,7 @@ def start(verbose, log_path, gamma):
 
                         color = unit_colors[event["unit"]]
 
-                        fn = FloatingNumber(520 + random.randint(-15, 15) , 10 , '-{}'.format(event["damage"]), color)
+                        fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
                         floating_number_group.add(fn)
 
                         aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
@@ -698,6 +713,7 @@ def start(verbose, log_path, gamma):
                     monster_hp_bar.empty()
                     monster_group.empty()
                     monster_name_surface = pygame.Surface((0,0))
+                    monster_damage_types_group.empty()
 
                     next_turn_counter += 30
 
@@ -714,7 +730,7 @@ def start(verbose, log_path, gamma):
             # clear monster hp bar
             monster_hp_bar.empty()
 
-            bar = HealthBar(530, 90, 300, 50, monster.id)
+            bar = HealthBar(530, 60, 300, 50, monster.id)
             bar.rect.x = 640 - math.floor(bar.rect.w/2)
             monster_hp_bar.add(bar)
 
@@ -726,6 +742,13 @@ def start(verbose, log_path, gamma):
                 monster_sprite = get_monster_sprite(monster.monster_type, monster_pos)
                 monster_sprite.rect.x = 640 - math.floor(monster_sprite.rect.w/2)
                 monster_group.add( monster_sprite )
+
+                for damage_type, icon_pos in zip(monster.weaknesses, monster_damage_types_pos):
+
+                    icon = get_damage_type_icon(damage_type, icon_pos)
+                    if icon is not None:
+                        monster_damage_types_group.add(icon)
+
 
         if location.node_type == NodeType.town:
             monster_hp_bar.empty()
@@ -824,7 +847,7 @@ def start(verbose, log_path, gamma):
 
         if monster_name_surface is not None:
             monster_info_rect = monster_name_surface.get_rect()
-            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 60)
+            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 30)
 
         archway_group.update()
 
@@ -835,6 +858,8 @@ def start(verbose, log_path, gamma):
         monster_hp_bar.update([monster])
 
         monster_group.update()
+
+        monster_damage_types_group.update()
 
         floating_number_group.update(floating_number_group)
 
@@ -895,6 +920,9 @@ def start(verbose, log_path, gamma):
 
         # draw monsters
         monster_group.draw(global_surf)
+
+        # Draw weakness types
+        monster_damage_types_group.draw(global_surf)
 
         archway_group.draw(global_surf)
 

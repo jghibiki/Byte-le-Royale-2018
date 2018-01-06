@@ -6,6 +6,127 @@ import ptext
 from game.visualizer.spritesheet_functions import SpriteSheet
 from game.common.enums import *
 
+
+class DamageIconSprite(pygame.sprite.Sprite):
+    def __init__(self, sprite_sheet_data, x, y):
+        super().__init__()
+
+        sprite_sheet = SpriteSheet("game/visualizer/assets/damage_type_icons.png")
+
+        self.icon_back = pygame.image.load("game/visualizer/assets/icon_back.png").convert_alpha()
+
+        self.image = self.icon_back
+
+        self.image.blit(sprite_sheet.get_image(sprite_sheet_data[0],
+                                            sprite_sheet_data[1],
+                                            sprite_sheet_data[2],
+                                            sprite_sheet_data[3]), (5, 5))
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class PiercingIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.piercing * 32,
+            32, 32
+        ], x, y)
+
+class SlashingIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.slashing * 32,
+            32, 32
+        ], x, y)
+
+class BludgeoningIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.bludgeoning * 32,
+            32, 32
+        ], x, y)
+
+class PrecisionIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.precision * 32,
+            32, 32
+        ], x, y)
+
+class FireIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.fire * 32,
+            32, 32
+        ], x, y)
+
+class ColdIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.cold * 32,
+            32, 32
+        ], x, y)
+
+class ElectricityIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.electricity * 32,
+            32, 32
+        ], x, y)
+
+class AcidIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.acid * 32,
+            32, 32
+        ], x, y)
+
+class SonicIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.sonic * 32,
+            32, 32
+        ], x, y)
+
+class ForceIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.force * 32,
+            32, 32
+        ], x, y)
+
+
+def get_damage_type_icon(damage_type, pos):
+    cls = None
+
+    if damage_type is DamageType.piercing:
+        cls = PiercingIconSprite
+    elif damage_type is DamageType.slashing:
+        cls = SlashingIconSprite
+    elif damage_type is DamageType.bludgeoning:
+        cls = BludgeoningIconSprite
+    elif damage_type is DamageType.precision:
+        cls = PrecisionIconSprite
+    elif damage_type is DamageType.fire:
+        cls = FireIconSprite
+    elif damage_type is DamageType.cold:
+        cls = ColdIconSprite
+    elif damage_type is DamageType.electricity:
+        cls = ElectricityIconSprite
+    elif damage_type is DamageType.acid:
+        cls = AcidIconSprite
+    elif damage_type is DamageType.sonic:
+        cls = SonicIconSprite
+    elif damage_type is DamageType.force:
+        cls = ForceIconSprite
+
+    if cls is None:
+        return None
+
+    return cls(*pos)
+
+
 class UnitIconSprite(pygame.sprite.Sprite):
     def __init__(self, sprite_sheet_data, x, y):
         super().__init__()

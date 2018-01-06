@@ -77,6 +77,12 @@ class Dragon(Monster):
         self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
+            DamageType.piercing,
+            DamageType.slashing,
+            DamageType.acid,
+            DamageType.cold,
+            DamageType.fire,
+            DamageType.electricity
         ]
 
 class Minotaur(Monster):
@@ -89,6 +95,12 @@ class Minotaur(Monster):
         self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
+            DamageType.piercing,
+            DamageType.slashing,
+            DamageType.acid,
+            DamageType.cold,
+            DamageType.fire,
+            DamageType.electricity
         ]
 
 class Slime(Monster):
@@ -101,6 +113,12 @@ class Slime(Monster):
         self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
+            DamageType.piercing,
+            DamageType.slashing,
+            DamageType.acid,
+            DamageType.cold,
+            DamageType.fire,
+            DamageType.electricity
         ]
 
 
