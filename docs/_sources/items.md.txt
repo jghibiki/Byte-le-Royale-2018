@@ -1,6 +1,6 @@
 # Items
 
-## Purchasign Items
+## Purchasing Items
 
 ### Client Storefront:
 
