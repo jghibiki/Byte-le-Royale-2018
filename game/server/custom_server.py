@@ -30,6 +30,8 @@ class CustomServer(ServerControl):
         self.gold = 300
         self.total_gold = 300
 
+        self.max_combat_rounds = 1000
+
         self.started = False
 
         self.combat_manager = None
@@ -191,6 +193,9 @@ class CustomServer(ServerControl):
                                 self.combat_manager = None
                                 return
                             elif self.combat_manager.success is False:
+                                self.game_over()
+                            elif self.combat_manager.round >= self.max_combat_rounds:
+                                print("Max Combat Rounds Reached: {}. Exiting. Intentional turtling possible.".format(self.combat_manager.round))
                                 self.game_over()
 
                     elif isinstance(self.current_location, TrapRoom):
