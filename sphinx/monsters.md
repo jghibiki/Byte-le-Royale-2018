@@ -3,7 +3,7 @@
 
 ## Wisp
 
-![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/wisp.png?raw=true)
+![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/wisp.png)
 
 **Stats:**
 ```eval_rst
@@ -37,7 +37,7 @@
 
 ## Beholder
 
-![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/beholder.png?raw=true)
+![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/beholder.png)
 
 **Stats:**
 ```eval_rst
@@ -70,7 +70,7 @@
 
 ## Dragon
 
-![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/dragon.png?raw=true)
+![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/dragon.png)
 
 **Stats:**
 ```eval_rst
@@ -103,7 +103,7 @@
 
 ## Minotaur
 
-![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/minotaur.png?raw=true)
+![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/minotaur.png)
 
 **Stats:**
 ```eval_rst
@@ -136,32 +136,32 @@
 
 ## Slime
 
-![](https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/thumbs/slime.png?raw=true)
+![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/slime.png)
 
 **Stats:**
 ```eval_rst
 +-------+--------+--------+------------+
 | Level | Health | Damage | Gold Value |
 +=======+========+========+============+
-| 1     |        |        |            |
+| 1     | 5500   | 175    | 235        |
 +-------+--------+--------+------------+
-| 2     |        |        |            |
+| 2     | 7425   | 271    | 340        |
 +-------+--------+--------+------------+
-| 3     |        |        |            |
+| 3     | 9350   | 367    | 446        |
 +-------+--------+--------+------------+
-| 4     |        |        |            |
+| 4     | 11274  | 463    | 552        |
 +-------+--------+--------+------------+
-| 5     |        |        |            |
+| 5     | 13200  | 560    | 658        |
 +-------+--------+--------+------------+
-| 6     |        |        |            |
+| 6     | 15125  | 656    | 763        |
 +-------+--------+--------+------------+
-| 7     |        |        |            |
+| 7     | 17049  | 752    | 875        |
 +-------+--------+--------+------------+
-| 8     |        |        |            |
+| 8     | 18975  | 848    | 975        |
 +-------+--------+--------+------------+
-| 9     |        |        |            |
+| 9     | 20900  | 945    | 1081       |
 +-------+--------+--------+------------+
-| 10    |        |        |            |
+| 10    | 22825  | 1041   | 1186       |
 +-------+--------+--------+------------+
 ```
 
@@ -197,3 +197,35 @@
 ```
 
 **Attack Logic:** Attacks a random player unit.
+
+
+## Wraith
+
+![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/wraith.png)
+
+**Stats:**
+```eval_rst
++-------+--------+--------+------------+
+| Level | Health | Damage | Gold Value |
++=======+========+========+============+
+| 1     | 6000   | 150    |  200       |
++-------+--------+--------+------------+
+| 2     | 75000  | 225    |  350       |
++-------+--------+--------+------------+
+| 3     | 90000  | 300    |  500       |
++-------+--------+--------+------------+
+| 4     | 10500  | 375    |  650       |
++-------+--------+--------+------------+
+| 5     | 12000  | 450    |  800       |
++-------+--------+--------+------------+
+| 6     | 13500  | 525    |  950       |
++-------+--------+--------+------------+
+| 7     | 15000  | 600    |  1100      |
++-------+--------+--------+------------+
+| 8     | 16500  | 675    |  1250      |
++-------+--------+--------+------------+
+| 9     | 18000  | 750    |  1400      |
++-------+--------+--------+------------+
+| 10    | 19500  | 825    |  1550      |
++-------+--------+--------+------------+
+```

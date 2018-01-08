@@ -1,3 +1,5 @@
+import math
+
 from game.common.game_serializable import Serializable
 from game.common.enums import *
 
@@ -46,10 +48,10 @@ class CombatItem(Item):
     def __init__(self):
         self.initialized = False
 
-    def init(self, name, damage, damage_types, level, item_type):
+    def init(self, name, damage, damage_types, level, item_type, damage_scale=0.5):
         Item.init(self, name, item_type)
 
-        self.damage = damage
+        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
         self.damage_types = damage_types
         self.level = level
 
