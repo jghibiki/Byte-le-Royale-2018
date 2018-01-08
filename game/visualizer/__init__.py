@@ -584,10 +584,24 @@ def start(verbose, log_path, gamma):
                     next_turn_counter += 2
 
                     if event["unit"].unit_class is UnitClass.pikeman:
-                        special_ability_group.add( TargetWeaknessAnimation(540, 170) )
+                        showing = False
+                        for ani in special_ability_group.sprites():
+                            if isinstance(ani, TargetWeaknessAnimation):
+                                showing = True
+                                break
+
+                        if not showing:
+                            special_ability_group.add( TargetWeaknessAnimation(540, 170) )
 
                     elif event["unit"].unit_class is UnitClass.magus:
-                        special_ability_group.add( ElementalBurstAnimation(480, 110) )
+                        showing = False
+                        for ani in special_ability_group.sprites():
+                            if isinstance(ani, ElementalBurstAnimation):
+                                showing = True
+                                break
+
+                        if not showing:
+                            special_ability_group.add( ElementalBurstAnimation(480, 110) )
 
                 elif event["type"] == Event.combat_resolved:
 

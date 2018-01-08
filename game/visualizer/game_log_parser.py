@@ -86,6 +86,9 @@ class GameLogParser:
             elif event["type"] == Event.special_ability:
                 event["unit"] = self._get_unit(event["unit"], units)
 
+            elif event["type"] == Event.special_ability_attack:
+                event["unit"] = self._get_unit(event["unit"], units)
+
             elif event["type"] == Event.room_choice:
 
                 if event["room_1"] is not None:
