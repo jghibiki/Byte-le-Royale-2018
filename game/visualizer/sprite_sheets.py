@@ -634,13 +634,11 @@ class BrawlerSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/brawler.png",
                     [
-                        [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
-                        [0, 256], [128, 256], [256, 256], [384, 256],
-                        [0, 384], [128, 384], [256, 384], [384, 384]
-
+                        [0,   0], [128,   0],
+                        [0, 128], [128, 128],
+                        [0, 256]
                     ],
                     x, y,
                     128, 128,
@@ -698,12 +696,11 @@ class WizardSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/wizard.png",
                     [
-                        [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
-                        [0, 256], [128, 256], [256, 256], [384, 256],
-                        [0, 384], [128, 384], [256, 384], [384, 384]
+                        [0,   0], [128,   0], [256,   0],
+                        [0, 128], [128, 128], [256, 128],
+                        [0, 256], [128, 256]
 
                     ],
                     x, y,

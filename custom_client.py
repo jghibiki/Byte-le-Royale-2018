@@ -21,7 +21,7 @@ class CustomClient(UserClient):
         return [
                 {
                     "name": "Martin",
-                    "class": UnitClass.knight
+                    "class": UnitClass.wizard
                 },
                 {
                     "name": "Steve",

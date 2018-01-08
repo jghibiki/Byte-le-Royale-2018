@@ -46,7 +46,7 @@
 ### Falling Ceiling
 - **Description:** The ceiling begins lowering until it squishes adventurers.
 - **Effort Stat:** Willpower
-- **Effort Required:** 30
+pr **Effort Required:** 30
 - **Pass Type:** Group Pass
 - **Damage Type**: All Units
 - **Frequency/Timer**: 3 turns
