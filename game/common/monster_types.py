@@ -47,6 +47,7 @@ class Wisp(Monster):
 
         self.weaknesses = [
             DamageType.slashing,
+            DamageType.electricity,
             DamageType.cold
         ]
 
@@ -64,7 +65,8 @@ class Beholder(Monster):
             DamageType.piercing,
             DamageType.slashing,
             DamageType.acid,
-            DamageType.cold
+            DamageType.cold,
+            DamageType.fire
         ]
 
 class Dragon(Monster):
@@ -81,8 +83,7 @@ class Dragon(Monster):
             DamageType.slashing,
             DamageType.acid,
             DamageType.cold,
-            DamageType.fire,
-            DamageType.electricity
+            DamageType.sonic
         ]
 
 class Minotaur(Monster):
@@ -95,12 +96,10 @@ class Minotaur(Monster):
         self.gold = 500 * (math.floor(0.5 * level) + 1)
 
         self.weaknesses = [
-            DamageType.piercing,
             DamageType.slashing,
+            DamageType.bludgeoning,
             DamageType.acid,
-            DamageType.cold,
-            DamageType.fire,
-            DamageType.electricity
+            DamageType.electricity,
         ]
 
 class Slime(Monster):
@@ -114,8 +113,7 @@ class Slime(Monster):
 
         self.weaknesses = [
             DamageType.piercing,
-            DamageType.slashing,
-            DamageType.acid,
+            DamageType.bludgeoning,
             DamageType.cold,
             DamageType.fire,
             DamageType.electricity
@@ -151,10 +149,8 @@ class Wraith(Monster):
 
         self.weaknesses = [
             DamageType.piercing,
-            DamageType.slashing,
-            DamageType.acid,
-            DamageType.cold,
             DamageType.fire,
-            DamageType.electricity
+            DamageType.electricity,
+            DamageType.sonic
         ]
 
