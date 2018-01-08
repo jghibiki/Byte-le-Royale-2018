@@ -10,7 +10,7 @@ from game.client.client_logic import ClientLogic
 @click.option("--client-verbose", is_flag=True)
 @click.option("--client", default="custom_client")
 @click.option("--port", default=8080)
-def start_client(client_verbose, client, port):
+def main(client_verbose, client, port):
 
     if client_verbose:
         print("Client Verbosity: ON")
@@ -20,4 +20,4 @@ def start_client(client_verbose, client, port):
     start(ClientLogic(client_verbose, mod.CustomClient()), client_verbose, port)
 
 if __name__ == "__main__":
-    start_client()
+    main()

@@ -8,7 +8,7 @@ from game.client.custom_client import CustomClient
 @click.option("--server-verbose", is_flag=True)
 @click.option("--server-loop", is_flag=True)
 @click.option("--port", default=8080)
-def start_server(server_verbose, server_loop, port):
+def main(server_verbose, server_loop, port):
 
     if server_verbose:
         print("Server Verbosity: ON")
@@ -16,4 +16,4 @@ def start_server(server_verbose, server_loop, port):
     start(server_verbose, server_loop, port)
 
 if __name__ == "__main__":
-    start_server()
+    main()
