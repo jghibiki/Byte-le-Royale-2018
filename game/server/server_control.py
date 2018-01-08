@@ -2,16 +2,18 @@ import random
 import os
 import json
 import platform
+import shutil
 from datetime import datetime, timedelta
 
 
 class ServerControl:
 
-    def __init__(self, verbose):
+    def __init__(self, wait_on_client, verbose):
 
         self._loop = None
         self._socket_client = None
         self.verbose = verbose
+        self.wait_on_client = wait_on_client
 
         self._clients_connected = 0
         self._client_ids = []
@@ -26,12 +28,16 @@ class ServerControl:
             self.turn_time = 0.01
 
         self.game_tick_no = 0
-        self.max_game_tick = 1e5
+        self.max_game_tick = 1e4
         self.turn_data = None
 
     def initialize(self):
         if self.verbose:
             print("Initializing Server Logic")
+
+        # clear game log
+        if os.path.exists("game_log"):
+            shutil.rmtree("game_log")
         self.send({ "type": "game_starting"})
         self.schedule(self.pre_tick, delay=0.1)
 
@@ -67,6 +73,11 @@ class ServerControl:
 
     def post_tick(self):
 
+        # wait for turn data before handling post tick
+        if self.turn_data is None and self.wait_on_client:
+            self.schedule(self.post_tick)
+            return
+
         self.post_turn()
 
         log_data = self.log()
@@ -75,8 +86,7 @@ class ServerControl:
         if self.game_tick_no < self.max_game_tick and not self._quit:
             self.schedule(self.pre_tick)
         else:
-            if self.verbose:
-                print("Game Completed")
+            print("Exiting - MAX Tickes: {0} exceeded".format(self.max_game_tick))
 
             # Dump Game log manifest
             with open("game_log/manifest.json", "w") as f:

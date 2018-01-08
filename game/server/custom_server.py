@@ -11,8 +11,8 @@ from game.common.item_types import get_item
 
 class CustomServer(ServerControl):
 
-    def __init__(self, verbose=False, server_loop=False):
-        super().__init__(verbose)
+    def __init__(self, verbose=False, server_loop=False, wait_on_client=False):
+        super().__init__(wait_on_client, verbose)
 
         self.verbose = verbose
         self.server_loop = server_loop
