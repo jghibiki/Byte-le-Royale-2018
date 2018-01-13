@@ -495,8 +495,6 @@ class CombatManager:
                 elif unit.unit_class is UnitClass.magus:
                     sa.use(turn_log, unit, self.monster)
 
-                elif unit.unit_class is UnitClass.wizard:
-                    sa.use(turn_log)
             else:
                 if unit.unit_class is UnitClass.rogue: # Hanble Rogue Items
                     if unit.combat_action == CombatAction.secondary_1 and unit.bomb_1 is not None and unit.bomb_1_quantity > 0:
