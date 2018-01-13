@@ -101,7 +101,7 @@ def unit_text(font, upper_left, unit):
         color=(255, 255, 255),
         owidth=2.0,
         ocolor=(0, 0, 0),
-        fontsize=14,
+        fontsize=16,
         fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
     primary_weapon_rect = primary_weapon_text.get_rect()
@@ -133,7 +133,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=24,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_1_rect = bomb_1_text.get_rect()
@@ -253,8 +253,8 @@ def start(verbose, log_path, gamma):
     unit_colors = {}
     colors = [
         pygame.Color("#FFFB00"),
-        pygame.Color("#FF0084"),
-        pygame.Color("#0005FF"),
+        pygame.Color("#FF91F2"),
+        pygame.Color("#36CDFF"),
         pygame.Color("#00FF7A")
     ]
     for unit in units:
