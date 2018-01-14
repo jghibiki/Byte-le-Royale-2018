@@ -724,7 +724,7 @@ class SorcererSprite(UnitSprite):
                     ],
                     x, y,
                     128, 128,
-                    2)
+                    3)
 
 class AlchemistSprite(UnitSprite):
     def __init__(self, x, y):
