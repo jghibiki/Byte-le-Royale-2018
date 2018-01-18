@@ -2,4 +2,5 @@
 make html
 
 
-cp -r _build/html/* ../docs/
+mkdir ../docs/documentation
+cp -r _build/html/* ../docs/documentation
