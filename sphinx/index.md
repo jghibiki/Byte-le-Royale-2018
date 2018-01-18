@@ -1,5 +1,5 @@
 
-# Welcome to Mini-MechMania's documentation!
+# Welcome to Byte-le Royale's documentation!
 
 
 

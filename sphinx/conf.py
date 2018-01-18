@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Mini-MechMania documentation build configuration file, created by
+# Byte-le-Royale documentation build configuration file, created by
 # sphinx-quickstart on Fri Nov 17 10:32:30 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -49,7 +49,7 @@ source_suffix = [ '.rst', '.md' ]
 master_doc = 'index'
 
 # General information about the project.
-project = 'Mini-MechMania'
+project = 'Byte-le-Royale'
 copyright = '2017, Jordan'
 author = 'Jordan'
 
@@ -119,7 +119,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Mini-MechManiadoc'
+htmlhelp_basename = 'Byte-le-Royaledoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -146,7 +146,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Mini-MechMania.tex', 'Mini-MechMania Documentation',
+    (master_doc, 'Byte-le-Royale.tex', 'Byte-le Royale Documentation',
      'Jordan', 'manual'),
 ]
 
@@ -156,7 +156,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'mini-mechmania', 'Mini-MechMania Documentation',
+    (master_doc, 'byte-le-royale', 'Byte-le Royale Documentation',
      [author], 1)
 ]
 
@@ -167,8 +167,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Mini-MechMania', 'Mini-MechMania Documentation',
-     author, 'Mini-MechMania', 'One line description of project.',
+    (master_doc, 'Byte-le Royale', 'Byte-le Royale Documentation',
+     author, 'Byte-le-Royale', 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -178,7 +178,7 @@ source_parsers = {
 }
 
 # At the bottom of conf.py
-github_doc_root = "https://jghibiki.github.io/Mini-MechMania-2017-2018/"
+github_doc_root = "https://jghibiki.github.io/Byte-le-Royale-2017-2018/"
 def setup(app):
     app.add_config_value('recommonmark_config', {
             'url_resolver': lambda url: github_doc_root + url,
