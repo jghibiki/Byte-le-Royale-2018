@@ -3,7 +3,7 @@
 
 ## Wisp
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/wisp.png)
+![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/wisp.png)
 
 **Stats:**
 ```eval_rst
@@ -37,7 +37,7 @@
 
 ## Beholder
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/beholder.png)
+![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/beholder.png)
 
 **Stats:**
 ```eval_rst
@@ -70,7 +70,7 @@
 
 ## Dragon
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/dragon.png)
+![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/dragon.png)
 
 **Stats:**
 ```eval_rst
@@ -103,7 +103,7 @@
 
 ## Minotaur
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/minotaur.png)
+![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/minotaur.png)
 
 **Stats:**
 ```eval_rst
@@ -136,7 +136,7 @@
 
 ## Slime
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/slime.png)
+![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/slime.png)
 
 **Stats:**
 ```eval_rst
@@ -196,12 +196,12 @@
 +-------+--------+--------+------------+
 ```
 
-e*Attack Logic:** Attacks a random player unit.
+*Attack Logic:** Attacks a random player unit.
 
 
 ## Wraith
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/wraith.png)
+![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/wraith.png)
 
 **Stats:**
 ```eval_rst
