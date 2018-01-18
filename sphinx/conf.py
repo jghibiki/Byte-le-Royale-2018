@@ -167,7 +167,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Byte-le Royale', 'Byte-le Royale Documentation',
+    (master_doc, 'Byte-le Royale', 'Dungeon Delvers Documentation',
      author, 'Byte-le-Royale', 'One line description of project.',
      'Miscellaneous'),
 ]
