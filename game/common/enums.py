@@ -38,6 +38,8 @@ class ItemSlot:
 
     spell_4 = 4
 
+    armor = 5
+
 class CombatAction:
     primary_weapon = 1
     secondary_1 = 2
@@ -110,6 +112,8 @@ class ItemType:
     flash_bomb = 17
     spike_bomb = 18
     concussion_bomb = 19
+
+    armor = 20
 
 class ItemClass:
     melee = 1

@@ -123,6 +123,41 @@ class UtilityItem(Item):
 
 
 
+##############
+# Armor Item #
+##############
 
+
+class ArmorItem(Item):
+
+    def __init__(self):
+        super().__init__()
+        self.initialized = False
+
+
+    def init(self, name, item_type, level, health):
+        Item.init(self, name, item_type)
+
+        self.initialized = True
+        self.health = health
+
+        self.level = level
+
+    def from_dict(self, d, safe=False):
+        Item.from_dict(self, d, safe)
+
+        self.level = d["level"]
+        self.health = d["health"]
+
+
+
+    def to_dict(self, safe=False):
+        data = Item.to_dict(self, safe)
+
+        data["name"] = self.name
+        data["level"] = self.level
+        data["health"] = self.health
+
+        return data
 
 

@@ -396,34 +396,34 @@ class CustomServer(ServerControl):
         return payload
 
     def get_shop_items(self):
-        shop_items = list(town_0)
+        shop_items = list(towns[0])
 
         if self.towns >= 1:
-            shop_items += list(town_1)
+            shop_items += list(towns[1])
 
         if self.towns >= 2:
-            shop_items += list(town_2)
+            shop_items += list(towns[2])
 
         if self.towns >= 3:
-            shop_items += list(town_3)
+            shop_items += list(towns[3])
 
         if self.towns >= 4:
-            shop_items += list(town_4)
+            shop_items += list(towns[4])
 
         if self.towns >= 5:
-            shop_items += list(town_5)
+            shop_items += list(towns[5])
 
         if self.towns >= 6:
-            shop_items += list(town_6)
+            shop_items += list(towns[6])
 
         if self.towns >= 7:
-            shop_items += list(town_7)
+            shop_items += list(towns[7])
 
         if self.towns >= 8:
-            shop_items += list(town_8)
+            shop_items += list(towns[8])
 
         if self.towns >= 9:
-            shop_items += list(town_9)
+            shop_items += list(towns[9])
 
     def get_unit_by_id(self, id):
         for unit in self.units:
@@ -495,21 +495,22 @@ class CustomServer(ServerControl):
 
                     item = None
 
-                    if unit.unit_class in [ UnitClass.knight, UnitClass.brawler, UnitClass.pikeman ]:
+                    if item_type is ItemType.armor:
                         self.gold -= item_cost
-                        item = get_item(item_type, item_level)
-                        unit.primary_weapon = item
+                        item = get_item(item_type, item_level, unit_class=unit.unit_class)
+                        unit.armor = item
+                        unit.current_health = item.health
+                        unit.health = item.health
 
                         self.turn_log["events"].append({
                             "type": Event.purchase_item,
                             "gold": self.gold,
                             "unit": unit.id,
-                            "slot": ItemSlot.primary
+                            "slot": ItemSlot.armor
                         })
+                    else:
 
-                    if unit.unit_class == UnitClass.rogue:
-
-                        if item_slot is None:
+                        if unit.unit_class in [ UnitClass.knight, UnitClass.brawler, UnitClass.pikeman ]:
                             self.gold -= item_cost
                             item = get_item(item_type, item_level)
                             unit.primary_weapon = item
@@ -521,177 +522,191 @@ class CustomServer(ServerControl):
                                 "slot": ItemSlot.primary
                             })
 
-                        elif item_slot == 1:
-                            self.gold -= item_cost
+                        if unit.unit_class == UnitClass.rogue:
 
-                            if(unit.bomb_1 is not None and
-                               item_type is unit.bomb_1.item_type and
-                               unit.bomb_1_quantity < 2):
+                            if item_slot is None:
+                                self.gold -= item_cost
+                                item = get_item(item_type, item_level)
+                                unit.primary_weapon = item
+
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.primary
+                                })
+
+                            elif item_slot == 1:
+                                self.gold -= item_cost
+
+                                if(unit.bomb_1 is not None and
+                                   item_type is unit.bomb_1.item_type and
+                                   unit.bomb_1_quantity < 2):
+                                        unit.bomb_1_quantity += 1
+                                else:
+                                    item = get_item(item_type, item_level)
+                                    unit.bomb_1 = item
+                                    unit.bomb_1_quantity = 1
+
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.bomb_1
+                                })
+
+                            elif item_slot == 2:
+
+                                self.gold -= item_cost
+
+                                if(unit.bomb_2 is not None and
+                                   item_type is unit.bomb_2.item_type and
+                                   unit.bomb_2_quantity < 2):
+                                    unit.bomb_2_quantity += 1
+                                else:
+                                    item = get_item(item_type, item_level)
+                                    unit.bomb_2 = item
+                                    unit.bomb_2_quantity = 1
+
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.bomb_2
+                                })
+
+                            elif item_slot == 3:
+                                self.gold -= item_cost
+
+                                if(unit.bomb_3 is not None and
+                                   item_type is unit.bomb_3.item_type and
+                                   unit.bomb_3_quantity < 2):
+                                    unit.bomb_3_quantity += 1
+                                else:
+                                    item = get_item(item_type, item_level)
+                                    unit.bomb_3 = item
+                                    unit.bomb_3_quantity = 1
+
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.bomb_3
+                                })
+
+
+                        elif unit.unit_class == UnitClass.alchemist:
+                            if item_slot is None:
+                                self.gold -= item_cost
+                                item = get_item(item_type, item_level)
+                                unit.primary_weapon = item
+
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.primary
+                                })
+
+                            elif item_slot == 1:
+                                self.gold -= item_cost
+
+                                if(unit.bomb_1 is not None and
+                                   item_type is unit.bomb_1.item_type and
+                                   unit.bomb_1_quantity < 2):
                                     unit.bomb_1_quantity += 1
-                            else:
+                                else:
+                                    item = get_item(item_type, item_level)
+                                    unit.bomb_1 = item
+                                    unit.bomb_1_quantity = 1
+
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.bomb_1
+                                })
+
+                            elif item_slot == 2:
+                                self.gold -= item_cost
+
+                                if(unit.bomb_2 is not None and
+                                   item_type is unit.bomb_2.item_type and
+                                   unit.bomb_2_quantity < 2):
+
+                                    unit.bomb_2_quantity += 1
+                                else:
+                                    item = get_item(item_type, item_level)
+                                    unit.bomb_2 = item
+                                    unit.bomb_2_quantity = 1
+
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.bomb_2
+                                })
+
+                        elif unit.unit_class in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ]:
+                            if item_slot is None:
+                                self.gold -= item_cost
                                 item = get_item(item_type, item_level)
-                                unit.bomb_1 = item
-                                unit.bomb_1_quantity = 1
+                                unit.primary_weapon = item
 
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.bomb_1
-                            })
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.primary
+                                })
 
-                        elif item_slot == 2:
-
-                            self.gold -= item_cost
-
-                            if(unit.bomb_2 is not None and
-                               item_type is unit.bomb_2.item_type and
-                               unit.bomb_2_quantity < 2):
-                                unit.bomb_2_quantity += 1
-                            else:
+                            elif item_slot == 1:
+                                self.gold -= item_cost
                                 item = get_item(item_type, item_level)
-                                unit.bomb_2 = item
-                                unit.bomb_2_quantity = 1
+                                unit.spell_1 = item
 
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.bomb_2
-                            })
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.spell_1
+                                })
 
-                        elif item_slot == 3:
-                            self.gold -= item_cost
-
-                            if(unit.bomb_3 is not None and
-                               item_type is unit.bomb_3.item_type and
-                               unit.bomb_3_quantity < 2):
-                                unit.bomb_3_quantity += 1
-                            else:
+                            elif item_slot == 2:
+                                self.gold -= item_cost
                                 item = get_item(item_type, item_level)
-                                unit.bomb_3 = item
-                                unit.bomb_3_quantity = 1
+                                unit.spell_2 = item
 
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.bomb_3
-                            })
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.spell_2
+                                })
 
-
-                    elif unit.unit_class == UnitClass.alchemist:
-                        if item_slot is None:
-                            self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.primary_weapon = item
-
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.primary
-                            })
-
-                        elif item_slot == 1:
-                            self.gold -= item_cost
-
-                            if(unit.bomb_1 is not None and
-                               item_type is unit.bomb_1.item_type and
-                               unit.bomb_1_quantity < 2):
-                                unit.bomb_1_quantity += 1
-                            else:
+                            elif item_slot == 3:
+                                self.gold -= item_cost
                                 item = get_item(item_type, item_level)
-                                unit.bomb_1 = item
-                                unit.bomb_1_quantity = 1
+                                unit.spell_3 = item
 
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.bomb_1
-                            })
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.spell_3
+                                })
 
-                        elif item_slot == 2:
-                            self.gold -= item_cost
-
-                            if(unit.bomb_2 is not None and
-                               item_type is unit.bomb_2.item_type and
-                               unit.bomb_2_quantity < 2):
-
-                                unit.bomb_2_quantity += 1
-                            else:
+                            elif item_slot == 4:
+                                self.gold -= item_cost
                                 item = get_item(item_type, item_level)
-                                unit.bomb_2 = item
-                                unit.bomb_2_quantity = 1
+                                unit.spell_4 = item
 
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.bomb_2
-                            })
-
-                    elif unit.unit_class in [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ]:
-                        if item_slot is None:
-                            self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.primary_weapon = item
-
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.primary
-                            })
-
-                        elif item_slot == 1:
-                            self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.spell_1 = item
-
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.spell_1
-                            })
-
-                        elif item_slot == 2:
-                            self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.spell_2 = item
-
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.spell_2
-                            })
-
-                        elif item_slot == 3:
-                            self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.spell_3 = item
-
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.spell_3
-                            })
-
-                        elif item_slot == 4:
-                            self.gold -= item_cost
-                            item = get_item(item_type, item_level)
-                            unit.spell_4 = item
-
-                            self.turn_log["events"].append({
-                                "type": Event.purchase_item,
-                                "gold": self.gold,
-                                "unit": unit.id,
-                                "slot": ItemSlot.spell_4
-                            })
+                                self.turn_log["events"].append({
+                                    "type": Event.purchase_item,
+                                    "gold": self.gold,
+                                    "unit": unit.id,
+                                    "slot": ItemSlot.spell_4
+                                })
 
                     if item is not None:
                         print("{0} purchased {1}".format(unit.name, item.name))
