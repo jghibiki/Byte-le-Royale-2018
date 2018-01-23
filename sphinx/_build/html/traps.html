@@ -190,31 +190,31 @@
 <span id="effort-types"></span><h3>Effort Types:<a class="headerlink" href="#effort-types" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>Large Effort:</strong><ul>
-<li>Description: The unit invests a large amount of effort in a small amount of time, at the cost of precision.</li>
-<li>Energy cost: 5</li>
-<li>Resulting Effort: 4</li>
-<li>Additional Effects: None</li>
+<li><strong>Description:</strong> The unit invests a large amount of effort in a small amount of time, at the cost of precision.</li>
+<li><strong>Energy cost:</strong> 5</li>
+<li><strong>Resulting Effort:</strong> 4</li>
+<li><strong>Additional Effects:</strong> None</li>
 </ul>
 </li>
 <li><strong>Little Effort:</strong><ul>
-<li>Description: The unit invests only a little effort, but taking time to avoid errors or mistakes.</li>
-<li>Energy cost: 2</li>
-<li>Resulting Effort: 2</li>
-<li>Additional Effects: None</li>
+<li><strong>Description:</strong> The unit invests only a little effort, but taking time to avoid errors or mistakes.</li>
+<li><strong>Energy cost:</strong> 2</li>
+<li><strong>Resulting Effort:</strong> 2</li>
+<li><strong>Additional Effects:</strong> None</li>
 </ul>
 </li>
 <li><strong>Evade:</strong><ul>
-<li>Description: The unit attempts to avoid receiving damage from the trap.</li>
-<li>Energy cost: 3</li>
-<li>Resulting Effort: 0</li>
-<li>Additional Effects: The unit takes 50% less damage from any trap effects for this round.</li>
+<li><strong>Description:</strong> The unit attempts to avoid receiving damage from the trap.</li>
+<li><strong>Energy cost:</strong> 3</li>
+<li><strong>Resulting Effort:</strong> 0</li>
+<li><strong>Additional Effects:</strong> The unit takes 50% less damage from any trap effects for this round.</li>
 </ul>
 </li>
 <li><strong>Wait:</strong><ul>
-<li>Description: The unit waits.</li>
-<li>Energy cost: 0</li>
-<li>Resulting Effort: 0</li>
-<li>Additional Effects: None</li>
+<li><strong>Description:</strong> The unit waits.</li>
+<li><strong>Energy cost:</strong> 0</li>
+<li><strong>Resulting Effort:</strong> 0</li>
+<li><strong>Additional Effects:</strong> None</li>
 </ul>
 </li>
 </ul>
@@ -236,61 +236,153 @@
 <span id="trap-types"></span><h2>Trap Types<a class="headerlink" href="#trap-types" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="spike-pit">
 <span id="spike-pit"></span><h3>Spike Pit<a class="headerlink" href="#spike-pit" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><strong>Description:</strong> A pit (or strip) of spikes.</li>
-<li><strong>Effort Stat:</strong> Willpower</li>
-<li><strong>Effort Required:</strong> 30</li>
-<li><strong>Pass Type:</strong> Individual Pass</li>
-<li><strong>Damage Type</strong>: Random Unit</li>
-<li><strong>Frequency</strong>: Every 1 turns.</li>
-<li><strong>Damage Amount</strong>: 100</li>
-</ul>
+<p><strong>Description:</strong> A pit (or strip) of spikes.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Effort Stat</strong></td>
+<td>Willpower</td>
+</tr>
+<tr class="row-even"><td><strong>Effort Required</strong></td>
+<td>30</td>
+</tr>
+<tr class="row-odd"><td><strong>Pass Type</strong></td>
+<td>Individual Pass</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Type</strong></td>
+<td>Random Unit</td>
+</tr>
+<tr class="row-odd"><td><strong>Frequency/Timer</strong></td>
+<td>Every 1 turns</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Amount</strong></td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="falling-ceiling">
 <span id="falling-ceiling"></span><h3>Falling Ceiling<a class="headerlink" href="#falling-ceiling" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><strong>Description:</strong> The ceiling begins lowering until it squishes adventurers.</li>
-<li><strong>Effort Stat:</strong> Willpower
-pr <strong>Effort Required:</strong> 30</li>
-<li><strong>Pass Type:</strong> Group Pass</li>
-<li><strong>Damage Type</strong>: All Units</li>
-<li><strong>Frequency/Timer</strong>: 3 turns</li>
-<li><strong>Damage Amount</strong>: 999999</li>
-</ul>
+<p><strong>Description:</strong> The ceiling begins lowering until it squishes adventurers.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Effort Stat</strong></td>
+<td>Willpower</td>
+</tr>
+<tr class="row-even"><td><strong>Effort Required</strong></td>
+<td>30</td>
+</tr>
+<tr class="row-odd"><td><strong>Pass Type</strong></td>
+<td>Group Pass</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Type</strong></td>
+<td>All Units</td>
+</tr>
+<tr class="row-odd"><td><strong>Frequency/Timer</strong></td>
+<td>3 Turns</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Amount</strong></td>
+<td>99999999</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="puzzle-box">
 <span id="puzzle-box"></span><h3>Puzzle Box<a class="headerlink" href="#puzzle-box" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><strong>Description:</strong> An arcane, segmented box, glowing with odd runes.</li>
-<li><strong>Effort Stat:</strong> Focus</li>
-<li><strong>Effort Required:</strong> 30</li>
-<li><strong>Pass Type:</strong> Group Pass</li>
-<li><strong>Damage Type</strong>: Unit with lowest health.</li>
-<li><strong>Frequency/Timer</strong>: 2 turns</li>
-<li><strong>Damage Amount</strong>: 100</li>
-</ul>
+<p><strong>Description:</strong> An arcane, segmented box, glowing with odd runes.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Effort Stat</strong></td>
+<td>Focus</td>
+</tr>
+<tr class="row-even"><td><strong>Effort Required</strong></td>
+<td>30</td>
+</tr>
+<tr class="row-odd"><td><strong>Pass Type</strong></td>
+<td>Group Pass</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Type</strong></td>
+<td>Unit with lowest health</td>
+</tr>
+<tr class="row-odd"><td><strong>Frequency/Timer</strong></td>
+<td>2 Turns</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Amount</strong></td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="pendulum-bridge">
 <span id="pendulum-bridge"></span><h3>Pendulum Bridge<a class="headerlink" href="#pendulum-bridge" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><strong>Description:</strong> A bridge, with many swinging axes between you and the exit. A leaver to disable the axes can be seen on the other side.</li>
-<li><strong>Effort Stat:</strong> Willpower</li>
-<li><strong>Pass Type:</strong> Group Pass on One Success</li>
-<li><strong>Damage Type</strong>: Random unit.</li>
-<li><strong>Frequency/Timer</strong>: every turn</li>
-<li><strong>Damage Amount</strong>: 250</li>
-</ul>
+<p><strong>Description:</strong> A bridge, with many swinging axes between you and the exit. A leaver to disable the axes can be seen on the other side.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Effort Stat</strong></td>
+<td>Willpower</td>
+</tr>
+<tr class="row-even"><td><strong>Effort Required</strong></td>
+<td>30</td>
+</tr>
+<tr class="row-odd"><td><strong>Pass Type</strong></td>
+<td>Group Pass on One Success</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Type</strong></td>
+<td>Random Unit</td>
+</tr>
+<tr class="row-odd"><td><strong>Frequency/Timer</strong></td>
+<td>Every Turn</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Amount</strong></td>
+<td>250</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="riddles-of-the-sphinx">
 <span id="riddles-of-the-sphinx"></span><h3>Riddles of the Sphinx<a class="headerlink" href="#riddles-of-the-sphinx" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><strong>Description:</strong> A sphinx, waiting to tickle your mortal brain for eternity. Solve its riddles to escape.</li>
-<li><strong>Effort Stat:</strong> Focus</li>
-<li><strong>Pass Type:</strong> Group Pass on One Success</li>
-<li><strong>Damage Type</strong>: Random unit.</li>
-<li><strong>Frequency/Timer</strong>: every turn</li>
-<li><strong>Damage Amount</strong>: 250</li>
-</ul>
+<p><strong>Description:</strong> A sphinx, waiting to tickle your mortal brain for eternity. Solve its riddles to escape.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Effort Stat</strong></td>
+<td>Focus</td>
+</tr>
+<tr class="row-even"><td><strong>Effort Required</strong></td>
+<td>30</td>
+</tr>
+<tr class="row-odd"><td><strong>Pass Type</strong></td>
+<td>Group Pass on One Success</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Type</strong></td>
+<td>Random Unit</td>
+</tr>
+<tr class="row-odd"><td><strong>Frequency/Timer</strong></td>
+<td>Every Turn</td>
+</tr>
+<tr class="row-even"><td><strong>Damage Amount</strong></td>
+<td>250</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>

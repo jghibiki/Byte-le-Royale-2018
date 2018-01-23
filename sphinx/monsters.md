@@ -44,7 +44,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ### Wisp
 
-![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/wisp.png)
+![](_static/wisp.png)
 
 **Stats:**
 ```eval_rst
@@ -78,7 +78,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ### Beholder
 
-![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/beholder.png)
+![](_static/beholder.png)
 
 **Stats:**
 ```eval_rst
@@ -111,7 +111,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ### Dragon
 
-![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/dragon.png)
+![](_static/dragon.png)
 
 **Stats:**
 ```eval_rst
@@ -144,7 +144,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ### Minotaur
 
-![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/minotaur.png)
+![](_static/minotaur.png)
 
 **Stats:**
 ```eval_rst
@@ -177,7 +177,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ### Slime
 
-![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/slime.png)
+![](_static/slime.png)
 
 **Stats:**
 ```eval_rst
@@ -242,7 +242,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ### Wraith
 
-![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/wraith.png)
+![](_static/wraith.png)
 
 **Stats:**
 ```eval_rst
