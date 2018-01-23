@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Traps &mdash; Byte-le-Royale 9 documentation</title>
+  <title>Traps &amp; Avoiding Traps &mdash; Byte-le-Royale 2018:&lt;br&gt;Dungeon Delvers 9 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Byte-le-Royale 9 documentation" href="index.html"/>
-        <link rel="next" title="Items" href="items.html"/>
+    <link rel="top" title="Byte-le-Royale 2018:&lt;br&gt;Dungeon Delvers 9 documentation" href="index.html"/>
+        <link rel="next" title="Items &amp; Purchasing Items" href="items.html"/>
         <link rel="prev" title="Unit Classes" href="unit_classes.html"/> 
 
   
@@ -58,7 +58,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Byte-le-Royale
+            <a href="index.html" class="icon icon-home"> Byte-le-Royale 2018:<br>Dungeon Delvers
           
 
           
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                Version 0.1
+                Version 1.0
               </div>
             
           
@@ -97,8 +97,12 @@
 <li class="toctree-l1"><a class="reference internal" href="running_the_game.html">Running The Game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unit_classes.html">Unit Classes</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Traps</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#effort-types">Effort Types:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#trap-pass-types">Trap Pass Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#avoiding-traps">Avoiding Traps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#effort-types">Effort Types:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trap-pass-types">Trap Pass Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#general-trap-properties">General Trap Properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#trap-types">Trap Types</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#spike-pit">Spike Pit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#falling-ceiling">Falling Ceiling</a></li>
@@ -107,7 +111,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#riddles-of-the-sphinx">Riddles of the Sphinx</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#trap-api">Trap API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="items.html">Items</a></li>
@@ -127,7 +130,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Byte-le-Royale</a>
+          <a href="index.html">Byte-le-Royale 2018:<br>Dungeon Delvers</a>
         
       </nav>
 
@@ -157,7 +160,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Traps</li>
+      <li>Traps &amp; Avoiding Traps</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,11 +179,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="traps">
-<span id="traps"></span><h1>Traps<a class="headerlink" href="#traps" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="traps-avoiding-traps">
+<span id="traps-avoiding-traps"></span><h1>Traps &amp; Avoiding Traps<a class="headerlink" href="#traps-avoiding-traps" title="Permalink to this headline">¶</a></h1>
 <p>-- trap description - describe how the trap portion of the game works --</p>
+<div class="section" id="avoiding-traps">
+<span id="avoiding-traps"></span><h2>Avoiding Traps<a class="headerlink" href="#avoiding-traps" title="Permalink to this headline">¶</a></h2>
+<p>-- description of how to check a trap type given a trap object. --</p>
+<p>-- description of the subset of the unit api that is useful for traps --</p>
 <div class="section" id="effort-types">
-<span id="effort-types"></span><h2>Effort Types:<a class="headerlink" href="#effort-types" title="Permalink to this headline">¶</a></h2>
+<span id="effort-types"></span><h3>Effort Types:<a class="headerlink" href="#effort-types" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>Large Effort:</strong><ul>
 <li>Description: The unit invests a large amount of effort in a small amount of time, at the cost of precision.</li>
@@ -213,12 +220,17 @@
 </ul>
 </div>
 <div class="section" id="trap-pass-types">
-<span id="trap-pass-types"></span><h2>Trap Pass Types<a class="headerlink" href="#trap-pass-types" title="Permalink to this headline">¶</a></h2>
+<span id="trap-pass-types"></span><h3>Trap Pass Types<a class="headerlink" href="#trap-pass-types" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>Individual Pass:</strong> Each unit must disarm/navigate/avoid the trap on their own to succeed. The party only moves on when all units have succeeded or died.</li>
 <li><strong>Group Effort Pass:</strong> The effort of the entire party contributes to the disarming of one trap. The party only moves on once the trap effort gauge is filled.</li>
 <li><strong>Group Pass on One Success:</strong> Each unit works to disarm/navigate/avoid their own trap. The party is able to move on once one unit succeeds in disarming a trap.</li>
 </ul>
+</div>
+</div>
+<div class="section" id="general-trap-properties">
+<span id="general-trap-properties"></span><h2>General Trap Properties<a class="headerlink" href="#general-trap-properties" title="Permalink to this headline">¶</a></h2>
+<p>General properties of traps</p>
 </div>
 <div class="section" id="trap-types">
 <span id="trap-types"></span><h2>Trap Types<a class="headerlink" href="#trap-types" title="Permalink to this headline">¶</a></h2>
@@ -281,11 +293,6 @@ pr <strong>Effort Required:</strong> 30</li>
 </ul>
 </div>
 </div>
-<div class="section" id="trap-api">
-<span id="trap-api"></span><h2>Trap API<a class="headerlink" href="#trap-api" title="Permalink to this headline">¶</a></h2>
-<p>-- description of how to check a trap type given a trap object. --</p>
-<p>-- description of the subset of the unit api that is useful for traps --</p>
-</div>
 </div>
 
 
@@ -298,7 +305,7 @@ pr <strong>Effort Required:</strong> 30</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="items.html" class="btn btn-neutral float-right" title="Items" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="items.html" class="btn btn-neutral float-right" title="Items &amp; Purchasing Items" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="unit_classes.html" class="btn btn-neutral" title="Unit Classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -310,7 +317,7 @@ pr <strong>Effort Required:</strong> 30</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Jordan.
+        &copy; Copyright 2017-2018, Jordan Goetze.
 
     </p>
   </div>

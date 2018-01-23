@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview &mdash; Byte-le-Royale 9 documentation</title>
+  <title>Dungeon Delvers Overview &mdash; Byte-le-Royale 2018:&lt;br&gt;Dungeon Delvers 9 documentation</title>
   
 
   
@@ -37,9 +37,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Byte-le-Royale 9 documentation" href="index.html"/>
+    <link rel="top" title="Byte-le-Royale 2018:&lt;br&gt;Dungeon Delvers 9 documentation" href="index.html"/>
         <link rel="next" title="Running The Game" href="running_the_game.html"/>
-        <link rel="prev" title="Welcome to Byte-le Royale&#39;s documentation!" href="index.html"/> 
+        <link rel="prev" title="Welcome to Byte-le Royale 2018: Dungeon Delvers&#39; documentation!" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -58,7 +58,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Byte-le-Royale
+            <a href="index.html" class="icon icon-home"> Byte-le-Royale 2018:<br>Dungeon Delvers
           
 
           
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                Version 0.1
+                Version 1.0
               </div>
             
           
@@ -93,7 +93,17 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-event">The Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-goal">The Goal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-basics">The Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#towns">Towns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monsters">Monsters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#traps">Traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#choosing-your-path">Choosing your path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#judging">Judging</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="running_the_game.html">Running The Game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unit_classes.html">Unit Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="traps.html">Traps</a></li>
@@ -114,7 +124,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Byte-le-Royale</a>
+          <a href="index.html">Byte-le-Royale 2018:<br>Dungeon Delvers</a>
         
       </nav>
 
@@ -144,7 +154,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Overview</li>
+      <li>Dungeon Delvers Overview</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -163,8 +173,244 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="overview">
-<span id="overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+  <!-- <img src="_static/dd.png"/> --><div class="section" id="dungeon-delvers-overview">
+<span id="dungeon-delvers-overview"></span><h1>Dungeon Delvers Overview<a class="headerlink" href="#dungeon-delvers-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-event">
+<span id="the-event"></span><h2>The Event<a class="headerlink" href="#the-event" title="Permalink to this headline">¶</a></h2>
+<p>Lead your fearless adventurers into the depths of the earth with the magical language of Python. Gather gold, fame, and glory to become the envy of your fellow competitors.</p>
+<p>Once the event starts, you will have 24 hours to build the best team. Never forget though, sleep is essential to successful adventuring. Get plenty of sleep!</p>
+</div>
+<div class="section" id="the-goal">
+<span id="the-goal"></span><h2>The Goal<a class="headerlink" href="#the-goal" title="Permalink to this headline">¶</a></h2>
+<p>The goal is to collect more trophies than any other party of adventurers. Your task is to program the most capable party of adventurers who will traverse randomly generated dungeons to earn as many trophies as possible. Gold and trophies are awarded for killing <a class="reference external" href="#monsters">monsters</a> but beware - monsters can be very deadly. The more dangerous a monster the more gold will be rewarded. Gold can be spent in <a class="reference external" href="#towns">town</a> to purchase better weapons and spells for your party. <a class="reference external" href="#traps">Traps</a>, while still dangerous, allow your party to avoid monsters that are too challenging.</p>
+</div>
+<div class="section" id="the-basics">
+<span id="the-basics"></span><h2>The Basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
+<p>Controlling your adventurers will be as simple as using a basic Python API, which will command your units to take various actions.</p>
+<p>The game is made up of several phases. These phases are best described as different rooms or locations. The first location your team will visit each game is a Town (for more about towns see <a class="reference external" href="#towns">Towns</a> and <a class="reference external" href="https://jghibiki.github.io/Byte-le-Royale-2018/~documentation/items.html#purchasing-items">Purchasing Items</a>). Once you are done in town, your party will venture out into various dungeons. A dungeon is made up of many rooms. Clearing a dungeon will allow you to return to town whereupon your team will be fully rested and healed. These dungeons will be of increasing length and difficulty so you will need to carefully plan how to survive. Once you clear a room in a dungeon you will be allowed a sneak-peek at what lies beyond. If there are two doors, you will be given the choice of which door to enter (see <a class="reference external" href="#choosing-your-path">Choosing Your Path</a>).</p>
+<p>The following code, is an example of a bare-bones client. A client is made up of several methods which will be called automatically by the networking mechanisms of the client which are implemented by inheriting the UserClient super-class. At the beginning of each method, there is a description of what each event-handling method does.</p>
+<p><em>Note: Tampering with any variables or methods defined by the UserClient method will be considered cheating and you will be disqualified.</em></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">from</span> <span class="nn">game.client.user_client</span> <span class="kn">import</span> <span class="n">UserClient</span>
+<span class="kn">from</span> <span class="nn">game.common.enums</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">CustomClient</span><span class="p">(</span><span class="n">UserClient</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Use the constructor to initialize any variables you </span>
+<span class="sd">        would like to track between turns. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">team_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows teams to set the team name. This is called once per game. </span>
+<span class="sd">        The character limit is 35 characters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Team Coffee!&quot;</span>
+
+    <span class="k">def</span> <span class="nf">unit_choice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows teams to name their units and pick what class each unit should be.</span>
+<span class="sd">        Only one unit of each class is allowed. Exactly four units are required.</span>
+<span class="sd">        </span>
+<span class="sd">        Valid Unit Types:</span>
+<span class="sd">            - UnitClass.knight</span>
+<span class="sd">            - UnitClass.brawler</span>
+<span class="sd">            - UnitClass.pikeman</span>
+<span class="sd">            - UnitClass.rogue</span>
+<span class="sd">            - UnitClass.magus</span>
+<span class="sd">            - UnitClass.sorcerer</span>
+<span class="sd">            - UnitClass.wizard</span>
+<span class="sd">            - UnitClass.alchemist </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Martin&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">UnitClass</span><span class="o">.</span><span class="n">wizard</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Steve&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">UnitClass</span><span class="o">.</span><span class="n">brawler</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alphonse&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">UnitClass</span><span class="o">.</span><span class="n">rogue</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">UnitClass</span><span class="o">.</span><span class="n">alchemist</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">town</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">gold</span><span class="p">,</span> <span class="n">store</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows units to purchase items while in town. Called when units </span>
+<span class="sd">        enter town. </span>
+<span class="sd">        </span>
+<span class="sd">        In the provided example, the code print a summary of the party&#39;s current </span>
+<span class="sd">        gold. Then depending on if this is the first (or zero-th town) the </span>
+<span class="sd">        party has been to it will attempt to purchase three items for Thomas, </span>
+<span class="sd">        armor (to increase Thomas&#39;s health), a Fire Bomb which is placed in</span>
+<span class="sd">        his second item slot, and an Acid Bomb which is placed in his first</span>
+<span class="sd">        item slot. Thomas is an alchemist, alchemists have to item slots and the</span>
+<span class="sd">        ability to purchase bombs.</span>
+<span class="sd">        </span>
+<span class="sd">        At the second town, Thomas purchases some upgrades/refills, and Martin</span>
+<span class="sd">        purchases a better sword.</span>
+<span class="sd">        </span>
+<span class="sd">        For item properties and further documentation on how </span>
+<span class="sd">        to purchase items see: http://royale.ndacm.org/~documentation/items.html </span>
+<span class="sd">        </span>
+<span class="sd">        Note: If the team does not have enough gold to cover the cost of an item,</span>
+<span class="sd">        the purchase will be canceled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Town&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Gold: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gold</span><span class="p">))</span>
+
+
+        <span class="k">if</span> <span class="n">store</span><span class="o">.</span><span class="n">get_town_number</span><span class="p">()</span> <span class="ow">is</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="s2">&quot;thomas&quot;</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">store</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">ItemType</span><span class="o">.</span><span class="n">armor</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">store</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">ItemType</span><span class="o">.</span><span class="n">fire_bomb</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">item_slot</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">store</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">ItemType</span><span class="o">.</span><span class="n">acid_bomb</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">item_slot</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">store</span><span class="o">.</span><span class="n">get_town_number</span><span class="p">()</span> <span class="ow">is</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="s2">&quot;thomas&quot;</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">store</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">ItemType</span><span class="o">.</span><span class="n">armor</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">store</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">ItemType</span><span class="o">.</span><span class="n">fire_bomb</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">item_slot</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">store</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">ItemType</span><span class="o">.</span><span class="n">fire_bomb</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">item_slot</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="s2">&quot;martin&quot;</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">store</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">ItemType</span><span class="o">.</span><span class="n">sword</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">room_choice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    When leaving a room, you will be given the opportunity to choose </span>
+<span class="sd">    what room you enter next. Some rooms will only have one door,</span>
+<span class="sd">    others will have two. Options is a dictionary of your options.</span>
+<span class="sd">        - options[Direction.right] provides access to the room on the right</span>
+<span class="sd">        - options[Direction.left] provides access to the room on the left</span>
+<span class="sd">        </span>
+<span class="sd">    The room objects will have a property to determine what type of room it is.</span>
+<span class="sd">    If:</span>
+<span class="sd">        - room.node_type == NodeType.town: Then the room is a town</span>
+<span class="sd">        - room.node_type == NodeType.monster: Then the room is a monster room.</span>
+<span class="sd">            - The monster from the monster room can be found with room.monster</span>
+<span class="sd">            - For monster properties see http://royale.ndacm.org/~documentation/monsters.html</span>
+<span class="sd">        - room.node_type == NodeType.trap: Then the room is a trap room.</span>
+<span class="sd">            - The trap from the trap room can be found with room.trap</span>
+<span class="sd">            - For trap properties see http://royale.ndacm.org/~documentation/traps.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Direction</span><span class="o">.</span><span class="n">forward</span>
+
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="n">Direction</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">left</span><span class="p">])</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">MessageType</span><span class="o">.</span><span class="n">null</span>
+
+    <span class="k">def</span> <span class="nf">combat_round</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monster</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Event handler for combat. This method is called once for each round of combat. </span>
+<span class="sd">        If combat has ended, the room_choice method will be called.</span>
+<span class="sd">        </span>
+<span class="sd">        This example implementation, begins by printing a summary of the monster&#39;s stats</span>
+<span class="sd">        and each of the party&#39;s stats. Then for each unit, if the unit (Thomas) is an</span>
+<span class="sd">        alchemist, and Thomas has bombs in bomb slot #2, then use a bomb. If there are</span>
+<span class="sd">        no bombs, use the alchemist resupply ability (passing the bomb slot containing the</span>
+<span class="sd">        bomb type the alchemist would like to resupply). If the unit is not an alchemist,</span>
+<span class="sd">        then they are told to do a basic attack.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Combat&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">monster</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">unit_class</span> <span class="o">==</span> <span class="n">UnitClass</span><span class="o">.</span><span class="n">alchemist</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">bomb_2_quantity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">u</span><span class="o">.</span><span class="n">use_bomb_2</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">u</span><span class="o">.</span><span class="n">resupply</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">u</span><span class="o">.</span><span class="n">attack</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">trap_round</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trap</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Event handler for trap avoidance. This method is called once for each round </span>
+<span class="sd">        while attempting to avoid a trap. Once the team has cleared the trap, the</span>
+<span class="sd">        room_choice method will be called.</span>
+<span class="sd">        </span>
+<span class="sd">        This sample code begins by printing a summary of the current trap, and the</span>
+<span class="sd">        party&#39;s stats. Then for each unit, the code selects a random trap evasion</span>
+<span class="sd">        action. Note that using any sort of randomness is not recommended when</span>
+<span class="sd">        competing as it will produce wildly varying performance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Trap!&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">trap</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+            <span class="n">u</span><span class="o">.</span><span class="n">trap_action</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span>
+                <span class="n">TrapAction</span><span class="o">.</span><span class="n">little_effort</span><span class="p">,</span> 
+                <span class="n">TrapAction</span><span class="o">.</span><span class="n">large_effort</span><span class="p">,</span> 
+                <span class="n">TrapAction</span><span class="o">.</span><span class="n">evade</span>
+            <span class="p">])</span>
+
+
+    <span class="c1">##################</span>
+    <span class="c1"># Helper Methods #</span>
+    <span class="c1">##################</span>
+
+    <span class="k">def</span> <span class="nf">get_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>    
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A helper method to aid in retrieving a unit by name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">unit</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">unit</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="towns">
+<span id="towns"></span><h2>Towns<a class="headerlink" href="#towns" title="Permalink to this headline">¶</a></h2>
+<p>In towns units are allowed to purchase new weapons, spells and armor if they have enough gold. The first room your units will be able to enter each game is town #0. At each town the availability of items is dependent on what number the town is. For example in town #0 you will be able to purchase level 2 weapons and level 1 spells and bombs.</p>
+</div>
+<div class="section" id="monsters">
+<span id="monsters"></span><h2>Monsters<a class="headerlink" href="#monsters" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="traps">
+<span id="traps"></span><h2>Traps<a class="headerlink" href="#traps" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="choosing-your-path">
+<span id="choosing-your-path"></span><h2>Choosing your path<a class="headerlink" href="#choosing-your-path" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="judging">
+<span id="judging"></span><h2>Judging<a class="headerlink" href="#judging" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -180,7 +426,7 @@
         <a href="running_the_game.html" class="btn btn-neutral float-right" title="Running The Game" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to Byte-le Royale&#39;s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Welcome to Byte-le Royale 2018: Dungeon Delvers&#39; documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -189,7 +435,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Jordan.
+        &copy; Copyright 2017-2018, Jordan Goetze.
 
     </p>
   </div>

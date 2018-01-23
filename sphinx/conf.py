@@ -49,16 +49,16 @@ source_suffix = [ '.rst', '.md' ]
 master_doc = 'index'
 
 # General information about the project.
-project = 'Byte-le-Royale'
-copyright = '2017, Jordan'
-author = 'Jordan'
+project = 'Byte-le-Royale 2018:<br>Dungeon Delvers'
+copyright = '2017-2018, Jordan Goetze'
+author = 'Jordan Goetze'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = 'Version 0.1'
+version = 'Version 1.0'
 # The full version, including alpha/beta/rc tags.
 release = '9'
 
@@ -167,8 +167,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Byte-le Royale', 'Dungeon Delvers Documentation',
-     author, 'Byte-le-Royale', 'One line description of project.',
+    (master_doc, 'Byte-le Royale: Dungeon Delvers"', 'Dungeon Delvers Documentation',
+     author, 'Byte-le-Royale: Dungeon Delvers', 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -178,7 +178,7 @@ source_parsers = {
 }
 
 # At the bottom of conf.py
-github_doc_root = "https://jghibiki.github.io/Byte-le-Royale-2017-2018/"
+github_doc_root = "https://jghibiki.github.io/Byte-le-Royale-2018/"
 def setup(app):
     app.add_config_value('recommonmark_config', {
             'url_resolver': lambda url: github_doc_root + url,
