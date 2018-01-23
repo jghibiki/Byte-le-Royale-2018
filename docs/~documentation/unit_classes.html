@@ -38,7 +38,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Byte-le-Royale 2018:&lt;br&gt;Dungeon Delvers 9 documentation" href="index.html"/>
-        <link rel="next" title="Traps" href="traps.html"/>
+        <link rel="next" title="Traps &amp; Avoiding Traps" href="traps.html"/>
         <link rel="prev" title="Running The Game" href="running_the_game.html"/> 
 
   
@@ -201,7 +201,25 @@
 <span id="unit-classes"></span><h1>Unit Classes<a class="headerlink" href="#unit-classes" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="knight">
 <span id="knight"></span><h2>Knight<a class="headerlink" href="#knight" title="Permalink to this headline">¶</a></h2>
-<p><strong>Primary Weapon:</strong> Sword</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="21%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Primary Weapon</th>
+<th class="head">Focus</th>
+<th class="head">Willpower</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Sword</td>
+<td>10</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Unique Ability:</strong> Taunt: If a monster attacks one unit, this unit absorbs 85% damage from the attack and the original target takes none. If a monster attacks multiple units, this unit absorbs 50% of the total damage that would be dealt to each unit. Each unit that was originally targeted receives 50% of the damage originally intended for them.</p>
 <div class="section" id="combat-methods">
 <span id="combat-methods"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
@@ -214,7 +232,25 @@
 </div>
 <div class="section" id="brawler">
 <span id="brawler"></span><h2>Brawler<a class="headerlink" href="#brawler" title="Permalink to this headline">¶</a></h2>
-<p><strong>Primary Weapon:</strong> Mace</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="21%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Primary Weapon</th>
+<th class="head">Focus</th>
+<th class="head">Willpower</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Mace</td>
+<td>10</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Unique Ability:</strong> Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal <code class="docutils literal"><span class="pre">(normal</span> <span class="pre">damage)</span> <span class="pre">*</span> <span class="pre">(2.5</span> <span class="pre">+</span> <span class="pre">(N</span> <span class="pre">*</span> <span class="pre">0.5))</span></code> damage. Where N is determined by the table below.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -249,7 +285,25 @@
 </div>
 <div class="section" id="pikeman">
 <span id="pikeman"></span><h2>Pikeman<a class="headerlink" href="#pikeman" title="Permalink to this headline">¶</a></h2>
-<p><strong>Primary Weapon:</strong> Spear</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="21%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Primary Weapon</th>
+<th class="head">Focus</th>
+<th class="head">Willpower</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Spear</td>
+<td>10</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Unique Ability:</strong> Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.</p>
 <div class="section" id="combat-methods">
 <span id="id2"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
@@ -262,9 +316,29 @@
 </div>
 <div class="section" id="rogue">
 <span id="rogue"></span><h2>Rogue<a class="headerlink" href="#rogue" title="Permalink to this headline">¶</a></h2>
-<p><strong>Primary Weapon:</strong> Dagger</p>
-<p><strong>Bomb Slots:</strong> 3</p>
-<p><strong>Unique Ability:</strong> Trap expert: <strong>need to flush out once trap mechanics are figured out</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="15%" />
+<col width="23%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Primary Weapon</th>
+<th class="head">Focus</th>
+<th class="head">Willpower</th>
+<th class="head">Bomb Slots</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Dagger</td>
+<td>30</td>
+<td>30</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Unique Ability:</strong> Trap expert: rogues have increased focus and willpower during trap evasion.</p>
 <div class="section" id="combat-methods">
 <span id="id3"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -278,8 +352,28 @@
 </div>
 <div class="section" id="magus">
 <span id="magus"></span><h2>Magus<a class="headerlink" href="#magus" title="Permalink to this headline">¶</a></h2>
-<p><strong>Primary Weapon:</strong> Staff</p>
-<p><strong>Spell Slots:</strong> 4</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="15%" />
+<col width="23%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Primary Weapon</th>
+<th class="head">Focus</th>
+<th class="head">Willpower</th>
+<th class="head">Spell Slots</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Staff</td>
+<td>14</td>
+<td>10</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Unique Ability:</strong> Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.</p>
 <div class="section" id="combat-methods">
 <span id="id4"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
@@ -296,8 +390,28 @@
 </div>
 <div class="section" id="wizard">
 <span id="wizard"></span><h2>Wizard<a class="headerlink" href="#wizard" title="Permalink to this headline">¶</a></h2>
-<p><strong>Primary Weapon:</strong> Wand</p>
-<p><strong>Spell Slots:</strong> 4</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="15%" />
+<col width="23%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Primary Weapon</th>
+<th class="head">Focus</th>
+<th class="head">Willpower</th>
+<th class="head">Spell Slots</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Wand</td>
+<td>14</td>
+<td>10</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Unique Ability:</strong> Invigorate: Charm one ally to deal 1.5 times damage for a turn. Cancels any other damage modifiers that would be in effect for that unit including the effects of Elemental Burst, and Fit of Rage. Can be cast once every 3 turns.</p>
 <div class="section" id="combat-methods">
 <span id="id5"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
@@ -314,8 +428,28 @@
 </div>
 <div class="section" id="sorcerer">
 <span id="sorcerer"></span><h2>Sorcerer<a class="headerlink" href="#sorcerer" title="Permalink to this headline">¶</a></h2>
-<p><strong>Primary Weapon:</strong> Spell Book</p>
-<p><strong>Spell Slots:</strong> 4</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="15%" />
+<col width="23%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Primary Weapon</th>
+<th class="head">Focus</th>
+<th class="head">Willpower</th>
+<th class="head">Spell Slots</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Spell Book</td>
+<td>14</td>
+<td>10</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Unique Ability:</strong> Illusion: Cast an illusion that disguises one player unit as another on the next turn. Monsters will be unable to tell the difference between the two units for that turn. Can be cast once every 5 turns.</p>
 <div class="section" id="combat-methods">
 <span id="id6"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
@@ -332,8 +466,28 @@
 </div>
 <div class="section" id="alchemist">
 <span id="alchemist"></span><h2>Alchemist<a class="headerlink" href="#alchemist" title="Permalink to this headline">¶</a></h2>
-<p><strong>Primary Weapon:</strong> Alchemical Supplies</p>
-<p><strong>Bomb Slots:</strong> 2</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="41%" />
+<col width="14%" />
+<col width="22%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Primary Weapon</th>
+<th class="head">Focus</th>
+<th class="head">Willpower</th>
+<th class="head">Bomb Slots</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Alchemical Supplies</td>
+<td>12</td>
+<td>10</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Unique Ability:</strong> Resupply: Spend one turn to regenerate one of bomb of the types currently possessed.</p>
 <div class="section" id="combat-methods">
 <span id="id7"></span><h3>Combat Methods<a class="headerlink" href="#combat-methods" title="Permalink to this headline">¶</a></h3>
@@ -357,7 +511,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="traps.html" class="btn btn-neutral float-right" title="Traps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="traps.html" class="btn btn-neutral float-right" title="Traps &amp; Avoiding Traps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="running_the_game.html" class="btn btn-neutral" title="Running The Game" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

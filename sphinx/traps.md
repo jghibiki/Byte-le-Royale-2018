@@ -40,7 +40,7 @@
 
 ## General Trap Properties
 
-General poperties of traps
+General properties of traps
 
 ## Trap Types
 

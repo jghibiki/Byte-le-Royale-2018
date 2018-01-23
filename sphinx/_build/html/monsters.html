@@ -99,7 +99,11 @@
 <li class="toctree-l1"><a class="reference internal" href="traps.html">Traps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="items.html">Items</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Monsters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#combat">Combat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#combat">Combat</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-actions">Combat Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#monster-weaknesses-item-damage-types">Monster Weaknesses &amp; Item Damage Types</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#monster-properties">Monster Properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#monsters">Monsters</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#wisp">Wisp</a></li>
@@ -181,9 +185,53 @@
 <span id="monsters-combat"></span><h1>Monsters &amp; Combat<a class="headerlink" href="#monsters-combat" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="combat">
 <span id="combat"></span><h2>Combat<a class="headerlink" href="#combat" title="Permalink to this headline">¶</a></h2>
+<p>Your party enters a room with a monster, combat will begin. The <code class="docutils literal"><span class="pre">combat_round</span></code> method on the game client will be called, and you will be able to direct your units to take various actions.</p>
+<div class="section" id="combat-actions">
+<span id="combat-actions"></span><h3>Combat Actions<a class="headerlink" href="#combat-actions" title="Permalink to this headline">¶</a></h3>
+<p>There are three main types of combat actions, attacking (also sometimes called basic attacking), attacking with a bomb or spells (only allowed by certain unit classes), and using a special ability.</p>
+<ul class="simple">
+<li><strong>Attacking</strong>: The unit attacks using their primary weapon (as listed on the <a class="reference external" href="https://jghibiki.github.io/Byte-le-Royale-2018/../../../../../~documentation/unit_classes.html#unit-classes">Unit Classes</a> page).<ul>
+<li>Basic attacking is done using the <code class="docutils literal"><span class="pre">unit.attack()</span></code> method.</li>
+</ul>
+</li>
+<li><strong>Bomb or spells</strong>: The unit attacks with an auxiliary item held in bomb or spell slots. Alchemists and rogues can use bombs; the Magus, Wizard, and Sorcerer classes can use spells. These items make use of monster weaknesses which are described below in more detail.<ul>
+<li>To use a bomb or spell, refer to the api for the specific class you are using as listed on the <a class="reference external" href="https://jghibiki.github.io/Byte-le-Royale-2018/../../../../../~documentation/unit_classes.html#unit-classes">Unit Classes</a> page.</li>
+</ul>
+</li>
+<li><strong>Special Abilities</strong>: Each class - excluding the rogue - has a unique special ability that can be used in combat.<ul>
+<li>To use a special ability, refer to the api for the specific class you are using as listed on the <a class="reference external" href="https://jghibiki.github.io/Byte-le-Royale-2018/../../../../../~documentation/unit_classes.html#unit-classes">Unit Classes</a> page.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="monster-weaknesses-item-damage-types">
+<span id="monster-weaknesses-item-damage-types"></span><h3>Monster Weaknesses &amp; Item Damage Types<a class="headerlink" href="#monster-weaknesses-item-damage-types" title="Permalink to this headline">¶</a></h3>
+<p>Each monsters have a series of weaknesses. These weaknesses are found as a list on the <code class="docutils literal"><span class="pre">monster.weaknesses</span></code> property. Each value in the list is an enum value corresponding to one or more of the following weaknesses:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">DamageType.piercing</span></code></li>
+<li><code class="docutils literal"><span class="pre">DamageType.slashing</span></code></li>
+<li><code class="docutils literal"><span class="pre">DamageType.bludgeoning</span></code></li>
+<li><code class="docutils literal"><span class="pre">DamageType.precision</span></code></li>
+<li><code class="docutils literal"><span class="pre">DamageType.fire</span></code></li>
+<li><code class="docutils literal"><span class="pre">DamageType.cold</span></code></li>
+<li><code class="docutils literal"><span class="pre">DamageType.electricity</span></code></li>
+<li><code class="docutils literal"><span class="pre">DamageType.acid</span></code></li>
+<li><code class="docutils literal"><span class="pre">DamageType.sonic</span></code></li>
+<li><code class="docutils literal"><span class="pre">DamageType.force</span></code></li>
+</ul>
+<p>Attacking a monster using a weapon, spell, or bomb with a matching weakness will deal double damage to the monster.</p>
+</div>
 </div>
 <div class="section" id="monster-properties">
 <span id="monster-properties"></span><h2>Monster Properties<a class="headerlink" href="#monster-properties" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">monster.monster_type</span></code>: A MonsterType enum value indicating the type of monster.</li>
+<li><code class="docutils literal"><span class="pre">monster.level</span></code>: The level of the monster.</li>
+<li><code class="docutils literal"><span class="pre">monster.health</span></code>: The monster's max health.</li>
+<li><code class="docutils literal"><span class="pre">monster.current_health</span></code>: The monster's current health.</li>
+<li><code class="docutils literal"><span class="pre">monster.damage</span></code>: The amount of damage the monster deals when it attacks.</li>
+<li><code class="docutils literal"><span class="pre">monster.gold</span></code>: The amount of gold that will rewarded for defeating the monster.</li>
+</ul>
 </div>
 <div class="section" id="monsters">
 <span id="monsters"></span><h2>Monsters<a class="headerlink" href="#monsters" title="Permalink to this headline">¶</a></h2>
@@ -622,7 +670,7 @@
 </tr>
 </tbody>
 </table>
-<p><em>Attack Logic:</em>* Attacks a random player unit.</p>
+<p><strong>Attack Logic:</strong> Attacks a random player unit.</p>
 </div>
 <div class="section" id="wraith">
 <span id="wraith"></span><h3>Wraith<a class="headerlink" href="#wraith" title="Permalink to this headline">¶</a></h3>
