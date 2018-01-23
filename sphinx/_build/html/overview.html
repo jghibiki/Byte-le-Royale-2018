@@ -94,7 +94,7 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#about-the-event">About the event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-event">The Event</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-goal">The Goal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-basics">The Basics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#towns">Towns</a></li>
@@ -175,14 +175,14 @@
             
   <!-- <img src="_static/dd.png"/> --><div class="section" id="dungeon-delvers-overview">
 <span id="dungeon-delvers-overview"></span><h1>Dungeon Delvers Overview<a class="headerlink" href="#dungeon-delvers-overview" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="about-the-event">
-<span id="about-the-event"></span><h2>About the event<a class="headerlink" href="#about-the-event" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-event">
+<span id="the-event"></span><h2>The Event<a class="headerlink" href="#the-event" title="Permalink to this headline">¶</a></h2>
 <p>Lead your fearless adventurers into the depths of the earth with the magical language of Python. Gather gold, fame, and glory to become the envy of your fellow competitors.</p>
 <p>Once the event starts, you will have 24 hours to build the best team. Never forget though, sleep is essential to successful adventuring. Get plenty of sleep!</p>
 </div>
 <div class="section" id="the-goal">
 <span id="the-goal"></span><h2>The Goal<a class="headerlink" href="#the-goal" title="Permalink to this headline">¶</a></h2>
-<p>The goal is to collect more trophies than any other party of adventurers. Your task is to program the most capable party of adventurers who will traverse randomly generated dungeons to earn as many trophies as possible. Gold and trophies are awarded for killing <a class="reference external" href="#monsters">monsters</a> but beware - monsters can be very deadly. The more dangerous a monster the more gold will be rewareded. Gold can be spent in <a class="reference external" href="#towns">town</a> to purchase better weapons and spells for your party. <a class="reference external" href="#traps">Traps</a>, while still dangerous, allow your party to avoid monsters that are too challenging.</p>
+<p>The goal is to collect more trophies than any other party of adventurers. Your task is to program the most capable party of adventurers who will traverse randomly generated dungeons to earn as many trophies as possible. Gold and trophies are awarded for killing <a class="reference external" href="#monsters">monsters</a> but beware - monsters can be very deadly. The more dangerous a monster the more gold will be rewarded. Gold can be spent in <a class="reference external" href="#towns">town</a> to purchase better weapons and spells for your party. <a class="reference external" href="#traps">Traps</a>, while still dangerous, allow your party to avoid monsters that are too challenging.</p>
 </div>
 <div class="section" id="the-basics">
 <span id="the-basics"></span><h2>The Basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
@@ -297,7 +297,7 @@
 
     <span class="k">def</span> <span class="nf">room_choice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    When leaving a room, you will be given the opporunity to choose </span>
+<span class="sd">    When leaving a room, you will be given the opportunity to choose </span>
 <span class="sd">    what room you enter next. Some rooms will only have one door,</span>
 <span class="sd">    others will have two. Options is a dictionary of your options.</span>
 <span class="sd">        - options[Direction.right] provides access to the room on the right</span>
@@ -324,6 +324,17 @@
             <span class="k">return</span> <span class="n">MessageType</span><span class="o">.</span><span class="n">null</span>
 
     <span class="k">def</span> <span class="nf">combat_round</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monster</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Event handler for combat. This method is called once for each round of combat. </span>
+<span class="sd">        If combat has ended, the room_choice method will be called.</span>
+<span class="sd">        </span>
+<span class="sd">        This example implementation, begins by printing a summary of the monster&#39;s stats</span>
+<span class="sd">        and each of the party&#39;s stats. Then for each unit, if the unit (Thomas) is an</span>
+<span class="sd">        alchemist, and Thomas has bombs in bomb slot #2, then use a bomb. If there are</span>
+<span class="sd">        no bombs, use the alchemist resupply ability (passing the bomb slot containing the</span>
+<span class="sd">        bomb type the alchemist would like to resupply). If the unit is not an alchemist,</span>
+<span class="sd">        then they are told to do a basic attack.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">print</span><span class="p">()</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Combat&quot;</span><span class="p">)</span>
@@ -342,6 +353,16 @@
                 <span class="n">u</span><span class="o">.</span><span class="n">attack</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">trap_round</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trap</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Event handler for trap avoidance. This method is called once for each round </span>
+<span class="sd">        while attempting to avoid a trap. Once the team has cleared the trap, the</span>
+<span class="sd">        room_choice method will be called.</span>
+<span class="sd">        </span>
+<span class="sd">        This sample code begins by printing a summary of the current trap, and the</span>
+<span class="sd">        party&#39;s stats. Then for each unit, the code selects a random trap evasion</span>
+<span class="sd">        action. Note that using any sort of randomness is not recommended when</span>
+<span class="sd">        competing as it will produce wildly varying performance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">print</span><span class="p">()</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Trap!&quot;</span><span class="p">)</span>
@@ -362,7 +383,10 @@
     <span class="c1"># Helper Methods #</span>
     <span class="c1">##################</span>
 
-    <span class="k">def</span> <span class="nf">get_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>    
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A helper method to aid in retrieving a unit by name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">unit</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
                 <span class="k">return</span> <span class="n">unit</span>
@@ -373,6 +397,7 @@
 </div>
 <div class="section" id="towns">
 <span id="towns"></span><h2>Towns<a class="headerlink" href="#towns" title="Permalink to this headline">¶</a></h2>
+<p>In towns units are allowed to purchase new weapons, spells and armor if they have enough gold. The first room your units will be able to enter each game is town #0. At each town the availability of items is dependent on what number the town is. For example in town #0 you will be able to purchase level 2 weapons and level 1 spells and bombs.</p>
 </div>
 <div class="section" id="monsters">
 <span id="monsters"></span><h2>Monsters<a class="headerlink" href="#monsters" title="Permalink to this headline">¶</a></h2>

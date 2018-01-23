@@ -1,7 +1,12 @@
-# Monsters
+# Monsters & Combat
 
+## Combat
 
-## Wisp
+## Monster Properties
+
+## Monsters
+
+### Wisp
 
 ![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/wisp.png)
 
@@ -35,7 +40,7 @@
 
 **Attack Logic:**
 
-## Beholder
+### Beholder
 
 ![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/beholder.png)
 
@@ -68,7 +73,7 @@
 
 **Attack Logic:**
 
-## Dragon
+### Dragon
 
 ![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/dragon.png)
 
@@ -101,7 +106,7 @@
 
 **Attack Logic:**
 
-## Minotaur
+### Minotaur
 
 ![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/minotaur.png)
 
@@ -134,7 +139,7 @@
 
 **Attack Logic:**
 
-## Slime
+### Slime
 
 ![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/slime.png)
 
@@ -167,7 +172,7 @@
 
 **Attack Logic:** 
 
-## Goblin
+### Goblin
 
 **Stats:**
 ```eval_rst
@@ -199,7 +204,7 @@
 *Attack Logic:** Attacks a random player unit.
 
 
-## Wraith
+### Wraith
 
 ![](https://github.com/jghibiki/Byte-le-Royale-2018/blob/master/game/visualizer/assets/wraith.png)
 

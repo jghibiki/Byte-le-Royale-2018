@@ -1,8 +1,14 @@
-# Traps
+# Traps & Avoiding Traps
 
 -- trap description - describe how the trap portion of the game works --
 
-## Effort Types:
+## Avoiding Traps
+
+-- description of how to check a trap type given a trap object. --
+
+-- description of the subset of the unit api that is useful for traps --
+
+### Effort Types:
 - **Large Effort:** 
     - Description: The unit invests a large amount of effort in a small amount of time, at the cost of precision.
     - Energy cost: 5
@@ -24,13 +30,17 @@
     - Resulting Effort: 0
     - Additional Effects: None
 
-## Trap Pass Types
+### Trap Pass Types
 
 - **Individual Pass:** Each unit must disarm/navigate/avoid the trap on their own to succeed. The party only moves on when all units have succeeded or died.
 
 - **Group Effort Pass:** The effort of the entire party contributes to the disarming of one trap. The party only moves on once the trap effort gauge is filled.
 
 - **Group Pass on One Success:** Each unit works to disarm/navigate/avoid their own trap. The party is able to move on once one unit succeeds in disarming a trap.
+
+## General Trap Properties
+
+General poperties of traps
 
 ## Trap Types
 
@@ -79,10 +89,5 @@ pr **Effort Required:** 30
 - **Damage Amount**: 250
 
 
-## Trap API
-
--- description of how to check a trap type given a trap object. --
-
--- description of the subset of the unit api that is useful for traps --
 
 

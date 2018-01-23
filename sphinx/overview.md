@@ -2,14 +2,14 @@
 
 # Dungeon Delvers Overview
 
-## About the event
+## The Event
 Lead your fearless adventurers into the depths of the earth with the magical language of Python. Gather gold, fame, and glory to become the envy of your fellow competitors. 
 
 Once the event starts, you will have 24 hours to build the best team. Never forget though, sleep is essential to successful adventuring. Get plenty of sleep! 
 
 ## The Goal
 
-The goal is to collect more trophies than any other party of adventurers. Your task is to program the most capable party of adventurers who will traverse randomly generated dungeons to earn as many trophies as possible. Gold and trophies are awarded for killing [monsters](#monsters) but beware - monsters can be very deadly. The more dangerous a monster the more gold will be rewareded. Gold can be spent in [town](#towns) to purchase better weapons and spells for your party. [Traps](#traps), while still dangerous, allow your party to avoid monsters that are too challenging.
+The goal is to collect more trophies than any other party of adventurers. Your task is to program the most capable party of adventurers who will traverse randomly generated dungeons to earn as many trophies as possible. Gold and trophies are awarded for killing [monsters](#monsters) but beware - monsters can be very deadly. The more dangerous a monster the more gold will be rewarded. Gold can be spent in [town](#towns) to purchase better weapons and spells for your party. [Traps](#traps), while still dangerous, allow your party to avoid monsters that are too challenging.
 
 
 ## The Basics
@@ -132,7 +132,7 @@ class CustomClient(UserClient):
 
     def room_choice(self, units, options):
     """
-    When leaving a room, you will be given the opporunity to choose 
+    When leaving a room, you will be given the opportunity to choose 
     what room you enter next. Some rooms will only have one door,
     others will have two. Options is a dictionary of your options.
         - options[Direction.right] provides access to the room on the right
@@ -159,6 +159,17 @@ class CustomClient(UserClient):
             return MessageType.null
 
     def combat_round(self, monster, units):
+        """
+        Event handler for combat. This method is called once for each round of combat. 
+        If combat has ended, the room_choice method will be called.
+        
+        This example implementation, begins by printing a summary of the monster's stats
+        and each of the party's stats. Then for each unit, if the unit (Thomas) is an
+        alchemist, and Thomas has bombs in bomb slot #2, then use a bomb. If there are
+        no bombs, use the alchemist resupply ability (passing the bomb slot containing the
+        bomb type the alchemist would like to resupply). If the unit is not an alchemist,
+        then they are told to do a basic attack.
+        """
         print()
         print("*"*50)
         print("Combat")
@@ -177,6 +188,16 @@ class CustomClient(UserClient):
                 u.attack()
 
     def trap_round(self, trap, units):
+        """
+        Event handler for trap avoidance. This method is called once for each round 
+        while attempting to avoid a trap. Once the team has cleared the trap, the
+        room_choice method will be called.
+        
+        This sample code begins by printing a summary of the current trap, and the
+        party's stats. Then for each unit, the code selects a random trap evasion
+        action. Note that using any sort of randomness is not recommended when
+        competing as it will produce wildly varying performance.
+        """
         print()
         print("*"*50)
         print("Trap!")
@@ -197,7 +218,10 @@ class CustomClient(UserClient):
     # Helper Methods #
     ##################
 
-    def get_unit(self, name, units):
+    def get_unit(self, name, units):    
+        """
+        A helper method to aid in retrieving a unit by name
+        """
         for unit in units:
             if unit.name.lower() == name.lower():
                 return unit
@@ -207,6 +231,7 @@ class CustomClient(UserClient):
 
 
 ## Towns
+In towns units are allowed to purchase new weapons, spells and armor if they have enough gold. The first room your units will be able to enter each game is town #0. At each town the availability of items is dependent on what number the town is. For example in town #0 you will be able to purchase level 2 weapons and level 1 spells and bombs.
 
 ## Monsters
 
