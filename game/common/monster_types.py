@@ -254,7 +254,7 @@ class Minotaur(Monster):
 
                 self.attack_state["index"] += 1
 
-                if self.attack_state["index"] > len(group):
+                if self.attack_state["index"] >= len(group):
                     self.attack_state["index"] = 0
                     break
 
