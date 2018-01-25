@@ -1,4 +1,4 @@
-<!-- <img src="_static/dd.png"/> -->
+<img src="_static/dd.png"/> 
 
 # Dungeon Delvers Overview
 
