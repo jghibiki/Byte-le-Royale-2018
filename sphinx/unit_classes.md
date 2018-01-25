@@ -2,6 +2,8 @@
 
 ## Knight
 
+![](_static/knight.png)
+
 ```eval_rst
 +----------------+-------+-----------+
 | Primary Weapon | Focus | Willpower |
@@ -18,6 +20,8 @@
 - ```Knight.wait()``` Do nothing for this turn.
 
 ## Brawler
+
+![](_static/brawler.png)
 
 ```eval_rst
 +----------------+-------+-----------+
@@ -49,6 +53,8 @@
 
 ## Pikeman
 
+![](_static/pikeman.png)
+
 ```eval_rst
 +----------------+-------+-----------+
 | Primary Weapon | Focus | Willpower |
@@ -65,6 +71,8 @@
 - ```Pikeman.wait()``` Do nothing for this turn.
 
 ## Rogue
+
+![](_static/rogue.png)
 
 ```eval_rst
 +----------------+-------+-----------+-------------+
@@ -85,6 +93,8 @@
 
 
 ## Magus
+
+![](_static/magus.png)
 
 
 ```eval_rst
@@ -108,6 +118,8 @@
 
 ## Wizard
 
+![](_static/wizard.png)
+
 ```eval_rst
 +----------------+-------+-----------+-------------+
 | Primary Weapon | Focus | Willpower | Spell Slots |
@@ -130,6 +142,8 @@
 
 ## Sorcerer
 
+![](_static/sorcerer.png)
+
 ```eval_rst
 +----------------+-------+-----------+-------------+
 | Primary Weapon | Focus | Willpower | Spell Slots |
@@ -150,6 +164,8 @@
 - ```Sorcerer.wait()``` Do nothing for this turn.
 
 ## Alchemist
+
+![](_static/alchemist.png)
 
 ```eval_rst
 +---------------------+-------+-----------+------------+
