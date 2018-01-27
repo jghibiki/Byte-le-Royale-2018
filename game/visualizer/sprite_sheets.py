@@ -904,6 +904,13 @@ class RiddleOfTheSphinxTrap(TrapSprite):
             [ 0,    0 ]
         ], 448, 10, 128, 128, 3, scale=3)
 
+class PuzzleBoxTrap(TrapSprite):
+
+    def __init__(self):
+        TrapSprite.__init__(self, "game/visualizer/assets/puzzle_box.png", [
+            [ 0,    0 ]
+        ], 512, 65, 128, 128, 3, scale=2)
+
 
 loaded_trap_sprites = {}
 
@@ -915,6 +922,8 @@ def get_trap_sprite(trap_type):
         cls = SpikeTrap
     elif trap_type == TrapType.riddles_of_the_sphinx:
         cls = RiddleOfTheSphinxTrap
+    elif trap_type == TrapType.puzzle_box:
+        cls = PuzzleBoxTrap
     else:
         cls = RiddleOfTheSphinxTrap
 
