@@ -556,6 +556,7 @@ class Armor(ArmorItem):
             UnitClass.alchemist: [ 19000, 20000, 21000, 22000, 23000, 24000, 25000, 26000, 27000, 28000]
         }
 
-        ArmorItem.init(self, "Armor", ItemType.armor, level, stats[unit_class][level])
+        ArmorItem.init(self, "Armor", ItemType.armor, level, stats[unit_class][level-1])
+
 
 
