@@ -16,13 +16,20 @@ class ClientStorefront:
         return self.town_number
 
 
-    def purchase(self, unit, item_slot, item, item_level):
-        self.purchases.append( {
-            "unit": unit.id,
-            "slot": item_slot,
-            "item": ItemType.fire_bomb,
-            "item_level": item_level
-        } )
+    def purchase(self, unit, item, item_level, item_slot=None):
+        if item_slot:
+            self.purchases.append( {
+                "unit": unit.id,
+                "slot": item_slot,
+                "item": item,
+                "item_level": item_level
+            } )
+        else:
+            self.purchases.append( {
+                "unit": unit.id,
+                "item": item,
+                "item_level": item_level
+            } )
 
     def get_return_data(self):
         return {

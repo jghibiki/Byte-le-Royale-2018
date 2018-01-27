@@ -7,12 +7,12 @@
 - ```get_town_number()```:
     - Returns: The current town number.
 
-- ```purchase(unit, item_slot, item, item_level)```:
+- ```purchase(unit, item, item_level, item_slot=None)```:
     - Parameters:
         - ```unit```: A unit instance. This is the unit who is buying the item.
-        - ```item_slot```: The item slot on the provided unit that the item will be placed in.
         - ```item```: The ItemType enum value for the item you wish to purchase.
         - ```item_level```: The level for the item you wish to purchase. Pricing scales based on level of the item.
+        - ```item_slot```: The item slot on the provided unit that the item will be placed in. Defaults to None. If purchasing a primary weapon leave None.
 
 
 
@@ -109,7 +109,7 @@
 ```eval_rst
 +-----------------+------+---+---+---+---+---+---+---+---+----+
 | Item Type       | 1    | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-+========================+===+===+===+===+===+===+===+===+====+
++=================+======+===+===+===+===+===+===+===+===+====+
 | Sword           | 0    |   |   |   |   |   |   |   |   |    |
 +-----------------+------+---+---+---+---+---+---+---+---+----+
 | Mace            | 0    |   |   |   |   |   |   |   |   |    |

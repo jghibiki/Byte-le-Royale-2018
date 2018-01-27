@@ -29,7 +29,7 @@ class CustomClient(UserClient):
                 },
                 {
                     "name": "Alphonse",
-                    "class": UnitClass.pikeman
+                    "class": UnitClass.rogue
                 },
                 {
                     "name": "Thomas",
@@ -50,26 +50,34 @@ class CustomClient(UserClient):
         if store.get_town_number() is 0:
             unit = self.get_unit("thomas", units)
             if unit is not None:
-                store.purchase(unit, 2, ItemType.fire_bomb, 1)
-                store.purchase(unit, 2, ItemType.fire_bomb, 1)
+                store.purchase(unit, ItemType.fire_bomb, 1, item_slot=2)
+                store.purchase(unit, ItemType.fire_bomb, 1, item_slot=2)
 
         elif store.get_town_number() is 1:
             unit = self.get_unit("thomas", units)
             if unit is not None:
-                store.purchase(unit, 2, ItemType.fire_bomb, 2)
-                store.purchase(unit, 2, ItemType.fire_bomb, 2)
+                store.purchase(unit, ItemType.fire_bomb, 2, item_slot=2)
+                store.purchase(unit, ItemType.fire_bomb, 2, item_slot=2)
+
+            unit = self.get_unit("martin", units)
+            if unit is not None:
+                store.purchase(unit, ItemType.sword, 2)
 
         elif store.get_town_number() is 3:
             unit = self.get_unit("thomas", units)
             if unit is not None:
-                store.purchase(unit, 2, ItemType.fire_bomb, 3)
-                store.purchase(unit, 2, ItemType.fire_bomb, 3)
+                store.purchase(unit, ItemType.fire_bomb, 3, item_slot=2)
+                store.purchase(unit, ItemType.fire_bomb, 3, item_slot=2)
+
+            unit = self.get_unit("martin", units)
+            if unit is not None:
+                store.purchase(unit, ItemType.sword, 3)
 
         elif store.get_town_number() is 4:
             unit = self.get_unit("thomas", units)
             if unit is not None:
-                store.purchase(unit, 2, ItemType.fire_bomb, 4)
-                store.purchase(unit, 2, ItemType.fire_bomb, 4)
+                store.purchase(unit, ItemType.fire_bomb, 4, item_slot=2)
+                store.purchase(unit, ItemType.fire_bomb, 4, item_slot=2)
 
 
     def room_choice(self, units, options):
