@@ -16,6 +16,10 @@ from game.visualizer.floating_number import FloatingNumber
 from game.visualizer.progress_bar import ProgressBar
 from game.visualizer.trap_text import TrapText
 
+ee_idx = 0
+easter_egg= """
+There are moments, psychologists tell us, when the passion for sin, or for what the world calls sin, so dominates a nature that every fiber of the body, as every cell of the brain, seems to be instinct with fearful impulses. Men and women at such moments lose the freedom of their will. They move to their terrible end as automatons move. Choice is taken from them, and conscience is either killed, or, if it lives at all, lives but to give rebellion to its fascination and fascination its charm. For all sins, as theologians weary not of reminding us, are sins of disobedience. When that high spirit, that mourning star of evil, fell from heaven, it was as a rebel that he fell. The Picture of Dorian Grey
+""".split(" ")
 
 def party_killed_screen(global_surf, fps_clock, data):
     width = math.floor(1280/2.0)
@@ -101,7 +105,7 @@ def unit_text(font, upper_left, unit):
         color=(255, 255, 255),
         owidth=2.0,
         ocolor=(0, 0, 0),
-        fontsize=14,
+        fontsize=16,
         fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
     primary_weapon_rect = primary_weapon_text.get_rect()
@@ -133,7 +137,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=24,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_1_rect = bomb_1_text.get_rect()
@@ -253,8 +257,8 @@ def start(verbose, log_path, gamma):
     unit_colors = {}
     colors = [
         pygame.Color("#FFFB00"),
-        pygame.Color("#FF0084"),
-        pygame.Color("#0005FF"),
+        pygame.Color("#FF91F2"),
+        pygame.Color("#36CDFF"),
         pygame.Color("#00FF7A")
     ]
     for unit in units:
@@ -971,8 +975,11 @@ def start(verbose, log_path, gamma):
                mousex, mousey = event.pos
                if event.button == 1:
                     mouse_x, mouse_y = event.pos
-                    fn = FloatingNumber(mouse_x, mouse_y, '-5000', color_white)
-                    floating_number_group.add(fn)
+                    global ee_idx
+                    if ee_idx < len(easter_egg):
+                        fn = FloatingNumber(mouse_x, mouse_y, easter_egg[ee_idx], color_white)
+                        ee_idx += 1
+                        floating_number_group.add(fn)
 
         first_loop = False
 

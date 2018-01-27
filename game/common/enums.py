@@ -159,9 +159,9 @@ class TrapDamageType:
     highest_health = 5
 
 class Direction:
-    forward = 1
-    left = 2
-    right = 3
+    left = 0
+    right = 1
+    forward = 2
 
 
 class MonsterType:

@@ -1,3 +1,5 @@
+import json
+
 from game.server.server_control import ServerControl
 from game.utils.generate_game import load
 from game.common.node_types import *
@@ -440,6 +442,7 @@ class CustomServer(ServerControl):
         print("Levels Cleared: {}".format(self.towns-1))
         print("*"*50)
 
+
         self.turn_log["events"].append({
             "type": Event.party_killed,
             "trophies": self.trophies,
@@ -447,6 +450,14 @@ class CustomServer(ServerControl):
             "total_gold": self.total_gold,
             "levels_cleared": self.towns-1
         })
+
+        with open("result.json", "w") as f:
+            json.dump({
+                "trophies": self.trophies,
+                "gold": self.gold,
+                "total_gold": self.total_gold,
+                "levels_cleared": self.towns-1
+            }, f)
 
         if self.server_loop:
             self.notify_game_over()

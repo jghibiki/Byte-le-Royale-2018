@@ -196,7 +196,7 @@
 +-------+--------+--------+------------+
 ```
 
-**Attack Logic:** Attacks a random player unit.
+e*Attack Logic:** Attacks a random player unit.
 
 
 ## Wraith
