@@ -51,7 +51,7 @@ class CombatItem(Item):
     def init(self, name, damage_table, damage_types, level, item_type, damage_scale=0.5):
         Item.init(self, name, item_type)
 
-        self.damage = damage_table[level]
+        self.damage = damage_table[level-1]
         self.damage_types = damage_types
         self.level = level
 
@@ -107,7 +107,7 @@ class UtilityItem(Item):
 
 
     def to_dict(self, safe=False):
-        data = Item.to_dict(self, safE)
+        data = Item.to_dict(self, safe)
 
         if not safe:
             pass
