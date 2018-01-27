@@ -331,7 +331,16 @@ class Thunderbolt(CombatItem):
         CombatItem.init(self,
                         "Thunderbolt",
                         [
-
+                            150,
+                            300,
+                            450,
+                            600,
+                            750,
+                            900,
+                            1050,
+                            1200,
+                            1350,
+                            1500
                         ],
                         [
                             DamageType.electricity
@@ -342,7 +351,25 @@ class Thunderbolt(CombatItem):
 
 class IceSpike(CombatItem):
     def init(self, level):
-        CombatItem.init(self, "Ice Spike", 100, [ DamageType.cold ], level, ItemType.ice_spike)
+        CombatItem.init(self,
+                        "Ice Spike",
+                        [
+                            150,
+                            300,
+                            450,
+                            600,
+                            750,
+                            900,
+                            1050,
+                            1200,
+                            1350,
+                            1500
+                        ],
+                        [
+                            DamageType.cold
+                        ],
+                        level,
+                        ItemType.ice_spike)
 
 
 #########
