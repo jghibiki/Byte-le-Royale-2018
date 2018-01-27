@@ -21,7 +21,7 @@ class CustomClient(UserClient):
         return [
                 {
                     "name": "Martin",
-                    "class": UnitClass.knight
+                    "class": UnitClass.wizard
                 },
                 {
                     "name": "Steve",
@@ -50,12 +50,14 @@ class CustomClient(UserClient):
         if store.get_town_number() is 0:
             unit = self.get_unit("thomas", units)
             if unit is not None:
+                store.purchase(unit, ItemType.armor, 1)
                 store.purchase(unit, ItemType.fire_bomb, 1, item_slot=2)
-                store.purchase(unit, ItemType.fire_bomb, 1, item_slot=2)
+                store.purchase(unit, ItemType.acid_bomb, 1, item_slot=1)
 
         elif store.get_town_number() is 1:
             unit = self.get_unit("thomas", units)
             if unit is not None:
+                store.purchase(unit, ItemType.armor, 2)
                 store.purchase(unit, ItemType.fire_bomb, 2, item_slot=2)
                 store.purchase(unit, ItemType.fire_bomb, 2, item_slot=2)
 
@@ -66,6 +68,7 @@ class CustomClient(UserClient):
         elif store.get_town_number() is 3:
             unit = self.get_unit("thomas", units)
             if unit is not None:
+                store.purchase(unit, ItemType.armor, 3)
                 store.purchase(unit, ItemType.fire_bomb, 3, item_slot=2)
                 store.purchase(unit, ItemType.fire_bomb, 3, item_slot=2)
 
@@ -76,6 +79,7 @@ class CustomClient(UserClient):
         elif store.get_town_number() is 4:
             unit = self.get_unit("thomas", units)
             if unit is not None:
+                store.purchase(unit, ItemType.armor, 4)
                 store.purchase(unit, ItemType.fire_bomb, 4, item_slot=2)
                 store.purchase(unit, ItemType.fire_bomb, 4, item_slot=2)
 

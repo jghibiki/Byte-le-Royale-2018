@@ -100,6 +100,7 @@ class ClientLogic:
         elif turn_data["message_type"] == MessageType.room_choice:
             units = turn_data["units"]
             options = turn_data["options"]
+            options = { int(k):v for k, v in options.items() }
             direction = self.player_client.room_choice(units, options)
             return { "message_type": MessageType.room_choice, "choice": direction }
 

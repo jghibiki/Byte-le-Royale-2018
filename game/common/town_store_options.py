@@ -18,7 +18,10 @@ valid_purchasers = {
     ItemType.concussion_bomb:     [ UnitClass.rogue, UnitClass.alchemist ],
     ItemType.fire_ball:            [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
     ItemType.thunderbolt:         [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
-    ItemType.ice_spike:           [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ]
+    ItemType.ice_spike:           [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
+    ItemType.armor:               [ UnitClass.knight, UnitClass.brawler, UnitClass.pikeman,
+                                    UnitClass.rogue, UnitClass.magus, UnitClass.sorcerer,
+                                    UnitClass.wizard, UnitClass.alchemist]
 }
 
 item_data = {
@@ -40,6 +43,7 @@ item_data = {
         3: { "cost": 300 },
         4: { "cost": 300 },
         5: { "cost": 300 },
+
         6: { "cost": 300 },
         7: { "cost": 300 },
         8: { "cost": 300 },
@@ -237,234 +241,239 @@ item_data = {
         8: { "cost": 300 },
         9: { "cost": 300 },
         10: { "cost": 300 }
+    },
+    ItemType.armor: {
+        1: { "cost": 50 },
+        2: { "cost": 300 },
+        3: { "cost": 300 },
+        4: { "cost": 300 },
+        5: { "cost": 300 },
+        6: { "cost": 300 },
+        7: { "cost": 300 },
+        8: { "cost": 300 },
+        9: { "cost": 300 },
+        10: { "cost": 300 }
     }
 }
 
+towns = [
+    [ # town 0
+        { "type": ItemType.sword,               "level": 1},
+        { "type": ItemType.mace,                "level": 1},
+        { "type": ItemType.spear,               "level": 1},
+        { "type": ItemType.dagger,              "level": 1},
+        { "type": ItemType.staff,               "level": 1},
+        { "type": ItemType.wand,                "level": 1},
+        { "type": ItemType.spell_book,          "level": 1},
+        { "type": ItemType.alchemical_supplies, "level": 1},
+        { "type": ItemType.fire_bomb,           "level": 1},
+        { "type": ItemType.frost_bomb,          "level": 1},
+        { "type": ItemType.shock_bomb,          "level": 1},
+        { "type": ItemType.acid_bomb,           "level": 1},
+        { "type": ItemType.flash_bomb,          "level": 1},
+        { "type": ItemType.spike_bomb,          "level": 1},
+        { "type": ItemType.concussion_bomb,     "level": 1},
+        { "type": ItemType.fire_ball,           "level": 1},
+        { "type": ItemType.thunderbolt,         "level": 1},
+        { "type": ItemType.ice_spike,           "level": 1},
+        { "type": ItemType.armor,               "level": 1}
 
-town_0 = [
-        { "type": ItemType.sword,               "level": 1,  "cost": 0  },
-        { "type": ItemType.mace,                "level": 1,  "cost": 0  },
-        { "type": ItemType.spear,               "level": 1,  "cost": 0  },
-        { "type": ItemType.dagger,              "level": 1,  "cost": 0  },
-        { "type": ItemType.staff,               "level": 1,  "cost": 0  },
-        { "type": ItemType.wand,                "level": 1,  "cost": 0  },
-        { "type": ItemType.spell_book,          "level": 1,  "cost": 0  },
-        { "type": ItemType.alchemical_supplies, "level": 1,  "cost": 0  },
-        { "type": ItemType.fire_bomb,           "level": 1,  "cost": 50 },
-        { "type": ItemType.frost_bomb,          "level": 1,  "cost": 50 },
-        { "type": ItemType.shock_bomb,          "level": 1,  "cost": 50 },
-        { "type": ItemType.acid_bomb,           "level": 1,  "cost": 50 },
-        { "type": ItemType.flash_bomb,          "level": 1,  "cost": 50 },
-        { "type": ItemType.spike_bomb,          "level": 1,  "cost": 50 },
-        { "type": ItemType.concussion_bomb,     "level": 1,  "cost": 50 },
-        { "type": ItemType.fire_ball,           "level": 1,  "cost": 50 },
-        { "type": ItemType.thunderbolt,         "level": 1,  "cost": 50 },
-        { "type": ItemType.ice_spike,           "level": 1,  "cost": 50 }
+    ],
+    [ # Town 1
+        { "type": ItemType.sword,               "level": 2},
+        { "type": ItemType.mace,                "level": 2},
+        { "type": ItemType.spear,               "level": 2},
+        { "type": ItemType.dagger,              "level": 2},
+        { "type": ItemType.staff,               "level": 2},
+        { "type": ItemType.wand,                "level": 2},
+        { "type": ItemType.spell_book,          "level": 2},
+        { "type": ItemType.alchemical_supplies, "level": 2},
+        { "type": ItemType.fire_bomb,           "level": 2},
+        { "type": ItemType.frost_bomb,          "level": 2},
+        { "type": ItemType.shock_bomb,          "level": 2},
+        { "type": ItemType.acid_bomb,           "level": 2},
+        { "type": ItemType.flash_bomb,          "level": 2},
+        { "type": ItemType.spike_bomb,          "level": 2},
+        { "type": ItemType.concussion_bomb,     "level": 2},
+        { "type": ItemType.fire_ball,           "level": 2},
+        { "type": ItemType.thunderbolt,         "level": 2},
+        { "type": ItemType.ice_spike,           "level": 2},
+        { "type": ItemType.armor,               "level": 2}
+    ],
+    [ # Town 2
+        { "type": ItemType.sword,               "level": 3},
+        { "type": ItemType.mace,                "level": 3},
+        { "type": ItemType.spear,               "level": 3},
+        { "type": ItemType.dagger,              "level": 3},
+        { "type": ItemType.staff,               "level": 3},
+        { "type": ItemType.wand,                "level": 3},
+        { "type": ItemType.spell_book,          "level": 3},
+        { "type": ItemType.alchemical_supplies, "level": 3},
+        { "type": ItemType.fire_bomb,           "level": 3},
+        { "type": ItemType.frost_bomb,          "level": 3},
+        { "type": ItemType.shock_bomb,          "level": 3},
+        { "type": ItemType.acid_bomb,           "level": 3},
+        { "type": ItemType.flash_bomb,          "level": 3},
+        { "type": ItemType.spike_bomb,          "level": 3},
+        { "type": ItemType.concussion_bomb,     "level": 3},
+        { "type": ItemType.fire_ball,           "level": 3},
+        { "type": ItemType.thunderbolt,         "level": 3},
+        { "type": ItemType.ice_spike,           "level": 3},
+        { "type": ItemType.armor,               "level": 3}
+    ],
+    [ # Town 3
+        { "type": ItemType.sword,               "level": 4},
+        { "type": ItemType.mace,                "level": 4},
+        { "type": ItemType.spear,               "level": 4},
+        { "type": ItemType.dagger,              "level": 4},
+        { "type": ItemType.staff,               "level": 4},
+        { "type": ItemType.wand,                "level": 4},
+        { "type": ItemType.spell_book,          "level": 4},
+        { "type": ItemType.alchemical_supplies, "level": 4},
+        { "type": ItemType.fire_bomb,           "level": 4},
+        { "type": ItemType.frost_bomb,          "level": 4},
+        { "type": ItemType.shock_bomb,          "level": 4},
+        { "type": ItemType.acid_bomb,           "level": 4},
+        { "type": ItemType.flash_bomb,          "level": 4},
+        { "type": ItemType.spike_bomb,          "level": 4},
+        { "type": ItemType.concussion_bomb,     "level": 4},
+        { "type": ItemType.fire_ball,           "level": 4},
+        { "type": ItemType.thunderbolt,         "level": 4},
+        { "type": ItemType.ice_spike,           "level": 4},
+        { "type": ItemType.armor,               "level": 4}
+    ],
+    [ # Town 4
+        { "type": ItemType.sword,               "level": 5},
+        { "type": ItemType.mace,                "level": 5},
+        { "type": ItemType.spear,               "level": 5},
+        { "type": ItemType.dagger,              "level": 5},
+        { "type": ItemType.staff,               "level": 5},
+        { "type": ItemType.wand,                "level": 5},
+        { "type": ItemType.spell_book,          "level": 5},
+        { "type": ItemType.alchemical_supplies, "level": 5},
+        { "type": ItemType.fire_bomb,           "level": 5},
+        { "type": ItemType.frost_bomb,          "level": 5},
+        { "type": ItemType.shock_bomb,          "level": 5},
+        { "type": ItemType.acid_bomb,           "level": 5},
+        { "type": ItemType.flash_bomb,          "level": 5},
+        { "type": ItemType.spike_bomb,          "level": 5},
+        { "type": ItemType.concussion_bomb,     "level": 5},
+        { "type": ItemType.fire_ball,           "level": 5},
+        { "type": ItemType.thunderbolt,         "level": 5},
+        { "type": ItemType.ice_spike,           "level": 5},
+        { "type": ItemType.armor,               "level": 5}
+    ],
+    [ # Town 5
+        { "type": ItemType.sword,               "level": 6},
+        { "type": ItemType.mace,                "level": 6},
+        { "type": ItemType.spear,               "level": 6},
+        { "type": ItemType.dagger,              "level": 6},
+        { "type": ItemType.staff,               "level": 6},
+        { "type": ItemType.wand,                "level": 6},
+        { "type": ItemType.spell_book,          "level": 6},
+        { "type": ItemType.alchemical_supplies, "level": 6},
+        { "type": ItemType.fire_bomb,           "level": 6},
+        { "type": ItemType.frost_bomb,          "level": 6},
+        { "type": ItemType.shock_bomb,          "level": 6},
+        { "type": ItemType.acid_bomb,           "level": 6},
+        { "type": ItemType.flash_bomb,          "level": 6},
+        { "type": ItemType.spike_bomb,          "level": 6},
+        { "type": ItemType.concussion_bomb,     "level": 6},
+        { "type": ItemType.fire_ball,           "level": 6},
+        { "type": ItemType.thunderbolt,         "level": 6},
+        { "type": ItemType.ice_spike,           "level": 6},
+        { "type": ItemType.armor,               "level": 6}
+    ],
+    [ # Town 6
+        { "type": ItemType.sword,               "level": 7},
+        { "type": ItemType.mace,                "level": 7},
+        { "type": ItemType.spear,               "level": 7},
+        { "type": ItemType.dagger,              "level": 7},
+        { "type": ItemType.staff,               "level": 7},
+        { "type": ItemType.wand,                "level": 7},
+        { "type": ItemType.spell_book,          "level": 7},
+        { "type": ItemType.alchemical_supplies, "level": 7},
+        { "type": ItemType.fire_bomb,           "level": 7},
+        { "type": ItemType.frost_bomb,          "level": 7},
+        { "type": ItemType.shock_bomb,          "level": 7},
+        { "type": ItemType.acid_bomb,           "level": 7},
+        { "type": ItemType.flash_bomb,          "level": 7},
+        { "type": ItemType.spike_bomb,          "level": 7},
+        { "type": ItemType.concussion_bomb,     "level": 7},
+        { "type": ItemType.fire_ball,           "level": 7},
+        { "type": ItemType.thunderbolt,         "level": 7},
+        { "type": ItemType.ice_spike,           "level": 7},
+        { "type": ItemType.armor,               "level": 7}
+    ],
+    [ # Town 7
+        { "type": ItemType.sword,               "level": 8},
+        { "type": ItemType.mace,                "level": 8},
+        { "type": ItemType.spear,               "level": 8},
+        { "type": ItemType.dagger,              "level": 8},
+        { "type": ItemType.staff,               "level": 8},
+        { "type": ItemType.wand,                "level": 8},
+        { "type": ItemType.spell_book,          "level": 8},
+        { "type": ItemType.alchemical_supplies, "level": 8},
+        { "type": ItemType.fire_bomb,           "level": 8},
+        { "type": ItemType.frost_bomb,          "level": 8},
+        { "type": ItemType.shock_bomb,          "level": 8},
+        { "type": ItemType.acid_bomb,           "level": 8},
+        { "type": ItemType.flash_bomb,          "level": 8},
+        { "type": ItemType.spike_bomb,          "level": 8},
+        { "type": ItemType.concussion_bomb,     "level": 8},
+        { "type": ItemType.fire_ball,           "level": 8},
+        { "type": ItemType.thunderbolt,         "level": 8},
+        { "type": ItemType.ice_spike,           "level": 8},
+        { "type": ItemType.armor,               "level": 8}
+    ],
+    [ # Town 8
+        { "type": ItemType.sword,               "level": 9},
+        { "type": ItemType.mace,                "level": 9},
+        { "type": ItemType.spear,               "level": 9},
+        { "type": ItemType.dagger,              "level": 9},
+        { "type": ItemType.staff,               "level": 9},
+        { "type": ItemType.wand,                "level": 9},
+        { "type": ItemType.spell_book,          "level": 9},
+        { "type": ItemType.alchemical_supplies, "level": 9},
+        { "type": ItemType.fire_bomb,           "level": 9},
+        { "type": ItemType.frost_bomb,          "level": 9},
+        { "type": ItemType.shock_bomb,          "level": 9},
+        { "type": ItemType.acid_bomb,           "level": 9},
+        { "type": ItemType.flash_bomb,          "level": 9},
+        { "type": ItemType.spike_bomb,          "level": 9},
+        { "type": ItemType.concussion_bomb,     "level": 9},
+        { "type": ItemType.fire_ball,           "level": 9},
+        { "type": ItemType.thunderbolt,         "level": 9},
+        { "type": ItemType.ice_spike,           "level": 9},
+        { "type": ItemType.armor,               "level": 9}
+    ],
+    [ # Town 9
+        { "type": ItemType.sword,               "level": 10},
+        { "type": ItemType.mace,                "level": 10},
+        { "type": ItemType.spear,               "level": 10},
+        { "type": ItemType.dagger,              "level": 10},
+        { "type": ItemType.staff,               "level": 10},
+        { "type": ItemType.wand,                "level": 10},
+        { "type": ItemType.spell_book,          "level": 10},
+        { "type": ItemType.alchemical_supplies, "level": 10},
+        { "type": ItemType.fire_bomb,           "level": 10},
+        { "type": ItemType.frost_bomb,          "level": 10},
+        { "type": ItemType.shock_bomb,          "level": 10},
+        { "type": ItemType.acid_bomb,           "level": 10},
+        { "type": ItemType.flash_bomb,          "level": 10},
+        { "type": ItemType.spike_bomb,          "level": 10},
+        { "type": ItemType.concussion_bomb,     "level": 10},
+        { "type": ItemType.fire_ball,           "level": 10},
+        { "type": ItemType.thunderbolt,         "level": 10},
+        { "type": ItemType.ice_spike,           "level": 10},
+        { "type": ItemType.armor,               "level": 10}
+    ]
 ]
 
 
-town_1 = [
-        { "type": ItemType.sword,               "level": 2,  "cost": 300 },
-        { "type": ItemType.mace,                "level": 2,  "cost": 300 },
-        { "type": ItemType.spear,               "level": 2,  "cost": 300 },
-        { "type": ItemType.dagger,              "level": 2,  "cost": 300 },
-        { "type": ItemType.staff,               "level": 2,  "cost": 300 },
-        { "type": ItemType.wand,                "level": 2,  "cost": 300 },
-        { "type": ItemType.spell_book,          "level": 2,  "cost": 300 },
-        { "type": ItemType.alchemical_supplies, "level": 2,  "cost": 300 },
-        { "type": ItemType.fire_bomb,           "level": 2,  "cost": 200 },
-        { "type": ItemType.frost_bomb,          "level": 2,  "cost": 200 },
-        { "type": ItemType.shock_bomb,          "level": 2,  "cost": 200 },
-        { "type": ItemType.acid_bomb,           "level": 2,  "cost": 200 },
-        { "type": ItemType.flash_bomb,          "level": 2,  "cost": 200 },
-        { "type": ItemType.spike_bomb,          "level": 2,  "cost": 200 },
-        { "type": ItemType.concussion_bomb,     "level": 2,  "cost": 200 },
-        { "type": ItemType.fire_ball,           "level": 2,  "cost": 200 },
-        { "type": ItemType.thunderbolt,         "level": 2,  "cost": 200 },
-        { "type": ItemType.ice_spike,           "level": 2,  "cost": 200 }
-]
-
-
-# TODO UPDATE OPTIONS
-town_2 = [
-        { "type": ItemType.sword,               "level": 3,  "cost": 300 },
-        { "type": ItemType.mace,                "level": 3,  "cost": 300 },
-        { "type": ItemType.spear,               "level": 3,  "cost": 300 },
-        { "type": ItemType.dagger,              "level": 3,  "cost": 300 },
-        { "type": ItemType.staff,               "level": 3,  "cost": 300 },
-        { "type": ItemType.wand,                "level": 3,  "cost": 300 },
-        { "type": ItemType.spell_book,          "level": 3,  "cost": 300 },
-        { "type": ItemType.alchemical_supplies, "level": 3,  "cost": 300 },
-        { "type": ItemType.fire_bomb,           "level": 3,  "cost": 200 },
-        { "type": ItemType.frost_bomb,          "level": 3,  "cost": 200 },
-        { "type": ItemType.shock_bomb,          "level": 3,  "cost": 200 },
-        { "type": ItemType.acid_bomb,           "level": 3,  "cost": 200 },
-        { "type": ItemType.flash_bomb,          "level": 3,  "cost": 200 },
-        { "type": ItemType.spike_bomb,          "level": 3,  "cost": 200 },
-        { "type": ItemType.concussion_bomb,     "level": 3,  "cost": 200 },
-        { "type": ItemType.fire_ball,           "level": 3,  "cost": 200 },
-        { "type": ItemType.thunderbolt,         "level": 3,  "cost": 200 },
-        { "type": ItemType.ice_spike,           "level": 3,  "cost": 200 }
-]
-
-
-# TODO UPDATE OPTIONS
-town_3 = [
-        { "type": ItemType.sword,               "level": 4,  "cost": 300 },
-        { "type": ItemType.mace,                "level": 4,  "cost": 300 },
-        { "type": ItemType.spear,               "level": 4,  "cost": 300 },
-        { "type": ItemType.dagger,              "level": 4,  "cost": 300 },
-        { "type": ItemType.staff,               "level": 4,  "cost": 300 },
-        { "type": ItemType.wand,                "level": 4,  "cost": 300 },
-        { "type": ItemType.spell_book,          "level": 4,  "cost": 300 },
-        { "type": ItemType.alchemical_supplies, "level": 4,  "cost": 300 },
-        { "type": ItemType.fire_bomb,           "level": 4,  "cost": 200 },
-        { "type": ItemType.frost_bomb,          "level": 4,  "cost": 200 },
-        { "type": ItemType.shock_bomb,          "level": 4,  "cost": 200 },
-        { "type": ItemType.acid_bomb,           "level": 4,  "cost": 200 },
-        { "type": ItemType.flash_bomb,          "level": 4,  "cost": 200 },
-        { "type": ItemType.spike_bomb,          "level": 4,  "cost": 200 },
-        { "type": ItemType.concussion_bomb,     "level": 4,  "cost": 200 },
-        { "type": ItemType.fire_ball,           "level": 4,  "cost": 200 },
-        { "type": ItemType.thunderbolt,         "level": 4,  "cost": 200 },
-        { "type": ItemType.ice_spike,           "level": 4,  "cost": 200 }
-]
-
-
-# TODO UPDATE OPTIONS
-town_4 = [
-        { "type": ItemType.sword,               "level": 5,  "cost": 300 },
-        { "type": ItemType.mace,                "level": 5,  "cost": 300 },
-        { "type": ItemType.spear,               "level": 5,  "cost": 300 },
-        { "type": ItemType.dagger,              "level": 5,  "cost": 300 },
-        { "type": ItemType.staff,               "level": 5,  "cost": 300 },
-        { "type": ItemType.wand,                "level": 5,  "cost": 300 },
-        { "type": ItemType.spell_book,          "level": 5,  "cost": 300 },
-        { "type": ItemType.alchemical_supplies, "level": 5,  "cost": 300 },
-        { "type": ItemType.fire_bomb,           "level": 5,  "cost": 200 },
-        { "type": ItemType.frost_bomb,          "level": 5,  "cost": 200 },
-        { "type": ItemType.shock_bomb,          "level": 5,  "cost": 200 },
-        { "type": ItemType.acid_bomb,           "level": 5,  "cost": 200 },
-        { "type": ItemType.flash_bomb,          "level": 5,  "cost": 200 },
-        { "type": ItemType.spike_bomb,          "level": 5,  "cost": 200 },
-        { "type": ItemType.concussion_bomb,     "level": 5,  "cost": 200 },
-        { "type": ItemType.fire_ball,           "level": 5,  "cost": 200 },
-        { "type": ItemType.thunderbolt,         "level": 5,  "cost": 200 },
-        { "type": ItemType.ice_spike,           "level": 5,  "cost": 200 }
-]
-
-
-# TODO UPDATE OPTIONS
-town_5 = [
-        { "type": ItemType.sword,               "level": 6,  "cost": 300 },
-        { "type": ItemType.mace,                "level": 6,  "cost": 300 },
-        { "type": ItemType.spear,               "level": 6,  "cost": 300 },
-        { "type": ItemType.dagger,              "level": 6,  "cost": 300 },
-        { "type": ItemType.staff,               "level": 6,  "cost": 300 },
-        { "type": ItemType.wand,                "level": 6,  "cost": 300 },
-        { "type": ItemType.spell_book,          "level": 6,  "cost": 300 },
-        { "type": ItemType.alchemical_supplies, "level": 6,  "cost": 300 },
-        { "type": ItemType.fire_bomb,           "level": 6,  "cost": 200 },
-        { "type": ItemType.frost_bomb,          "level": 6,  "cost": 200 },
-        { "type": ItemType.shock_bomb,          "level": 6,  "cost": 200 },
-        { "type": ItemType.acid_bomb,           "level": 6,  "cost": 200 },
-        { "type": ItemType.flash_bomb,          "level": 6,  "cost": 200 },
-        { "type": ItemType.spike_bomb,          "level": 6,  "cost": 200 },
-        { "type": ItemType.concussion_bomb,     "level": 6,  "cost": 200 },
-        { "type": ItemType.fire_ball,           "level": 6,  "cost": 200 },
-        { "type": ItemType.thunderbolt,         "level": 6,  "cost": 200 },
-        { "type": ItemType.ice_spike,           "level": 6,  "cost": 200 }
-]
-
-
-# TODO UPDATE OPTIONS
-town_6 = [
-        { "type": ItemType.sword,               "level": 7,  "cost": 300 },
-        { "type": ItemType.mace,                "level": 7,  "cost": 300 },
-        { "type": ItemType.spear,               "level": 7,  "cost": 300 },
-        { "type": ItemType.dagger,              "level": 7,  "cost": 300 },
-        { "type": ItemType.staff,               "level": 7,  "cost": 300 },
-        { "type": ItemType.wand,                "level": 7,  "cost": 300 },
-        { "type": ItemType.spell_book,          "level": 7,  "cost": 300 },
-        { "type": ItemType.alchemical_supplies, "level": 7,  "cost": 300 },
-        { "type": ItemType.fire_bomb,           "level": 7,  "cost": 200 },
-        { "type": ItemType.frost_bomb,          "level": 7,  "cost": 200 },
-        { "type": ItemType.shock_bomb,          "level": 7,  "cost": 200 },
-        { "type": ItemType.acid_bomb,           "level": 7,  "cost": 200 },
-        { "type": ItemType.flash_bomb,          "level": 7,  "cost": 200 },
-        { "type": ItemType.spike_bomb,          "level": 7,  "cost": 200 },
-        { "type": ItemType.concussion_bomb,     "level": 7,  "cost": 200 },
-        { "type": ItemType.fire_ball,           "level": 7,  "cost": 200 },
-        { "type": ItemType.thunderbolt,         "level": 7,  "cost": 200 },
-        { "type": ItemType.ice_spike,           "level": 7,  "cost": 200 }
-]
-
-# TODO UPDATE OPTIONS
-town_7 = [
-        { "type": ItemType.sword,               "level": 8,  "cost": 300 },
-        { "type": ItemType.mace,                "level": 8,  "cost": 300 },
-        { "type": ItemType.spear,               "level": 8,  "cost": 300 },
-        { "type": ItemType.dagger,              "level": 8,  "cost": 300 },
-        { "type": ItemType.staff,               "level": 8,  "cost": 300 },
-        { "type": ItemType.wand,                "level": 8,  "cost": 300 },
-        { "type": ItemType.spell_book,          "level": 8,  "cost": 300 },
-        { "type": ItemType.alchemical_supplies, "level": 8,  "cost": 300 },
-        { "type": ItemType.fire_bomb,           "level": 8,  "cost": 200 },
-        { "type": ItemType.frost_bomb,          "level": 8,  "cost": 200 },
-        { "type": ItemType.shock_bomb,          "level": 8,  "cost": 200 },
-        { "type": ItemType.acid_bomb,           "level": 8,  "cost": 200 },
-        { "type": ItemType.flash_bomb,          "level": 8,  "cost": 200 },
-        { "type": ItemType.spike_bomb,          "level": 8,  "cost": 200 },
-        { "type": ItemType.concussion_bomb,     "level": 8,  "cost": 200 },
-        { "type": ItemType.fire_ball,           "level": 8,  "cost": 200 },
-        { "type": ItemType.thunderbolt,         "level": 8,  "cost": 200 },
-        { "type": ItemType.ice_spike,           "level": 8,  "cost": 200 }
-]
-
-
-# TODO UPDATE OPTIONS
-town_8 = [
-        { "type": ItemType.sword,               "level": 9,  "cost": 300 },
-        { "type": ItemType.mace,                "level": 9,  "cost": 300 },
-        { "type": ItemType.spear,               "level": 9,  "cost": 300 },
-        { "type": ItemType.dagger,              "level": 9,  "cost": 300 },
-        { "type": ItemType.staff,               "level": 9,  "cost": 300 },
-        { "type": ItemType.wand,                "level": 9,  "cost": 300 },
-        { "type": ItemType.spell_book,          "level": 9,  "cost": 300 },
-        { "type": ItemType.alchemical_supplies, "level": 9,  "cost": 300 },
-        { "type": ItemType.fire_bomb,           "level": 9,  "cost": 200 },
-        { "type": ItemType.frost_bomb,          "level": 9,  "cost": 200 },
-        { "type": ItemType.shock_bomb,          "level": 9,  "cost": 200 },
-        { "type": ItemType.acid_bomb,           "level": 9,  "cost": 200 },
-        { "type": ItemType.flash_bomb,          "level": 9,  "cost": 200 },
-        { "type": ItemType.spike_bomb,          "level": 9,  "cost": 200 },
-        { "type": ItemType.concussion_bomb,     "level": 9,  "cost": 200 },
-        { "type": ItemType.fire_ball,           "level": 9,  "cost": 200 },
-        { "type": ItemType.thunderbolt,         "level": 9,  "cost": 200 },
-        { "type": ItemType.ice_spike,           "level": 9,  "cost": 200 }
-]
-
-
-# TODO UPDATE OPTIONS
-town_9 = [
-        { "type": ItemType.sword,               "level": 10,  "cost": 300 },
-        { "type": ItemType.mace,                "level": 10,  "cost": 300 },
-        { "type": ItemType.spear,               "level": 10,  "cost": 300 },
-        { "type": ItemType.dagger,              "level": 10,  "cost": 300 },
-        { "type": ItemType.staff,               "level": 10,  "cost": 300 },
-        { "type": ItemType.wand,                "level": 10,  "cost": 300 },
-        { "type": ItemType.spell_book,          "level": 10,  "cost": 300 },
-        { "type": ItemType.alchemical_supplies, "level": 10,  "cost": 300 },
-        { "type": ItemType.fire_bomb,           "level": 10,  "cost": 200 },
-        { "type": ItemType.frost_bomb,          "level": 10,  "cost": 200 },
-        { "type": ItemType.shock_bomb,          "level": 10,  "cost": 200 },
-        { "type": ItemType.acid_bomb,           "level": 10,  "cost": 200 },
-        { "type": ItemType.flash_bomb,          "level": 10,  "cost": 200 },
-        { "type": ItemType.spike_bomb,          "level": 10,  "cost": 200 },
-        { "type": ItemType.concussion_bomb,     "level": 10,  "cost": 200 },
-        { "type": ItemType.fire_ball,           "level": 10,  "cost": 200 },
-        { "type": ItemType.thunderbolt,         "level": 10,  "cost": 200 },
-        { "type": ItemType.ice_spike,           "level": 10,  "cost": 200 }
-]
-
+for town_no in range(10):
+    for item in towns[town_no]:
+        type = item["type"]
+        level = item["level"]
+        item["cost"] = item_data[type][level]["cost"]
 

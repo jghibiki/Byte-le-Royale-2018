@@ -13,7 +13,13 @@ from game.visualizer.spritesheet_functions import SpriteSheet
 from game.visualizer.sprite_sheets import *
 from game.visualizer.game_log_parser import GameLogParser
 from game.visualizer.floating_number import FloatingNumber
+from game.visualizer.progress_bar import ProgressBar
+from game.visualizer.trap_text import TrapText
 
+ee_idx = 0
+easter_egg= """
+There are moments, psychologists tell us, when the passion for sin, or for what the world calls sin, so dominates a nature that every fiber of the body, as every cell of the brain, seems to be instinct with fearful impulses. Men and women at such moments lose the freedom of their will. They move to their terrible end as automatons move. Choice is taken from them, and conscience is either killed, or, if it lives at all, lives but to give rebellion to its fascination and fascination its charm. For all sins, as theologians weary not of reminding us, are sins of disobedience. When that high spirit, that mourning star of evil, fell from heaven, it was as a rebel that he fell. The Picture of Dorian Grey
+""".split(" ")
 
 def party_killed_screen(global_surf, fps_clock, data):
     width = math.floor(1280/2.0)
@@ -99,7 +105,7 @@ def unit_text(font, upper_left, unit):
         color=(255, 255, 255),
         owidth=2.0,
         ocolor=(0, 0, 0),
-        fontsize=14,
+        fontsize=16,
         fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
     primary_weapon_rect = primary_weapon_text.get_rect()
@@ -109,6 +115,29 @@ def unit_text(font, upper_left, unit):
     text_parts.append([
         primary_weapon_text,
         primary_weapon_rect])
+
+    if unit.armor is not None:
+        text = "Lvl{0} {1}".format(
+            unit.armor.level,
+            unit.armor.name
+        )
+
+        armor_text = ptext.draw(
+            text,
+            (0,0),
+            color=(255, 255, 255),
+            owidth=2.0,
+            ocolor=(0, 0, 0),
+            fontsize=16,
+            fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
+        armor_rect = armor_text.get_rect()
+        armor_rect.topleft = (upper_left[0], upper_left[1]+100)
+
+        text_parts.append([
+            armor_text,
+            armor_rect
+        ])
 
     if unit.unit_class is UnitClass.knight:
         pass
@@ -131,7 +160,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_1_rect = bomb_1_text.get_rect()
@@ -155,7 +184,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_2_rect = bomb_2_text.get_rect()
@@ -179,7 +208,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_3_rect = bomb_3_text.get_rect()
@@ -204,7 +233,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_1_rect = bomb_1_text.get_rect()
@@ -228,7 +257,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_2_rect = bomb_2_text.get_rect()
@@ -251,8 +280,8 @@ def start(verbose, log_path, gamma):
     unit_colors = {}
     colors = [
         pygame.Color("#FFFB00"),
-        pygame.Color("#FF0084"),
-        pygame.Color("#0005FF"),
+        pygame.Color("#FF91F2"),
+        pygame.Color("#36CDFF"),
         pygame.Color("#00FF7A")
     ]
     for unit in units:
@@ -295,14 +324,20 @@ def start(verbose, log_path, gamma):
     unit_hp_bars = pygame.sprite.Group()
     unit_sprite_group = pygame.sprite.Group()
 
+    trap_progress_group = pygame.sprite.Group()
+
+    trap_text_group = pygame.sprite.Group()
+
+    special_ability_group = pygame.sprite.Group()
+
     unit_hp_bar_pos = [(20, 544), (332, 544), (644, 544), (956, 544)]
     unit_sprite_pos = [(80, 320), (392, 320), (704, 320), (1016, 320)]
 
     for idx, pos in enumerate(unit_hp_bar_pos):
-        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
-        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
-        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
-        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id, unit=True) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id, unit=True) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id, unit=True) )
+        unit_hp_bars.add( HealthBar(*pos, 300, 50, units[idx].id, unit=True) )
 
     unit_damage_number_pos = {}
 
@@ -326,9 +361,24 @@ def start(verbose, log_path, gamma):
     unit_icon_sprite_group = pygame.sprite.Group()
     icon_back_group = pygame.sprite.Group()
     monster_group = pygame.sprite.Group()
+    monster_damage_types_group = pygame.sprite.Group()
 
 
-    monster_pos = (585,120)
+    monster_pos = (585,140)
+
+    monster_damage_types_topleft = 489
+    monster_damage_types_pos = [
+        [monster_damage_types_topleft + (0*42), 90],
+        [monster_damage_types_topleft + (1*42), 90],
+        [monster_damage_types_topleft + (2*42), 90],
+        [monster_damage_types_topleft + (3*42), 90],
+        [monster_damage_types_topleft + (4*42), 90],
+        [monster_damage_types_topleft + (5*42), 90],
+        [monster_damage_types_topleft + (6*42), 90],
+        [monster_damage_types_topleft + (7*42), 90],
+        [monster_damage_types_topleft + (8*42), 90],
+        [monster_damage_types_topleft + (9*42), 90]
+    ]
 
 
     icon_sprite_positions = [(20,504), (332,504), (644,504), (956,504)]
@@ -383,7 +433,8 @@ def start(verbose, log_path, gamma):
     background_group.add(HillSprite())
 
     town_shop_sprite = TownShopSprite()
-    monster_room_sprite = get_monster_room_sprite()
+
+    trap_sprite_group = pygame.sprite.Group()
 
 
     first_loop = True
@@ -455,7 +506,7 @@ def start(verbose, log_path, gamma):
 
                         color = unit_colors[event["unit"]]
 
-                        fn = FloatingNumber(520 + random.randint(-15, 15) , 10 , '-{}'.format(event["damage"]), color)
+                        fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
                         floating_number_group.add(fn)
 
                         aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
@@ -486,7 +537,98 @@ def start(verbose, log_path, gamma):
                         aa = AttackAnimation(unit_animation_pos[0], unit_animation_pos[1], pygame.Color("#FF0000"))
                         attack_animation_group.add(aa)
 
+                elif event["type"] == Event.special_ability:
+                    event["handled"] = True
 
+                    next_turn_counter += 2
+
+                    if event["unit"].unit_class is UnitClass.alchemist:
+                        idx = units.index(event["unit"])
+
+                        if idx is 0:
+                            special_ability_group.add( ResupplyAnimation(70, 280) )
+                        elif idx is 1:
+                            special_ability_group.add( ResupplyAnimation(370, 280) )
+                        elif idx is 2:
+                            special_ability_group.add( ResupplyAnimation(680, 280) )
+                        elif idx is 3:
+                            special_ability_group.add( ResupplyAnimation(1000, 280) )
+
+                    elif event["unit"].unit_class is UnitClass.sorcerer:
+
+                        target_idx = units.index(event["target_1"])
+
+                        if target_idx is 0:
+                            special_ability_group.add( IllusionAnimation(70, 280) )
+                        elif target_idx is 1:
+                            special_ability_group.add( IllusionAnimation(370, 280) )
+                        elif target_idx is 2:
+                            special_ability_group.add( IllusionAnimation(680, 280) )
+                        elif target_idx is 3:
+                            special_ability_group.add( IllusionAnimation(1000, 280) )
+
+                    elif event["unit"].unit_class is UnitClass.sorcerer:
+                        target_idx = units.index(event["target_1"])
+
+                        if target_idx is 0:
+                           special_ability_group.add( InvigorateAnimation(65, 280) )
+                        elif target_idx is 1:
+                           special_ability_group.add( InvigorateAnimation(365, 280) )
+                        elif target_idx is 2:
+                           special_ability_group.add( InvigorateAnimation(675, 280) )
+                        elif target_idx is 3:
+                            special_ability_group.add( InvigorateAnimation(995, 280) )
+
+                    elif event["unit"].unit_class is UnitClass.sorcerer:
+                        unit_idx = units.index(event["unit"])
+
+                        if unit_idx is 0:
+                            special_ability_group.add( FitOfRageAnimation(105, 310) )
+                        elif unit_idx is 1:
+                            special_ability_group.add( FitOfRageAnimation(405, 310) )
+                        elif unit_idx is 2:
+                            special_ability_group.add( FitOfRageAnimation(715, 310) )
+                        elif unit_idx is 3:
+                            special_ability_group.add( FitOfRageAnimation(1035, 310) )
+
+                    elif event["unit"].unit_class is UnitClass.knight:
+                        unit_idx = units.index(event["unit"])
+
+                        if unit_idx is 0:
+                            special_ability_group.add( TauntAnimation(70, 280) )
+                        elif unit_idx is 1:
+                            special_ability_group.add( TauntAnimation(370, 280) )
+                        elif unit_idx is 2:
+                            special_ability_group.add( TauntAnimation(680, 280) )
+                        elif unit_idx is 3:
+                            special_ability_group.add( TauntAnimation(1000, 280) )
+
+
+
+                elif event["type"] == Event.special_ability_attack:
+                    event["handled"] = True
+
+                    next_turn_counter += 2
+
+                    if event["unit"].unit_class is UnitClass.pikeman:
+                        showing = False
+                        for ani in special_ability_group.sprites():
+                            if isinstance(ani, TargetWeaknessAnimation):
+                                showing = True
+                                break
+
+                        if not showing:
+                            special_ability_group.add( TargetWeaknessAnimation(540, 170) )
+
+                    elif event["unit"].unit_class is UnitClass.magus:
+                        showing = False
+                        for ani in special_ability_group.sprites():
+                            if isinstance(ani, ElementalBurstAnimation):
+                                showing = True
+                                break
+
+                        if not showing:
+                            special_ability_group.add( ElementalBurstAnimation(480, 110) )
 
                 elif event["type"] == Event.combat_resolved:
 
@@ -494,11 +636,45 @@ def start(verbose, log_path, gamma):
 
                     event["handled"] = True
 
+                elif event["type"] == Event.begin_trap_evade:
+
+                    event["handled"] = True
+
+                    trap_sprite_group.add( get_trap_sprite(location.trap.trap_type) )
+
+                    trap_text_group.add( TrapText(10, "Lvl{} {}".format(location.trap.level, location.trap.name)))
+
+                    if(location.trap.pass_type is TrapPassType.individual_pass or
+                       location.trap.pass_type is TrapPassType.group_pass_on_first_success):
+
+                        def get_effort(trap, index):
+                            return trap.current_effort[index]
+
+                        trap_progress_group.add( ProgressBar(80, 300, 200, 20, location.trap.required_effort, lambda t: get_effort(t, 0)) )
+                        trap_progress_group.add( ProgressBar(390, 300, 200, 20, location.trap.required_effort, lambda t: get_effort(t, 1)) )
+                        trap_progress_group.add( ProgressBar(700, 300, 200, 20, location.trap.required_effort, lambda t: get_effort(t, 2)) )
+                        trap_progress_group.add( ProgressBar(1010, 300, 200, 20, location.trap.required_effort, lambda t: get_effort(t, 3)) )
+
+                    elif location.trap.pass_type is TrapPassType.group_pass:
+
+                        def get_effort(trap):
+                            return trap.current_effort
+
+                        trap_progress_group.add( ProgressBar(400, 50, 500, 30, location.trap.required_effort, get_effort) )
+
+
+                elif event["type"] == Event.trap_resolved:
+                    event["handled"] = True
+                    trap_progress_group.empty()
+                    trap_text_group.empty()
+
                 elif event["type"] == Event.party_killed:
                     party_killed_screen(global_surf, fpsClock, event)
 
                 elif event["type"] == Event.room_choice:
                     room_choice = True
+
+                    trap_sprite_group.empty()
 
                     if event["room_1"] is not None and event["room_2"] is not None:
                         room_1_pos = (256, 48)
@@ -578,6 +754,7 @@ def start(verbose, log_path, gamma):
                     monster_hp_bar.empty()
                     monster_group.empty()
                     monster_name_surface = pygame.Surface((0,0))
+                    monster_damage_types_group.empty()
 
                     next_turn_counter += 30
 
@@ -594,7 +771,7 @@ def start(verbose, log_path, gamma):
             # clear monster hp bar
             monster_hp_bar.empty()
 
-            bar = HealthBar(530, 90, 300, 50, monster.id)
+            bar = HealthBar(530, 60, 300, 50, monster.id)
             bar.rect.x = 640 - math.floor(bar.rect.w/2)
             monster_hp_bar.add(bar)
 
@@ -607,6 +784,13 @@ def start(verbose, log_path, gamma):
                 monster_sprite.rect.x = 640 - math.floor(monster_sprite.rect.w/2)
                 monster_group.add( monster_sprite )
 
+                for damage_type, icon_pos in zip(monster.weaknesses, monster_damage_types_pos):
+
+                    icon = get_damage_type_icon(damage_type, icon_pos)
+                    if icon is not None:
+                        monster_damage_types_group.add(icon)
+
+
         if location.node_type == NodeType.town:
             monster_hp_bar.empty()
             monster_group.empty()
@@ -617,9 +801,16 @@ def start(verbose, log_path, gamma):
         if location_change:
             if background == NodeType.monster:
                 background_group.empty()
-                background_group.add( get_monster_room_sprite() )
-            if background == NodeType.town:
+                trap_sprite_group.empty()
+                background_group.add( get_room_sprite() )
+
+            elif background == NodeType.trap:
                 background_group.empty()
+                background_group.add( get_room_sprite() )
+
+            elif background == NodeType.town:
+                background_group.empty()
+                trap_sprite_group.empty()
                 background_group.add( town_shop_sprite )
             else:
                 pass
@@ -630,7 +821,7 @@ def start(verbose, log_path, gamma):
         #####
 
         unit_item_text = []
-        unit_item_text_pos = [(20, 564), (332, 564), (644, 564), (956, 564)]
+        unit_item_text_pos = [(20, 584), (332, 584), (644, 584), (956, 584)]
         # render unit item text
         for unit, pos in zip(units, unit_item_text_pos):
             unit_item_text +=  unit_text(small_font, pos, unit)
@@ -643,7 +834,7 @@ def start(verbose, log_path, gamma):
 
             # handle font shifting when rendering a to a different width as a result of a narrow character such as 1
             gold_rect = gold_surf.get_rect()
-            gold_rect.topright= _pos
+            gold_rect.topright = _pos
 
 
         # render trophies text if changed
@@ -697,7 +888,7 @@ def start(verbose, log_path, gamma):
 
         if monster_name_surface is not None:
             monster_info_rect = monster_name_surface.get_rect()
-            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 60)
+            monster_info_rect.topleft = ( 640 - math.floor(monster_info_rect.w/2), 30)
 
         archway_group.update()
 
@@ -709,9 +900,20 @@ def start(verbose, log_path, gamma):
 
         monster_group.update()
 
+        monster_damage_types_group.update()
+
         floating_number_group.update(floating_number_group)
 
         attack_animation_group.update(attack_animation_group)
+
+        background_group.update()
+
+        trap_sprite_group.update()
+
+        special_ability_group.update(special_ability_group)
+
+        if location is not None and location.node_type is NodeType.trap:
+            trap_progress_group.update(location.trap)
 
         #####
         # Begin Drawing to screen
@@ -720,8 +922,9 @@ def start(verbose, log_path, gamma):
         # clear screen, fill with white
         global_surf.fill(blackColor)
 
-        background_group.update()
         background_group.draw(global_surf)
+
+        trap_sprite_group.draw(global_surf)
 
 
         # draw team name background
@@ -759,6 +962,9 @@ def start(verbose, log_path, gamma):
         # draw monsters
         monster_group.draw(global_surf)
 
+        # Draw weakness types
+        monster_damage_types_group.draw(global_surf)
+
         archway_group.draw(global_surf)
 
         # draw units
@@ -768,9 +974,18 @@ def start(verbose, log_path, gamma):
         icon_back_group.draw(global_surf)
         unit_icon_sprite_group.draw(global_surf)
 
+        # Draw unit special ability animations
+        special_ability_group.draw(global_surf)
+
         # draw floating numbers
         floating_number_group.draw(global_surf)
         attack_animation_group.draw(global_surf)
+
+        # draw trap progress
+        trap_progress_group.draw(global_surf)
+
+        # draw trap text
+        trap_text_group.draw(global_surf)
 
 
         for event in pygame.event.get():
@@ -783,8 +998,11 @@ def start(verbose, log_path, gamma):
                mousex, mousey = event.pos
                if event.button == 1:
                     mouse_x, mouse_y = event.pos
-                    fn = FloatingNumber(mouse_x, mouse_y, '-5000', color_white)
-                    floating_number_group.add(fn)
+                    global ee_idx
+                    if ee_idx < len(easter_egg):
+                        fn = FloatingNumber(mouse_x, mouse_y, easter_egg[ee_idx], color_white)
+                        ee_idx += 1
+                        floating_number_group.add(fn)
 
         first_loop = False
 

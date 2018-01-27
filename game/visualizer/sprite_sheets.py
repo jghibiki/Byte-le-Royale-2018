@@ -6,6 +6,127 @@ import ptext
 from game.visualizer.spritesheet_functions import SpriteSheet
 from game.common.enums import *
 
+
+class DamageIconSprite(pygame.sprite.Sprite):
+    def __init__(self, sprite_sheet_data, x, y):
+        super().__init__()
+
+        sprite_sheet = SpriteSheet("game/visualizer/assets/damage_type_icons.png")
+
+        self.icon_back = pygame.image.load("game/visualizer/assets/icon_back.png").convert_alpha()
+
+        self.image = self.icon_back
+
+        self.image.blit(sprite_sheet.get_image(sprite_sheet_data[0],
+                                            sprite_sheet_data[1],
+                                            sprite_sheet_data[2],
+                                            sprite_sheet_data[3]), (5, 5))
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class PiercingIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.piercing * 32,
+            32, 32
+        ], x, y)
+
+class SlashingIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.slashing * 32,
+            32, 32
+        ], x, y)
+
+class BludgeoningIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.bludgeoning * 32,
+            32, 32
+        ], x, y)
+
+class PrecisionIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.precision * 32,
+            32, 32
+        ], x, y)
+
+class FireIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.fire * 32,
+            32, 32
+        ], x, y)
+
+class ColdIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.cold * 32,
+            32, 32
+        ], x, y)
+
+class ElectricityIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.electricity * 32,
+            32, 32
+        ], x, y)
+
+class AcidIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.acid * 32,
+            32, 32
+        ], x, y)
+
+class SonicIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.sonic * 32,
+            32, 32
+        ], x, y)
+
+class ForceIconSprite(DamageIconSprite):
+    def __init__(self, x, y):
+        super().__init__([
+            0, DamageType.force * 32,
+            32, 32
+        ], x, y)
+
+
+def get_damage_type_icon(damage_type, pos):
+    cls = None
+
+    if damage_type is DamageType.piercing:
+        cls = PiercingIconSprite
+    elif damage_type is DamageType.slashing:
+        cls = SlashingIconSprite
+    elif damage_type is DamageType.bludgeoning:
+        cls = BludgeoningIconSprite
+    elif damage_type is DamageType.precision:
+        cls = PrecisionIconSprite
+    elif damage_type is DamageType.fire:
+        cls = FireIconSprite
+    elif damage_type is DamageType.cold:
+        cls = ColdIconSprite
+    elif damage_type is DamageType.electricity:
+        cls = ElectricityIconSprite
+    elif damage_type is DamageType.acid:
+        cls = AcidIconSprite
+    elif damage_type is DamageType.sonic:
+        cls = SonicIconSprite
+    elif damage_type is DamageType.force:
+        cls = ForceIconSprite
+
+    if cls is None:
+        return None
+
+    return cls(*pos)
+
+
 class UnitIconSprite(pygame.sprite.Sprite):
     def __init__(self, sprite_sheet_data, x, y):
         super().__init__()
@@ -369,7 +490,7 @@ class HillSprite(BackgroundSprite):
 
 loaded_monster_room_sprites = {}
 
-def get_monster_room_sprite():
+def get_room_sprite():
     cls = random.choice([
         BrownDungeonSprite,
         GreyDungeonSprite,
@@ -497,12 +618,18 @@ class KnightSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/knight.png",
                     [
-                        [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
-                        [0, 256], [128, 256], [256, 256], [384, 256],
-                        [0, 384], [128, 384], [256, 384], [384, 384]
+                        # 8 x 9
+                        [0,    0], [128,    0], [256,    0], [384,    0], [512,    0], [640,    0], [768,    0], [896,    0],
+                        [0,  128], [128,  128], [256,  128], [384,  128], [512,  128], [640,  128], [768,  128], [896,  128],
+                        [0,  256], [128,  256], [256,  256], [384,  256], [512,  256], [640,  256], [768,  256], [896,  256],
+                        [0,  384], [128,  384], [256,  384], [384,  384], [512,  384], [640,  384], [768,  384], [896,  384],
+                        [0,  512], [128,  512], [256,  512], [384,  512], [512,  512], [640,  512], [768,  512], [896,  512],
+                        [0,  640], [128,  640], [256,  640], [384,  640], [512,  640], [640,  640], [768,  640], [896,  640],
+                        [0,  768], [128,  768], [256,  768], [384,  768], [512,  768], [640,  768], [768,  768], [896,  768],
+                        [0,  896], [128,  896], [256,  896], [384,  896], [512,  896], [640,  896], [768,  896], [896,  896],
+                        [0, 1024], [128, 1024], [256, 1024], [384, 1024], [512, 1024], [640, 1024], [768, 1024], [896, 1024],
 
                     ],
                     x, y,
@@ -513,13 +640,11 @@ class BrawlerSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/brawler.png",
                     [
-                        [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
-                        [0, 256], [128, 256], [256, 256], [384, 256],
-                        [0, 384], [128, 384], [256, 384], [384, 384]
-
+                        [0,   0], [128,   0],
+                        [0, 128], [128, 128],
+                        [0, 256]
                     ],
                     x, y,
                     128, 128,
@@ -532,7 +657,7 @@ class PikemanSprite(UnitSprite):
                     "game/visualizer/assets/spearman.png",
                     [
                         [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 128], [128, 128], [256, 128], [384, 128],
                         [0, 256], [128, 256], [256, 256], [384, 256],
                         [0, 384], [128, 384], [256, 384], [384, 384]
 
@@ -545,12 +670,13 @@ class RogueSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/rogue.png",
                     [
                         [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 128], [128, 128], [256, 128], [384, 128],
                         [0, 256], [128, 256], [256, 256], [384, 256],
-                        [0, 384], [128, 384], [256, 384], [384, 384]
+                        [0, 384], [128, 384], [256, 384], [384, 384],
+                        [0, 512], [128, 512]
 
                     ],
                     x, y,
@@ -561,12 +687,13 @@ class MagusSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/magus.png",
                     [
-                        [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
-                        [0, 256], [128, 256], [256, 256], [384, 256],
-                        [0, 384], [128, 384], [256, 384], [384, 384]
+                        [0,   0], [128,   0], [256,   0], [384,   0], [512,   0],
+                        [0, 128], [128, 128], [256, 128], [384, 128], [512, 128],
+                        [0, 256], [128, 256], [256, 256], [384, 256], [512, 256],
+                        [0, 384], [128, 384], [256, 384], [384, 384], [512, 384],
+                        [0, 512]
 
                     ],
                     x, y,
@@ -577,12 +704,11 @@ class WizardSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/wizard.png",
                     [
-                        [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
-                        [0, 256], [128, 256], [256, 256], [384, 256],
-                        [0, 384], [128, 384], [256, 384], [384, 384]
+                        [0,   0], [128,   0], [256,   0],
+                        [0, 128], [128, 128], [256, 128],
+                        [0, 256], [128, 256]
 
                     ],
                     x, y,
@@ -593,28 +719,29 @@ class SorcererSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/sorcerer.png",
                     [
                         [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 128], [128, 128], [256, 128], [384, 128],
                         [0, 256], [128, 256], [256, 256], [384, 256],
-                        [0, 384], [128, 384], [256, 384], [384, 384]
+                        [0, 384], [128, 384], [256, 384], [384, 384],
+                        [0, 512], [128, 512]
 
                     ],
                     x, y,
                     128, 128,
-                    2)
+                    3)
 
 class AlchemistSprite(UnitSprite):
     def __init__(self, x, y):
             UnitSprite.__init__(
                     self,
-                    "game/visualizer/assets/spearman.png",
+                    "game/visualizer/assets/alchemist.png",
                     [
                         [0,   0], [128,   0], [256,   0], [384,   0],
-                        [0, 128], [128, 128], [256, 128], [384, 129],
+                        [0, 128], [128, 128], [256, 128], [384, 128],
                         [0, 256], [128, 256], [256, 256], [384, 256],
-                        [0, 384], [128, 384], [256, 384], [384, 384]
+                        [0, 384], [128, 384]
 
                     ],
                     x, y,
@@ -720,4 +847,232 @@ class ArchwaySprite(pygame.sprite.Sprite):
 
 
 
+class TrapSprite(pygame.sprite.Sprite):
+    def __init__(self, sprite_sheet_path, frames, x, y, h, w, animation_speed, scale=1):
+        super().__init__()
 
+        self.frames = frames
+        self.index = 0
+        self.tick_counter = 0
+        self.animation_speed = animation_speed
+        self.scale = scale
+
+        self.h = h
+        self.w = w
+
+        self.sprite_sheet = SpriteSheet(sprite_sheet_path)
+
+        self.image = self.sprite_sheet.get_image(
+            self.frames[self.index][0],
+            self.frames[self.index][1],
+            self.h,
+            self.w
+        )
+
+        self.image = pygame.transform.scale(self.image, (self.h*self.scale, self.w*self.scale))
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self):
+        self.tick_counter += 1
+        if self.tick_counter % self.animation_speed is 0:
+            if self.index < len(self.frames)-1:
+                self.index += 1
+            else:
+                self.index = 0
+        self.image = self.sprite_sheet.get_image(
+            self.frames[self.index][0],
+            self.frames[self.index][1],
+            self.h,
+            self.w
+        )
+        self.image = pygame.transform.scale(self.image, (self.h*self.scale, self.w*self.scale))
+
+class SpikeTrap(TrapSprite):
+
+    def __init__(self):
+        TrapSprite.__init__(self, "game/visualizer/assets/spikes.png", [
+            [ 0,    0 ]
+        ], 0, 290, 1280, 128, 3)
+
+class RiddleOfTheSphinxTrap(TrapSprite):
+
+    def __init__(self):
+        TrapSprite.__init__(self, "game/visualizer/assets/sphinx.png", [
+            [ 0,    0 ]
+        ], 448, 10, 128, 128, 3, scale=3)
+
+
+loaded_trap_sprites = {}
+
+def get_trap_sprite(trap_type):
+
+    cls = None
+
+    if trap_type == TrapType.spike_trap:
+        cls = SpikeTrap
+    elif trap_type == TrapType.riddles_of_the_sphinx:
+        cls = RiddleOfTheSphinxTrap
+    else:
+        cls = RiddleOfTheSphinxTrap
+
+    if cls is not None and cls not in loaded_trap_sprites:
+        loaded_trap_sprites[cls] = cls()
+    return loaded_trap_sprites[cls]
+
+
+class SpecialAbilityAnimation(pygame.sprite.Sprite):
+    def __init__(self, sprite_sheet_path, frames, x, y, h, w, animation_speed, scale=1, repeat=1):
+        super().__init__()
+
+        self.frames = frames
+        self.index = 0
+        self.tick_counter = 0
+        self.animation_speed = animation_speed
+
+        self.h = h
+        self.w = w
+
+        self.scale = scale
+
+        self.repeat = repeat
+
+        self.sprite_sheet = SpriteSheet(sprite_sheet_path)
+
+        self.image = self.sprite_sheet.get_image(
+            self.frames[self.index][0],
+            self.frames[self.index][1],
+            self.h,
+            self.w
+        )
+
+        self.image = pygame.transform.scale(self.image, (self.h*self.scale, self.w*self.scale))
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self, obj):
+
+        self.tick_counter += 1
+        if self.tick_counter % self.animation_speed is 0:
+            if self.index < len(self.frames)-1:
+                self.index += 1
+            else:
+                self.index = 0
+                self.repeat -= 1
+
+        if self.repeat <= 0:
+            obj.remove(self)
+
+        self.image = self.sprite_sheet.get_image(
+            self.frames[self.index][0],
+            self.frames[self.index][1],
+            self.h,
+            self.w
+        )
+
+        self.image = pygame.transform.scale(self.image, (self.h*self.scale, self.w*self.scale))
+
+class ResupplyAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/resupply_animation.png",
+            [
+                [0,   0], [32,   0], [64,   0],
+                [0,  32], [32,  32], [64,  32],
+                [0,  64], [32,  64], [64,  64],
+
+            ],
+            x, y,
+            32, 32,
+            2, scale=2)
+
+class IllusionAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/illusion_animation.png",
+            [
+                [0,   0], [32,   0], [64,   0],
+                [0,  32], [32,  32], [64,  32],
+                [0,  64], [32,  64], [64,  64],
+
+            ],
+            x, y,
+            32, 32,
+            2, scale=8)
+
+
+class InvigorateAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/invigorate_animation.png",
+            [
+                [0,   0], [32,   0], [64,   0],
+                [0,  32], [32,  32], [64,  32],
+                [0,  64], [32,  64], [64,  64],
+
+            ],
+            x, y,
+            32, 32,
+            2, scale=8)
+
+
+class ElementalBurstAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/elemental_burst_animation.png",
+            [
+                [0,   0], [32,   0], [64,   0], [96, 0],
+                [0,  32], [32,  32], [64,  32], [96, 32],
+                [0,  64], [32,  64], [64,  64], [96, 64],
+                [0,  96], [32,  96], [64,  96], [96, 96]
+            ],
+            x, y,
+            32, 32,
+            2, scale=10)
+
+class TargetWeaknessAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/target_weakness_animation.png",
+            [
+                [0,   0], [32,   0], [64,   0], [96,    0], [128,   0], [160,   0],
+                [0,  32], [32,  32], [64,  32], [96,   32], [128,  32], [160,  32],
+                [0,  64], [32,  64], [64,  64], [96,   64], [128,  64], [160,  64],
+                [0,  96], [32,  96], [64,  96], [96,   96], [128,  96], [160,  96],
+                [0, 128], [32, 128], [64, 128], [96,  128], [128, 128], [160, 128],
+                [0, 160], [32, 160], [64, 160], [96,  160], [128, 160], [160, 160],
+            ],
+            x, y,
+            32, 32,
+            1, scale=6)
+
+class FitOfRageAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/fit_of_rage_animation.png",
+            [
+                # 3x4 sprite sheet
+                [0,   0], [64,   0], [128,   0],
+                [0,  64], [64,  64], [128,  64],
+                [0, 128], [64, 128], [128, 128],
+                [0, 192], [64, 192], [128, 192]
+            ],
+            x, y,
+            64, 64,
+            2, scale=1)
+
+class TauntAnimation(SpecialAbilityAnimation):
+    def __init__(self, x, y):
+        super().__init__(
+            "game/visualizer/assets/taunt_animation.png",
+            [
+                [0,   0],
+                [0,  64],
+            ],
+            x, y,
+            64, 64,
+            4, scale=1, repeat=3)

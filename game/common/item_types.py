@@ -2,7 +2,7 @@ from game.common.items import *
 from game.common.enums import *
 
 
-def get_item(item_type, level, init=False):
+def get_item(item_type, level, unit_class=None, init=False):
 
     # melee items
     if item_type == ItemType.sword:
@@ -30,13 +30,13 @@ def get_item(item_type, level, init=False):
     elif item_type == ItemType.thunderbolt:
         new_item = Thunderbolt()
     elif item_type == ItemType.ice_spike:
-        new_item = Thunderbolt()
+        new_item = IceSpike()
 
     # Bombs
     elif item_type == ItemType.fire_bomb:
         new_item = FireBomb()
     elif item_type == ItemType.frost_bomb:
-        new_item == FrostBomb()
+        new_item = FrostBomb()
     elif item_type == ItemType.shock_bomb:
         new_item = ShockBomb()
     elif item_type == ItemType.acid_bomb:
@@ -48,13 +48,20 @@ def get_item(item_type, level, init=False):
     elif item_type == ItemType.concussion_bomb:
         new_item = ConcussionBomb()
 
+    elif item_type == ItemType.armor:
+        new_item = Armor()
+
     else:
         raise Exception("Invalid item type: {0}".format(item_type))
 
-    new_item.init(level)
+    if unit_class is not None:
+        new_item.init(level, unit_class=unit_class)
+    else:
+        new_item.init(level)
+
     return new_item
 
-def load_item(item_type, data):
+def load_item(item_type, data, unit_class=None):
 
     # combat items
     if item_type == ItemType.sword:
@@ -84,7 +91,7 @@ def load_item(item_type, data):
     elif item_type == ItemType.fire_bomb:
         new_item = FireBomb()
     elif item_type == ItemType.frost_bomb:
-        new_item == FrostBomb()
+        new_item = FrostBomb()
     elif item_type == ItemType.shock_bomb:
         new_item = ShockBomb()
     elif item_type == ItemType.acid_bomb:
@@ -96,12 +103,15 @@ def load_item(item_type, data):
     elif item_type == ItemType.concussion_bomb:
         new_item = ConcussionBomb()
 
-    # utility items
+    # armor items
+    elif item_type == ItemType.armor:
+        new_item = Armor()
 
     else:
         raise Exception("Invalid item type: {0}".format(item_type))
 
     new_item.from_dict(data)
+
     return new_item
 
 ################
@@ -206,4 +216,25 @@ class ConcussionBomb(CombatItem):
 class Rope(UtilityItem):
     def init(self):
         UtilityItem.init(self, "Rope")
+
+###############
+# Armor Items #
+###############
+
+class Armor(ArmorItem):
+    def init(self, level, unit_class):
+        stats = {
+                                #   1       2      3      4      5      6      7      8      9     10
+            UnitClass.knight:    [ 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000, 21000],
+            UnitClass.brawler:   [ 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000, 21000, 22000],
+            UnitClass.pikeman:   [ 14000, 15000, 16000, 17000, 18000, 19000, 20000, 21000, 22000, 23000],
+            UnitClass.rogue:     [ 15000, 16000, 17000, 18000, 19000, 20000, 21000, 22000, 23000, 24000],
+            UnitClass.sorcerer:  [ 16000, 17000, 18000, 19000, 20000, 21000, 22000, 23000, 24000, 25000],
+            UnitClass.magus:     [ 17000, 18000, 19000, 20000, 21000, 22000, 23000, 24000, 25000, 26000],
+            UnitClass.wizard:    [ 18000, 19000, 20000, 21000, 22000, 23000, 24000, 25000, 26000, 27000],
+            UnitClass.alchemist: [ 19000, 20000, 21000, 22000, 23000, 24000, 25000, 26000, 27000, 28000]
+        }
+
+        ArmorItem.init(self, "Armor", ItemType.armor, level, stats[unit_class][level])
+
 

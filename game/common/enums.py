@@ -38,6 +38,8 @@ class ItemSlot:
 
     spell_4 = 4
 
+    armor = 5
+
 class CombatAction:
     primary_weapon = 1
     secondary_1 = 2
@@ -54,10 +56,6 @@ class TrapAction:
     evade = 2
     wait = 3
 
-class TrapPassType:
-    individual_pass = 0
-    group_effort_pass = 1
-    group_pass = 2
 
 class UnitClass:
     knight = 0
@@ -115,6 +113,8 @@ class ItemType:
     spike_bomb = 18
     concussion_bomb = 19
 
+    armor = 20
+
 class ItemClass:
     melee = 1
     magic = 2
@@ -163,9 +163,9 @@ class TrapDamageType:
     highest_health = 5
 
 class Direction:
-    forward = 1
-    left = 2
-    right = 3
+    left = 0
+    right = 1
+    forward = 2
 
 
 class MonsterType:

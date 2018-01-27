@@ -30,7 +30,7 @@
 
 <button class="accordion">Damage Type Icon Images</button>
 <div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/damage_type_icons.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
+    <img src="https://raw.githubusercontent.com/jghibiki/Byt-le-Royale-2017-2018/master/game/visualizer/assets/damage_type_icons.png?token=AGO_amlBvUx5Q6TAHM6kH3qjauj0FiuIks5aWp4OwA%3D%3D" style="image-rendering: pixelated; width: 512px;"/>
 </div>
 <br>
 

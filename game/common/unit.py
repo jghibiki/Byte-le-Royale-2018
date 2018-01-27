@@ -47,6 +47,7 @@ class Unit(Serializable):
         self.invigorated = False
 
         self.primary_weapon = get_item(primary_weapon_type, 1)
+        self.armor = None
 
         self.initialized = True
 
@@ -82,6 +83,14 @@ class Unit(Serializable):
         self.primary_weapon = load_item(
             d["primary_weapon"][0],
             d["primary_weapon"][1])
+
+        if d["armor"] is not None:
+            self.armor = load_item(
+                d["armor"][0],
+                d["armor"][1],
+                unit_class=self.unit_class)
+        else:
+            self.armor = None
 
         self.initialized = True
 
@@ -127,6 +136,14 @@ class Unit(Serializable):
             self.primary_weapon.item_type,
             self.primary_weapon.to_dict()
         ]
+
+        if self.armor is None:
+            data["armor"] = None
+        else:
+            data["armor"] = [
+                self.armor.item_type,
+                self.armor.to_dict()
+            ]
 
         return data
 

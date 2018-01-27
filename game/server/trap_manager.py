@@ -29,6 +29,12 @@ class TrapManager:
 
                     if self.trap.pass_type is TrapPassType.group_pass:
                         self.trap.current_effort = min(self.trap.required_effort, self.trap.current_effort+4)
+
+                        game_log["events"].append({
+                            "type": Event.trap_effort,
+                            "current_effort": self.trap.current_effort
+                        })
+
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-5)
                         else:
@@ -37,6 +43,13 @@ class TrapManager:
                     elif (self.trap.pass_type is TrapPassType.individual_pass or
                           self.trap.pass_type is TrapPassType.group_pass_on_first_success):
                         self.trap.current_effort[idx] = min(self.trap.required_effort, self.trap.current_effort[idx]+4)
+
+                        game_log["events"].append({
+                            "type": Event.trap_effort,
+                            "unit_idx": idx,
+                            "current_effort": self.trap.current_effort[idx]
+                        })
+
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-5)
                         else:
@@ -46,6 +59,12 @@ class TrapManager:
 
                     if self.trap.pass_type is TrapPassType.group_pass:
                         self.trap.current_effort = min(self.trap.required_effort, self.trap.current_effort+2)
+
+                        game_log["events"].append({
+                            "type": Event.trap_effort,
+                            "current_effort": self.trap.current_effort
+                        })
+
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-2)
                         else:
@@ -54,6 +73,13 @@ class TrapManager:
                     elif (self.trap.pass_type is TrapPassType.individual_pass or
                           self.trap.pass_type is TrapPassType.group_pass_on_first_success):
                         self.trap.current_effort[idx] = min(self.trap.required_effort, self.trap.current_effort[idx]+2)
+
+                        game_log["events"].append({
+                            "type": Event.trap_effort,
+                            "unit_idx": idx,
+                            "current_effort": self.trap.current_effort[idx]
+                        })
+
                         if self.trap.stat is TrapStat.focus:
                             unit.current_focus = max(0, unit.current_focus-2)
                         else:
@@ -116,6 +142,14 @@ class TrapManager:
             for unit in trap_targets:
                 if unit.trap_action == TrapAction.evade:
                     dmg = math.floor(self.trap.damage * 0.5)
+
+                    # if individual pass and unit has completed the trap
+                    # don't let it take damage from it
+                    if self.trap.trap_type is TrapPassType.individual_pass:
+                        unit_idx = self.units.index(unit)
+                        if self.trap.current_effort[unit_idx] >= self.trap.required_effort:
+                            continue
+
                     unit.current_health = max(0, unit.current_health-dmg)
 
                     game_log["events"].append({
@@ -153,8 +187,19 @@ class TrapManager:
 
         elif (self.trap.pass_type is TrapPassType.individual_pass or
               self.trap.pass_type is TrapPassType.group_pass_on_first_success):
-            completed = [ unit_effort >= self.trap.required_effort for unit_effort in self.trap.current_effort ]
-            if all(completed):
+
+            completed = []
+            for unit_effort, unit in zip(self.trap.current_effort, sorted(self.units, key=lambda u: u.name)):
+                if unit.is_alive():
+                    completed.append( unit_effort >= self.trap.required_effort )
+                else:
+                    completed.append(True)
+
+            if all(completed) and self.trap.pass_type is TrapPassType.individual_pass:
+                self.done = True
+                self.success = True
+
+            if any(completed) and self.trap.pass_type is TrapPassType.group_pass_on_first_success:
                 self.done = True
                 self.success = True
 
@@ -170,8 +215,6 @@ class TrapManager:
             data["units"].append(d)
 
         return data
-
-
 
     def print(self, msg, force=False):
         if self.verbose or force:

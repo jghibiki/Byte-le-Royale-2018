@@ -108,3 +108,5 @@ ENV/
 *.swp
 
 .idea/
+
+node_modules/

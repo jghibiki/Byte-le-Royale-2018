@@ -40,78 +40,302 @@ class Wisp(Monster):
     def init(self, level):
         Monster.init(self, "Wisp", MonsterType.wisp, level)
 
-        self.health = 9000
+        # config values
+        damage = 250
+        damage_scale = 0.5
+        health = 6000
+        health_scale = 0.25
+        gold = 200
+        gold_scale = 0.75
+
+        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
         self.current_health = self.health
-        self.damage = 100 * (math.floor(0.5 * level) + 1)
-        self.gold = 500 * (math.floor(0.5 * level) + 1)
+        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
             DamageType.slashing,
+            DamageType.electricity,
             DamageType.cold
         ]
+
+        self.attack_state["group_1"] = [
+            UnitClass.rogue,
+            UnitClass.sorcerer,
+            UnitClass.magus,
+            UnitClass.wizard,
+            UnitClass.alchemist
+        ]
+        random.shuffle(self.attack_state["group_1"])
+
+        self.attack_state["group_2"] = [
+            UnitClass.knight,
+            UnitClass.brawler,
+            UnitClass.pikeman
+        ]
+        random.shuffle(self.attack_state["group_2"])
+
+        self.attack_state["index"] = 0
+
+    def attack(self, targets):
+
+        for group in [self.attack_state["group_1"], self.attack_state["group_2"]]:
+            while True:
+                unit_class_to_target = group[self.attack_state["index"]]
+
+                for unit in targets:
+                    if unit.unit_class == unit_class_to_target and unit.current_health > 0:
+                        return unit
+
+                self.attack_state["index"] += 1
+
+                if self.attack_state["index"] > len(group):
+                    self.attack_state["index"] = 0
+                    break
+
+        raise Exception("No valid targets: ", targets)
+
+
+
+
 
 
 class Beholder(Monster):
     def init(self, level):
         Monster.init(self, "Beholder", MonsterType.beholder, level)
 
-        self.health = 6000
+        # config values
+        damage = 250
+        damage_scale = 0.5
+        health = 6000
+        health_scale = 0.25
+        gold = 200
+        gold_scale = 0.75
+
+        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
         self.current_health = self.health
-        self.damage = 250 * (math.floor(0.5 * level) + 1)
-        self.gold = 500 * (math.floor(0.5 * level) + 1)
+        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
             DamageType.piercing,
             DamageType.slashing,
             DamageType.acid,
-            DamageType.cold
+            DamageType.cold,
+            DamageType.fire
         ]
+
+        self.attack_state["index"] = 0
+
+    def attack(self, targets):
+
+        for _ in range(8):
+
+            idx = self.attack_state["index"]
+            unit = list(sorted(targets, key=lambda t: t.name))[idx]
+
+
+            if self.attack_state["index"] >= len(targets):
+                self.attack_state["index"] = 0
+
+            if unit.current_health > 0:
+                return unit
+            else:
+                self.attack_state["index"] += 1
+
 
 class Dragon(Monster):
     def init(self, level):
         Monster.init(self, "Dragon", MonsterType.dragon, level)
 
-        self.health = 6000
+        # config values
+        damage = 250
+        damage_scale = 0.5
+        health = 6000
+        health_scale = 0.25
+        gold = 200
+        gold_scale = 0.75
+
+        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
         self.current_health = self.health
-        self.damage = 250 * (math.floor(0.5 * level) + 1)
-        self.gold = 500 * (math.floor(0.5 * level) + 1)
+        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
+            DamageType.piercing,
+            DamageType.slashing,
+            DamageType.acid,
+            DamageType.cold,
+            DamageType.sonic
         ]
+
+        self.attack_state["group"] = [
+            UnitClass.knight,
+            UnitClass.pikeman,
+            UnitClass.alchemist,
+            UnitClass.brawler,
+            UnitClass.magus,
+            UnitClass.rogue,
+            UnitClass.wizard,
+            UnitClass.sorcerer
+        ]
+
+        self.attack_state["index"] = 0
+
+    def attack(self, targets):
+
+        while True:
+            unit_class_to_target = self.attack_state["group"][self.attack_state["index"]]
+
+            for unit in targets:
+                if unit.unit_class == unit_class_to_target and unit.current_health > 0:
+                    return unit
+
+            self.attack_state["index"] += 1
+
+            if self.attack_state["index"] > len(self.attack_state["group"]):
+                self.attack_state["index"] = 0
+                break
+
+        raise Exception("No valid targets: ", targets)
+
 
 class Minotaur(Monster):
     def init(self, level):
         Monster.init(self, "Minotaur", MonsterType.minotaur, level)
 
-        self.health = 6000
+        # config values
+        damage = 250
+        damage_scale = 0.5
+        health = 6000
+        health_scale = 0.25
+        gold = 200
+        gold_scale = 0.75
+
+        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
         self.current_health = self.health
-        self.damage = 250 * (math.floor(0.5 * level) + 1)
-        self.gold = 500 * (math.floor(0.5 * level) + 1)
+        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
+            DamageType.slashing,
+            DamageType.bludgeoning,
+            DamageType.acid,
+            DamageType.electricity,
         ]
+
+        self.attack_state["group_1"] = [
+            UnitClass.knight,
+            UnitClass.brawler,
+            UnitClass.pikeman,
+            UnitClass.rogue
+        ]
+        random.shuffle(self.attack_state["group_1"])
+
+        self.attack_state["group_2"] = [
+            UnitClass.magus,
+            UnitClass.sorcerer,
+            UnitClass.wizard,
+            UnitClass.alchemist
+        ]
+        random.shuffle(self.attack_state["group_2"])
+
+        self.attack_state["index"] = 0
+
+    def attack(self, targets):
+
+        for group in [self.attack_state["group_1"], self.attack_state["group_2"]]:
+            while True:
+                unit_class_to_target = group[self.attack_state["index"]]
+
+                for unit in targets:
+                    if unit.unit_class == unit_class_to_target and unit.current_health > 0:
+                        return unit
+
+                self.attack_state["index"] += 1
+
+                if self.attack_state["index"] >= len(group):
+                    self.attack_state["index"] = 0
+                    break
+
+        raise Exception("No valid targets: ", targets)
 
 class Slime(Monster):
     def init(self, level):
         Monster.init(self, "Slime", MonsterType.slime, level)
 
-        self.health = 6000
+        # config values
+        damage = 175
+        damage_scale = 0.55
+        health = 5500
+        health_scale = 0.35
+        gold = 235
+        gold_scale = 0.45
+
+        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
         self.current_health = self.health
-        self.damage = 250 * (math.floor(0.5 * level) + 1)
-        self.gold = 500 * (math.floor(0.5 * level) + 1)
+        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
+            DamageType.piercing,
+            DamageType.bludgeoning,
+            DamageType.cold,
+            DamageType.fire,
+            DamageType.electricity
         ]
+
+        self.attack_state["group"] = [
+            UnitClass.knight,
+            UnitClass.pikeman,
+            UnitClass.alchemist,
+            UnitClass.brawler,
+            UnitClass.magus,
+            UnitClass.rogue,
+            UnitClass.wizard,
+            UnitClass.sorcerer
+        ]
+        random.shuffle(self.attack_state["group"])
+
+        self.attack_state["index"] = 0
+
+    def attack(self, targets):
+
+        while True:
+
+            if self.attack_state["index"] >= len(self.attack_state["group"]):
+                self.attack_state["index"] = 0
+
+            unit_class_to_target = self.attack_state["group"][self.attack_state["index"]]
+
+            for unit in targets:
+                if unit.unit_class == unit_class_to_target and unit.current_health > 0:
+                    self.attack_state["index"] += 1
+                    return unit
+
+            self.attack_state["index"] += 1
+
+
+        raise Exception("No valid targets: ", targets)
 
 
 class Goblin(Monster):
     def init(self, level):
         Monster.init(self, "Goblin", MonsterType.goblin, level)
 
-        self.health = 6000
+        # config values
+        damage = 250
+        damage_scale = 0.5
+
+        health = 6000
+        health_scale = 0.25
+        gold = 200
+        gold_scale = 0.75
+
+        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
         self.current_health = self.health
-        self.damage = 250 * (math.floor(0.5 * level) + 1)
-        self.gold = 500 * (math.floor(0.5 * level) + 1)
+        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
             DamageType.piercing,
@@ -126,17 +350,59 @@ class Wraith(Monster):
     def init(self, level):
         Monster.init(self, "Wraith", MonsterType.wraith, level)
 
-        self.health = 6000
+        # config values
+        damage = 150
+        damage_scale = 0.5
+        health = 6000
+        health_scale = 0.25
+        gold = 200
+        gold_scale = 0.75
+
+        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
         self.current_health = self.health
-        self.damage = 250 * (math.floor(0.5 * level) + 1)
-        self.gold = 500 * (math.floor(0.5 * level) + 1)
+        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
             DamageType.piercing,
-            DamageType.slashing,
-            DamageType.acid,
-            DamageType.cold,
             DamageType.fire,
-            DamageType.electricity
+            DamageType.electricity,
+            DamageType.sonic
         ]
+
+        self.attack_state["group_1"] = [
+            UnitClass.magus,
+            UnitClass.sorcerer,
+            UnitClass.wizard,
+            UnitClass.alchemist
+        ]
+        random.shuffle(self.attack_state["group_1"])
+
+        self.attack_state["group_2"] = [
+            UnitClass.knight,
+            UnitClass.brawler,
+            UnitClass.pikeman,
+            UnitClass.rogue
+        ]
+        random.shuffle(self.attack_state["group_2"])
+
+        self.attack_state["index"] = 0
+
+    def attack(self, targets):
+
+        for group in [self.attack_state["group_1"], self.attack_state["group_2"]]:
+            while True:
+                unit_class_to_target = group[self.attack_state["index"]]
+
+                for unit in targets:
+                    if unit.unit_class == unit_class_to_target and unit.current_health > 0:
+                        return unit
+
+                self.attack_state["index"] += 1
+
+                if self.attack_state["index"] >= len(group):
+                    self.attack_state["index"] = 0
+                    break
+
+        raise Exception("No valid targets: ", targets)
 

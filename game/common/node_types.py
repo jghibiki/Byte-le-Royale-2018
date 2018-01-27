@@ -60,10 +60,13 @@ def difficulty_distribution(level):
 
 
 def get_random_node(level):
-    node_type = random.choice([
+    node_type = random.choices([
         NodeType.monster,
         NodeType.trap
-    ])
+    ], weights=[
+        0.70, # monster
+        0.30 # trap
+    ])[0]
 
     if node_type == NodeType.monster:
         return MonsterRoom.new_node(level)

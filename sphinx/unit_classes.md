@@ -1,13 +1,16 @@
 # Unit Classes
 
 ## Knight
-**Primary Weapon:** Sword
 
-<button class="accordion">Sword Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/sword.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br>
+![](_static/knight.png)
+
+```eval_rst
++----------------+-------+-----------+
+| Primary Weapon | Focus | Willpower |
++================+=======+===========+
+| Sword          | 10    | 14        |
++----------------+-------+-----------+
+```
 
 **Unique Ability:** Taunt: If a monster attacks one unit, this unit absorbs 85% damage from the attack and the original target takes none. If a monster attacks multiple units, this unit absorbs 50% of the total damage that would be dealt to each unit. Each unit that was originally targeted receives 50% of the damage originally intended for them.
 
@@ -17,15 +20,16 @@
 - ```Knight.wait()``` Do nothing for this turn.
 
 ## Brawler
-**Primary Weapon:** Mace
 
+![](_static/brawler.png)
 
-<button class="accordion">Mace Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/mace.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br>
-
+```eval_rst
++----------------+-------+-----------+
+| Primary Weapon | Focus | Willpower |
++================+=======+===========+
+| Mace           | 10    | 14        |
++----------------+-------+-----------+
+```
 
 **Unique Ability:** Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(normal damage) * (2.5 + (N * 0.5))``` damage. Where N is determined by the table below.
 
@@ -48,15 +52,16 @@
 - ```Brawler.wait()``` Do nothing for this turn.
 
 ## Pikeman
-**Primary Weapon:** Spear
 
-![]()
+![](_static/pikeman.png)
 
-<button class="accordion">Spear Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/spear.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br>
+```eval_rst
++----------------+-------+-----------+
+| Primary Weapon | Focus | Willpower |
++================+=======+===========+
+| Spear          | 10    | 14        |
++----------------+-------+-----------+
+```
 
 **Unique Ability:** Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.
 
@@ -66,90 +71,115 @@
 - ```Pikeman.wait()``` Do nothing for this turn.
 
 ## Rogue
-**Primary Weapon:** Dagger
 
-<button class="accordion">Dagger Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/dagger.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br>
+![](_static/rogue.png)
 
-**Bomb Slots:** 3
+```eval_rst
++----------------+-------+-----------+-------------+
+| Primary Weapon | Focus | Willpower | Bomb Slots  |
++================+=======+===========+=============+
+| Dagger         | 30    | 30        | 3           |
++----------------+-------+-----------+-------------+
+```
 
-**Unique Ability:** Trap expert: **need to flush out once trap mechanics are figured out**
+**Unique Ability:** Trap expert: rogues have increased focus and willpower during trap evasion.
 
 ### Combat Methods
 - ```Rogue.attack()``` Attack monster with Dagger.
-- ```Rogue.bomb_1()``` Attack monster with Bomb in Bomb Slot 1.
-- ```Rogue.bomb_2()``` Attack monster with Bomb in Bomb Slot 2.
-- ```Rogue.bomb_3()``` Attack monster with Bomb in Bomb Slot 3.
+- ```Rogue.use_bomb_1()``` Attack monster with Bomb in Bomb Slot 1.
+- ```Rogue.use_bomb_2()``` Attack monster with Bomb in Bomb Slot 2.
+- ```Rogue.use_bomb_3()``` Attack monster with Bomb in Bomb Slot 3.
 - ```Rogue.wait()``` Do nothing for this turn.
 
 
 ## Magus
-**Primary Weapon:** Staff
 
-<button class="accordion">Staff Images Level 1-10</button>
-<div class="panel">
-    <img src="https://github.com/jghibiki/Mini-MechMania-2017-2018/blob/master/game/visualizer/assets/staff.png?raw=true" style="image-rendering: pixelated; width: 512px;"/>
-</div>
-<br>
+![](_static/magus.png)
 
-**Spell Slots:** 4
+
+```eval_rst
++----------------+-------+-----------+-------------+
+| Primary Weapon | Focus | Willpower | Spell Slots |
++================+=======+===========+=============+
+| Staff          | 14    | 10        | 4           |
++----------------+-------+-----------+-------------+
+```
 
 **Unique Ability:** Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.
 
 ### Combat Methods
 - ```Magus.attack()``` Attack monster with Staff.
-- ```Magus.spell_1()``` Attack monster with Spell in Spell Slot 1.
-- ```Magus.spell_2()``` Attack monster with Spell in Spell Slot 2.
-- ```Magus.spell_3()``` Attack monster with Spell in Spell Slot 3.
-- ```Magus.spell_4()``` Attack monster with Spell in Spell Slot 4.
+- ```Magus.use_spell_1()``` Attack monster with Spell in Spell Slot 1.
+- ```Magus.use_spell_2()``` Attack monster with Spell in Spell Slot 2.
+- ```Magus.use_spell_3()``` Attack monster with Spell in Spell Slot 3.
+- ```Magus.use_spell_4()``` Attack monster with Spell in Spell Slot 4.
 - ```Magus.elemental_burst()``` Use Elemental Burst ability.
 - ```Magus.wait()``` Do nothing for this turn.
 
 ## Wizard
-**Primary Weapon:** Wand
 
-**Spell Slots:** 4
+![](_static/wizard.png)
+
+```eval_rst
++----------------+-------+-----------+-------------+
+| Primary Weapon | Focus | Willpower | Spell Slots |
++================+=======+===========+=============+
+| Wand           | 14    | 10        | 4           |
++----------------+-------+-----------+-------------+
+
+```
 
 **Unique Ability:** Invigorate: Charm one ally to deal 1.5 times damage for a turn. Cancels any other damage modifiers that would be in effect for that unit including the effects of Elemental Burst, and Fit of Rage. Can be cast once every 3 turns.
 
 ### Combat Methods
 - ```Wizard.attack()``` Attack monster with Wand.
-- ```Wizard.spell_1()``` Attack monster with Spell in Spell Slot 1.
-- ```Wizard.spell_2()``` Attack monster with Spell in Spell Slot 2.
-- ```Wizard.spell_3()``` Attack monster with Spell in Spell Slot 3.
-- ```Wizard.spell_4()``` Attack monster with Spell in Spell Slot 4.
+- ```Wizard.use_spell_1()``` Attack monster with Spell in Spell Slot 1.
+- ```Wizard.use_spell_2()``` Attack monster with Spell in Spell Slot 2.
+- ```Wizard.use_spell_3()``` Attack monster with Spell in Spell Slot 3.
+- ```Wizard.use_spell_4()``` Attack monster with Spell in Spell Slot 4.
 - ```Wizard.invigorate(target)``` Use Invigorate ability.
 - ```Wizard.wait()``` Do nothing for this turn.
 
 ## Sorcerer
-**Primary Weapon:** Spell Book
 
-**Spell Slots:** 4
+![](_static/sorcerer.png)
+
+```eval_rst
++----------------+-------+-----------+-------------+
+| Primary Weapon | Focus | Willpower | Spell Slots |
++================+=======+===========+=============+
+| Spell Book     | 14    | 10        | 4           |
++----------------+-------+-----------+-------------+
+```
 
 **Unique Ability:** Illusion: Cast an illusion that disguises one player unit as another on the next turn. Monsters will be unable to tell the difference between the two units for that turn. Can be cast once every 5 turns.
 
 ### Combat Methods
 - ```Sorcerer.attack()``` Attack monster with Spell Book.
-- ```Sorcerer.spell_1()``` Attack monster with Spell in Spell Slot 1.
-- ```Sorcerer.spell_2()``` Attack monster with Spell in Spell Slot 2.
-- ```Sorcerer.spell_3()``` Attack monster with Spell in Spell Slot 3.
-- ```Sorcerer.spell_4()``` Attack monster with Spell in Spell Slot 4.
+- ```Sorcerer.use_spell_1()``` Attack monster with Spell in Spell Slot 1.
+- ```Sorcerer.use_spell_2()``` Attack monster with Spell in Spell Slot 2.
+- ```Sorcerer.use_spell_3()``` Attack monster with Spell in Spell Slot 3.
+- ```Sorcerer.use_spell_4()``` Attack monster with Spell in Spell Slot 4.
 - ```Sorcerer.illusion(unit_to_disguise, unit_to_be_disguised)``` Use Illusion ability.
 - ```Sorcerer.wait()``` Do nothing for this turn.
 
 ## Alchemist
-**Primary Weapon:** Alchemical Supplies
 
-**Bomb Slots:** 2
+![](_static/alchemist.png)
+
+```eval_rst
++---------------------+-------+-----------+------------+
+| Primary Weapon      | Focus | Willpower | Bomb Slots |
++=====================+=======+===========+============+
+| Alchemical Supplies | 12    | 10        | 2          |
++---------------------+-------+-----------+------------+
+```
 
 **Unique Ability:** Resupply: Spend one turn to regenerate one of bomb of the types currently possessed.
 
 ### Combat Methods
-- ```Alchemist.bomb_1()``` Attack monster with Bomb in Bomb Slot 1.
-- ```Alchemist.bomb_2()``` Attack monster with Bomb in Bomb Slot 2.
+- ```Alchemist.use_bomb_1()``` Attack monster with Bomb in Bomb Slot 1.
+- ```Alchemist.use_bomb_2()``` Attack monster with Bomb in Bomb Slot 2.
 - ```Alchemist.resupply(bomb_type_to_resupply)``` Use Resupply ability.
 - ```Alchemist.wait()``` Do nothing for this turn.
 

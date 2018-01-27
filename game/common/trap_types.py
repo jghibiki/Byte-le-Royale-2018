@@ -53,8 +53,8 @@ class FallingCeiling(Trap):
                   TrapPassType.group_pass,
                   TrapDamageType.all,
                   3, # damage interval
-                  700, # damage
-                  150) # required effort
+                  100, # damage
+                  50) # required effort
 
 
 class PuzzleBox(Trap):
@@ -67,7 +67,7 @@ class PuzzleBox(Trap):
                   TrapPassType.group_pass,
                   TrapDamageType.lowest_health,
                   2, # damage interval
-                  200, # damage
+                  100, # damage
                   150) # required effort
 
 
@@ -81,7 +81,7 @@ class PendulumBridge(Trap):
                   TrapPassType.group_pass_on_first_success,
                   TrapDamageType.random_one,
                   1, # damage interval
-                  50, # damage
+                  100, # damage
                   50) # required effort
 
 
@@ -96,5 +96,5 @@ class RiddlesOfTheSphinx(Trap):
                   TrapPassType.group_pass_on_first_success,
                   TrapDamageType.random_one,
                   1, # damage interval
-                  20, # damage
+                  100, # damage
                   50) # required effort

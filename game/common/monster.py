@@ -17,7 +17,6 @@ class Monster(Serializable):
         self.monster_type = monster_type
         self.level = level
         self.damage = 5
-        self.defense = 5
         self.cumulative_damage = 0
         self.health = 5
         self.current_health = 5
@@ -41,7 +40,6 @@ class Monster(Serializable):
         self.level = d["level"]
         self.damage = d["damage"]
         self.cumulative_damage = d["cumulative_damage"]
-        self.defense = d["defense"]
         self.health = d["health"]
         self.current_health = d["current_health"]
         self.attack_state = d["attack_state"]
@@ -66,7 +64,6 @@ class Monster(Serializable):
         data["damage"] = self.damage
         data["cumulative_damage"] = self.cumulative_damage
         data["health"] = self.health
-        data["defense"] = self.defense
         data["current_health"] = self.current_health
         data["attack_state"] = self.attack_state
         data["weaknesses"] = self.weaknesses

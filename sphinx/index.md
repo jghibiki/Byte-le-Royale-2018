@@ -1,9 +1,12 @@
 
-# Welcome to Mini-MechMania's documentation!
+<img src="_static/dd.png"/>
+
+# Welcome to Byte-le Royale 2018: Dungeon Delvers' documentation!
 
 
 
 * [Overview](overview.md)
+* [Running The Game](running_the_game.md)
 * [Unit Classes](unit_classes.md)
 * [Traps](traps.md)
 * [Items](items.md)
