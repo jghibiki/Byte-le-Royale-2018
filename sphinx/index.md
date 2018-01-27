@@ -1,5 +1,7 @@
 
-# Welcome to Mini-MechMania's documentation!
+<img src="_static/dd.png"/>
+
+# Welcome to Byte-le Royale 2018: Dungeon Delvers' documentation!
 
 
 

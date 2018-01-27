@@ -1,7 +1,16 @@
 # Unit Classes
 
 ## Knight
-**Primary Weapon:** Sword
+
+![](_static/knight.png)
+
+```eval_rst
++----------------+-------+-----------+
+| Primary Weapon | Focus | Willpower |
++================+=======+===========+
+| Sword          | 10    | 14        |
++----------------+-------+-----------+
+```
 
 **Unique Ability:** Taunt: If a monster attacks one unit, this unit absorbs 85% damage from the attack and the original target takes none. If a monster attacks multiple units, this unit absorbs 50% of the total damage that would be dealt to each unit. Each unit that was originally targeted receives 50% of the damage originally intended for them.
 
@@ -11,7 +20,16 @@
 - ```Knight.wait()``` Do nothing for this turn.
 
 ## Brawler
-**Primary Weapon:** Mace
+
+![](_static/brawler.png)
+
+```eval_rst
++----------------+-------+-----------+
+| Primary Weapon | Focus | Willpower |
++================+=======+===========+
+| Mace           | 10    | 14        |
++----------------+-------+-----------+
+```
 
 **Unique Ability:** Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(normal damage) * (2.5 + (N * 0.5))``` damage. Where N is determined by the table below.
 
@@ -34,7 +52,16 @@
 - ```Brawler.wait()``` Do nothing for this turn.
 
 ## Pikeman
-**Primary Weapon:** Spear
+
+![](_static/pikeman.png)
+
+```eval_rst
++----------------+-------+-----------+
+| Primary Weapon | Focus | Willpower |
++================+=======+===========+
+| Spear          | 10    | 14        |
++----------------+-------+-----------+
+```
 
 **Unique Ability:** Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.
 
@@ -44,11 +71,18 @@
 - ```Pikeman.wait()``` Do nothing for this turn.
 
 ## Rogue
-**Primary Weapon:** Dagger
 
-**Bomb Slots:** 3
+![](_static/rogue.png)
 
-**Unique Ability:** Trap expert: **need to flush out once trap mechanics are figured out**
+```eval_rst
++----------------+-------+-----------+-------------+
+| Primary Weapon | Focus | Willpower | Bomb Slots  |
++================+=======+===========+=============+
+| Dagger         | 30    | 30        | 3           |
++----------------+-------+-----------+-------------+
+```
+
+**Unique Ability:** Trap expert: rogues have increased focus and willpower during trap evasion.
 
 ### Combat Methods
 - ```Rogue.attack()``` Attack monster with Dagger.
@@ -59,9 +93,17 @@
 
 
 ## Magus
-**Primary Weapon:** Staff
 
-**Spell Slots:** 4
+![](_static/magus.png)
+
+
+```eval_rst
++----------------+-------+-----------+-------------+
+| Primary Weapon | Focus | Willpower | Spell Slots |
++================+=======+===========+=============+
+| Staff          | 14    | 10        | 4           |
++----------------+-------+-----------+-------------+
+```
 
 **Unique Ability:** Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.
 
@@ -75,9 +117,17 @@
 - ```Magus.wait()``` Do nothing for this turn.
 
 ## Wizard
-**Primary Weapon:** Wand
 
-**Spell Slots:** 4
+![](_static/wizard.png)
+
+```eval_rst
++----------------+-------+-----------+-------------+
+| Primary Weapon | Focus | Willpower | Spell Slots |
++================+=======+===========+=============+
+| Wand           | 14    | 10        | 4           |
++----------------+-------+-----------+-------------+
+
+```
 
 **Unique Ability:** Invigorate: Charm one ally to deal 1.5 times damage for a turn. Cancels any other damage modifiers that would be in effect for that unit including the effects of Elemental Burst, and Fit of Rage. Can be cast once every 3 turns.
 
@@ -91,9 +141,16 @@
 - ```Wizard.wait()``` Do nothing for this turn.
 
 ## Sorcerer
-**Primary Weapon:** Spell Book
 
-**Spell Slots:** 4
+![](_static/sorcerer.png)
+
+```eval_rst
++----------------+-------+-----------+-------------+
+| Primary Weapon | Focus | Willpower | Spell Slots |
++================+=======+===========+=============+
+| Spell Book     | 14    | 10        | 4           |
++----------------+-------+-----------+-------------+
+```
 
 **Unique Ability:** Illusion: Cast an illusion that disguises one player unit as another on the next turn. Monsters will be unable to tell the difference between the two units for that turn. Can be cast once every 5 turns.
 
@@ -107,9 +164,16 @@
 - ```Sorcerer.wait()``` Do nothing for this turn.
 
 ## Alchemist
-**Primary Weapon:** Alchemical Supplies
 
-**Bomb Slots:** 2
+![](_static/alchemist.png)
+
+```eval_rst
++---------------------+-------+-----------+------------+
+| Primary Weapon      | Focus | Willpower | Bomb Slots |
++=====================+=======+===========+============+
+| Alchemical Supplies | 12    | 10        | 2          |
++---------------------+-------+-----------+------------+
+```
 
 **Unique Ability:** Resupply: Spend one turn to regenerate one of bomb of the types currently possessed.
 

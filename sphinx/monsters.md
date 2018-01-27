@@ -1,9 +1,50 @@
-# Monsters
+# Monsters & Combat
 
+## Combat
 
-## Wisp
+Your party enters a room with a monster, combat will begin. The ```combat_round``` method on the game client will be called, and you will be able to direct your units to take various actions.
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/wisp.png)
+### Combat Actions
+
+There are three main types of combat actions, attacking (also sometimes called basic attacking), attacking with a bomb or spells (only allowed by certain unit classes), and using a special ability.
+
+- **Attacking**: The unit attacks using their primary weapon (as listed on the [Unit Classes](/~documentation/unit_classes.html#unit-classes) page).
+    - Basic attacking is done using the ```unit.attack()``` method.
+- **Bomb or spells**: The unit attacks with an auxiliary item held in bomb or spell slots. Alchemists and rogues can use bombs; the Magus, Wizard, and Sorcerer classes can use spells. These items make use of monster weaknesses which are described below in more detail.
+    - To use a bomb or spell, refer to the api for the specific class you are using as listed on the [Unit Classes](/~documentation/unit_classes.html#unit-classes) page.
+- **Special Abilities**: Each class - excluding the rogue - has a unique special ability that can be used in combat.
+    - To use a special ability, refer to the api for the specific class you are using as listed on the [Unit Classes](/~documentation/unit_classes.html#unit-classes) page.
+
+### Monster Weaknesses & Item Damage Types
+
+Each monsters have a series of weaknesses. These weaknesses are found as a list on the ```monster.weaknesses``` property. Each value in the list is an enum value corresponding to one or more of the following weaknesses:
+- ```DamageType.piercing```
+- ```DamageType.slashing```
+- ```DamageType.bludgeoning```
+- ```DamageType.precision```
+- ```DamageType.fire```
+- ```DamageType.cold```
+- ```DamageType.electricity```
+- ```DamageType.acid```
+- ```DamageType.sonic```
+- ```DamageType.force```
+
+Attacking a monster using a weapon, spell, or bomb with a matching weakness will deal double damage to the monster.
+
+## Monster Properties
+
+- ```monster.monster_type```: A MonsterType enum value indicating the type of monster.
+- ```monster.level```: The level of the monster.
+- ```monster.health```: The monster's max health.
+- ```monster.current_health```: The monster's current health.
+- ```monster.damage```: The amount of damage the monster deals when it attacks.
+- ```monster.gold```: The amount of gold that will rewarded for defeating the monster.
+
+## Monsters
+
+### Wisp
+
+![](_static/wisp.png)
 
 **Stats:**
 ```eval_rst
@@ -35,42 +76,9 @@
 
 **Attack Logic:**
 
-## Beholder
+### Beholder
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/beholder.png)
-
-**Stats:**
-```eval_rst
-+-------+--------+--------+------------+
-| Level | Health | Damage | Gold Value |
-+=======+========+========+============+
-| 1     |        |        |            |
-+-------+--------+--------+------------+
-| 2     |        |        |            |
-+-------+--------+--------+------------+
-| 3     |        |        |            |
-+-------+--------+--------+------------+
-| 4     |        |        |            |
-+-------+--------+--------+------------+
-| 5     |        |        |            |
-+-------+--------+--------+------------+
-| 6     |        |        |            |
-+-------+--------+--------+------------+
-| 7     |        |        |            |
-+-------+--------+--------+------------+
-| 8     |        |        |            |
-+-------+--------+--------+------------+
-| 9     |        |        |            |
-+-------+--------+--------+------------+
-| 10    |        |        |            |
-+-------+--------+--------+------------+
-```
-
-**Attack Logic:**
-
-## Dragon
-
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/dragon.png)
+![](_static/beholder.png)
 
 **Stats:**
 ```eval_rst
@@ -101,9 +109,9 @@
 
 **Attack Logic:**
 
-## Minotaur
+### Dragon
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/minotaur.png)
+![](_static/dragon.png)
 
 **Stats:**
 ```eval_rst
@@ -134,9 +142,42 @@
 
 **Attack Logic:**
 
-## Slime
+### Minotaur
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/slime.png)
+![](_static/minotaur.png)
+
+**Stats:**
+```eval_rst
++-------+--------+--------+------------+
+| Level | Health | Damage | Gold Value |
++=======+========+========+============+
+| 1     |        |        |            |
++-------+--------+--------+------------+
+| 2     |        |        |            |
++-------+--------+--------+------------+
+| 3     |        |        |            |
++-------+--------+--------+------------+
+| 4     |        |        |            |
++-------+--------+--------+------------+
+| 5     |        |        |            |
++-------+--------+--------+------------+
+| 6     |        |        |            |
++-------+--------+--------+------------+
+| 7     |        |        |            |
++-------+--------+--------+------------+
+| 8     |        |        |            |
++-------+--------+--------+------------+
+| 9     |        |        |            |
++-------+--------+--------+------------+
+| 10    |        |        |            |
++-------+--------+--------+------------+
+```
+
+**Attack Logic:**
+
+### Slime
+
+![](_static/slime.png)
 
 **Stats:**
 ```eval_rst
@@ -167,7 +208,7 @@
 
 **Attack Logic:** 
 
-## Goblin
+### Goblin
 
 **Stats:**
 ```eval_rst
@@ -196,12 +237,12 @@
 +-------+--------+--------+------------+
 ```
 
-e*Attack Logic:** Attacks a random player unit.
+**Attack Logic:** Attacks a random player unit.
 
 
-## Wraith
+### Wraith
 
-![](https://github.com/jghibiki/Byt-le-Royale-2017-2018/blob/master/game/visualizer/assets/wraith.png)
+![](_static/wraith.png)
 
 **Stats:**
 ```eval_rst

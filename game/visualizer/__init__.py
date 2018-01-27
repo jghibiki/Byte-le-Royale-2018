@@ -116,6 +116,29 @@ def unit_text(font, upper_left, unit):
         primary_weapon_text,
         primary_weapon_rect])
 
+    if unit.armor is not None:
+        text = "Lvl{0} {1}".format(
+            unit.armor.level,
+            unit.armor.name
+        )
+
+        armor_text = ptext.draw(
+            text,
+            (0,0),
+            color=(255, 255, 255),
+            owidth=2.0,
+            ocolor=(0, 0, 0),
+            fontsize=16,
+            fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
+        armor_rect = armor_text.get_rect()
+        armor_rect.topleft = (upper_left[0], upper_left[1]+100)
+
+        text_parts.append([
+            armor_text,
+            armor_rect
+        ])
+
     if unit.unit_class is UnitClass.knight:
         pass
 
@@ -137,7 +160,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=24,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_1_rect = bomb_1_text.get_rect()
@@ -161,7 +184,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_2_rect = bomb_2_text.get_rect()
@@ -185,7 +208,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_3_rect = bomb_3_text.get_rect()
@@ -210,7 +233,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_1_rect = bomb_1_text.get_rect()
@@ -234,7 +257,7 @@ def unit_text(font, upper_left, unit):
                 color=(255, 255, 255),
                 owidth=2.0,
                 ocolor=(0, 0, 0),
-                fontsize=14,
+                fontsize=16,
                 fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
 
             bomb_2_rect = bomb_2_text.get_rect()

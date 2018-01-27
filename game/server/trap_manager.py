@@ -189,13 +189,17 @@ class TrapManager:
               self.trap.pass_type is TrapPassType.group_pass_on_first_success):
 
             completed = []
-            for unit_effort, unit in zip(self.trap.current_effort, self.units):
+            for unit_effort, unit in zip(self.trap.current_effort, sorted(self.units, key=lambda u: u.name)):
                 if unit.is_alive():
                     completed.append( unit_effort >= self.trap.required_effort )
                 else:
                     completed.append(True)
 
-            if all(completed):
+            if all(completed) and self.trap.pass_type is TrapPassType.individual_pass:
+                self.done = True
+                self.success = True
+
+            if any(completed) and self.trap.pass_type is TrapPassType.group_pass_on_first_success:
                 self.done = True
                 self.success = True
 

@@ -67,7 +67,7 @@
 2. Install the [Github Client](https://desktop.github.com/)
 
 3. Using the Github Client clone the game repository 
-    - ```https://github.com/jghibiki/Mini-MechMania-2017-2018.git```
+    - ```https://github.com/jghibiki/Byte-le-Royale-2018.git```
 
 4. Using a Windows Command Prompt, change directory to where you clone the repository. 
     - As a shortcut, browse to the directory using Windows Explorer, and hold shift while right clicking in the folder. This will add an option to the context menu that says "Open Command Propmt Here". Click this button to open a command prompt in this directory.
@@ -84,7 +84,7 @@ pip install -r requirements.txt
 
 2. Clone the repository
 ```shell
-git clone https://github.com/jghibiki/Mini-MechMania-2017-2018.git
+git clone https://github.com/jghibiki/Byte-le-Royale-2018.git
 ```
 3. Change directory into the repository and run
 ```shell

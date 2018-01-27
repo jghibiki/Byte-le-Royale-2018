@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = Mini-MechMania
+SPHINXPROJ    = Byte-le-Royale
 SOURCEDIR     = .
 BUILDDIR      = _build
 
