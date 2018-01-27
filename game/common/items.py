@@ -48,10 +48,10 @@ class CombatItem(Item):
     def __init__(self):
         self.initialized = False
 
-    def init(self, name, damage, damage_types, level, item_type, damage_scale=0.5):
+    def init(self, name, damage_table, damage_types, level, item_type, damage_scale=0.5):
         Item.init(self, name, item_type)
 
-        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.damage = damage_table[level]
         self.damage_types = damage_types
         self.level = level
 
