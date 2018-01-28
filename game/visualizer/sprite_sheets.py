@@ -875,6 +875,10 @@ class TrapSprite(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+    def reset(self):
+        self.index = 0
+        self.tick_counter = 0
+
     def update(self):
         self.tick_counter += 1
         if self.tick_counter % self.animation_speed is 0:
@@ -911,6 +915,18 @@ class PuzzleBoxTrap(TrapSprite):
             [ 0,    0 ]
         ], 512, 65, 128, 128, 3, scale=2)
 
+class FallingCeilingTrap(TrapSprite):
+
+    def __init__(self):
+        TrapSprite.__init__(self, "game/visualizer/assets/falling_ceiling.png", [
+            [0,    0], [1280,    0], [2560,    0], [3840,    0],
+            [0,  720], [1280,  720], [2560,  720], [3840,  720],
+            [0, 1440], [1280, 1440], [2560, 1440], [3840, 1440],
+            [0, 2160], [1280, 2160], [2560, 2160], [3840, 2160],
+            [0, 2880], [1280, 2880], [2560, 2880], [3840, 2880],
+            [0, 3600], [1280, 3600], [2560, 3600]
+        ], 0, 0, 1280, 720, 10, scale=1)
+
 
 loaded_trap_sprites = {}
 
@@ -924,11 +940,15 @@ def get_trap_sprite(trap_type):
         cls = RiddleOfTheSphinxTrap
     elif trap_type == TrapType.puzzle_box:
         cls = PuzzleBoxTrap
+    elif trap_type == TrapType.falling_ceiling:
+        cls = FallingCeilingTrap
     else:
         cls = RiddleOfTheSphinxTrap
 
     if cls is not None and cls not in loaded_trap_sprites:
         loaded_trap_sprites[cls] = cls()
+
+    loaded_trap_sprites[cls].reset()
     return loaded_trap_sprites[cls]
 
 

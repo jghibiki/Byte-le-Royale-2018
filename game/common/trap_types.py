@@ -54,7 +54,7 @@ class FallingCeiling(Trap):
                   TrapDamageType.all,
                   3, # damage interval
                   100, # damage
-                  50) # required effort
+                  100) # required effort
 
 
 class PuzzleBox(Trap):

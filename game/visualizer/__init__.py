@@ -753,6 +753,7 @@ def start(verbose, log_path, gamma):
 
                     monster_hp_bar.empty()
                     monster_group.empty()
+                    special_ability_group.empty()
                     monster_name_surface = pygame.Surface((0,0))
                     monster_damage_types_group.empty()
 
@@ -780,9 +781,12 @@ def start(verbose, log_path, gamma):
             if location_change:
                 monster_group.empty()
 
+                special_ability_group.empty()
+
                 monster_sprite = get_monster_sprite(monster.monster_type, monster_pos)
                 monster_sprite.rect.x = 640 - math.floor(monster_sprite.rect.w/2)
                 monster_group.add( monster_sprite )
+
 
                 for damage_type, icon_pos in zip(monster.weaknesses, monster_damage_types_pos):
 
@@ -794,6 +798,7 @@ def start(verbose, log_path, gamma):
         if location.node_type == NodeType.town:
             monster_hp_bar.empty()
             monster_group.empty()
+            special_ability_group.empty()
             monster_name_surface = None
 
 
