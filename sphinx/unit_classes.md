@@ -14,6 +14,10 @@
 
 **Unique Ability:** Taunt: If a monster attacks one unit, this unit absorbs 85% damage from the attack and the original target takes none. If a monster attacks multiple units, this unit absorbs 50% of the total damage that would be dealt to each unit. Each unit that was originally targeted receives 50% of the damage originally intended for them.
 
+### Unit Properties
+- ```Knight.primary_weapon``` The type of primary weapon the unit is carrying.
+- ```Knight.armor``` The type of armor the unit is carrying. Is initially ```None``` until armor is bought for the unit.
+
 ### Combat Methods
 - ```Knight.attack()``` Attack monster with Sword.
 - ```Knight.taunt()``` Use Taunt ability.
@@ -46,6 +50,10 @@
 +------------------+--------------------------------------------------------------+
 ```
 
+### Unit Properties
+- ```Brawler.primary_weapon``` The type of primary weapon the unit is carrying.
+- ```Brawler.armor``` The type of armor the unit is carrying. Is initially ```None``` until armor is bought for the unit.
+
 ### Combat Methods
 - ```Brawler.attack()``` Attack monster with Mace.
 - ```Brawler.fit_of_rage()``` Use Fit of Rage ability.
@@ -65,6 +73,10 @@
 
 **Unique Ability:** Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.
 
+### Unit Properties
+- ```Pikeman.primary_weapon``` The type of primary weapon the unit is carrying.
+- ```Pikeman.armor``` The type of armor the unit is carrying. Is initially ```None``` until armor is bought for the unit.
+
 ### Combat Methods
 - ```Pikeman.attack()``` Attack monster with Spear.
 - ```Pikeman.target_weakness()``` Use Target Weakness ability.
@@ -83,6 +95,16 @@
 ```
 
 **Unique Ability:** Trap expert: rogues have increased focus and willpower during trap evasion.
+
+### Unit Properties
+- ```Rogue.primary_weapon``` The type of primary weapon the unit is carrying.
+- ```Rogue.armor``` The type of armor the unit is carrying. Is initially ```None``` until armor is bought for the unit.
+- ```Rogue.bomb_1``` The type of bomb stored in bomb slot 1.
+- ```Rogue.bomb_1_quantity``` The quantity of bombs stored in bomb slot 1. When a bomb is used this number wil decrease, if it is zero, the unit will not be able to use this bomb type.
+- ```Rogue.bomb_2``` The type of bomb stored in bomb slot 2.
+- ```Rogue.bomb_2_quantity``` The quantity of bombs stored in bomb slot 2. When a bomb is used this number wil decrease, if it is zero, the unit will not be able to use this bomb type.
+- ```Rogue.bomb_3``` The type of bomb stored in bomb slot 3.
+- ```Rogue.bomb_3_quantity``` The quantity of bombs stored in bomb slot 3. When a bomb is used this number wil decrease, if it is zero, the unit will not be able to use this bomb type.
 
 ### Combat Methods
 - ```Rogue.attack()``` Attack monster with Dagger.
@@ -106,6 +128,10 @@
 ```
 
 **Unique Ability:** Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.
+
+### Unit Properties
+- ```Magus.primary_weapon``` The type of primary weapon the unit is carrying.
+- ```Magus.armor``` The type of armor the unit is carrying. Is initially ```None``` until armor is bought for the unit.
 
 ### Combat Methods
 - ```Magus.attack()``` Attack monster with Staff.
@@ -131,6 +157,10 @@
 
 **Unique Ability:** Invigorate: Charm one ally to deal 1.5 times damage for a turn. Cancels any other damage modifiers that would be in effect for that unit including the effects of Elemental Burst, and Fit of Rage. Can be cast once every 3 turns.
 
+### Unit Properties
+- ```Wizard.primary_weapon``` The type of primary weapon the unit is carrying.
+- ```Wizard.armor``` The type of armor the unit is carrying. Is initially ```None``` until armor is bought for the unit.
+
 ### Combat Methods
 - ```Wizard.attack()``` Attack monster with Wand.
 - ```Wizard.use_spell_1()``` Attack monster with Spell in Spell Slot 1.
@@ -154,6 +184,10 @@
 
 **Unique Ability:** Illusion: Cast an illusion that disguises one player unit as another on the next turn. Monsters will be unable to tell the difference between the two units for that turn. Can be cast once every 5 turns.
 
+### Unit Properties
+- ```Sorcerer.primary_weapon``` The type of primary weapon the unit is carrying.
+- ```Sorcerer.armor``` The type of armor the unit is carrying. Is initially ```None``` until armor is bought for the unit.
+
 ### Combat Methods
 - ```Sorcerer.attack()``` Attack monster with Spell Book.
 - ```Sorcerer.use_spell_1()``` Attack monster with Spell in Spell Slot 1.
@@ -176,6 +210,13 @@
 ```
 
 **Unique Ability:** Resupply: Spend one turn to regenerate one of bomb of the types currently possessed.
+
+### Unit Properties
+- ```Alchemist.armor``` The type of armor the unit is carrying. Is initially ```None``` until armor is bought for the unit.
+- ```Alchemist.bomb_1``` The type of bomb stored in bomb slot 1.
+- ```Alchemist.bomb_1_quantity``` The quantity of bombs stored in bomb slot 1. When a bomb is used this number wil decrease, if it is zero, the unit will not be able to use this bomb type.
+- ```Alchemist.bomb_2``` The type of bomb stored in bomb slot 2.
+- ```Alchemist.bomb_2_quantity``` The quantity of bombs stored in bomb slot 2. When a bomb is used this number wil decrease, if it is zero, the unit will not be able to use this bomb type.
 
 ### Combat Methods
 - ```Alchemist.use_bomb_1()``` Attack monster with Bomb in Bomb Slot 1.

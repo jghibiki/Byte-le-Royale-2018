@@ -98,14 +98,20 @@
 <li class="toctree-l1"><a class="reference internal" href="unit_classes.html">Unit Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="traps.html">Traps</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Items</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#purchasing-items">Purchasing Items</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#client-storefront">Client Storefront:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#purchasing-items">Purchasing Items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bombs-and-spells">Bombs and Spells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#item-properties">Item Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-item-properties">Combat Item Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#armor-item-properties">Armor Item Properties</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#combat-items-spells">Combat Items/Spells</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#combat-item-spell-damage-scaling">Combat Item/Spell Damage Scaling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#combat-item-spell-cost">Combat Item/Spell Cost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#items-available-by-town">Items Available By Town</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#item-stats">Item Stats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#combat-items-spells">Combat Items/Spells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#combat-item-spell-damage-scaling">Combat Item/Spell Damage Scaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#combat-item-spell-cost">Combat Item/Spell Cost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#items-available-by-town">Items Available By Town</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="monsters.html">Monsters</a></li>
@@ -177,14 +183,13 @@
 <span id="items-purchasing-items"></span><h1>Items &amp; Purchasing Items<a class="headerlink" href="#items-purchasing-items" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="purchasing-items">
 <span id="purchasing-items"></span><h2>Purchasing Items<a class="headerlink" href="#purchasing-items" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="client-storefront">
-<span id="client-storefront"></span><h3>Client Storefront:<a class="headerlink" href="#client-storefront" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">store</span></code> object is available in the <code class="docutils literal"><span class="pre">client.town</span></code> method of the client.</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">get_town_number()</span></code>:<ul>
+<li><code class="docutils literal"><span class="pre">store.get_town_number()</span></code>:<ul>
 <li>Returns: The current town number.</li>
 </ul>
 </li>
-<li><code class="docutils literal"><span class="pre">purchase(unit,</span> <span class="pre">item,</span> <span class="pre">item_level,</span> <span class="pre">item_slot=None)</span></code>:<ul>
+<li><code class="docutils literal"><span class="pre">store.purchase(unit,</span> <span class="pre">item,</span> <span class="pre">item_level,</span> <span class="pre">item_slot=None)</span></code>:<ul>
 <li>Parameters:<ul>
 <li><code class="docutils literal"><span class="pre">unit</span></code>: A unit instance. This is the unit who is buying the item.</li>
 <li><code class="docutils literal"><span class="pre">item</span></code>: The ItemType enum value for the item you wish to purchase.</li>
@@ -196,9 +201,46 @@
 </li>
 </ul>
 </div>
+<div class="section" id="bombs-and-spells">
+<span id="bombs-and-spells"></span><h2>Bombs and Spells<a class="headerlink" href="#bombs-and-spells" title="Permalink to this headline">¶</a></h2>
+<p>Some units have the ability to use either bombs or spells. Bombs and spells can be purchased from the store by units which can use the appropriate item type. The alchemist and rogue may only carry 2 of each bomb type. Bombs are consumable and when used their quantity will decrease. Spells have unlimited use but are not as strong as bombs.</p>
+<p><strong>Units that use Bombs:</strong></p>
+<ul class="simple">
+<li>Rogue</li>
+<li>Alchemist</li>
+</ul>
+<p><strong>Units that use Spells:</strong></p>
+<ul class="simple">
+<li>Magus</li>
+<li>Sorcerer</li>
+<li>Wizard</li>
+</ul>
 </div>
+<div class="section" id="item-properties">
+<span id="item-properties"></span><h2>Item Properties<a class="headerlink" href="#item-properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="combat-item-properties">
+<span id="combat-item-properties"></span><h3>Combat Item Properties<a class="headerlink" href="#combat-item-properties" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Item.name</span></code> The name of the item as a string.</li>
+<li><code class="docutils literal"><span class="pre">Item.level</span></code> The level of this item.</li>
+<li><code class="docutils literal"><span class="pre">Item.item_type</span></code> An <code class="docutils literal"><span class="pre">ItemType</span></code> enum value for the type of item.</li>
+<li><code class="docutils literal"><span class="pre">Item.damage</span></code> The amount of damage the item does, this varies by type and by level.</li>
+<li><code class="docutils literal"><span class="pre">Item.damage_types</span></code> A list of <code class="docutils literal"><span class="pre">DamageType</span></code> enum values corresponding to potential monster weaknesses that this item would deal extra damage against.</li>
+</ul>
+</div>
+<div class="section" id="armor-item-properties">
+<span id="armor-item-properties"></span><h3>Armor Item Properties<a class="headerlink" href="#armor-item-properties" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Item.name</span></code> The name of the item as a string.</li>
+<li><code class="docutils literal"><span class="pre">Item.level</span></code> The level of this item.</li>
+<li><code class="docutils literal"><span class="pre">Item.health</span></code> The amount of health the armor is worth. This number replaces the unit’s base health.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="item-stats">
+<span id="item-stats"></span><h2>Item Stats<a class="headerlink" href="#item-stats" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="combat-items-spells">
-<span id="combat-items-spells"></span><h2>Combat Items/Spells<a class="headerlink" href="#combat-items-spells" title="Permalink to this headline">¶</a></h2>
+<span id="combat-items-spells"></span><h3>Combat Items/Spells<a class="headerlink" href="#combat-items-spells" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="30%" />
@@ -288,7 +330,7 @@
 </table>
 </div>
 <div class="section" id="combat-item-spell-damage-scaling">
-<span id="combat-item-spell-damage-scaling"></span><h2>Combat Item/Spell Damage Scaling<a class="headerlink" href="#combat-item-spell-damage-scaling" title="Permalink to this headline">¶</a></h2>
+<span id="combat-item-spell-damage-scaling"></span><h3>Combat Item/Spell Damage Scaling<a class="headerlink" href="#combat-item-spell-damage-scaling" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="25%" />
@@ -538,7 +580,7 @@
 </table>
 </div>
 <div class="section" id="combat-item-spell-cost">
-<span id="combat-item-spell-cost"></span><h2>Combat Item/Spell Cost<a class="headerlink" href="#combat-item-spell-cost" title="Permalink to this headline">¶</a></h2>
+<span id="combat-item-spell-cost"></span><h3>Combat Item/Spell Cost<a class="headerlink" href="#combat-item-spell-cost" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="25%" />
@@ -788,7 +830,7 @@
 </table>
 </div>
 <div class="section" id="items-available-by-town">
-<span id="items-available-by-town"></span><h2>Items Available By Town<a class="headerlink" href="#items-available-by-town" title="Permalink to this headline">¶</a></h2>
+<span id="items-available-by-town"></span><h3>Items Available By Town<a class="headerlink" href="#items-available-by-town" title="Permalink to this headline">¶</a></h3>
 <p><em>Note: <code class="docutils literal"><span class="pre">T&lt;number&gt;</span></code> stands for <code class="docutils literal"><span class="pre">Town</span> <span class="pre">&lt;number&gt;</span></code></em></p>
 <table border="1" class="docutils">
 <colgroup>
@@ -1040,6 +1082,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 

@@ -2,21 +2,51 @@
 
 ## Purchasing Items
 
-### Client Storefront:
+The ```store``` object is available in the ```client.town``` method of the client.
 
-- ```get_town_number()```:
+- ```store.get_town_number()```:
     - Returns: The current town number.
 
-- ```purchase(unit, item, item_level, item_slot=None)```:
+- ```store.purchase(unit, item, item_level, item_slot=None)```:
     - Parameters:
         - ```unit```: A unit instance. This is the unit who is buying the item.
         - ```item```: The ItemType enum value for the item you wish to purchase.
         - ```item_level```: The level for the item you wish to purchase. Pricing scales based on level of the item.
         - ```item_slot```: The item slot on the provided unit that the item will be placed in. Defaults to None. If purchasing a primary weapon leave None.
+        
+## Bombs and Spells
+
+Some units have the ability to use either bombs or spells. Bombs and spells can be purchased from the store by units which can use the appropriate item type. The alchemist and rogue may only carry 2 of each bomb type. Bombs are consumable and when used their quantity will decrease. Spells have unlimited use but are not as strong as bombs.
+
+**Units that use Bombs:**
+- Rogue
+- Alchemist
+
+**Units that use Spells:**
+- Magus
+- Sorcerer
+- Wizard
+
+## Item Properties
+
+### Combat Item Properties
+
+- ```Item.name``` The name of the item as a string.
+- ```Item.level``` The level of this item.
+- ```Item.item_type``` An ```ItemType``` enum value for the type of item.
+- ```Item.damage``` The amount of damage the item does, this varies by type and by level.
+- ```Item.damage_types``` A list of ```DamageType``` enum values corresponding to potential monster weaknesses that this item would deal extra damage against.
 
 
+### Armor Item Properties
 
-## Combat Items/Spells
+- ```Item.name``` The name of the item as a string.
+- ```Item.level``` The level of this item.
+- ```Item.health``` The amount of health the armor is worth. This number replaces the unit's base health.
+
+## Item Stats
+
+### Combat Items/Spells
 
 ```eval_rst
 +---------------------+-----------------------+-------------------------+
@@ -62,7 +92,7 @@
 
 
 
-## Combat Item/Spell Damage Scaling
+### Combat Item/Spell Damage Scaling
 ```eval_rst
 +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 | Item Type       | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
@@ -105,7 +135,7 @@
 +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 ```
 
-## Combat Item/Spell Cost
+### Combat Item/Spell Cost
 ```eval_rst
 +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 | Item Type       | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
@@ -148,7 +178,7 @@
 +-----------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 ```
 
-## Items Available By Town
+### Items Available By Town
 *Note: ```T<number>``` stands for ```Town <number>```*
 ```eval_rst
 +-----------------+--------------------------------------------------+
@@ -193,3 +223,5 @@
 | Ice Spike       | T0  | T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9 |
 +-----------------+-----+----+----+----+----+----+----+----+----+----+
 ```
+
+
