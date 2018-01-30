@@ -66,7 +66,7 @@
 **Unique Ability:** Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.
 
 ### Combat Methods
-- ```Pikeman.attack()``` Attack monster with Mace.
+- ```Pikeman.attack()``` Attack monster with Spear.
 - ```Pikeman.target_weakness()``` Use Target Weakness ability.
 - ```Pikeman.wait()``` Do nothing for this turn.
 
@@ -182,6 +182,8 @@
 - ```Alchemist.use_bomb_2()``` Attack monster with Bomb in Bomb Slot 2.
 - ```Alchemist.resupply(bomb_type_to_resupply)``` Use Resupply ability.
 - ```Alchemist.wait()``` Do nothing for this turn.
+
+*Note: The Alchemist does not have a basic attack.*
 
 
 
