@@ -1,36 +1,84 @@
 # Damage Types
 
-```eval_rst
-+--------------+----+
-| Damage Types | Id |
-+==============+====+
-| piercing     | 0  |
-+--------------+----+
-| slashing     | 1  |
-+--------------+----+
-| bludgeoning  | 2  |
-+--------------+----+
-| precision    | 3  |
-+--------------+----+
-| fire         | 4  |
-+--------------+----+
-| cold         | 5  |
-+--------------+----+
-| electricity  | 6  |
-+--------------+----+
-| acid         | 7  |
-+--------------+----+
-| sonic        | 8  |
-+--------------+----+
-| force        | 9  |
-+--------------+----+
-```
+## Piercing
 
-## Damage Type Icons
-
-<button class="accordion">Damage Type Icon Images</button>
-<div class="panel">
-    <img src="https://raw.githubusercontent.com/jghibiki/Byt-le-Royale-2017-2018/master/game/visualizer/assets/damage_type_icons.png?token=AGO_amlBvUx5Q6TAHM6kH3qjauj0FiuIks5aWp4OwA%3D%3D" style="image-rendering: pixelated; width: 512px;"/>
-</div>
+**Enum:** ```DamageType.piercing```
 <br>
+**Value:** ```0```
+
+<br>
+![](_static/piercing_damage.png)
+
+## Slashing
+
+**Enum:** ```DamageType.slashing```
+<br>
+**Value:** ```1```
+
+<br>
+![](_static/slashing_damage.png)
+
+## Bludgeoning
+**Enum:** ```DamageType.bludgeoning```
+<br>
+**Value:** ```2```
+
+<br>
+![](_static/bludgeoning_damage.png)
+
+## Precision 
+**Enum:** ```DamageType.precision```
+<br>
+**Value:** ```3```
+
+<br>
+![](_static/precision_damage.png)
+
+## Fire 
+**Enum:** ```DamageType.fire```
+<br>
+**Value:** ```4```
+
+<br>
+![](_static/fire_damage.png)
+
+## Cold 
+**Enum:** ```DamageType.cold```
+<br>
+**Value:** ```5```
+
+<br>
+![](_static/cold_damage.png)
+
+## Electricity 
+**Enum:** ```DamageType.electricity```
+<br>
+**Value:** ```6```
+
+<br>
+![](_static/electricity_damage.png)
+
+## Acid 
+**Enum:** ```DamageType.acid```
+<br>
+**Value:** ```7```
+
+<br>
+![](_static/acid_damage.png)
+
+## Sonic 
+**Enum:** ```DamageType.sonic```
+<br>
+**Value:** ```8```
+
+<br>
+![](_static/sonic_damage.png)
+
+## Force 
+**Enum:** ```DamageType.force```
+<br>
+**Value:** ```9```
+
+<br>
+![](_static/force_damage.png)
 
