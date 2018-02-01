@@ -372,6 +372,29 @@ class IceSpike(CombatItem):
                         ItemType.ice_spike)
 
 
+class SonicBlast(CombatItem):
+    def init(self, level):
+        CombatItem.init(self,
+                        "Sonic Blast",
+                        [
+                            150,
+                            300,
+                            450,
+                            600,
+                            750,
+                            900,
+                            1050,
+                            1200,
+                            1350,
+                            1500
+                        ],
+                        [
+                            DamageType.sonic
+                        ],
+                        level,
+                        ItemType.sonic_blast)
+
+
 #########
 # Bombs #
 #########
