@@ -13,14 +13,15 @@ class DamageIconSprite(pygame.sprite.Sprite):
 
         sprite_sheet = SpriteSheet("game/visualizer/assets/damage_type_icons.png")
 
-        self.icon_back = pygame.image.load("game/visualizer/assets/icon_back.png").convert_alpha()
+        self.h = 32
+        self.w = 32
 
-        self.image = self.icon_back
-
-        self.image.blit(sprite_sheet.get_image(sprite_sheet_data[0],
+        self.image = sprite_sheet.get_image(sprite_sheet_data[0],
                                             sprite_sheet_data[1],
                                             sprite_sheet_data[2],
-                                            sprite_sheet_data[3]), (5, 5))
+                                            sprite_sheet_data[3])
+
+        self.image = pygame.transform.scale(self.image, (self.h*2, self.w*2))
 
         self.rect = self.image.get_rect()
         self.rect.x = x

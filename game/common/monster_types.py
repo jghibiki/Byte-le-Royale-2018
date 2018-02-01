@@ -43,7 +43,7 @@ class Wisp(Monster):
         # config values
         damage = 250
         damage_scale = 0.5
-        health = 6000
+        health = 100000
         health_scale = 0.25
         gold = 200
         gold_scale = 0.75
@@ -107,7 +107,7 @@ class Beholder(Monster):
         # config values
         damage = 250
         damage_scale = 0.5
-        health = 6000
+        health = 100000
         health_scale = 0.25
         gold = 200
         gold_scale = 0.75
@@ -151,7 +151,7 @@ class Dragon(Monster):
         # config values
         damage = 250
         damage_scale = 0.5
-        health = 6000
+        health = 100000
         health_scale = 0.25
         gold = 200
         gold_scale = 0.75
@@ -207,7 +207,7 @@ class Minotaur(Monster):
         # config values
         damage = 250
         damage_scale = 0.5
-        health = 6000
+        health = 100000
         health_scale = 0.25
         gold = 200
         gold_scale = 0.75
@@ -267,7 +267,7 @@ class Slime(Monster):
         # config values
         damage = 175
         damage_scale = 0.55
-        health = 5500
+        health = 100000
         health_scale = 0.35
         gold = 235
         gold_scale = 0.45
@@ -327,7 +327,7 @@ class Goblin(Monster):
         damage = 250
         damage_scale = 0.5
 
-        health = 6000
+        health = 100000
         health_scale = 0.25
         gold = 200
         gold_scale = 0.75
@@ -353,7 +353,7 @@ class Wraith(Monster):
         # config values
         damage = 150
         damage_scale = 0.5
-        health = 6000
+        health = 100000
         health_scale = 0.25
         gold = 200
         gold_scale = 0.75
