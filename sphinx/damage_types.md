@@ -9,6 +9,8 @@
 <br>
 ![](_static/piercing_damage.png)
 
+-------------
+
 ## Slashing
 
 **Enum:** ```DamageType.slashing```
@@ -18,6 +20,8 @@
 <br>
 ![](_static/slashing_damage.png)
 
+-------------
+
 ## Bludgeoning
 **Enum:** ```DamageType.bludgeoning```
 <br>
@@ -25,6 +29,8 @@
 
 <br>
 ![](_static/bludgeoning_damage.png)
+
+-------------
 
 ## Precision 
 **Enum:** ```DamageType.precision```
@@ -34,6 +40,8 @@
 <br>
 ![](_static/precision_damage.png)
 
+-------------
+
 ## Fire 
 **Enum:** ```DamageType.fire```
 <br>
@@ -41,6 +49,8 @@
 
 <br>
 ![](_static/fire_damage.png)
+
+-------------
 
 ## Cold 
 **Enum:** ```DamageType.cold```
@@ -50,6 +60,8 @@
 <br>
 ![](_static/cold_damage.png)
 
+-------------
+
 ## Electricity 
 **Enum:** ```DamageType.electricity```
 <br>
@@ -57,6 +69,8 @@
 
 <br>
 ![](_static/electricity_damage.png)
+
+-------------
 
 ## Acid 
 **Enum:** ```DamageType.acid```
@@ -66,6 +80,8 @@
 <br>
 ![](_static/acid_damage.png)
 
+-------------
+
 ## Sonic 
 **Enum:** ```DamageType.sonic```
 <br>
@@ -73,6 +89,8 @@
 
 <br>
 ![](_static/sonic_damage.png)
+
+-------------
 
 ## Force 
 **Enum:** ```DamageType.force```
