@@ -1,4 +1,4 @@
-import sys, math, random
+import sys, math, random, time
 
 import pygame
 from pygame.locals import *
@@ -21,7 +21,7 @@ easter_egg= """
 There are moments, psychologists tell us, when the passion for sin, or for what the world calls sin, so dominates a nature that every fiber of the body, as every cell of the brain, seems to be instinct with fearful impulses. Men and women at such moments lose the freedom of their will. They move to their terrible end as automatons move. Choice is taken from them, and conscience is either killed, or, if it lives at all, lives but to give rebellion to its fascination and fascination its charm. For all sins, as theologians weary not of reminding us, are sins of disobedience. When that high spirit, that mourning star of evil, fell from heaven, it was as a rebel that he fell. The Picture of Dorian Grey
 """.split(" ")
 
-def party_killed_screen(global_surf, fps_clock, data):
+def party_killed_screen(global_surf, fps_clock, data, dont_wait):
     width = math.floor(1280/2.0)
 
     big_font = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf',70)
@@ -71,10 +71,11 @@ def party_killed_screen(global_surf, fps_clock, data):
         global_surf.blit(total_gold, pos)
 
 
-        # center and print press space to exit
-        rect = press_space_to_exit.get_rect()
-        pos = ( width-math.floor(rect.w/2), 600)
-        global_surf.blit(press_space_to_exit, pos)
+        if not dont_wait:
+            # center and print press space to exit
+            rect = press_space_to_exit.get_rect()
+            pos = ( width-math.floor(rect.w/2), 600)
+            global_surf.blit(press_space_to_exit, pos)
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -88,6 +89,11 @@ def party_killed_screen(global_surf, fps_clock, data):
 
         pygame.display.update()
         fps_clock.tick(60)
+
+        # if dont_wait, exit after 5 seconds
+        if dont_wait:
+            time.sleep(5)
+            sys.exit()
 
 
 def unit_text(font, upper_left, unit):
@@ -271,7 +277,7 @@ def unit_text(font, upper_left, unit):
     return text_parts
 
 
-def start(verbose, log_path, gamma):
+def start(verbose, log_path, gamma, dont_wait):
 
     log_parser = GameLogParser(log_path)
     team_name, units, events = log_parser.get_turn()
@@ -623,7 +629,7 @@ def start(verbose, log_path, gamma):
                         trap_text_group.empty()
 
                     elif event["type"] == Event.party_killed:
-                        party_killed_screen(global_surf, fpsClock, event)
+                        party_killed_screen(global_surf, fpsClock, event, dont_wait)
 
                     elif event["type"] == Event.room_choice:
                         room_choice = True
