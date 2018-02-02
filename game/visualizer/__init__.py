@@ -274,6 +274,101 @@ def unit_text(font, upper_left, unit):
                 bomb_2_rect
             ])
 
+    elif unit.unit_class in [UnitClass.magus, UnitClass.sorcerer, UnitClass.wizard]:
+        if unit.spell_1 is not None:
+
+            text = "Lvl{0} {1}".format(
+                unit.spell_1.level,
+                unit.spell_1.name,
+            )
+
+            spell_1_text = ptext.draw(
+                text,
+                (0,0),
+                color=(255, 255, 255),
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=16,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
+            spell_1_rect = spell_1_text.get_rect()
+            spell_1_rect.topleft = (upper_left[0], upper_left[1]+20)
+
+            text_parts.append([
+                spell_1_text,
+                spell_1_rect
+            ])
+
+        if unit.spell_2 is not None:
+            text = "Lvl{0} {1}".format(
+                unit.spell_2.level,
+                unit.spell_2.name
+            )
+
+            spell_2_text = ptext.draw(
+                text,
+                (0,0),
+                color=(255, 255, 255),
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=16,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
+            spell_2_rect = spell_2_text.get_rect()
+            spell_2_rect.topleft = (upper_left[0], upper_left[1]+40)
+
+            text_parts.append([
+                spell_2_text,
+                spell_2_rect
+            ])
+
+        if unit.spell_3 is not None:
+            text = "Lvl{0} {1}".format(
+                unit.spell_3.level,
+                unit.spell_3.name
+            )
+
+            spell_3_text = ptext.draw(
+                text,
+                (0,0),
+                color=(255, 255, 255),
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=16,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
+            spell_3_rect = spell_3_text.get_rect()
+            spell_3_rect.topleft = (upper_left[0], upper_left[1]+60)
+
+            text_parts.append([
+                spell_3_text,
+                spell_3_rect
+            ])
+
+
+        if unit.spell_4 is not None:
+            text = "Lvl{0} {1}".format(
+                unit.spell_4.level,
+                unit.spell_4.name
+            )
+
+            spell_4_text = ptext.draw(
+                text,
+                (0,0),
+                color=(255, 255, 255),
+                owidth=2.0,
+                ocolor=(0, 0, 0),
+                fontsize=16,
+                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
+
+            spell_4_rect = spell_4_text.get_rect()
+            spell_4_rect.topleft = (upper_left[0], upper_left[1]+80)
+
+            text_parts.append([
+                spell_4_text,
+                spell_4_rect
+            ])
+
     return text_parts
 
 
