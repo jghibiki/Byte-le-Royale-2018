@@ -599,6 +599,21 @@ def start(verbose, log_path, gamma, dont_wait):
                             aa = AttackAnimation(unit_animation_pos[0], unit_animation_pos[1], pygame.Color("#FF0000"))
                             attack_animation_group.add(aa)
 
+                    elif event["type"] == Event.special_ability_charging:
+                        event["handled"] = True
+
+                        next_turn_counter += 2
+                        if event["unit"].unit_class is UnitClass.brawler:
+                            unit_idx = units.index(event["unit"])
+
+                            if unit_idx is 0:
+                                special_ability_group.add( FitOfRageAnimation(105, 310) )
+                            elif unit_idx is 1:
+                                special_ability_group.add( FitOfRageAnimation(405, 310) )
+                            elif unit_idx is 2:
+                                special_ability_group.add( FitOfRageAnimation(715, 310) )
+                            elif unit_idx is 3:
+                                special_ability_group.add( FitOfRageAnimation(1035, 310) )
                     elif event["type"] == Event.special_ability:
                         event["handled"] = True
 
@@ -629,7 +644,7 @@ def start(verbose, log_path, gamma, dont_wait):
                             elif target_idx is 3:
                                 special_ability_group.add( IllusionAnimation(1000, 280) )
 
-                        elif event["unit"].unit_class is UnitClass.sorcerer:
+                        elif event["unit"].unit_class is UnitClass.wizard:
                             target_idx = units.index(event["target_1"])
 
                             if target_idx is 0:
@@ -641,7 +656,7 @@ def start(verbose, log_path, gamma, dont_wait):
                             elif target_idx is 3:
                                 special_ability_group.add( InvigorateAnimation(995, 280) )
 
-                        elif event["unit"].unit_class is UnitClass.sorcerer:
+                        elif event["unit"].unit_class is UnitClass.brawler:
                             unit_idx = units.index(event["unit"])
 
                             if unit_idx is 0:
