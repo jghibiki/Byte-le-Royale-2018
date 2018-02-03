@@ -230,13 +230,20 @@ class CustomClient(UserClient):
 ```
 
 
-## Towns
+## [Towns and Items](items.md)
 In towns units are allowed to purchase new weapons, spells and armor if they have enough gold. The first room your units will be able to enter each game is town #0. At each town the availability of items is dependent on what number the town is. For example in town #0 you will be able to purchase level 2 weapons and level 1 spells and bombs.
 
-## Monsters
+## [Monsters](monsters.md)
+Monsters are the primary obstacle you will face on your run. The slavering hordes would love nothing better than to have your units for dinner, so be prepared to fight valiantly. Every monster has its own attack preferences, strengths, and weaknesses. Only by exploiting these weaknesses will you truly show this crass menagerie who's boss.
 
-## Traps
+## [Traps](traps.md)
+Traps are the other hazard that you will have to contend with on your run. Traps will take a certain amount of effort to get past, with some hurting you every turn, and some killing you outright if you're not quick enough. This effort comes from a unit's Willpower or Focus, depending on the type of trap.
 
 ## Choosing your path
+Your party will be faced with either one or two doors when you complete a room. If there is one, the only way you can go is forward. If there are two, you can go right or left. 
 
 ## Judging
+Judging will be based on the average number of trophies earned over a large amount of runs through differing maps. You can get a good feel for how your team is doing by uploading your client to our scrimmage server, and seeing where you come out on the leaderboards. 
+
+## Bugs and Questions
+If you find a particularly exquisite feature, we would greatly appreciate you reporting it, either in person or, more preferably, by submitting an issue on our Github repo, which can be found [here](https://github.com/jghibiki/Byte-le-Royale-2018/issues). which can be found at . If you have any other questions, feel free to consult this site, or ask any of the event organizers.
