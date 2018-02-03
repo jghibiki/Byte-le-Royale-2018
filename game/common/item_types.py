@@ -31,6 +31,8 @@ def get_item(item_type, level, unit_class=None, init=False):
         new_item = Thunderbolt()
     elif item_type == ItemType.ice_spike:
         new_item = IceSpike()
+    elif item_type == ItemType.sonic_blast:
+        new_item = SonicBlast()
 
     # Bombs
     elif item_type == ItemType.fire_bomb:
@@ -85,7 +87,9 @@ def load_item(item_type, data, unit_class=None):
     elif item_type == ItemType.thunderbolt:
         new_item = Thunderbolt()
     elif item_type == ItemType.ice_spike:
-        new_item = Thunderbolt()
+        new_item = IceSpike()
+    elif item_type == ItemType.sonic_blast:
+        new_item = SonicBlast()
 
     # Bombs
     elif item_type == ItemType.fire_bomb:

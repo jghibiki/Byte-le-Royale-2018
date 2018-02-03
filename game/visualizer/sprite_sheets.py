@@ -540,8 +540,6 @@ class AttackAnimation(pygame.sprite.Sprite):
         del pa
 
 
-
-
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -570,6 +568,87 @@ class AttackAnimation(pygame.sprite.Sprite):
         pa.replace(pygame.Color("#a5a5a5"), pygame.Color ( r, g, b, 255))
         del pa
 
+class MagicAttackAnimation(pygame.sprite.Sprite):
+    def __init__(self, x, y, color):
+        super().__init__()
+        self.frames = [
+            [  0,   0], [128,   0], [256,   0], [384,   0],
+            [  0, 128], [128, 128], [256, 128], [384, 128],
+            [  0, 256], [128, 256], [256, 256], [384, 256],
+            [  0, 384]
+        ]
+
+        self.index = 0
+        self.tick_counter = 0
+        self.animation_speed = 1
+
+        self.h = 128
+        self.w = 128
+
+
+        self.sprite_sheet = SpriteSheet("game/visualizer/assets/explosion_animation.png")
+
+        self.image = self.sprite_sheet.get_image(
+            self.frames[self.index][0],
+            self.frames[self.index][1],
+            self.h,
+            self.w
+        )
+
+        self.color = pygame.Color(
+            color.r,
+            color.g,
+            color.b,
+            255
+        )
+
+        d = 60
+        self.color_2 = pygame.Color(
+            self.color.r if self.color.r-d < 0 else self.color.r-d,
+            self.color.g if self.color.g-d < 0 else self.color.g-d,
+            self.color.b if self.color.b-d < 0 else self.color.b-d,
+            255
+        )
+
+        d = 100
+        self.color_3 = pygame.Color(
+            self.color.r if self.color.r-d < 0 else self.color.r-d,
+            self.color.g if self.color.g-d < 0 else self.color.g-d,
+            self.color.b if self.color.b-d < 0 else self.color.b-d,
+            255
+        )
+
+        pa = pygame.PixelArray(self.image)
+        pa.replace(pygame.Color("#ffffff"), self.color)
+        pa.replace(pygame.Color("#a5a5a5"), self.color_2)
+        pa.replace(pygame.Color("#3c3c3c"), self.color_3)
+        del pa
+
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self, group):
+        self.tick_counter += 1
+        if self.tick_counter % self.animation_speed is 0:
+            if self.index < len(self.frames)-1:
+                self.index += 1
+            else:
+                del self.image
+                group.remove(self)
+
+        self.image = self.sprite_sheet.get_image(
+            self.frames[self.index][0],
+            self.frames[self.index][1],
+            self.h,
+            self.w
+        )
+        pa = pygame.PixelArray(self.image)
+        pa.replace(pygame.Color("#ffffff"), self.color)
+        pa.replace(pygame.Color("#a5a5a5"), self.color_2)
+        pa.replace(pygame.Color("#3c3c3c"), self.color_3)
+        del pa
 
 
 class UnitSprite(pygame.sprite.Sprite):
@@ -928,6 +1007,13 @@ class FallingCeilingTrap(TrapSprite):
             [0, 3600], [1280, 3600], [2560, 3600]
         ], 0, 0, 1280, 720, 10, scale=1)
 
+class EldritchBarrierTrap(TrapSprite):
+
+    def __init__(self):
+        TrapSprite.__init__(self, "game/visualizer/assets/eldritch_trap.png", [
+            [ 0,    0 ]
+        ], 400, 65, 480, 480, 3, scale=1)
+
 
 loaded_trap_sprites = {}
 
@@ -943,6 +1029,8 @@ def get_trap_sprite(trap_type):
         cls = PuzzleBoxTrap
     elif trap_type == TrapType.falling_ceiling:
         cls = FallingCeilingTrap
+    elif trap_type == TrapType.eldritch_barrier:
+        cls = EldritchBarrierTrap
     else:
         cls = RiddleOfTheSphinxTrap
 

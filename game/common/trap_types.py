@@ -16,6 +16,8 @@ def get_trap(trap_type):
         return PuzzleBox()
     elif trap_type == TrapType.riddles_of_the_sphinx:
         return RiddlesOfTheSphinx()
+    elif trap_type == TrapType.eldritch_barrier:
+        return EldritchBarrier()
 
 def get_random_trap():
     trap_type = random.choice([
@@ -23,7 +25,8 @@ def get_random_trap():
         TrapType.falling_ceiling,
         TrapType.puzzle_box ,
         TrapType.pendulum_bridge,
-        TrapType.riddles_of_the_sphinx
+        TrapType.riddles_of_the_sphinx,
+        TrapType.eldritch_barrier
     ])
 
     return get_trap(trap_type)
@@ -91,6 +94,20 @@ class RiddlesOfTheSphinx(Trap):
         Trap.init(self,
                   TrapType.riddles_of_the_sphinx,
                   "Riddles of the Sphinx",
+                  level,
+                  TrapStat.focus,
+                  TrapPassType.group_pass_on_first_success,
+                  TrapDamageType.random_one,
+                  1, # damage interval
+                  100, # damage
+                  50) # required effort
+
+
+class EldritchBarrier(Trap):
+    def init(self, level):
+        Trap.init(self,
+                  TrapType.eldritch_barrier,
+                  "Eldritch Barrier",
                   level,
                   TrapStat.focus,
                   TrapPassType.group_pass_on_first_success,

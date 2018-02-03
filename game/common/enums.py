@@ -143,6 +143,7 @@ class TrapType:
     puzzle_box = 2
     pendulum_bridge = 3
     riddles_of_the_sphinx = 4
+    eldritch_barrier = 5
 
 class TrapPassType:
     individual_pass = 0

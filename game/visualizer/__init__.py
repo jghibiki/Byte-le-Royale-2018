@@ -564,7 +564,14 @@ def start(verbose, log_path, gamma, dont_wait):
                             fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
                             floating_number_group.add(fn)
 
-                            aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
+                            if event["item_used"] == ItemSlot.primary:
+                                aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
+                            elif event["item_used"] in [ItemSlot.bomb_1, ItemSlot.bomb_2, ItemSlot.bomb_3]:
+                                aa = MagicAttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
+                            elif event["item_used"] in [ItemSlot.spell_1, ItemSlot.spell_2, ItemSlot.spell_3, ItemSlot.spell_4]:
+                                aa = MagicAttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
+
+
                             attack_animation_group.add(aa)
 
                             if monster is not None:
