@@ -64,7 +64,7 @@ class Knight(Unit):
             name,
             "Knight",
             UnitClass.knight,
-            11000,
+            17000,
             10, # focus
             14, # will
             ItemType.sword)
@@ -85,7 +85,7 @@ class Brawler(Unit):
             name,
             "Brawler",
             UnitClass.brawler,
-            12000, # health
+            15000, # health
             10, # focus
             14, # will
             ItemType.mace)
@@ -107,7 +107,7 @@ class Pikeman(Unit):
             name,
             "Pikeman",
             UnitClass.pikeman,
-            13000, # health
+            16000, # health
             10, # focus
             14, # will
             ItemType.spear)
@@ -202,7 +202,7 @@ class Magus(Unit):
         Unit.init(self,
             name, "Magus",
             UnitClass.magus,
-            15000, # health
+            10000, # health
             14, # focus
             10, # will
             ItemType.staff)
@@ -285,7 +285,7 @@ class Wizard(Unit):
             name,
             "Wizard",
             UnitClass.wizard,
-            16000, # health
+            11000, # health
             14, # focus
             10, # will
             ItemType.wand)
@@ -369,7 +369,7 @@ class Sorcerer(Unit):
             name,
             "Sorcerer",
             UnitClass.sorcerer,
-            17000, # health
+            13000, # health
             14, # focus
             10, # will
             ItemType.spell_book)
@@ -455,7 +455,7 @@ class Alchemist(Unit):
             name,
             "Alchemist",
             UnitClass.alchemist,
-            18000, # health
+            13000, # health
             12, # focus
             10, # will
             ItemType.alchemical_supplies)

@@ -98,22 +98,23 @@ class ItemType:
     fire_ball = 9
     thunderbolt = 10
     ice_spike = 11
+    sonic_blast = 12
 
-    rope = 12
+    rope = 13
 
-    fire_bomb = 13
-    frost_bomb = 14
-    shock_bomb = 15
-    acid_bomb = 16
-    flash_bomb = 17
-    frost_bomb = 14
-    shock_bomb = 15
-    acid_bomb = 16
-    flash_bomb = 17
-    spike_bomb = 18
-    concussion_bomb = 19
+    fire_bomb = 14
+    frost_bomb = 15
+    shock_bomb = 16
+    acid_bomb = 17
+    flash_bomb = 18
+    frost_bomb = 19
+    shock_bomb = 20
+    acid_bomb = 21
+    flash_bomb = 22
+    spike_bomb = 23
+    concussion_bomb = 24
 
-    armor = 20
+    armor = 25
 
 class ItemClass:
     melee = 1
@@ -142,6 +143,7 @@ class TrapType:
     puzzle_box = 2
     pendulum_bridge = 3
     riddles_of_the_sphinx = 4
+    eldritch_barrier = 5
 
 class TrapPassType:
     individual_pass = 0

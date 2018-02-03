@@ -193,10 +193,10 @@ class Unit(Serializable):
         self.current_combat_action = CombatAction.special_ability
 
     def attack(self):
-        self.current_combat_action = CombatAction.primary_weapon
+        self.combat_action = CombatAction.primary_weapon
 
     def wait(self):
-        self.current_combat_action = CombatAction.wait
+        self.combat_action = CombatAction.wait
 
     def is_alive(self):
         return self.current_health > 0

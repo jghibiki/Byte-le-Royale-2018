@@ -19,6 +19,7 @@ valid_purchasers = {
     ItemType.fire_ball:            [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
     ItemType.thunderbolt:         [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
     ItemType.ice_spike:           [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
+    ItemType.sonic_blast:         [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
     ItemType.armor:               [ UnitClass.knight, UnitClass.brawler, UnitClass.pikeman,
                                     UnitClass.rogue, UnitClass.magus, UnitClass.sorcerer,
                                     UnitClass.wizard, UnitClass.alchemist]
@@ -242,6 +243,18 @@ item_data = {
         9: { "cost": 300 },
         10: { "cost": 300 }
     },
+    ItemType.sonic_blast: {
+        1: { "cost": 50 },
+        2: { "cost": 300 },
+        3: { "cost": 300 },
+        4: { "cost": 300 },
+        5: { "cost": 300 },
+        6: { "cost": 300 },
+        7: { "cost": 300 },
+        8: { "cost": 300 },
+        9: { "cost": 300 },
+        10: { "cost": 300 }
+    },
     ItemType.armor: {
         1: { "cost": 50 },
         2: { "cost": 300 },
@@ -276,6 +289,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 1},
         { "type": ItemType.thunderbolt,         "level": 1},
         { "type": ItemType.ice_spike,           "level": 1},
+        { "type": ItemType.sonic_blast,         "level": 1},
         { "type": ItemType.armor,               "level": 1}
 
     ],
@@ -298,6 +312,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 2},
         { "type": ItemType.thunderbolt,         "level": 2},
         { "type": ItemType.ice_spike,           "level": 2},
+        { "type": ItemType.sonic_blast,         "level": 2},
         { "type": ItemType.armor,               "level": 2}
     ],
     [ # Town 2
@@ -319,6 +334,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 3},
         { "type": ItemType.thunderbolt,         "level": 3},
         { "type": ItemType.ice_spike,           "level": 3},
+        { "type": ItemType.sonic_blast,         "level": 3},
         { "type": ItemType.armor,               "level": 3}
     ],
     [ # Town 3
@@ -340,6 +356,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 4},
         { "type": ItemType.thunderbolt,         "level": 4},
         { "type": ItemType.ice_spike,           "level": 4},
+        { "type": ItemType.sonic_blast,         "level": 4},
         { "type": ItemType.armor,               "level": 4}
     ],
     [ # Town 4
@@ -361,6 +378,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 5},
         { "type": ItemType.thunderbolt,         "level": 5},
         { "type": ItemType.ice_spike,           "level": 5},
+        { "type": ItemType.sonic_blast,         "level": 5},
         { "type": ItemType.armor,               "level": 5}
     ],
     [ # Town 5
@@ -382,6 +400,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 6},
         { "type": ItemType.thunderbolt,         "level": 6},
         { "type": ItemType.ice_spike,           "level": 6},
+        { "type": ItemType.sonic_blast,         "level": 6},
         { "type": ItemType.armor,               "level": 6}
     ],
     [ # Town 6
@@ -403,6 +422,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 7},
         { "type": ItemType.thunderbolt,         "level": 7},
         { "type": ItemType.ice_spike,           "level": 7},
+        { "type": ItemType.sonic_blast,         "level": 7},
         { "type": ItemType.armor,               "level": 7}
     ],
     [ # Town 7
@@ -424,6 +444,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 8},
         { "type": ItemType.thunderbolt,         "level": 8},
         { "type": ItemType.ice_spike,           "level": 8},
+        { "type": ItemType.sonic_blast,         "level": 8},
         { "type": ItemType.armor,               "level": 8}
     ],
     [ # Town 8
@@ -445,6 +466,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 9},
         { "type": ItemType.thunderbolt,         "level": 9},
         { "type": ItemType.ice_spike,           "level": 9},
+        { "type": ItemType.sonic_blast,         "level": 9},
         { "type": ItemType.armor,               "level": 9}
     ],
     [ # Town 9
@@ -466,6 +488,7 @@ towns = [
         { "type": ItemType.fire_ball,           "level": 10},
         { "type": ItemType.thunderbolt,         "level": 10},
         { "type": ItemType.ice_spike,           "level": 10},
+        { "type": ItemType.sonic_blast,         "level": 10},
         { "type": ItemType.armor,               "level": 10}
     ]
 ]

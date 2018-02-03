@@ -38,7 +38,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Byte-le-Royale 2018:&lt;br&gt;Dungeon Delvers 9 documentation" href="index.html"/>
-        <link rel="prev" title="Monsters" href="monsters.html"/> 
+        <link rel="prev" title="Monsters &amp; Combat" href="monsters.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -99,7 +99,16 @@
 <li class="toctree-l1"><a class="reference internal" href="items.html">Items</a></li>
 <li class="toctree-l1"><a class="reference internal" href="monsters.html">Monsters</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Damage Types</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#damage-type-icons">Damage Type Icons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#piercing">Piercing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slashing">Slashing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bludgeoning">Bludgeoning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#precision">Precision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fire">Fire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cold">Cold</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#electricity">Electricity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acid">Acid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sonic">Sonic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#force">Force</a></li>
 </ul>
 </li>
 </ul>
@@ -167,56 +176,95 @@
             
   <div class="section" id="damage-types">
 <span id="damage-types"></span><h1>Damage Types<a class="headerlink" href="#damage-types" title="Permalink to this headline">¶</a></h1>
-<table border="1" class="docutils">
-<colgroup>
-<col width="78%" />
-<col width="22%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Damage Types</th>
-<th class="head">Id</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>piercing</td>
-<td>0</td>
-</tr>
-<tr class="row-odd"><td>slashing</td>
-<td>1</td>
-</tr>
-<tr class="row-even"><td>bludgeoning</td>
-<td>2</td>
-</tr>
-<tr class="row-odd"><td>precision</td>
-<td>3</td>
-</tr>
-<tr class="row-even"><td>fire</td>
-<td>4</td>
-</tr>
-<tr class="row-odd"><td>cold</td>
-<td>5</td>
-</tr>
-<tr class="row-even"><td>electricity</td>
-<td>6</td>
-</tr>
-<tr class="row-odd"><td>acid</td>
-<td>7</td>
-</tr>
-<tr class="row-even"><td>sonic</td>
-<td>8</td>
-</tr>
-<tr class="row-odd"><td>force</td>
-<td>9</td>
-</tr>
-</tbody>
-</table>
-<div class="section" id="damage-type-icons">
-<span id="damage-type-icons"></span><h2>Damage Type Icons<a class="headerlink" href="#damage-type-icons" title="Permalink to this headline">¶</a></h2>
-<button class="accordion">Damage Type Icon Images</button>
-<div class="panel">
-    <img src="https://raw.githubusercontent.com/jghibiki/Byt-le-Royale-2017-2018/master/game/visualizer/assets/damage_type_icons.png?token=AGO_amlBvUx5Q6TAHM6kH3qjauj0FiuIks5aWp4OwA%3D%3D" style="image-rendering: pixelated; width: 512px;"/>
+<div class="section" id="piercing">
+<span id="piercing"></span><h2>Piercing<a class="headerlink" href="#piercing" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.piercing</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">0</span></code></p>
+<p><br>
+<img alt="" src="_images/piercing_damage.png" /></p>
 </div>
-<br></div>
+<hr class="docutils" />
+<div class="section" id="slashing">
+<span id="slashing"></span><h2>Slashing<a class="headerlink" href="#slashing" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.slashing</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">1</span></code></p>
+<p><br>
+<img alt="" src="_images/slashing_damage.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="bludgeoning">
+<span id="bludgeoning"></span><h2>Bludgeoning<a class="headerlink" href="#bludgeoning" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.bludgeoning</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">2</span></code></p>
+<p><br>
+<img alt="" src="_images/bludgeoning_damage.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="precision">
+<span id="precision"></span><h2>Precision<a class="headerlink" href="#precision" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.precision</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">3</span></code></p>
+<p><br>
+<img alt="" src="_images/precision_damage.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="fire">
+<span id="fire"></span><h2>Fire<a class="headerlink" href="#fire" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.fire</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">4</span></code></p>
+<p><br>
+<img alt="" src="_images/fire_damage.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="cold">
+<span id="cold"></span><h2>Cold<a class="headerlink" href="#cold" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.cold</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">5</span></code></p>
+<p><br>
+<img alt="" src="_images/cold_damage.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="electricity">
+<span id="electricity"></span><h2>Electricity<a class="headerlink" href="#electricity" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.electricity</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">6</span></code></p>
+<p><br>
+<img alt="" src="_images/electricity_damage.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="acid">
+<span id="acid"></span><h2>Acid<a class="headerlink" href="#acid" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.acid</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">7</span></code></p>
+<p><br>
+<img alt="" src="_images/acid_damage.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="sonic">
+<span id="sonic"></span><h2>Sonic<a class="headerlink" href="#sonic" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.sonic</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">8</span></code></p>
+<p><br>
+<img alt="" src="_images/sonic_damage.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="force">
+<span id="force"></span><h2>Force<a class="headerlink" href="#force" title="Permalink to this headline">¶</a></h2>
+<p><strong>Enum:</strong> <code class="docutils literal"><span class="pre">DamageType.force</span></code>
+<br>
+<strong>Value:</strong> <code class="docutils literal"><span class="pre">9</span></code></p>
+<p><br>
+<img alt="" src="_images/force_damage.png" /></p>
+</div>
 </div>
 
 
@@ -230,7 +278,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="monsters.html" class="btn btn-neutral" title="Monsters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="monsters.html" class="btn btn-neutral" title="Monsters &amp; Combat" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

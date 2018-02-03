@@ -480,6 +480,8 @@ class CustomServer(ServerControl):
                 item_type = purchase["item"]
                 item_level = purchase["item_level"]
 
+                if level > 10:
+                    continue
 
                 if "slot" in purchase:
                     item_slot = purchase["slot"]

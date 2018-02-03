@@ -8,9 +8,10 @@ import click
 @click.option("--verbose", is_flag=True)
 @click.option("--log-path", default="./game_log")
 @click.option("--gamma", default=1.0)
-def main(verbose, log_path, gamma):
+@click.option("--dont-wait", is_flag=True)
+def main(verbose, log_path, gamma, dont_wait):
 
-    start(verbose, log_path, gamma)
+    start(verbose, log_path, gamma, dont_wait)
 
 if __name__ == "__main__":
 
