@@ -242,7 +242,7 @@ class Illusion(SpecialAbility):
     def __init__(self, verbose):
         SpecialAbility.__init__(self, verbose)
 
-    def use(self, target_1, target_2):
+    def use(self):
         if self.cooldown_timer <= 0:
             self.cooldown_timer = 5
 
