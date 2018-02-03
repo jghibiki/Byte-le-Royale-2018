@@ -85,8 +85,13 @@ class GameLogParser:
 
             elif event["type"] == Event.special_ability:
                 event["unit"] = self._get_unit(event["unit"], units)
+                event["target_1"] = self._get_unit(event["target_1"], units)
+                event["target_2"] = self._get_unit(event["target_2"], units)
 
             elif event["type"] == Event.special_ability_attack:
+                event["unit"] = self._get_unit(event["unit"], units)
+
+            elif event["type"] == Event.special_ability_charging:
                 event["unit"] = self._get_unit(event["unit"], units)
 
             elif event["type"] == Event.room_choice:
