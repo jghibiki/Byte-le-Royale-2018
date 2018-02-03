@@ -97,11 +97,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#the-event">The Event</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-goal">The Goal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-basics">The Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#towns">Towns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#towns-and-items">Towns and Items</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#monsters">Monsters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#traps">Traps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#choosing-your-path">Choosing your path</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#judging">Judging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bugs-and-questions">Bugs and Questions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running_the_game.html">Running The Game</a></li>
@@ -188,7 +189,7 @@
 <div class="section" id="the-basics">
 <span id="the-basics"></span><h2>The Basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
 <p>Controlling your adventurers will be as simple as using a basic Python API, which will command your units to take various actions.</p>
-<p>The game is made up of several phases. These phases are best described as different rooms or locations. The first location your team will visit each game is a Town (for more about towns see <a class="reference external" href="#towns">Towns</a> and <a class="reference external" href="https://jghibiki.github.io/Byte-le-Royale-2018/~documentation/items.html#purchasing-items">Purchasing Items</a>). Once you are done in town, your party will venture out into various dungeons. A dungeon is made up of many rooms. Clearing a dungeon will allow you to return to town whereupon your team will be fully rested and healed. These dungeons will be of increasing length and difficulty so you will need to carefully plan how to survive. Once you clear a room in a dungeon you will be allowed a sneak-peek at what lies beyond. If there are two doors, you will be given the choice of which door to enter (see <a class="reference external" href="#choosing-your-path">Choosing Your Path</a>).</p>
+<p>The game is made up of several phases. These phases are best described as different rooms or locations. The first location your team will visit each game is a Town (for more about towns see <a class="reference external" href="#towns">Towns</a> and <a class="reference external" href="https://royale.ndacm.org/~documentation/~documentation/items.html#purchasing-items">Purchasing Items</a>). Once you are done in town, your party will venture out into various dungeons. A dungeon is made up of many rooms. Clearing a dungeon will allow you to return to town whereupon your team will be fully rested and healed. These dungeons will be of increasing length and difficulty so you will need to carefully plan how to survive. Once you clear a room in a dungeon you will be allowed a sneak-peek at what lies beyond. If there are two doors, you will be given the choice of which door to enter (see <a class="reference external" href="#choosing-your-path">Choosing Your Path</a>).</p>
 <p>The following code, is an example of a bare-bones client. A client is made up of several methods which will be called automatically by the networking mechanisms of the client which are implemented by inheriting the UserClient super-class. At the beginning of each method, there is a description of what each event-handling method does.</p>
 <p><em>Note: Tampering with any variables or methods defined by the UserClient method will be considered cheating and you will be disqualified.</em></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -396,21 +397,30 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="towns">
-<span id="towns"></span><h2>Towns<a class="headerlink" href="#towns" title="Permalink to this headline">¶</a></h2>
-<p>In towns units are allowed to purchase new weapons, spells and armor if they have enough gold. The first room your units will be able to enter each game is town #0. At each town the availability of items is dependent on what number the town is. For example in town #0 you will be able to purchase level 2 weapons and level 1 spells and bombs.</p>
+<div class="section" id="towns-and-items">
+<span id="towns-and-items"></span><h2>Towns and Items<a class="headerlink" href="#towns-and-items" title="Permalink to this headline">¶</a></h2>
+<p>In towns units are allowed to <a class="reference external" href="https://royale.ndacm.org/~documentation/items.html#purchasing-items">purchase new weapons, spells and armor</a> if they have enough gold. The first room your units will be able to enter each game is town #0. At each town the availability of items is dependent on what number the town is. For example in town #0 you will be able to purchase level 2 weapons and level 1 spells and bombs.</p>
 </div>
 <div class="section" id="monsters">
 <span id="monsters"></span><h2>Monsters<a class="headerlink" href="#monsters" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://royale.ndacm.org/~documentation/monsters.html">Monsters</a> are the primary obstacle you will face on your adventures. The slavering hordes would love nothing better than to have your brave adventurers for dinner, so be prepared to fight valiantly. Every monster has its own <a class="reference external" href="https://royale.ndacm.org/~documentation/monsters.html#monsters">attack preferences, strengths, and weaknesses</a>. Only by <a class="reference external" href="#monster-weaknesses-item-damage-types">exploiting these weaknesses</a> will you truly show this crass menagerie who’s boss.</p>
 </div>
 <div class="section" id="traps">
 <span id="traps"></span><h2>Traps<a class="headerlink" href="#traps" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://royale.ndacm.org/~documentation/traps.html">Traps</a> are the other hazard that you will have to contend with on your run. Traps will take a <a class="reference external" href="https://royale.ndacm.org/~documentation/traps.html#avoiding-traps">certain amount of effort to get past</a>, with some hurting you every turn, and some killing you outright if you’re not quick enough. This effort comes from a unit’s <a class="reference external" href="http://localhost:8080/~documentation/unit_classes.html#knight">Willpower or Focus</a>, depending on the <a class="reference external" href="https://royale.ndacm.org/~documentation/traps.html#trap-types">type of trap</a>.</p>
 </div>
 <div class="section" id="choosing-your-path">
 <span id="choosing-your-path"></span><h2>Choosing your path<a class="headerlink" href="#choosing-your-path" title="Permalink to this headline">¶</a></h2>
+<p>Your party will be faced with either one or two doors when you complete a room. If there is one, the only way you can go is forward. If there are two, you can go right or left.</p>
 </div>
 <div class="section" id="judging">
 <span id="judging"></span><h2>Judging<a class="headerlink" href="#judging" title="Permalink to this headline">¶</a></h2>
+<p>Judging will be based on the average number of trophies earned over a large amount of runs through differing maps. You can get a good feel for how your team is doing by uploading your client to our scrimmage server, and seeing where you come out on the leaderboards.</p>
+</div>
+<div class="section" id="bugs-and-questions">
+<span id="bugs-and-questions"></span><h2>Bugs and Questions<a class="headerlink" href="#bugs-and-questions" title="Permalink to this headline">¶</a></h2>
+<p>If you find a <del>particularly exquisite feature</del> bug, we would greatly appreciate you reporting it by submitting an issue on our Github repo, which can be found <a class="reference external" href="https://github.com/jghibiki/Byte-le-Royale-2018/issues">here</a>. If you have any other questions, feel free to consult this site, or ask any of the event organizers.</p>
+<p><em>Please note: Attempting to exploit a bug may be grounds for disqualification, and will be decided at the discretion of the organizers.</em></p>
 </div>
 </div>
 
