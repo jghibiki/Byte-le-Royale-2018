@@ -396,6 +396,19 @@ class WispSprite(MonsterSprite):
             [384,512]
         ], x, y, 128, 128,3)
 
+
+class VampireSprite(MonsterSprite):
+    def __init__(self, x, y):
+        MonsterSprite.__init__(self, "game/visualizer/assets/vampire.png", [
+            [0,   0], [128,   0], [256,   0], [384,   0], [512,   0], [640,   0],
+            [0, 128], [128, 128], [256, 128], [384, 128], [512, 128], [640, 128],
+            [0, 256], [128, 256], [256, 256], [384, 256], [512, 256], [640, 256],
+            [0, 384], [128, 384], [256, 384], [384, 384], [512, 384], [640, 384],
+            [0, 512], [128, 512], [256, 512], [384, 512], [512, 512], [640, 512],
+            [0, 512], [128, 512]
+
+        ], x, y, 128, 128, 2)
+
 def get_monster_sprite(monster_type, pos):
     if monster_type is MonsterType.beholder:
         return BeholderSprite(*pos)
@@ -409,6 +422,8 @@ def get_monster_sprite(monster_type, pos):
         return WraithSprite(*pos)
     elif monster_type is MonsterType.wisp:
         return WispSprite(*pos)
+    elif monster_type is MonsterType.vampire:
+        return VampireSprite(*pos)
 
 
 class BackgroundSprite(pygame.sprite.Sprite):

@@ -21,6 +21,8 @@ def get_monster(monster_type):
         return Slime()
     elif monster_type == MonsterType.wraith:
         return Wraith()
+    elif monster_type == MonsterType.vampire:
+        return Vampire()
 
 def get_random_monster(level):
     mon =  random.choice([
@@ -30,7 +32,8 @@ def get_random_monster(level):
         MonsterType.dragon,
         MonsterType.minotaur,
         MonsterType.slime,
-        MonsterType.wraith
+        MonsterType.wraith,
+        MonsterType.vampire
     ])
 
     return get_monster(mon)
@@ -383,6 +386,65 @@ class Wraith(Monster):
             UnitClass.brawler,
             UnitClass.pikeman,
             UnitClass.rogue
+        ]
+        random.shuffle(self.attack_state["group_2"])
+
+        self.attack_state["index"] = 0
+
+    def attack(self, targets):
+
+        for group in [self.attack_state["group_1"], self.attack_state["group_2"]]:
+            while True:
+                unit_class_to_target = group[self.attack_state["index"]]
+
+                for unit in targets:
+                    if unit.unit_class == unit_class_to_target and unit.current_health > 0:
+                        return unit
+
+                self.attack_state["index"] += 1
+
+                if self.attack_state["index"] >= len(group):
+                    self.attack_state["index"] = 0
+                    break
+
+        raise Exception("No valid targets: ", targets)
+
+class Vampire(Monster):
+    def init(self, level):
+        Monster.init(self, "Vampire", MonsterType.vampire, level)
+
+        # config values
+        damage = 250
+        damage_scale = 0.5
+        health = 100000
+        health_scale = 0.25
+        gold = 200
+        gold_scale = 0.75
+
+        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
+        self.current_health = self.health
+        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
+
+        self.weaknesses = [
+            DamageType.slashing,
+            DamageType.electricity,
+            DamageType.cold
+        ]
+
+        self.attack_state["group_1"] = [
+            UnitClass.knight,
+            UnitClass.brawler,
+            UnitClass.pikeman
+        ]
+        random.shuffle(self.attack_state["group_1"])
+
+        self.attack_state["group_2"] = [
+            UnitClass.rogue,
+            UnitClass.sorcerer,
+            UnitClass.magus,
+            UnitClass.wizard,
+            UnitClass.alchemist
         ]
         random.shuffle(self.attack_state["group_2"])
 

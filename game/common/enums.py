@@ -178,6 +178,7 @@ class MonsterType:
     minotaur = 4
     slime = 5
     wraith = 6
+    vampire = 7
 
 
 
