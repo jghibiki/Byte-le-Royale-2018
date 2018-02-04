@@ -242,10 +242,14 @@ In towns units are allowed to [purchase new weapons, spells and armor](items.htm
 ## Choosing your path
 Your party will be faced with either one or two doors when you complete a room. If there is one, the only way you can go is forward. If there are two, you can go right or left. 
 
-## Judging
-Judging will be based on the average number of trophies earned over a large amount of runs through differing maps. You can get a good feel for how your team is doing by uploading your client to our scrimmage server, and seeing where you come out on the leaderboards. 
-
 ## Bugs and Questions
 If you find a <del>particularly exquisite feature</del> bug, we would greatly appreciate you reporting it by submitting an issue on our Github repo, which can be found [here](https://github.com/jghibiki/Byte-le-Royale-2018/issues). If you have any other questions, feel free to consult this site, or ask any of the event organizers.
 
 *Please note: Attempting to exploit a bug may be grounds for disqualification, and will be decided at the discretion of the organizers.*
+
+
+## Rules & Judging
+Tampering with any variables or methods defined by the UserClient method will be considered cheating and you will be disqualified. Also, 
+
+
+Judging will be based on the average number of trophies earned over a large amount of runs through differing maps. You can get a good feel for how your team is doing by uploading your client to our scrimmage server, and seeing where you come out on the leaderboards. 
