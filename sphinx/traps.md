@@ -29,8 +29,6 @@ Units can use this to judge the trap and the best course of action. Their availa
 
 ```large_effort```, ```little_effort```, ```evade```, and ```wait```.
 
-The effects of these actions are detailed below.
-
 ### Effort Types:
 - **Large Effort:** 
     - **Description:** The unit invests a large amount of effort in a small amount of time, at the cost of precision.
