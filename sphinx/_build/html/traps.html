@@ -100,9 +100,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#avoiding-traps">Avoiding Traps</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#effort-types">Effort Types:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trap-pass-types">Trap Pass Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trap-damage-type">Trap Damage Type</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#general-trap-properties">General Trap Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trap-properties">Trap Properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#trap-types">Trap Types</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#spike-pit">Spike Pit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#falling-ceiling">Falling Ceiling</a></li>
@@ -181,11 +182,11 @@
             
   <div class="section" id="traps-avoiding-traps">
 <span id="traps-avoiding-traps"></span><h1>Traps &amp; Avoiding Traps<a class="headerlink" href="#traps-avoiding-traps" title="Permalink to this headline">¶</a></h1>
-<p>– trap description - describe how the trap portion of the game works –</p>
 <div class="section" id="avoiding-traps">
 <span id="avoiding-traps"></span><h2>Avoiding Traps<a class="headerlink" href="#avoiding-traps" title="Permalink to this headline">¶</a></h2>
-<p>– description of how to check a trap type given a trap object. –</p>
-<p>– description of the subset of the unit api that is useful for traps –</p>
+<p>Traps while often easier than monsters, can still pose a deadly threat to your party. To avoid traps, units must choose one of <a class="reference external" href="#effort-types">four actions</a>: <code class="docutils literal"><span class="pre">TrapAction.large_effort</span></code>, <code class="docutils literal"><span class="pre">TrapAction.little_effort</span></code>, <code class="docutils literal"><span class="pre">TrapAction.evade</span></code>, <code class="docutils literal"><span class="pre">TrapAction.wait</span></code>. Certain actions such as <code class="docutils literal"><span class="pre">TrapAction.large_effort</span></code> or <code class="docutils literal"><span class="pre">TrapAction.little_effort</span></code> will cost energy. The amount of energy each unit has to spend on actions is dependant on either their <code class="docutils literal"><span class="pre">Unit.will</span></code> or <code class="docutils literal"><span class="pre">Unit.focus</span></code> stats. Melee units specialize higher willpower, and magic units specialize in higher focus. If the <code class="docutils literal"><span class="pre">Trap.stat</span></code> property is <code class="docutils literal"><span class="pre">TrapStat.will</span></code> then the unit will use it’s Willpower stat, if it is <code class="docutils literal"><span class="pre">TrapStat.focus</span></code> the unit will use it’s Focus stat. As the unit chooses actions, the unit’s <code class="docutils literal"><span class="pre">Unit.current_will</span></code> or <code class="docutils literal"><span class="pre">Unit.current_focus</span></code> will go down based on which action was chosen. Each round, the unit’s focus or willpower will regenerate one point up to the unit’s base focus or willpower (<code class="docutils literal"><span class="pre">Unit.focus</span></code> or <code class="docutils literal"><span class="pre">Unit.will</span></code>).</p>
+<p>Depending on the <a class="reference external" href="#trap-pass-types">pass type</a> (<code class="docutils literal"><span class="pre">Trap.pass_type</span></code>) of the trap, once your units have contributed enough effort to the trap (<code class="docutils literal"><span class="pre">Trap.current_effort</span> <span class="pre">==</span> <span class="pre">Trap.required_effort</span></code>), then your unit will have avoided/disarmed the trap and will be free to continue on their way.</p>
+<p>If your units take too long however, based on the damage interval(<code class="docutils literal"><span class="pre">Trap.damage_interval</span></code>, the trap will deal <code class="docutils literal"><span class="pre">Trap.damage</span></code> according to a <a class="reference external" href="#trap-damage-type">damage type</a>(<code class="docutils literal"><span class="pre">Trap.damage_type</span></code>).</p>
 <div class="section" id="effort-types">
 <span id="effort-types"></span><h3>Effort Types:<a class="headerlink" href="#effort-types" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -194,6 +195,7 @@
 <li><strong>Energy cost:</strong> 5</li>
 <li><strong>Resulting Effort:</strong> 4</li>
 <li><strong>Additional Effects:</strong> None</li>
+<li><strong>Enum Value:</strong> <code class="docutils literal"><span class="pre">TrapAction.large_effort</span></code></li>
 </ul>
 </li>
 <li><strong>Little Effort:</strong><ul>
@@ -201,6 +203,7 @@
 <li><strong>Energy cost:</strong> 2</li>
 <li><strong>Resulting Effort:</strong> 2</li>
 <li><strong>Additional Effects:</strong> None</li>
+<li><strong>Enum Value:</strong> <code class="docutils literal"><span class="pre">TrapAction.little_effort</span></code></li>
 </ul>
 </li>
 <li><strong>Evade:</strong><ul>
@@ -208,6 +211,7 @@
 <li><strong>Energy cost:</strong> 3</li>
 <li><strong>Resulting Effort:</strong> 0</li>
 <li><strong>Additional Effects:</strong> The unit takes 50% less damage from any trap effects for this round.</li>
+<li><strong>Enum Value:</strong> <code class="docutils literal"><span class="pre">TrapAction.evade</span></code></li>
 </ul>
 </li>
 <li><strong>Wait:</strong><ul>
@@ -215,6 +219,7 @@
 <li><strong>Energy cost:</strong> 0</li>
 <li><strong>Resulting Effort:</strong> 0</li>
 <li><strong>Additional Effects:</strong> None</li>
+<li><strong>Enum Value:</strong> <code class="docutils literal"><span class="pre">TrapAction.wait</span></code></li>
 </ul>
 </li>
 </ul>
@@ -222,15 +227,35 @@
 <div class="section" id="trap-pass-types">
 <span id="trap-pass-types"></span><h3>Trap Pass Types<a class="headerlink" href="#trap-pass-types" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><strong>Individual Pass:</strong> Each unit must disarm/navigate/avoid the trap on their own to succeed. The party only moves on when all units have succeeded or died.</li>
-<li><strong>Group Effort Pass:</strong> The effort of the entire party contributes to the disarming of one trap. The party only moves on once the trap effort gauge is filled.</li>
-<li><strong>Group Pass on One Success:</strong> Each unit works to disarm/navigate/avoid their own trap. The party is able to move on once one unit succeeds in disarming a trap.</li>
+<li><strong>Individual Pass:</strong> Each unit must disarm/navigate/avoid the trap on their own to succeed. The party only moves on when all units have succeeded or died. Its enum value is <code class="docutils literal"><span class="pre">TrapPassType.individual_pass</span></code>.</li>
+<li><strong>Group Effort Pass:</strong> The effort of the entire party contributes to the disarming of one trap. The party only moves on once the trap effort gauge is filled. Its enum value is <code class="docutils literal"><span class="pre">TrapPassType.group_pass</span></code>.</li>
+<li><strong>Group Pass on One Success:</strong> Each unit works to disarm/navigate/avoid their own trap. The party is able to move on once one unit succeeds in disarming a trap. Its enum value is <code class="docutils literal"><span class="pre">TrapPassType.group_pass_on_first_success</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="trap-damage-type">
+<span id="trap-damage-type"></span><h3>Trap Damage Type<a class="headerlink" href="#trap-damage-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">TrapDamageType.random_one</span></code> Randomly damages one unit.</li>
+<li><code class="docutils literal"><span class="pre">TrapDamageType.random_two</span></code> Randomly damages two units.</li>
+<li><code class="docutils literal"><span class="pre">TrapDamageType.random_three</span></code> Randomly damages three units.</li>
+<li><code class="docutils literal"><span class="pre">TrapDamageType.all</span></code> Damages all units.</li>
+<li><code class="docutils literal"><span class="pre">TrapDamageType.lowest_health</span></code> Damages unit with the lowest health.</li>
+<li><code class="docutils literal"><span class="pre">TrapDamageType.highest_health</span></code> Damages unit with the highest health.</li>
 </ul>
 </div>
 </div>
-<div class="section" id="general-trap-properties">
-<span id="general-trap-properties"></span><h2>General Trap Properties<a class="headerlink" href="#general-trap-properties" title="Permalink to this headline">¶</a></h2>
-<p>General properties of traps</p>
+<div class="section" id="trap-properties">
+<span id="trap-properties"></span><h2>Trap Properties<a class="headerlink" href="#trap-properties" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Trap.type</span></code>: The type of trap you’re currently up against. Corresponds to a <code class="docutils literal"><span class="pre">TrapType</span></code> enum value.</li>
+<li><code class="docutils literal"><span class="pre">Trap.stat</span></code>: Which stat (Focus or Willpower) is associated with this trap. Corresponds to a <code class="docutils literal"><span class="pre">TrapStat</span></code> enum value.</li>
+<li><code class="docutils literal"><span class="pre">Trap.required_effort</span></code>: The amount of effort needed to pass the trap.</li>
+<li><code class="docutils literal"><span class="pre">Trap.current_effort</span></code>: How much effort has been put into the trap.</li>
+<li><code class="docutils literal"><span class="pre">Trap.pass_type</span></code>: The <a class="reference external" href="#trap-pass-types">pass type</a> of the trap. Corresponds to a <code class="docutils literal"><span class="pre">TrapPassType</span></code> enum value.</li>
+<li><code class="docutils literal"><span class="pre">Trap.damage_interval</span></code>: How often the trap will deal damage.</li>
+<li><code class="docutils literal"><span class="pre">Trap.damage</span></code>: How much damage the trap deals.</li>
+<li><code class="docutils literal"><span class="pre">Trap.damage_type</span></code>: How the trap decides who to damage.</li>
+</ul>
 </div>
 <div class="section" id="trap-types">
 <span id="trap-types"></span><h2>Trap Types<a class="headerlink" href="#trap-types" title="Permalink to this headline">¶</a></h2>

@@ -11,8 +11,6 @@ def get_monster(monster_type):
         return Wisp()
     elif monster_type == MonsterType.beholder:
         return Beholder()
-    #elif monster_type == MonsterType.goblin:
-    #    return Goblin()
     elif monster_type == MonsterType.dragon:
         return Dragon()
     elif monster_type == MonsterType.minotaur:
@@ -28,7 +26,6 @@ def get_random_monster(level):
     mon =  random.choice([
         MonsterType.wisp,
         MonsterType.beholder,
-    #    MonsterType.goblin,
         MonsterType.dragon,
         MonsterType.minotaur,
         MonsterType.slime,
@@ -57,9 +54,9 @@ class Wisp(Monster):
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
-            DamageType.slashing,
-            DamageType.electricity,
-            DamageType.cold
+            DamageType.cold,
+            DamageType.force,
+            DamageType.sonic
         ]
 
         self.attack_state["group_1"] = [
@@ -121,11 +118,11 @@ class Beholder(Monster):
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
-            DamageType.piercing,
-            DamageType.slashing,
             DamageType.acid,
             DamageType.cold,
-            DamageType.fire
+            DamageType.fire,
+            DamageType.piercing,
+            DamageType.slashing
         ]
 
         self.attack_state["index"] = 0
@@ -165,10 +162,10 @@ class Dragon(Monster):
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
-            DamageType.piercing,
-            DamageType.slashing,
             DamageType.acid,
-            DamageType.cold,
+            DamageType.electricity,
+            DamageType.piercing,
+            DamageType.precision,
             DamageType.sonic
         ]
 
@@ -221,10 +218,9 @@ class Minotaur(Monster):
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
-            DamageType.slashing,
-            DamageType.bludgeoning,
-            DamageType.acid,
+            DamageType.cold,
             DamageType.electricity,
+            DamageType.precision
         ]
 
         self.attack_state["group_1"] = [
@@ -281,11 +277,9 @@ class Slime(Monster):
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
-            DamageType.piercing,
-            DamageType.bludgeoning,
-            DamageType.cold,
-            DamageType.fire,
-            DamageType.electricity
+            DamageType.electricity,
+            DamageType.precision,
+            DamageType.sonic
         ]
 
         self.attack_state["group"] = [
@@ -322,32 +316,6 @@ class Slime(Monster):
         raise Exception("No valid targets: ", targets)
 
 
-class Goblin(Monster):
-    def init(self, level):
-        Monster.init(self, "Goblin", MonsterType.goblin, level)
-
-        # config values
-        damage = 250
-        damage_scale = 0.5
-
-        health = 100000
-        health_scale = 0.25
-        gold = 200
-        gold_scale = 0.75
-
-        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
-        self.current_health = self.health
-        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
-        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
-
-        self.weaknesses = [
-            DamageType.piercing,
-            DamageType.slashing,
-            DamageType.acid,
-            DamageType.cold,
-            DamageType.fire,
-            DamageType.electricity
-        ]
 
 class Wraith(Monster):
     def init(self, level):
@@ -367,10 +335,10 @@ class Wraith(Monster):
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
-            DamageType.piercing,
+            DamageType.acid,
+            DamageType.bludgeoning,
             DamageType.fire,
-            DamageType.electricity,
-            DamageType.sonic
+            DamageType.slashing
         ]
 
         self.attack_state["group_1"] = [
@@ -427,9 +395,10 @@ class Vampire(Monster):
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
-            DamageType.slashing,
-            DamageType.electricity,
-            DamageType.cold
+            DamageType.fire,
+            DamageType.piercing,
+            DamageType.precision,
+            DamageType.slashing
         ]
 
         self.attack_state["group_1"] = [

@@ -47,9 +47,11 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 ![](_static/wisp.png)
 
 #### Weaknesses:
-- 
+- ```DamageType.cold```
+- ```DamageType.force```
+- ```DamageType.sonic```
 
-**Stats:**
+#### Stats
 ```eval_rst
 +-------+--------+--------+------------+
 | Level | Health | Damage | Gold Value |
@@ -76,17 +78,20 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 +-------+--------+--------+------------+
 ```
 
-
-**Attack Logic:**
+#### Attack Logic
 
 ### Beholder
 
 ![](_static/beholder.png)
 
 #### Weaknesses:
-- 
+- ```DamageType.acid```
+- ```DamageType.cold```
+- ```DamageType.fire```
+- ```DamageType.piercing```
+- ```DamageType.slashing```
 
-**Stats:**
+#### Stats
 ```eval_rst
 +-------+--------+--------+------------+
 | Level | Health | Damage | Gold Value |
@@ -113,16 +118,20 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 +-------+--------+--------+------------+
 ```
 
-**Attack Logic:**
+#### Attack Logic
 
 ### Dragon
 
 ![](_static/dragon.png)
 
 #### Weaknesses:
-- 
+- ```DamageType.acid```
+- ```DamageType.electricity```
+- ```DamageType.piercing```
+- ```DamageType.precision```
+- ```DamageType.sonic```
 
-**Stats:**
+#### Stats
 ```eval_rst
 +-------+--------+--------+------------+
 | Level | Health | Damage | Gold Value |
@@ -149,16 +158,18 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 +-------+--------+--------+------------+
 ```
 
-**Attack Logic:**
+#### Attack Logic
 
 ### Minotaur
 
 ![](_static/minotaur.png)
 
 #### Weaknesses:
-- 
+- ```DamageType.cold```
+- ```DamageType.electricity```
+- ```DamageType.precision```
 
-**Stats:**
+#### Stats
 ```eval_rst
 +-------+--------+--------+------------+
 | Level | Health | Damage | Gold Value |
@@ -185,16 +196,18 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 +-------+--------+--------+------------+
 ```
 
-**Attack Logic:**
+#### Attack Logic
 
 ### Slime
 
 ![](_static/slime.png)
 
 #### Weaknesses:
-- 
+- ```DamageType.electricity```
+- ```DamageType.precision```
+- ```DamageType.sonic```
 
-**Stats:**
+##### Stats
 ```eval_rst
 +-------+--------+--------+------------+
 | Level | Health | Damage | Gold Value |
@@ -221,15 +234,18 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 +-------+--------+--------+------------+
 ```
 
-**Attack Logic:** 
+#### Attack Logic
 
 ### Vampire
 ![](_static/vampire.png)
 
 #### Weaknesses:
-- 
+- ```DamageType.fire```
+- ```DamageType.piercing```
+- ```DamageType.precision```
+- ```DamageType.slashing```
 
-**Stats:**
+#### Stats
 ```eval_rst
 +-------+--------+--------+------------+
 | Level | Health | Damage | Gold Value |
@@ -256,7 +272,8 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 +-------+--------+--------+------------+
 ```
 
-**Attack Logic:** Attacks a random player unit.
+#### Attack Logic
+Attacks a random player unit.
 
 
 ### Wraith
@@ -264,9 +281,12 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 ![](_static/wraith.png)
 
 #### Weaknesses:
-- 
+- ```DamageType.acid```
+- ```DamageType.bludgeoning```
+- ```DamageType.fire```
+- ```DamageType.slashing```
 
-**Stats:**
+#### Stats
 ```eval_rst
 +-------+--------+--------+------------+
 | Level | Health | Damage | Gold Value |
@@ -292,3 +312,5 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 | 10    | 19500  | 825    |  1550      |
 +-------+--------+--------+------------+
 ```
+
+#### Attack Logic

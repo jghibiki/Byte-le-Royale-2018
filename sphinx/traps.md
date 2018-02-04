@@ -1,33 +1,13 @@
 # Traps & Avoiding Traps
 
-When your party comes upon a trap, they will struggle to escape said trap. How their struggle fares is influenced by the trap's type, associated stat, and pass type.
-
 ## Avoiding Traps
 
-To successfully avoid traps, you will want to check which stat the trap relies on, either Focus or Willpower using the TrapStat enum. You may also want to check what is required to pass the trap, which can be found using the TrapPassType enum. From there, you will want to choose your action for a turn, using the TrapAction enum, which will be either putting in a large effort, little effort, evading the trap, or waiting and regenerating your required resource. 
+Traps while often easier than monsters, can still pose a deadly threat to your party. To avoid traps, units must choose one of [four actions](#effort-types): ```TrapAction.large_effort```, ```TrapAction.little_effort```, ```TrapAction.evade```, ```TrapAction.wait```. Certain actions such as ```TrapAction.large_effort``` or ```TrapAction.little_effort``` will cost energy. The amount of energy each unit has to spend on actions is dependant on either their ```Unit.will``` or ```Unit.focus``` stats. Melee units specialize higher willpower, and magic units specialize in higher focus. If the ```Trap.stat``` property is ```TrapStat.will``` then the unit will use it's Willpower stat, if it is ```TrapStat.focus``` the unit will use it's Focus stat. As the unit chooses actions, the unit's ```Unit.current_will``` or ```Unit.current_focus``` will go down based on which action was chosen. Each round, the unit's focus or willpower will regenerate one point up to the unit's base focus or willpower (```Unit.focus``` or ```Unit.will```).
 
-You can also utilize other information, such as the trap's type (TrapType), how much total effort you need to pass the trap (required_effort), who the trap will attack (TrapDamageType), or how much effort you've put in thus far (current_effort). 
+Depending on the [pass type](#trap-pass-types) (```Trap.pass_type```) of the trap, once your units have contributed enough effort to the trap (```Trap.current_effort == Trap.required_effort```), then your unit will have avoided/disarmed the trap and will be free to continue on their way.
 
-## Trap Properties
-These statistics are properties of the Trap object.
+If your units take too long however, based on the damage interval(```Trap.damage_interval```, the trap will deal ```Trap.damage``` according to a [damage type](#trap-damage-type)(```Trap.damage_type```).
 
-```Trap.stat```: Check which stat (Focus or Willpower)is associated with this trap.
-
-```Trap.required_effort```: Check the amount of effort needed to pass the trap,
-
-```Trap.current_effort```: Check how much effort you have put into the trap.
-
-```Trap.pass_type```: Check the pass type of the trap (detailed below).
-
-```Trap.damage_interval```: How often the trap damages you.
-
-```Trap.damage```: How much damage the trap does.
-
-```Trap.damage_type```: Who the trap will attack.
-
-Units can use this to judge the trap and the best course of action. Their available actions, used through TrapAction, are:
-
-```large_effort```, ```little_effort```, ```evade```, and ```wait```.
 
 ### Effort Types:
 - **Large Effort:** 
@@ -57,34 +37,34 @@ Units can use this to judge the trap and the best course of action. Their availa
 
 ### Trap Pass Types
 
-- **Individual Pass:** Each unit must disarm/navigate/avoid the trap on their own to succeed. The party only moves on when all units have succeeded or died. Its enum value is ```individual_pass```.
+- **Individual Pass:** Each unit must disarm/navigate/avoid the trap on their own to succeed. The party only moves on when all units have succeeded or died. Its enum value is ```TrapPassType.individual_pass```.
 
-- **Group Effort Pass:** The effort of the entire party contributes to the disarming of one trap. The party only moves on once the trap effort gauge is filled. Its enum value is ```group_pass```.
+- **Group Effort Pass:** The effort of the entire party contributes to the disarming of one trap. The party only moves on once the trap effort gauge is filled. Its enum value is ```TrapPassType.group_pass```.
 
-- **Group Pass on One Success:** Each unit works to disarm/navigate/avoid their own trap. The party is able to move on once one unit succeeds in disarming a trap. Its enum value is ```group_pass_on_first_success```.
+- **Group Pass on One Success:** Each unit works to disarm/navigate/avoid their own trap. The party is able to move on once one unit succeeds in disarming a trap. Its enum value is ```TrapPassType.group_pass_on_first_success```.
+
+### Trap Damage Type
+
+- ```TrapDamageType.random_one``` Randomly damages one unit.
+- ```TrapDamageType.random_two``` Randomly damages two units.
+- ```TrapDamageType.random_three``` Randomly damages three units.
+- ```TrapDamageType.all``` Damages all units.
+- ```TrapDamageType.lowest_health``` Damages unit with the lowest health.
+- ```TrapDamageType.highest_health``` Damages unit with the highest health.
 
 ## Trap Properties
-These statistics are properties of the Trap object.
 
-```Trap.type```: Check which type of trap you're currently up against.
+- ```Trap.type```: The type of trap you're currently up against. Corresponds to a ```TrapType``` enum value.
+- ```Trap.stat```: Which stat (Focus or Willpower) is associated with this trap. Corresponds to a ```TrapStat``` enum value.
+- ```Trap.required_effort```: The amount of effort needed to pass the trap.
+- ```Trap.current_effort```: How much effort has been put into the trap.
+- ```Trap.pass_type```: The [pass type](#trap-pass-types) of the trap. Corresponds to a ```TrapPassType``` enum value.
+- ```Trap.damage_interval```: How often the trap will deal damage.
+- ```Trap.damage```: How much damage the trap deals.
+- ```Trap.damage_type```: How the trap decides who to damage.
 
-```Trap.stat```: Check which stat (Focus or Willpower)is associated with this trap.
-
-```Trap.required_effort```: Check the amount of effort needed to pass the trap.
-
-```Trap.current_effort```: Check how much effort you have put into the trap.
-
-```Trap.pass_type```: Check the pass type of the trap (detailed below).
-
-```Trap.damage_interval```: How often the trap damages you.
-
-```Trap.damage```: How much damage the trap does.
-
-```Trap.damage_type```: Who the trap will attack.
 
 ## Trap Types
-
-
 
 ### Spike Pit
 **Description:** A pit (or strip) of spikes. 
