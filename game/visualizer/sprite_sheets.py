@@ -1029,6 +1029,13 @@ class EldritchBarrierTrap(TrapSprite):
             [ 0,    0 ]
         ], 400, 65, 480, 480, 3, scale=1)
 
+class PendulumnBridgeTrap(TrapSprite):
+
+    def __init__(self):
+        TrapSprite.__init__(self, "game/visualizer/assets/pendulum.png", [
+            [ 0,    0 ]
+        ], 0, 0, 1280, 720, 3, scale=1)
+
 
 loaded_trap_sprites = {}
 
@@ -1046,6 +1053,8 @@ def get_trap_sprite(trap_type):
         cls = FallingCeilingTrap
     elif trap_type == TrapType.eldritch_barrier:
         cls = EldritchBarrierTrap
+    elif trap_type == TrapType.pendulum_bridge:
+        cls = PendulumnBridgeTrap
     else:
         cls = RiddleOfTheSphinxTrap
 
