@@ -194,7 +194,7 @@
 - ```Sorcerer.use_spell_2()``` Attack monster with Spell in Spell Slot 2.
 - ```Sorcerer.use_spell_3()``` Attack monster with Spell in Spell Slot 3.
 - ```Sorcerer.use_spell_4()``` Attack monster with Spell in Spell Slot 4.
-- ```Sorcerer.illusion(unit_to_disguise, unit_to_be_disguised)``` Use Illusion ability.
+- ```Sorcerer.illusion(unit_to_disguise, unit_to_be_disguised_as)``` Use Illusion ability. Disguesses the first unit as the second.
 - ```Sorcerer.wait()``` Do nothing for this turn.
 
 ## Alchemist

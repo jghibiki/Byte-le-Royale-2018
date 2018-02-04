@@ -46,6 +46,9 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ![](_static/wisp.png)
 
+#### Weaknesses:
+- 
+
 **Stats:**
 ```eval_rst
 +-------+--------+--------+------------+
@@ -80,6 +83,9 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ![](_static/beholder.png)
 
+#### Weaknesses:
+- 
+
 **Stats:**
 ```eval_rst
 +-------+--------+--------+------------+
@@ -112,6 +118,9 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 ### Dragon
 
 ![](_static/dragon.png)
+
+#### Weaknesses:
+- 
 
 **Stats:**
 ```eval_rst
@@ -146,6 +155,9 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ![](_static/minotaur.png)
 
+#### Weaknesses:
+- 
+
 **Stats:**
 ```eval_rst
 +-------+--------+--------+------------+
@@ -179,6 +191,9 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 ![](_static/slime.png)
 
+#### Weaknesses:
+- 
+
 **Stats:**
 ```eval_rst
 +-------+--------+--------+------------+
@@ -208,7 +223,11 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 
 **Attack Logic:** 
 
-### Goblin
+### Vampire
+![](_static/vampire.png)
+
+#### Weaknesses:
+- 
 
 **Stats:**
 ```eval_rst
@@ -243,6 +262,9 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 ### Wraith
 
 ![](_static/wraith.png)
+
+#### Weaknesses:
+- 
 
 **Stats:**
 ```eval_rst
