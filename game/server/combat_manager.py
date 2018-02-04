@@ -241,18 +241,13 @@ class Illusion(SpecialAbility):
 
     def __init__(self, verbose):
         SpecialAbility.__init__(self, verbose)
-        self.target_1 = None
-        self.target_2 = None
 
-    def use(self, target_1, target_2):
+    def use(self):
         if self.cooldown_timer <= 0:
             self.cooldown_timer = 5
-            self.target_1 = target_1
-            self.target_2 = target_2
 
     def reset(self):
-        self.target_1 = None
-        self.target_2 = None
+        pass
 
 class Resupply(SpecialAbility):
 
