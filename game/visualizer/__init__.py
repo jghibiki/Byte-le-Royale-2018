@@ -644,6 +644,16 @@ def start(verbose, log_path, gamma, dont_wait):
                             elif target_idx is 3:
                                 special_ability_group.add( IllusionAnimation(1000, 280) )
 
+                            target_idx = units.index(event["target_2"])
+                            if target_idx is 0:
+                                special_ability_group.add( Illusion2Animation(55, 280) )
+                            elif target_idx is 1:
+                                special_ability_group.add( Illusion2Animation(355, 280) )
+                            elif target_idx is 2:
+                                special_ability_group.add( Illusion2Animation(665, 280) )
+                            elif target_idx is 3:
+                                special_ability_group.add( Illusion2Animation(985, 280) )
+
                         elif event["unit"].unit_class is UnitClass.wizard:
                             target_idx = units.index(event["target_1"])
 

@@ -349,6 +349,8 @@ class CombatManager:
                                 living_units[idx_2].name))
                             living_units[idx_1] = living_units[idx_2]
 
+                            living_units.remove(living_units[idx_2])
+
                             turn_log["events"].append({
                                 "type": Event.special_ability,
                                 "unit": unit.id,
