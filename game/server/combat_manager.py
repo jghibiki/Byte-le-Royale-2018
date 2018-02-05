@@ -300,6 +300,8 @@ class CombatManager:
         taunt_unit = None
         brawler_damage = 0
         invigorated_unit = None
+        disguised_unit = None
+        disguised_as_unit = None
 
         # handle early special abilities
         for unit in living_units:
@@ -347,8 +349,10 @@ class CombatManager:
                                 unit.name,
                                 living_units[idx_1].name,
                                 living_units[idx_2].name))
-                            living_units[idx_1] = living_units[idx_2]
+                            disguised_unit = living_units[idx_1]
+                            disguised_as_unit = living_units[idx_2]
 
+                            living_units[idx_1] = living_units[idx_2]
                             living_units.remove(living_units[idx_2])
 
                             turn_log["events"].append({
@@ -369,7 +373,9 @@ class CombatManager:
         monster_target = self.monster.attack(living_units)
         monster_damage = self.monster.damage
 
-
+        if ((disguised_as_unit is not None and disguised_unit is not None) and
+             monster_target is disguised_as_unit):
+            monster_target = disguised_unit
 
 
         # Apply monster damage
