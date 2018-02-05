@@ -38,7 +38,7 @@ class GameLogParser:
     def _parse_turn(self, turn):
 
         units = self._deserialize_units( turn["units"] )
-        units = sorted(units, key=lambda u: u.id)
+        units = sorted(units, key=lambda u: u.name)
 
         location = None
 
@@ -85,8 +85,10 @@ class GameLogParser:
 
             elif event["type"] == Event.special_ability:
                 event["unit"] = self._get_unit(event["unit"], units)
-                event["target_1"] = self._get_unit(event["target_1"], units)
-                event["target_2"] = self._get_unit(event["target_2"], units)
+                if "target_1" in event:
+                    event["target_1"] = self._get_unit(event["target_1"], units)
+                if "target_2" in event:
+                    event["target_2"] = self._get_unit(event["target_2"], units)
 
             elif event["type"] == Event.special_ability_attack:
                 event["unit"] = self._get_unit(event["unit"], units)
