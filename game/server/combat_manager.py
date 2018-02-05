@@ -52,7 +52,7 @@ def reset_special_abilities():
     for _, sa in special_abilities.items():
         sa.reset()
 
-def cooldown_abilities(self):
+def cooldown_abilities():
     global special_abilities
     for _, sa in special_abilities.items():
         sa.cooldown()
@@ -317,6 +317,7 @@ class CombatManager:
 
                 elif unit.unit_class == UnitClass.wizard:
                     if sa.cooldown_timer <= 0:
+                        sa.use()
                         for u in self.units:
                             if u.id == unit.combat_action_target_1:
                                 invigorated_unit = u
@@ -583,6 +584,7 @@ class CombatManager:
 
 
         self.round += 1
+        cooldown_abilities()
 
         if self.monster.current_health <= 0:
             self.done = True
