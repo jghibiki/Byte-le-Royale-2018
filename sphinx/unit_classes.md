@@ -4,15 +4,27 @@
 
 ![](_static/knight.png)
 
+### Base Stats
 ```eval_rst
 +--------+----------------+-------+-----------+
 | Health | Primary Weapon | Focus | Willpower |
 +========+================+=======+===========+
-| 17000  | Sword          | 10    | 14        |
+| 13500  | Sword          | 10    | 14        |
 +--------+----------------+-------+-----------+
 ```
 
-**Unique Ability:** Taunt: If a monster attacks one unit, this unit absorbs 85% damage from the attack and the original target takes none. If a monster attacks multiple units, this unit absorbs 50% of the total damage that would be dealt to each unit. Each unit that was originally targeted receives 50% of the damage originally intended for them.
+### Armor
+Armor replaces the unit's current maximum health.
+```eval_rst
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    |
++=======+=======+=======+=======+=======+=======+=======+=======+=======+=======+
+| 15000 | 16500 | 18000 | 19500 | 21000 | 22500 | 24000 | 25500 | 27000 | 28500 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+```
+
+### Unique Ability
+Taunt: If a monster attacks one unit, this unit absorbs 85% damage from the attack and the original target takes none. If a monster attacks multiple units, this unit absorbs 50% of the total damage that would be dealt to each unit. Each unit that was originally targeted receives 50% of the damage originally intended for them.
 
 ### Unit Properties
 - ```Knight.primary_weapon``` The type of primary weapon the unit is carrying.
@@ -27,15 +39,27 @@
 
 ![](_static/brawler.png)
 
+### Base Stats
 ```eval_rst
 +--------+----------------+-------+-----------+
 | Health | Primary Weapon | Focus | Willpower |
 +========+================+=======+===========+
-| 15000  | Mace           | 10    | 14        |
+| 12000  | Mace           | 10    | 14        |
 +--------+----------------+-------+-----------+
 ```
 
-**Unique Ability:** Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(normal damage) * (2.5 + (N * 0.5))``` damage. Where N is determined by the table below.
+### Armor
+Armor replaces the unit's current maximum health.
+```eval_rst
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    |
++=======+=======+=======+=======+=======+=======+=======+=======+=======+=======+
+| 13500 | 15000 | 16500 | 18000 | 19500 | 21000 | 22500 | 24000 | 25500 | 27000 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+```
+
+### Unique Ability
+Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(normal damage) * (2.5 + (N * 0.5))``` damage. Where N is determined by the table below.
 
 
 ```eval_rst
@@ -63,15 +87,27 @@
 
 ![](_static/pikeman.png)
 
+### Base Stats
 ```eval_rst
 +--------+----------------+-------+-----------+
 | Health | Primary Weapon | Focus | Willpower |
 +========+================+=======+===========+
-| 16000  | Spear          | 10    | 14        |
+| 12750  | Spear          | 10    | 14        |
 +--------+----------------+-------+-----------+
 ```
 
-**Unique Ability:** Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.
+### Armor
+Armor replaces the unit's current maximum health.
+```eval_rst
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    |
++=======+=======+=======+=======+=======+=======+=======+=======+=======+=======+
+| 14250 | 15750 | 17250 | 18750 | 20250 | 21750 | 23250 | 24750 | 26250 | 27750 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+```
+
+### Unique Ability
+Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.
 
 ### Unit Properties
 - ```Pikeman.primary_weapon``` The type of primary weapon the unit is carrying.
@@ -86,15 +122,27 @@
 
 ![](_static/rogue.png)
 
+### Base Stats
 ```eval_rst
 +--------+----------------+-------+-----------+-------------+
 | Health | Primary Weapon | Focus | Willpower | Bomb Slots  |
 +========+================+=======+===========+=============+
-| 14000  | Dagger         | 30    | 30        | 3           |
+| 10000  | Dagger         | 30    | 30        | 3           |
 +--------+----------------+-------+-----------+-------------+
 ```
 
-**Unique Ability:** Trap expert: rogues have increased focus and willpower during trap evasion.
+### Armor
+Armor replaces the unit's current maximum health.
+```eval_rst
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    |
++=======+=======+=======+=======+=======+=======+=======+=======+=======+=======+
+| 11500 | 13000 | 14500 | 16000 | 17500 | 19000 | 20500 | 22000 | 23500 | 25000 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+```
+
+### Unique Ability
+Trap expert: rogues have increased focus and willpower during trap evasion.
 
 ### Unit Properties
 - ```Rogue.primary_weapon``` The type of primary weapon the unit is carrying.
@@ -119,15 +167,27 @@
 ![](_static/magus.png)
 
 
+### Base Stats
 ```eval_rst
 +--------+----------------+-------+-----------+-------------+
 | Health | Primary Weapon | Focus | Willpower | Spell Slots |
 +========+================+=======+===========+=============+
-| 10000  | Staff          | 14    | 10        | 4           |
+|  7000  | Staff          | 14    | 10        | 4           |
 +--------+----------------+-------+-----------+-------------+
 ```
 
-**Unique Ability:** Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.
+### Armor 
+Armor replaces the unit's current maximum health.
+```eval_rst
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    |
++=======+=======+=======+=======+=======+=======+=======+=======+=======+=======+
+| 8500  | 10000 | 11500 | 13000 | 14500 | 16000 | 17500 | 19000 | 20500 | 22000 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+```
+
+### Unique Ability
+Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.
 
 ### Unit Properties
 - ```Magus.primary_weapon``` The type of primary weapon the unit is carrying.
@@ -145,16 +205,27 @@
 
 ![](_static/wizard.png)
 
+### Base Stats
 ```eval_rst
 +--------+----------------+-------+-----------+-------------+
 | Health | Primary Weapon | Focus | Willpower | Spell Slots |
 +========+================+=======+===========+=============+
-| 11000  | Wand           | 14    | 10        | 3           |
+|  8250  | Wand           | 14    | 10        | 3           |
 +--------+----------------+-------+-----------+-------------+
-
 ```
 
-**Unique Ability:** Invigorate: Charm one ally to deal 1.5 times damage for a turn. Cancels any other damage modifiers that would be in effect for that unit including the effects of Elemental Burst, and Fit of Rage. Can be cast once every 3 turns.
+### Armor
+Armor replaces the unit's current maximum health.
+```eval_rst
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    |
++=======+=======+=======+=======+=======+=======+=======+=======+=======+=======+
+| 9750  | 11250 | 12750 | 14250 | 15750 | 17250 | 18750 | 20250 | 21750 | 23250 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+```
+
+### Unique Ability
+Invigorate: Charm one ally to deal 1.5 times damage for a turn. Cancels any other damage modifiers that would be in effect for that unit including the effects of Elemental Burst, and Fit of Rage. Can be cast once every 3 turns.
 
 ### Unit Properties
 - ```Wizard.primary_weapon``` The type of primary weapon the unit is carrying.
@@ -172,15 +243,27 @@
 
 ![](_static/sorcerer.png)
 
+### Base Stats
 ```eval_rst
 +--------+----------------+-------+-----------+-------------+
 | Health | Primary Weapon | Focus | Willpower | Spell Slots |
 +========+================+=======+===========+=============+
-| 12000  | Spell Book     | 14    | 10        | 3           |
+|  7500  | Spell Book     | 14    | 10        | 3           |
 +--------+----------------+-------+-----------+-------------+
 ```
 
-**Unique Ability:** Illusion: Cast an illusion that disguises one player unit as another on the next turn. Monsters will be unable to tell the difference between the two units for that turn. Can be cast once every 5 turns.
+### Armor
+Armor replaces the unit's current maximum health.
+```eval_rst
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    |
++=======+=======+=======+=======+=======+=======+=======+=======+=======+=======+
+| 9000  | 10500 | 12000 | 13500 | 15000 | 16500 | 18000 | 19500 | 21000 | 22500 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+```
+
+### Unique Ability
+Illusion: Cast an illusion that disguises one player unit as another on the next turn. Monsters will be unable to tell the difference between the two units for that turn. Can be cast once every 5 turns.
 
 ### Unit Properties
 - ```Sorcerer.primary_weapon``` The type of primary weapon the unit is carrying.
@@ -198,15 +281,27 @@
 
 ![](_static/alchemist.png)
 
+### Base Stats
 ```eval_rst
 +--------+---------------------+-------+-----------+------------+
 | Health | Primary Weapon      | Focus | Willpower | Bomb Slots |
 +========+=====================+=======+===========+============+
-| 13000  | Alchemical Supplies | 12    | 10        | 2          |
+|  9250  | Alchemical Supplies | 12    | 10        | 2          |
 +--------+---------------------+-------+-----------+------------+
 ```
 
-**Unique Ability:** Resupply: Spend one turn to regenerate one of bomb of the types currently possessed.
+### Armor
+Armor replaces the unit's current maximum health.
+```eval_rst
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10    |
++=======+=======+=======+=======+=======+=======+=======+=======+=======+=======+
+| 10750 | 12250 | 13750 | 15250 | 16750 | 18250 | 18750 | 19750 | 21750 | 24250 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+```
+
+### Unique Ability
+Resupply: Spend one turn to regenerate one of bomb of the types currently possessed.
 
 ### Unit Properties
 - ```Alchemist.armor``` The type of armor the unit is carrying. Is initially ```None``` until armor is bought for the unit.
