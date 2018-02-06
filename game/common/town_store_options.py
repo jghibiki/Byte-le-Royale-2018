@@ -16,10 +16,13 @@ valid_purchasers = {
     ItemType.flash_bomb:          [ UnitClass.rogue, UnitClass.alchemist ],
     ItemType.spike_bomb:          [ UnitClass.rogue, UnitClass.alchemist ],
     ItemType.concussion_bomb:     [ UnitClass.rogue, UnitClass.alchemist ],
-    ItemType.fire_ball:            [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
+    ItemType.fire_ball:           [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
     ItemType.thunderbolt:         [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
     ItemType.ice_spike:           [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
     ItemType.sonic_blast:         [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
+    ItemType.magic_sword:         [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
+    ItemType.spear_of_light:      [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
+    ItemType.rock_smash:          [ UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer ],
     ItemType.armor:               [ UnitClass.knight, UnitClass.brawler, UnitClass.pikeman,
                                     UnitClass.rogue, UnitClass.magus, UnitClass.sorcerer,
                                     UnitClass.wizard, UnitClass.alchemist]
@@ -255,6 +258,42 @@ item_data = {
         9: { "cost": 300 },
         10: { "cost": 300 }
     },
+    ItemType.magic_sword: {
+        1: { "cost": 50 },
+        2: { "cost": 300 },
+        3: { "cost": 300 },
+        4: { "cost": 300 },
+        5: { "cost": 300 },
+        6: { "cost": 300 },
+        7: { "cost": 300 },
+        8: { "cost": 300 },
+        9: { "cost": 300 },
+        10: { "cost": 300 }
+    },
+    ItemType.spear_of_light: {
+        1: { "cost": 50 },
+        2: { "cost": 300 },
+        3: { "cost": 300 },
+        4: { "cost": 300 },
+        5: { "cost": 300 },
+        6: { "cost": 300 },
+        7: { "cost": 300 },
+        8: { "cost": 300 },
+        9: { "cost": 300 },
+        10: { "cost": 300 }
+    },
+    ItemType.rock_smash: {
+        1: { "cost": 50 },
+        2: { "cost": 300 },
+        3: { "cost": 300 },
+        4: { "cost": 300 },
+        5: { "cost": 300 },
+        6: { "cost": 300 },
+        7: { "cost": 300 },
+        8: { "cost": 300 },
+        9: { "cost": 300 },
+        10: { "cost": 300 }
+    },
     ItemType.armor: {
         1: { "cost": 50 },
         2: { "cost": 300 },
@@ -290,6 +329,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 1},
         { "type": ItemType.ice_spike,           "level": 1},
         { "type": ItemType.sonic_blast,         "level": 1},
+        { "type": ItemType.magic_sword,         "level": 1},
+        { "type": ItemType.spear_of_light,      "level": 1},
+        { "type": ItemType.rock_smash,          "level": 1},
         { "type": ItemType.armor,               "level": 1}
 
     ],
@@ -313,6 +355,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 2},
         { "type": ItemType.ice_spike,           "level": 2},
         { "type": ItemType.sonic_blast,         "level": 2},
+        { "type": ItemType.magic_sword,         "level": 2},
+        { "type": ItemType.spear_of_light,      "level": 2},
+        { "type": ItemType.rock_smash,          "level": 2},
         { "type": ItemType.armor,               "level": 2}
     ],
     [ # Town 2
@@ -335,6 +380,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 3},
         { "type": ItemType.ice_spike,           "level": 3},
         { "type": ItemType.sonic_blast,         "level": 3},
+        { "type": ItemType.magic_sword,         "level": 3},
+        { "type": ItemType.spear_of_light,      "level": 3},
+        { "type": ItemType.rock_smash,          "level": 3},
         { "type": ItemType.armor,               "level": 3}
     ],
     [ # Town 3
@@ -357,6 +405,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 4},
         { "type": ItemType.ice_spike,           "level": 4},
         { "type": ItemType.sonic_blast,         "level": 4},
+        { "type": ItemType.magic_sword,         "level": 4},
+        { "type": ItemType.spear_of_light,      "level": 4},
+        { "type": ItemType.rock_smash,          "level": 4},
         { "type": ItemType.armor,               "level": 4}
     ],
     [ # Town 4
@@ -379,6 +430,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 5},
         { "type": ItemType.ice_spike,           "level": 5},
         { "type": ItemType.sonic_blast,         "level": 5},
+        { "type": ItemType.magic_sword,         "level": 5},
+        { "type": ItemType.spear_of_light,      "level": 5},
+        { "type": ItemType.rock_smash,          "level": 5},
         { "type": ItemType.armor,               "level": 5}
     ],
     [ # Town 5
@@ -401,6 +455,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 6},
         { "type": ItemType.ice_spike,           "level": 6},
         { "type": ItemType.sonic_blast,         "level": 6},
+        { "type": ItemType.magic_sword,         "level": 6},
+        { "type": ItemType.spear_of_light,      "level": 6},
+        { "type": ItemType.rock_smash,          "level": 6},
         { "type": ItemType.armor,               "level": 6}
     ],
     [ # Town 6
@@ -423,6 +480,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 7},
         { "type": ItemType.ice_spike,           "level": 7},
         { "type": ItemType.sonic_blast,         "level": 7},
+        { "type": ItemType.magic_sword,         "level": 7},
+        { "type": ItemType.spear_of_light,      "level": 7},
+        { "type": ItemType.rock_smash,          "level": 7},
         { "type": ItemType.armor,               "level": 7}
     ],
     [ # Town 7
@@ -445,6 +505,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 8},
         { "type": ItemType.ice_spike,           "level": 8},
         { "type": ItemType.sonic_blast,         "level": 8},
+        { "type": ItemType.magic_sword,         "level": 8},
+        { "type": ItemType.spear_of_light,      "level": 8},
+        { "type": ItemType.rock_smash,          "level": 8},
         { "type": ItemType.armor,               "level": 8}
     ],
     [ # Town 8
@@ -467,6 +530,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 9},
         { "type": ItemType.ice_spike,           "level": 9},
         { "type": ItemType.sonic_blast,         "level": 9},
+        { "type": ItemType.magic_sword,         "level": 9},
+        { "type": ItemType.spear_of_light,      "level": 9},
+        { "type": ItemType.rock_smash,          "level": 9},
         { "type": ItemType.armor,               "level": 9}
     ],
     [ # Town 9
@@ -489,6 +555,9 @@ towns = [
         { "type": ItemType.thunderbolt,         "level": 10},
         { "type": ItemType.ice_spike,           "level": 10},
         { "type": ItemType.sonic_blast,         "level": 10},
+        { "type": ItemType.magic_sword,         "level": 10},
+        { "type": ItemType.spear_of_light,      "level": 10},
+        { "type": ItemType.rock_smash,          "level": 10},
         { "type": ItemType.armor,               "level": 10}
     ]
 ]

@@ -138,7 +138,6 @@
 - ```Magus.use_spell_1()``` Attack monster with Spell in Spell Slot 1.
 - ```Magus.use_spell_2()``` Attack monster with Spell in Spell Slot 2.
 - ```Magus.use_spell_3()``` Attack monster with Spell in Spell Slot 3.
-- ```Magus.use_spell_4()``` Attack monster with Spell in Spell Slot 4.
 - ```Magus.elemental_burst()``` Use Elemental Burst ability.
 - ```Magus.wait()``` Do nothing for this turn.
 
@@ -150,7 +149,7 @@
 +--------+----------------+-------+-----------+-------------+
 | Health | Primary Weapon | Focus | Willpower | Spell Slots |
 +========+================+=======+===========+=============+
-| 11000  | Wand           | 14    | 10        | 4           |
+| 11000  | Wand           | 14    | 10        | 3           |
 +--------+----------------+-------+-----------+-------------+
 
 ```
@@ -166,7 +165,6 @@
 - ```Wizard.use_spell_1()``` Attack monster with Spell in Spell Slot 1.
 - ```Wizard.use_spell_2()``` Attack monster with Spell in Spell Slot 2.
 - ```Wizard.use_spell_3()``` Attack monster with Spell in Spell Slot 3.
-- ```Wizard.use_spell_4()``` Attack monster with Spell in Spell Slot 4.
 - ```Wizard.invigorate(target)``` Use Invigorate ability.
 - ```Wizard.wait()``` Do nothing for this turn.
 
@@ -178,7 +176,7 @@
 +--------+----------------+-------+-----------+-------------+
 | Health | Primary Weapon | Focus | Willpower | Spell Slots |
 +========+================+=======+===========+=============+
-| 12000  | Spell Book     | 14    | 10        | 4           |
+| 12000  | Spell Book     | 14    | 10        | 3           |
 +--------+----------------+-------+-----------+-------------+
 ```
 
@@ -193,7 +191,6 @@
 - ```Sorcerer.use_spell_1()``` Attack monster with Spell in Spell Slot 1.
 - ```Sorcerer.use_spell_2()``` Attack monster with Spell in Spell Slot 2.
 - ```Sorcerer.use_spell_3()``` Attack monster with Spell in Spell Slot 3.
-- ```Sorcerer.use_spell_4()``` Attack monster with Spell in Spell Slot 4.
 - ```Sorcerer.illusion(unit_to_disguise, unit_to_be_disguised_as)``` Use Illusion ability. Disguesses the first unit as the second.
 - ```Sorcerer.wait()``` Do nothing for this turn.
 

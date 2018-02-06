@@ -346,28 +346,6 @@ def unit_text(font, upper_left, unit):
             ])
 
 
-        if unit.spell_4 is not None:
-            text = "Lvl{0} {1}".format(
-                unit.spell_4.level,
-                unit.spell_4.name
-            )
-
-            spell_4_text = ptext.draw(
-                text,
-                (0,0),
-                color=(255, 255, 255),
-                owidth=2.0,
-                ocolor=(0, 0, 0),
-                fontsize=16,
-                fontname='game/visualizer/assets/joystix/joystix monospace.ttf')[0]
-
-            spell_4_rect = spell_4_text.get_rect()
-            spell_4_rect.topleft = (upper_left[0], upper_left[1]+80)
-
-            text_parts.append([
-                spell_4_text,
-                spell_4_rect
-            ])
 
     return text_parts
 
@@ -568,7 +546,7 @@ def start(verbose, log_path, gamma, dont_wait):
                                 aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
                             elif event["item_used"] in [ItemSlot.bomb_1, ItemSlot.bomb_2, ItemSlot.bomb_3]:
                                 aa = MagicAttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
-                            elif event["item_used"] in [ItemSlot.spell_1, ItemSlot.spell_2, ItemSlot.spell_3, ItemSlot.spell_4]:
+                            elif event["item_used"] in [ItemSlot.spell_1, ItemSlot.spell_2, ItemSlot.spell_3]:
                                 aa = MagicAttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
 
 

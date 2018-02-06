@@ -398,6 +398,72 @@ class SonicBlast(CombatItem):
                         level,
                         ItemType.sonic_blast)
 
+class MagicSword(CombatItem):
+    def init(self, level):
+        CombatItem.init(self,
+                        "Magic Sword",
+                        [
+                            150,
+                            300,
+                            450,
+                            600,
+                            750,
+                            900,
+                            1050,
+                            1200,
+                            1350,
+                            1500
+                        ],
+                        [
+                            DamageType.slashing
+                        ],
+                        level,
+                        ItemType.magic_sword)
+
+class SpearOfLight(CombatItem):
+    def init(self, level):
+        CombatItem.init(self,
+                        "Spear Of Light",
+                        [
+                            150,
+                            300,
+                            450,
+                            600,
+                            750,
+                            900,
+                            1050,
+                            1200,
+                            1350,
+                            1500
+                        ],
+                        [
+                            DamageType.piercing
+                        ],
+                        level,
+                        ItemType.spear_of_light)
+
+class RockSmash(CombatItem):
+    def init(self, level):
+        CombatItem.init(self,
+                        "Rock Smash",
+                        [
+                            150,
+                            300,
+                            450,
+                            600,
+                            750,
+                            900,
+                            1050,
+                            1200,
+                            1350,
+                            1500
+                        ],
+                        [
+                            DamageType.bludgeoning
+                        ],
+                        level,
+                        ItemType.rock_smash)
+
 
 #########
 # Bombs #

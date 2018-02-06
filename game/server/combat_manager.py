@@ -550,11 +550,6 @@ class CombatManager:
                         item_slot = ItemSlot.spell_3
 
 
-                    elif unit.combat_action == CombatAction.secondary_4 and unit.spell_4 is not None:
-                        self.print("{} uses {}".format(unit.name, unit.spell_3.name))
-                        weapon = unit.spell_4
-                        item_slot = ItemSlot.spell_4
-
 
             # calculate normal combat damage
             if weapon is not None:

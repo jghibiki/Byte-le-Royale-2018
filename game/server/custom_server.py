@@ -698,17 +698,6 @@ class CustomServer(ServerControl):
                                     "slot": ItemSlot.spell_3
                                 })
 
-                            elif item_slot == 4:
-                                self.gold -= item_cost
-                                item = get_item(item_type, item_level)
-                                unit.spell_4 = item
-
-                                self.turn_log["events"].append({
-                                    "type": Event.purchase_item,
-                                    "gold": self.gold,
-                                    "unit": unit.id,
-                                    "slot": ItemSlot.spell_4
-                                })
 
                     if item is not None:
                         print("{0} purchased {1}".format(unit.name, item.name))

@@ -210,7 +210,6 @@ class Magus(Unit):
         self.spell_1 = None
         self.spell_2 = None
         self.spell_3 = None
-        self.spell_4 = None
 
     def to_dict(self):
         data = Unit.to_dict(self)
@@ -230,10 +229,6 @@ class Magus(Unit):
         else:
             data["spell_3"] = self.spell_3.to_dict()
 
-        if self.spell_4 is None:
-            data["spell_4"] = None
-        else:
-            data["spell_4"] = self.spell_4.to_dict()
 
         return data
 
@@ -255,10 +250,6 @@ class Magus(Unit):
         else:
             self.spell_3 = None
 
-        if data["spell_4"] is not None:
-            self.spell_4 = load_item(data["spell_4"]["item_type"], data["spell_4"])
-        else:
-            self.spell_4 = None
 
     def use_spell_1(self):
         self.combat_action = CombatAction.secondary_1
@@ -268,9 +259,6 @@ class Magus(Unit):
 
     def use_spell_3(self):
         self.combat_action = CombatAction.secondary_3
-
-    def use_spell_4(self):
-        self.combat_action = CombatAction.secondary_4
 
     def elemental_burst(self):
         self.combat_action = CombatAction.special_ability
@@ -293,7 +281,6 @@ class Wizard(Unit):
         self.spell_1 = None
         self.spell_2 = None
         self.spell_3 = None
-        self.spell_4 = None
 
     def to_dict(self):
         data = Unit.to_dict(self)
@@ -313,10 +300,6 @@ class Wizard(Unit):
         else:
             data["spell_3"] = self.spell_3.to_dict()
 
-        if self.spell_4 is None:
-            data["spell_4"] = None
-        else:
-            data["spell_4"] = self.spell_4.to_dict()
 
         return data
 
@@ -338,10 +321,6 @@ class Wizard(Unit):
         else:
             self.spell_3 = None
 
-        if data["spell_4"] is not None:
-            self.spell_4 = load_item(data["spell_4"]["item_type"], data["spell_4"])
-        else:
-            self.spell_4 = None
 
     def use_spell_1(self):
         self.combat_action = CombatAction.secondary_1
@@ -352,8 +331,6 @@ class Wizard(Unit):
     def use_spell_3(self):
         self.combat_action = CombatAction.secondary_3
 
-    def use_spell_4(self):
-        self.combat_action = CombatAction.secondary_4
 
     def invigorate(self, target):
         self.combat_action = CombatAction.special_ability
@@ -377,7 +354,6 @@ class Sorcerer(Unit):
         self.spell_1 = None
         self.spell_2 = None
         self.spell_3 = None
-        self.spell_4 = None
 
     def to_dict(self):
         data = Unit.to_dict(self)
@@ -396,11 +372,6 @@ class Sorcerer(Unit):
             data["spell_3"] = None
         else:
             data["spell_3"] = self.spell_3.to_dict()
-
-        if self.spell_4 is None:
-            data["spell_4"] = None
-        else:
-            data["spell_4"] = self.spell_4.to_dict()
 
         return data
 
@@ -422,10 +393,6 @@ class Sorcerer(Unit):
         else:
             self.spell_3 = None
 
-        if data["spell_4"] is not None:
-            self.spell_4 = load_item(data["spell_4"]["item_type"], data["spell_4"])
-        else:
-            self.spell_4 = None
 
     def use_spell_1(self):
         self.combat_action = CombatAction.secondary_1
@@ -436,8 +403,6 @@ class Sorcerer(Unit):
     def use_spell_3(self):
         self.combat_action = CombatAction.secondary_3
 
-    def use_spell_4(self):
-        self.combat_action = CombatAction.secondary_4
 
     def illusion(self, target_1, target_2):
         self.combat_action = CombatAction.special_ability

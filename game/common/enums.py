@@ -36,8 +36,6 @@ class ItemSlot:
     spell_3 = 3
     bomb_3 = 3
 
-    spell_4 = 4
-
     armor = 5
 
 class CombatAction:
@@ -99,22 +97,25 @@ class ItemType:
     thunderbolt = 10
     ice_spike = 11
     sonic_blast = 12
+    magic_sword = 13
+    spear_of_light = 14
+    rock_smash = 15
 
-    rope = 13
+    rope = 16
 
-    fire_bomb = 14
-    frost_bomb = 15
-    shock_bomb = 16
-    acid_bomb = 17
-    flash_bomb = 18
-    frost_bomb = 19
-    shock_bomb = 20
-    acid_bomb = 21
-    flash_bomb = 22
-    spike_bomb = 23
-    concussion_bomb = 24
+    fire_bomb = 17
+    frost_bomb = 18
+    shock_bomb = 19
+    acid_bomb = 20
+    flash_bomb = 21
+    frost_bomb = 22
+    shock_bomb = 23
+    acid_bomb = 24
+    flash_bomb = 25
+    spike_bomb = 26
+    concussion_bomb = 27
 
-    armor = 25
+    armor = 28
 
 class ItemClass:
     melee = 1
