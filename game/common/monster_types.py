@@ -41,16 +41,12 @@ class Wisp(Monster):
         Monster.init(self, "Wisp", MonsterType.wisp, level)
 
         # config values
-        damage = 250
-        damage_scale = 0.5
-        health = 100000
-        health_scale = 0.25
         gold = 200
         gold_scale = 0.75
 
-        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
+        self.health = math.floor(  ((117500*level)/9) + (94000/9) )
         self.current_health = self.health
-        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.damage = math.floor( ((320 * level)/9) + (1120/9) )
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
@@ -105,16 +101,12 @@ class Beholder(Monster):
         Monster.init(self, "Beholder", MonsterType.beholder, level)
 
         # config values
-        damage = 250
-        damage_scale = 0.5
-        health = 100000
-        health_scale = 0.25
         gold = 200
         gold_scale = 0.75
 
-        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
+        self.health = math.floor( ((125000*level)/9)+(100000/9) )
         self.current_health = self.health
-        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.damage = math.floor( (39 * level) +150 )
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
@@ -149,16 +141,12 @@ class Dragon(Monster):
         Monster.init(self, "Dragon", MonsterType.dragon, level)
 
         # config values
-        damage = 250
-        damage_scale = 0.5
-        health = 100000
-        health_scale = 0.25
         gold = 200
         gold_scale = 0.75
 
-        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
+        self.health = math.floor( ((5000 * level)/3) + (40000/3) )
         self.current_health = self.health
-        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.damage = math.floor( ((370 * level)/9) + (1295/9) )
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
@@ -205,16 +193,12 @@ class Minotaur(Monster):
         Monster.init(self, "Minotaur", MonsterType.minotaur, level)
 
         # config values
-        damage = 250
-        damage_scale = 0.5
-        health = 100000
-        health_scale = 0.25
         gold = 200
         gold_scale = 0.75
 
-        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
+        self.health = math.floor( ((140000*level)/9) + (112000/9) )
         self.current_health = self.health
-        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.damage = math.floor( ((400 * level)/9) + (1400/9) )
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
@@ -264,16 +248,12 @@ class Slime(Monster):
         Monster.init(self, "Slime", MonsterType.slime, level)
 
         # config values
-        damage = 175
-        damage_scale = 0.55
-        health = 100000
-        health_scale = 0.35
         gold = 235
         gold_scale = 0.45
 
-        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
+        self.health = math.floor( ((110000*level)/9) + (88000/9) )
         self.current_health = self.health
-        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.damage = math.floor( ((100 * level)/3) + (350/3) )
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
@@ -322,16 +302,12 @@ class Wraith(Monster):
         Monster.init(self, "Wraith", MonsterType.wraith, level)
 
         # config values
-        damage = 150
-        damage_scale = 0.5
-        health = 100000
-        health_scale = 0.25
         gold = 200
         gold_scale = 0.75
 
-        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
+        self.damage = math.floor( ((110 * level)/3) + (385/3) )
+        self.health = math.floor( ((130000*level)/9) + (104000/9) )
         self.current_health = self.health
-        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
@@ -382,16 +358,12 @@ class Vampire(Monster):
         Monster.init(self, "Vampire", MonsterType.vampire, level)
 
         # config values
-        damage = 250
-        damage_scale = 0.5
-        health = 100000
-        health_scale = 0.25
         gold = 200
         gold_scale = 0.75
 
-        self.health = math.floor(health * ((health_scale * (level-1)) + 1))
+        self.health = math.floor( ((125000*level)/9)+(100000/9) )
         self.current_health = self.health
-        self.damage = math.floor(damage * ((damage_scale * (level-1)) + 1))
+        self.damage = math.floor( ((350 * level)/9) + (1225/9) )
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
 
         self.weaknesses = [
@@ -422,6 +394,7 @@ class Vampire(Monster):
     def attack(self, targets):
 
         for group in [self.attack_state["group_1"], self.attack_state["group_2"]]:
+            self.attack_state["index"] = 0
             while True:
                 unit_class_to_target = group[self.attack_state["index"]]
 
