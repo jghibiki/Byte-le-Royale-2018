@@ -96,7 +96,7 @@ def party_killed_screen(global_surf, fps_clock, data, dont_wait):
             sys.exit()
 
 
-def unit_text(font, upper_left, unit):
+def unit_text(font, upper_left, unit, item_uses):
 
     text_parts = []
 
@@ -105,10 +105,15 @@ def unit_text(font, upper_left, unit):
         unit.primary_weapon.name
     )
 
+    if item_uses == ItemSlot.primary:
+        item_color = (255, 0, 0)
+    else:
+        item_color = (255, 255, 255)
+
     primary_weapon_text = ptext.draw(
         text,
         (0,0),
-        color=(255, 255, 255),
+        color=item_color,
         owidth=2.0,
         ocolor=(0, 0, 0),
         fontsize=16,
@@ -152,7 +157,13 @@ def unit_text(font, upper_left, unit):
         pass
 
     elif unit.unit_class is UnitClass.rogue:
+
         if unit.bomb_1 is not None:
+
+            if item_uses == ItemSlot.bomb_1:
+                item_color = (255, 0, 0)
+            else:
+                item_color = (255, 255, 255)
 
             text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_1.level,
@@ -163,7 +174,7 @@ def unit_text(font, upper_left, unit):
             bomb_1_text = ptext.draw(
                 text,
                 (0,0),
-                color=(255, 255, 255),
+                color=item_color,
                 owidth=2.0,
                 ocolor=(0, 0, 0),
                 fontsize=16,
@@ -178,6 +189,11 @@ def unit_text(font, upper_left, unit):
             ])
 
         if unit.bomb_2 is not None:
+            if item_uses == ItemSlot.bomb_2:
+                item_color = (255, 0, 0)
+            else:
+                item_color = (255, 255, 255)
+
             text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_2.level,
                 unit.bomb_2.name,
@@ -187,7 +203,7 @@ def unit_text(font, upper_left, unit):
             bomb_2_text = ptext.draw(
                 text,
                 (0,0),
-                color=(255, 255, 255),
+                color=item_color,
                 owidth=2.0,
                 ocolor=(0, 0, 0),
                 fontsize=16,
@@ -202,6 +218,11 @@ def unit_text(font, upper_left, unit):
             ])
 
         if unit.bomb_3 is not None:
+            if item_uses == ItemSlot.bomb_3:
+                item_color = (255, 0, 0)
+            else:
+                item_color = (255, 255, 255)
+
             text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_3.level,
                 unit.bomb_3.name,
@@ -211,7 +232,7 @@ def unit_text(font, upper_left, unit):
             bomb_3_text = ptext.draw(
                 text,
                 (0,0),
-                color=(255, 255, 255),
+                color=item_color,
                 owidth=2.0,
                 ocolor=(0, 0, 0),
                 fontsize=16,
@@ -227,6 +248,12 @@ def unit_text(font, upper_left, unit):
 
     elif unit.unit_class is UnitClass.alchemist:
         if unit.bomb_1 is not None:
+
+            if item_uses == ItemSlot.bomb_1:
+                item_color = (255, 0, 0)
+            else:
+                item_color = (255, 255, 255)
+
             text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_1.level,
                 unit.bomb_1.name,
@@ -236,7 +263,7 @@ def unit_text(font, upper_left, unit):
             bomb_1_text = ptext.draw(
                 text,
                 (0,0),
-                color=(255, 255, 255),
+                color=item_color,
                 owidth=2.0,
                 ocolor=(0, 0, 0),
                 fontsize=16,
@@ -251,6 +278,12 @@ def unit_text(font, upper_left, unit):
             ])
 
         if unit.bomb_2 is not None:
+
+            if item_uses == ItemSlot.bomb_2:
+                item_color = (255, 0, 0)
+            else:
+                item_color = (255, 255, 255)
+
             text = "Lvl{0} {1} x {2}".format(
                 unit.bomb_2.level,
                 unit.bomb_2.name,
@@ -260,7 +293,7 @@ def unit_text(font, upper_left, unit):
             bomb_2_text = ptext.draw(
                 text,
                 (0,0),
-                color=(255, 255, 255),
+                color=item_color,
                 owidth=2.0,
                 ocolor=(0, 0, 0),
                 fontsize=16,
@@ -277,6 +310,11 @@ def unit_text(font, upper_left, unit):
     elif unit.unit_class in [UnitClass.magus, UnitClass.sorcerer, UnitClass.wizard]:
         if unit.spell_1 is not None:
 
+            if item_uses == ItemSlot.spell_1:
+                item_color = (255, 0, 0)
+            else:
+                item_color = (255, 255, 255)
+
             text = "Lvl{0} {1}".format(
                 unit.spell_1.level,
                 unit.spell_1.name,
@@ -285,7 +323,7 @@ def unit_text(font, upper_left, unit):
             spell_1_text = ptext.draw(
                 text,
                 (0,0),
-                color=(255, 255, 255),
+                color=item_color,
                 owidth=2.0,
                 ocolor=(0, 0, 0),
                 fontsize=16,
@@ -300,6 +338,12 @@ def unit_text(font, upper_left, unit):
             ])
 
         if unit.spell_2 is not None:
+
+            if item_uses == ItemSlot.spell_2:
+                item_color = (255, 0, 0)
+            else:
+                item_color = (255, 255, 255)
+
             text = "Lvl{0} {1}".format(
                 unit.spell_2.level,
                 unit.spell_2.name
@@ -308,7 +352,7 @@ def unit_text(font, upper_left, unit):
             spell_2_text = ptext.draw(
                 text,
                 (0,0),
-                color=(255, 255, 255),
+                color=item_color,
                 owidth=2.0,
                 ocolor=(0, 0, 0),
                 fontsize=16,
@@ -323,6 +367,12 @@ def unit_text(font, upper_left, unit):
             ])
 
         if unit.spell_3 is not None:
+
+            if item_uses == ItemSlot.spell_3:
+                item_color = (255, 0, 0)
+            else:
+                item_color = (255, 255, 255)
+
             text = "Lvl{0} {1}".format(
                 unit.spell_3.level,
                 unit.spell_3.name
@@ -331,7 +381,7 @@ def unit_text(font, upper_left, unit):
             spell_3_text = ptext.draw(
                 text,
                 (0,0),
-                color=(255, 255, 255),
+                color=item_color,
                 owidth=2.0,
                 ocolor=(0, 0, 0),
                 fontsize=16,
@@ -344,7 +394,6 @@ def unit_text(font, upper_left, unit):
                 spell_3_text,
                 spell_3_rect
             ])
-
 
 
     return text_parts
@@ -478,6 +527,8 @@ def start(verbose, log_path, gamma, dont_wait):
 
     while True:
 
+        unit_item_uses = {}
+
         if not pause:
             # per loop flags
             draw_gold = False
@@ -541,6 +592,8 @@ def start(verbose, log_path, gamma, dont_wait):
 
                             fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
                             floating_number_group.add(fn)
+
+                            unit_item_uses[event["unit"]] = event["item_used"]
 
                             if event["item_used"] == ItemSlot.primary:
                                 aa = AttackAnimation(576 + random.randint(-50, 70), 200 + random.randint(-70, 50), color)
@@ -894,7 +947,11 @@ def start(verbose, log_path, gamma, dont_wait):
             unit_item_text_pos = [(20, 584), (332, 584), (644, 584), (956, 584)]
             # render unit item text
             for unit, pos in zip(units, unit_item_text_pos):
-                unit_item_text +=  unit_text(small_font, pos, unit)
+                if unit.id in unit_item_uses:
+                    item_uses = unit_item_uses[unit.id]
+                else:
+                    item_uses = None
+                unit_item_text +=  unit_text(small_font, pos, unit, item_uses)
 
             # render gold text if changed
             if draw_gold or first_loop:
