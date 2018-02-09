@@ -451,12 +451,77 @@ class CustomServer(ServerControl):
             "levels_cleared": self.towns-1
         })
 
+        unit_loadouts = []
+
+        for unit in self.units:
+            unit_data = {}
+
+            if unit.unit_class == UnitClass.knight:
+                unit_data["class"] = "Knight"
+            elif unit.unit_class == UnitClass.pikeman:
+                unit_data["class"] = "Pikeman"
+            elif unit.unit_class == UnitClass.brawler:
+                unit_data["class"] = "Brawler"
+            elif unit.unit_class == UnitClass.rogue:
+                unit_data["class"] = "Rogue"
+            elif unit.unit_class == UnitClass.magus:
+                unit_data["class"] = "Magus"
+            elif unit.unit_class == UnitClass.wizard:
+                unit_data["class"] = "Wizard"
+            elif unit.unit_class == UnitClass.sorcerer:
+                unit_data["class"] = "Sorcerer"
+            elif unit.unit_class == UnitClass.alchemist:
+                unit_data["class"] = "Alchemist"
+
+            unit_data["primary_name"] = unit.primary_weapon.name
+            unit_data["primary_level"] = unit.primary_weapon.level
+
+            if unit.unit_class in [UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer]:
+                if unit.spell_1 is not None:
+                    unit_data["spell_1_name"] = unit.spell_1.name
+                    unit_data["spell_1_level"] = unit.spell_1.level
+
+                if unit.spell_2 is not None:
+                    unit_data["spell_2_name"] = unit.spell_2.name
+                    unit_data["spell_2_level"] = unit.spell_2.level
+
+                if unit.spell_3 is not None:
+                    unit_data["spell_3_name"] = unit.spell_3.name
+                    unit_data["spell_3_level"] = unit.spell_3.level
+
+            elif unit.unit_class == UnitClass.rogue:
+                if unit.bomb_1 is not None:
+                    unit_data["bomb_1_name"] = unit.bomb_1.name
+                    unit_data["bomb_1_level"] = unit.bomb_1.level
+
+                if unit.bomb_2 is not None:
+                    unit_data["bomb_2_name"] = unit.bomb_2.name
+                    unit_data["bomb_2_level"] = unit.bomb_2.level
+
+                if unit.bomb_3 is not None:
+                    unit_data["bomb_3_name"] = unit.bomb_3.name
+                    unit_data["bomb_3_level"] = unit.bomb_3.level
+
+            elif unit.unit_class == UnitClass.alchemist:
+                if unit.bomb_1 is not None:
+                    unit_data["bomb_1_name"] = unit.bomb_1.name
+                    unit_data["bomb_1_level"] = unit.bomb_1.level
+
+                if unit.bomb_2 is not None:
+                    unit_data["bomb_2_name"] = unit.bomb_2.name
+                    unit_data["bomb_2_level"] = unit.bomb_2.level
+
+            unit_loadouts.append(unit_data)
+
+
+
         with open("result.json", "w") as f:
             json.dump({
                 "trophies": self.trophies,
                 "gold": self.gold,
                 "total_gold": self.total_gold,
-                "levels_cleared": self.towns-1
+                "levels_cleared": self.towns-1,
+                "unit_loadouts": unit_loadouts
             }, f)
 
         if self.server_loop:
