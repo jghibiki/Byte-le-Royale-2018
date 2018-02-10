@@ -107,7 +107,7 @@ Armor replaces the unit's current maximum health.
 ```
 
 ### Unique Ability
-Target Weakness: take a turn to find critical points, then next turn deal 2.5 * damage.
+Target Weakness: takes a turn to find critical points, then next turn deal 2.5 * damage.
 
 ### Unit Properties
 - ```Pikeman.primary_weapon``` The type of primary weapon the unit is carrying.
