@@ -40,14 +40,10 @@ class Wisp(Monster):
     def init(self, level):
         Monster.init(self, "Wisp", MonsterType.wisp, level)
 
-        # config values
-        gold = 200
-        gold_scale = 0.75
-
-        self.health = math.floor(  ((117500*level)/9) + (94000/9) )
+        self.health = math.floor( ((117500*level)/9) + (94000/9) )
         self.current_health = self.health
         self.damage = math.floor( ((320 * level)/9) + (1120/9) )
-        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
+        self.gold = math.floor( ((6568 * level)/9) - (4768/9) )
 
         self.weaknesses = [
             DamageType.cold,
@@ -92,22 +88,15 @@ class Wisp(Monster):
         raise Exception("No valid targets: ", targets)
 
 
-
-
-
-
 class Beholder(Monster):
     def init(self, level):
         Monster.init(self, "Beholder", MonsterType.beholder, level)
 
-        # config values
-        gold = 200
-        gold_scale = 0.75
 
         self.health = math.floor( ((125000*level)/9)+(100000/9) )
         self.current_health = self.health
         self.damage = math.floor( (39 * level) +150 )
-        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
+        self.gold = math.floor( (850 * level) - (500) )
 
         self.weaknesses = [
             DamageType.acid,
@@ -140,14 +129,11 @@ class Dragon(Monster):
     def init(self, level):
         Monster.init(self, "Dragon", MonsterType.dragon, level)
 
-        # config values
-        gold = 200
-        gold_scale = 0.75
 
         self.health = math.floor( ((50000 * level)/3) + (40000/3) )
         self.current_health = self.health
         self.damage = math.floor( ((370 * level)/9) + (1295/9) )
-        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
+        self.gold = math.floor( ((9535*level)/9) - (5440/9) )
 
         self.weaknesses = [
             DamageType.acid,
@@ -192,14 +178,10 @@ class Minotaur(Monster):
     def init(self, level):
         Monster.init(self, "Minotaur", MonsterType.minotaur, level)
 
-        # config values
-        gold = 200
-        gold_scale = 0.75
-
         self.health = math.floor( ((140000*level)/9) + (112000/9) )
         self.current_health = self.health
         self.damage = math.floor( ((400 * level)/9) + (1400/9) )
-        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
+        self.gold = math.floor( ((8500*level)/9) - (4900/9) )
 
         self.weaknesses = [
             DamageType.cold,
@@ -243,18 +225,15 @@ class Minotaur(Monster):
 
         raise Exception("No valid targets: ", targets)
 
+
 class Slime(Monster):
     def init(self, level):
         Monster.init(self, "Slime", MonsterType.slime, level)
 
-        # config values
-        gold = 235
-        gold_scale = 0.45
-
         self.health = math.floor( ((110000*level)/9) + (88000/9) )
         self.current_health = self.health
         self.damage = math.floor( ((100 * level)/3) + (350/3) )
-        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
+        self.gold = math.floor( ((5740*level)/3) - (3940/9) )
 
         self.weaknesses = [
             DamageType.electricity,
@@ -296,19 +275,14 @@ class Slime(Monster):
         raise Exception("No valid targets: ", targets)
 
 
-
 class Wraith(Monster):
     def init(self, level):
         Monster.init(self, "Wraith", MonsterType.wraith, level)
 
-        # config values
-        gold = 200
-        gold_scale = 0.75
-
         self.damage = math.floor( ((110 * level)/3) + (385/3) )
         self.health = math.floor( ((130000*level)/9) + (104000/9) )
         self.current_health = self.health
-        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
+        self.gold = math.floor( ((7048*level)/9) - (4798/9) )
 
         self.weaknesses = [
             DamageType.acid,
@@ -353,18 +327,15 @@ class Wraith(Monster):
 
         raise Exception("No valid targets: ", targets)
 
+
 class Vampire(Monster):
     def init(self, level):
         Monster.init(self, "Vampire", MonsterType.vampire, level)
 
-        # config values
-        gold = 200
-        gold_scale = 0.75
-
         self.health = math.floor( ((125000*level)/9)+(100000/9) )
         self.current_health = self.health
         self.damage = math.floor( ((350 * level)/9) + (1225/9) )
-        self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
+        self.gold = math.floor( ((2474*level)/3) - (1574/3) )
 
         self.weaknesses = [
             DamageType.fire,
