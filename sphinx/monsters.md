@@ -136,29 +136,30 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 +-------+--------+--------+------------+
 | Level | Health | Damage | Gold Value |
 +=======+========+========+============+
-| 1     | 15000  | 185    | 200        |
+| 1     | 30000  | 185    | 200        |
 +-------+--------+--------+------------+
-| 2     | 16666  | 226    | 350        |
+| 2     | 46666  | 226    | 350        |
 +-------+--------+--------+------------+
-| 3     | 18333  | 267    | 500        |
+| 3     | 63333  | 267    | 500        |
 +-------+--------+--------+------------+
-| 4     | 20000  | 308    | 650        |
+| 4     | 80000  | 308    | 650        |
 +-------+--------+--------+------------+
-| 5     | 21666  | 349    | 800        |
+| 5     | 96666  | 349    | 800        |
 +-------+--------+--------+------------+
-| 6     | 23333  | 390    | 950        |
+| 6     | 113333 | 390    | 950        |
 +-------+--------+--------+------------+
-| 7     | 25000  | 431    | 1100       |
+| 7     | 130000 | 431    | 1100       |
 +-------+--------+--------+------------+
-| 8     | 26666  | 472    | 1250       |
+| 8     | 146666 | 472    | 1250       |
 +-------+--------+--------+------------+
-| 9     | 28333  | 513    | 1400       |
+| 9     | 163333 | 513    | 1400       |
 +-------+--------+--------+------------+
-| 10    | 30000  | 555    | 1550       |
+| 10    | 180000 | 555    | 1550       |
 +-------+--------+--------+------------+
 ```
 
 #### Attack Logic
+Dragons hate those arrogant, lazy knights.
 
 ### Minotaur
 
@@ -197,6 +198,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 ```
 
 #### Attack Logic
+I'd rather not get physical this time, but I'll take a swing at it!
 
 ### Slime
 
@@ -235,6 +237,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 ```
 
 #### Attack Logic
+*splosh* *slorp* *slurmp* *sound of gelatin gelatinning*
 
 ### Vampire
 ![](_static/vampire.png)
@@ -273,8 +276,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 ```
 
 #### Attack Logic
-Attacks a random player unit.
-
+What is a man? *tosses wine glass aside* A miserable pile of armor and nothing more! But enough talk! Have at you!
 
 ### Wraith
 
@@ -314,3 +316,4 @@ Attacks a random player unit.
 ```
 
 #### Attack Logic
+Allow me to spell out your doom for you loud and clear!
