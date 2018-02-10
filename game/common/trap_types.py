@@ -55,7 +55,7 @@ class FallingCeiling(Trap):
                   TrapStat.will,
                   TrapPassType.group_pass,
                   TrapDamageType.all,
-                  3, # damage interval
+                  6, # damage interval
                   999999, # damage
                   100) # required effort
 
