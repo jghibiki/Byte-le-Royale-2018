@@ -73,16 +73,35 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-----------------+
 | **Effort Stat**     | Willpower       |
 +---------------------+-----------------+
-| **Effort Required** | 30              |
+| **Effort Required** | 50              |
 +---------------------+-----------------+
 | **Pass Type**       | Individual Pass |
 +---------------------+-----------------+
-| **Damage Type**     | Random Unit     |
+| **Damage Type**     | Two Random Units|
 +---------------------+-----------------+
-| **Frequency/Timer** | Every 1 turns   |
+| **Frequency/Timer** | Every 3 turns   |
 +---------------------+-----------------+
-| **Damage Amount**   | 100             |
+| **Damage Amount**   | 200             |
 +---------------------+-----------------+
+```
+
+### Eldritch Barrier
+**Description:** An anomalous barrier, formed from the maddening truths of reality. 
+
+```eval_rst
++---------------------+-------------------------------+
+| **Effort Stat**     | Focus                         |
++---------------------+-------------------------------+
+| **Effort Required** | 50                            |
++---------------------+-------------------------------+
+| **Pass Type**       | Individual Pass               |
++---------------------+-------------------------------+
+| **Damage Type**     | Random Unit                   |
++---------------------+-------------------------------+
+| **Frequency/Timer** | Every 2 turns                 |
++---------------------+-------------------------------+
+| **Damage Amount**   | 150                           |
++---------------------+-------------------------------+
 ```
 
 ### Falling Ceiling
@@ -92,13 +111,13 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-----------------+
 | **Effort Stat**     | Willpower       |
 +---------------------+-----------------+
-| **Effort Required** | 30              |
+| **Effort Required** | 100             |
 +---------------------+-----------------+
 | **Pass Type**       | Group Pass      |
 +---------------------+-----------------+
 | **Damage Type**     | All Units       |
 +---------------------+-----------------+
-| **Frequency/Timer** | 3 Turns         |
+| **Frequency/Timer** | Every 3 Turns   |
 +---------------------+-----------------+
 | **Damage Amount**   | 99999999        |
 +---------------------+-----------------+
@@ -112,13 +131,13 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Effort Stat**     | Focus                         |
 +---------------------+-------------------------------+
-| **Effort Required** | 30                            |
+| **Effort Required** | 150                           |
 +---------------------+-------------------------------+
 | **Pass Type**       | Group Pass                    |
 +---------------------+-------------------------------+
 | **Damage Type**     | Unit with lowest health       |
 +---------------------+-------------------------------+
-| **Frequency/Timer** | 2 Turns                       |
+| **Frequency/Timer** | 1 Turns                       |
 +---------------------+-------------------------------+
 | **Damage Amount**   | 100                           |
 +---------------------+-------------------------------+
@@ -131,15 +150,15 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Effort Stat**     | Willpower                     |
 +---------------------+-------------------------------+
-| **Effort Required** | 30                            |
+| **Effort Required** | 50                            |
 +---------------------+-------------------------------+
 | **Pass Type**       | Group Pass on One Success     |
 +---------------------+-------------------------------+
 | **Damage Type**     | Random Unit                   |
 +---------------------+-------------------------------+
-| **Frequency/Timer** | Every Turn                    |
+| **Frequency/Timer** | Every 4 turns                 |
 +---------------------+-------------------------------+
-| **Damage Amount**   | 250                           |
+| **Damage Amount**   | 200                           |
 +---------------------+-------------------------------+
 ```
 
@@ -151,15 +170,15 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Effort Stat**     | Focus                         |
 +---------------------+-------------------------------+
-| **Effort Required** | 30                            |
+| **Effort Required** | 100                            |
 +---------------------+-------------------------------+
 | **Pass Type**       | Group Pass on One Success     |
 +---------------------+-------------------------------+
 | **Damage Type**     | Random Unit                   |
 +---------------------+-------------------------------+
-| **Frequency/Timer** | Every Turn                    |
+| **Frequency/Timer** | Every 2 turns                 |
 +---------------------+-------------------------------+
-| **Damage Amount**   | 250                           |
+| **Damage Amount**   | 100                           |
 +---------------------+-------------------------------+
 ```
 

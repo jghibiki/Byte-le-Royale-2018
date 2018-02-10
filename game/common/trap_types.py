@@ -42,8 +42,8 @@ class SpikeTrap(Trap):
                   TrapStat.will,
                   TrapPassType.individual_pass,
                   TrapDamageType.random_two,
-                  1, # damage interval
-                  100, # damage
+                  3, # damage interval
+                  200, # damage
                   50) # required effort
 
 class FallingCeiling(Trap):
@@ -56,7 +56,7 @@ class FallingCeiling(Trap):
                   TrapPassType.group_pass,
                   TrapDamageType.all,
                   3, # damage interval
-                  100, # damage
+                  999999, # damage
                   100) # required effort
 
 
@@ -69,7 +69,7 @@ class PuzzleBox(Trap):
                   TrapStat.focus,
                   TrapPassType.group_pass,
                   TrapDamageType.lowest_health,
-                  2, # damage interval
+                  1, # damage interval
                   100, # damage
                   150) # required effort
 
@@ -83,8 +83,8 @@ class PendulumBridge(Trap):
                   TrapStat.willpower,
                   TrapPassType.group_pass_on_first_success,
                   TrapDamageType.random_one,
-                  1, # damage interval
-                  100, # damage
+                  4, # damage interval
+                  200, # damage
                   50) # required effort
 
 
@@ -98,9 +98,9 @@ class RiddlesOfTheSphinx(Trap):
                   TrapStat.focus,
                   TrapPassType.group_pass_on_first_success,
                   TrapDamageType.random_one,
-                  1, # damage interval
+                  2, # damage interval
                   100, # damage
-                  50) # required effort
+                  100) # required effort
 
 
 class EldritchBarrier(Trap):
@@ -110,8 +110,8 @@ class EldritchBarrier(Trap):
                   "Eldritch Barrier",
                   level,
                   TrapStat.focus,
-                  TrapPassType.group_pass_on_first_success,
+                  TrapPassType.individual_pass,
                   TrapDamageType.random_one,
-                  1, # damage interval
-                  100, # damage
+                  2, # damage interval
+                  150, # damage
                   50) # required effort
