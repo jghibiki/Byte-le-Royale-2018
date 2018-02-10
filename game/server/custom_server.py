@@ -425,6 +425,8 @@ class CustomServer(ServerControl):
         if self.towns >= 9:
             shop_items += list(towns[9])
 
+        return shop_items
+
     def get_unit_by_id(self, id):
         for unit in self.units:
             if unit.id == id:

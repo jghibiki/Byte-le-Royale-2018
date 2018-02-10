@@ -1027,7 +1027,7 @@ class EldritchBarrierTrap(TrapSprite):
     def __init__(self):
         TrapSprite.__init__(self, "game/visualizer/assets/eldritch_trap.png", [
             [ 0,    0 ]
-        ], 400, 65, 480, 480, 3, scale=1)
+        ], 512, 65, 128, 128, 10, scale=2)
 
 class PendulumnBridgeTrap(TrapSprite):
 

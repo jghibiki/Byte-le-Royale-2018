@@ -23,7 +23,7 @@ from game.utils.network_visualizer import visualize
 #  \ /
 #   i
 
-LEVELS = 15
+LEVELS = 20
 
 
 def random_room_type(self):

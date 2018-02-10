@@ -21,7 +21,7 @@ class CustomClient(UserClient):
         return [
                 {
                     "name": "Martin",
-                    "class": UnitClass.wizard
+                    "class": UnitClass.knight
                 },
                 {
                     "name": "Steve",
@@ -57,7 +57,7 @@ class CustomClient(UserClient):
         elif store.get_town_number() is 1:
             unit = self.get_unit("thomas", units)
             if unit is not None:
-                store.purchase(unit, ItemType.armor, 2)
+                store.purchase(unit, ItemType.armor, "pie")
                 store.purchase(unit, ItemType.fire_bomb, 2, item_slot=2)
                 store.purchase(unit, ItemType.fire_bomb, 2, item_slot=2)
 
@@ -65,7 +65,7 @@ class CustomClient(UserClient):
             if unit is not None:
                 store.purchase(unit, ItemType.sword, 2)
 
-        elif store.get_town_number() is 3:
+        elif store.get_town_number() is 2:
             unit = self.get_unit("thomas", units)
             if unit is not None:
                 store.purchase(unit, ItemType.armor, 3)

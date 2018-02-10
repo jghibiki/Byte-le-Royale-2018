@@ -96,8 +96,11 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#recommended-install-windows-linux">Recommended Install (Windows &amp; Linux)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-install">Manual Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running_the_game.html">Running The Game</a></li>
@@ -188,7 +191,7 @@
 <br></li>
 <li>Now we will clone the github repository. This copys the remote code repository to your local machine.<ol>
 <li>Fill in fields<ul>
-<li><strong><em>Git Repository URL:</em></strong> <code class="docutils literal"><span class="pre">https://github.com/jghibiki/Byt-le-Royale-2017-2018.git</span></code></li>
+<li><strong><em>Git Repository URL:</em></strong> <code class="docutils literal"><span class="pre">https://github.com/jghibiki/Byte-le-Royale-2018</span></code></li>
 <li><strong><em>Parent Directory:</em></strong> Use the <code class="docutils literal"><span class="pre">...</span></code> to select where you would like to download the code to.</li>
 <li><strong><em>Directory Name:</em></strong> <code class="docutils literal"><span class="pre">Byte-le</span> <span class="pre">Royale</span></code></li>
 </ul>
@@ -203,20 +206,28 @@
 <li>Click File -&gt; Settings</li>
 <li>In the settings window, click on the triangle next to <code class="docutils literal"><span class="pre">Project:</span> <span class="pre">Byte-le</span> <span class="pre">...</span></code> and then click <code class="docutils literal"><span class="pre">Project</span> <span class="pre">Interpreter</span></code>
 <br>
-<img src="_static/python_interpreter.png" style="width:400px"/>
-<br></li>
-<li>Click on the gear icon, then click on <code class="docutils literal"><span class="pre">Create</span> <span class="pre">Virtual</span> <span class="pre">Env</span></code>
 <br>
-<img src="_static/python_interpreter_gear.png" style="width:250px"/>
+<img src="_static/python_interpreter.png" style="width:900px"/>
 <br></li>
-<li>In the window that appears, fill in the following fields:<ul>
-<li><strong><em>Name:</em></strong> <code class="docutils literal"><span class="pre">.venv</span></code></li>
-<li>Click <code class="docutils literal"><span class="pre">Ok</span></code>
+<li>Click on the gear icon, then click on <code class="docutils literal"><span class="pre">Add</span> <span class="pre">Local</span></code>
 <br>
-<img src="_static/create_venv.png" style="width:400px"/>
+<img src="_static/python_interpreter_gear.png" style="width:500px"/>
+<br>
+<br>
+<img src="_static/gearPic.png" style="width:500px"/>
 <br></li>
-</ul>
+<li>In the window that appears, rename the <code class="docutils literal"><span class="pre">venv</span></code> directory to <code class="docutils literal"><span class="pre">.venv</span></code>. This will help prevent git from attempting to track changes to this python virtual environment.
+<br>
+<img src="_static/venvPic.png" style="width:800px"/>
+<br></li>
+</ol>
 </li>
+<li>Now that we have set up a virtual environment, we need to install the python libraries required for the game.<ol>
+<li>To do this, go to the file browser on the left, and open the <code class="docutils literal"><span class="pre">custom_client.py</span></code> file in the root of the repository. In the top right corner of the file you should see the following bar pop up after a few seconds.
+<img src="_static/installReqs.png" style="width:800px"/></li>
+<li>Click on install requirements, and click Ok/Install Requirements on the window that pops up.</li>
+<li>In the lower right corner you should see a progress bar pop up. When this bar reaches 100% the python requirements have been installed successfully.
+<img src="_static/installProgress.png" style="width:800px"/></li>
 </ol>
 </li>
 <li>Now that we have set up a virtual environment, we need to set the working directory for some helper scripts.<ol>
@@ -239,8 +250,10 @@
 <br></li>
 </ol>
 </div>
+<div class="section" id="manual-install">
+<span id="manual-install"></span><h2>Manual Install<a class="headerlink" href="#manual-install" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="windows">
-<span id="windows"></span><h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<span id="windows"></span><h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
 <p><strong><em>Note: This installation method is not recommended. The PyCharm installation will be much easier to use and provides the benefit of the PyCharm Debugger.</em></strong></p>
 <ol class="simple">
 <li>Install Python 3.6: Download Python 3.6 or newer from the <a class="reference external" href="https://royale.ndacm.org/~documentation/python.org">Python Official Website</a></li>
@@ -260,7 +273,7 @@
 </div>
 </div>
 <div class="section" id="linux">
-<span id="linux"></span><h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<span id="linux"></span><h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
 <p><strong><em>Note: This installation method is not recommended. The PyCharm installation will be much easier to use and provides the benefit of the PyCharm Debugger.</em></strong></p>
 <ol class="simple">
 <li>Install Python 3.6 via your distro’s package manager.</li>
@@ -274,6 +287,7 @@
 </ol>
 <div class="highlight-shell"><div class="highlight"><pre><span></span>pip install -r requirements.txt
 </pre></div>
+</div>
 </div>
 </div>
 </div>
