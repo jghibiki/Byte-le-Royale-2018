@@ -7,6 +7,7 @@
 
 * [Overview](overview.md)
 * [Running The Game](running_the_game.md)
+* [Choosing Your Path](choosing_your_path.md)
 * [Unit Classes](unit_classes.md)
 * [Traps](traps.md)
 * [Items](items.md)

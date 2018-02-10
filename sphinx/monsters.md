@@ -119,7 +119,7 @@ Attacking a monster using a weapon, spell, or bomb with a matching weakness will
 ```
 
 #### Attack Logic
-Beauty is in the 👁(U+1F441) of the Beholder, but to him, all are ugly. Quite frankly, even 👁(U+1F441) have no idea.
+Beauty is in the 👁 of the Beholder, but to him, all are ugly. Quite frankly, even 👁 have no idea.
 
 ### Dragon
 
