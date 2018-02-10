@@ -144,7 +144,7 @@ class Dragon(Monster):
         gold = 200
         gold_scale = 0.75
 
-        self.health = math.floor( ((5000 * level)/3) + (40000/3) )
+        self.health = math.floor( ((50000 * level)/3) + (40000/3) )
         self.current_health = self.health
         self.damage = math.floor( ((370 * level)/9) + (1295/9) )
         self.gold = math.floor(gold * ((gold_scale * (level-1)) + 1))
