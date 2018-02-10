@@ -476,6 +476,11 @@ class CustomServer(ServerControl):
             unit_data["primary_name"] = unit.primary_weapon.name
             unit_data["primary_level"] = unit.primary_weapon.level
 
+            if unit.armor is not None:
+                unit_data["armor_level"] = unit.armor.level
+            else:
+                unit_data["armor_level"] = None
+
             if unit.unit_class in [UnitClass.magus, UnitClass.wizard, UnitClass.sorcerer]:
                 if unit.spell_1 is not None:
                     unit_data["spell_1_name"] = unit.spell_1.name
