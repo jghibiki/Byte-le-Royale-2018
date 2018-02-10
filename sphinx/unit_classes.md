@@ -187,7 +187,7 @@ Armor replaces the unit's current maximum health.
 ```
 
 ### Unique Ability
-Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 2 times damage.
+Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 200% the Magus' primary weapon damage, plus an extra 25% per weakness hit.
 
 ### Unit Properties
 - ```Magus.primary_weapon``` The type of primary weapon the unit is carrying.

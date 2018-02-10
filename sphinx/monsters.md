@@ -29,7 +29,7 @@ Each monsters have a series of weaknesses. These weaknesses are found as a list 
 - ```DamageType.sonic```
 - ```DamageType.force```
 
-Attacking a monster using a weapon, spell, or bomb with a matching weakness will deal double damage to the monster.
+Attacking a monster using a weapon, spell, or bomb with a matching weakness will deal 25% extra damage per weakness to the monster.
 
 ## Monster Properties
 
