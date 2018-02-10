@@ -49,6 +49,8 @@ def get_item(item_type, level, unit_class=None, init=False):
         new_item = SpikeBomb()
     elif item_type == ItemType.concussion_bomb:
         new_item = ConcussionBomb()
+    elif item_type == ItemType.guided_bomb:
+        new_item = GuidedBomb()
 
     elif item_type == ItemType.armor:
         new_item = Armor()
@@ -106,6 +108,8 @@ def load_item(item_type, data, unit_class=None):
         new_item = SpikeBomb()
     elif item_type == ItemType.concussion_bomb:
         new_item = ConcussionBomb()
+    elif item_type == ItemType.guided_bomb:
+        new_item = GuidedBomb()
 
     # armor items
     elif item_type == ItemType.armor:
@@ -600,6 +604,29 @@ class SpikeBomb(CombatItem):
                         ],
                         level,
                         ItemType.spike_bomb)
+
+
+class GuidedBomb(CombatItem):
+    def init(self, level):
+        CombatItem.init(self,
+                        "Guided Bomb",
+                        [
+                            468,
+                            681,
+                            728,
+                            748,
+                            908,
+                            1244,
+                            1631,
+                            1897,
+                            1982,
+                            1991
+                        ],
+                        [
+                            DamageType.precision
+                        ],
+                        level,
+                        ItemType.guided_bomb)
 
 class ConcussionBomb(CombatItem):
     def init(self, level):

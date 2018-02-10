@@ -114,8 +114,9 @@ class ItemType:
     flash_bomb = 25
     spike_bomb = 26
     concussion_bomb = 27
+    guided_bomb = 28
 
-    armor = 28
+    armor = 29
 
 class ItemClass:
     melee = 1
