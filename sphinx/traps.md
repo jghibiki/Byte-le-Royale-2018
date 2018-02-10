@@ -170,7 +170,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Effort Stat**     | Focus                         |
 +---------------------+-------------------------------+
-| **Effort Required** | 100                            |
+| **Effort Required** | 100                           |
 +---------------------+-------------------------------+
 | **Pass Type**       | Group Pass on One Success     |
 +---------------------+-------------------------------+
