@@ -126,7 +126,7 @@ item_data = {
         10: { "cost": 8191 }
     },
     ItemType.fire_bomb: {
-        1: { "cost": 0 },
+        1: { "cost": 33 },
         2: { "cost": 244 },
         3: { "cost": 651 },
         4: { "cost": 1255 },
@@ -138,7 +138,7 @@ item_data = {
         10: { "cost": 9010 }
     },
     ItemType.frost_bomb: {
-        1: { "cost": 0 },
+        1: { "cost": 33 },
         2: { "cost": 244 },
         3: { "cost": 651 },
         4: { "cost": 1255 },
@@ -150,7 +150,7 @@ item_data = {
         10: { "cost": 9010 }
     },
     ItemType.shock_bomb: {
-        1: { "cost": 0 },
+        1: { "cost": 33 },
         2: { "cost": 244 },
         3: { "cost": 651 },
         4: { "cost": 1255 },
@@ -162,7 +162,7 @@ item_data = {
         10: { "cost": 9010 }
     },
     ItemType.acid_bomb: {
-        1: { "cost": 0 },
+        1: { "cost": 33 },
         2: { "cost": 244 },
         3: { "cost": 651 },
         4: { "cost": 1255 },
@@ -174,7 +174,7 @@ item_data = {
         10: { "cost": 9010 }
     },
     ItemType.flash_bomb: {
-        1: { "cost": 0 },
+        1: { "cost": 33 },
         2: { "cost": 244 },
         3: { "cost": 651 },
         4: { "cost": 1255 },
@@ -186,7 +186,7 @@ item_data = {
         10: { "cost": 9010 }
     },
     ItemType.spike_bomb: {
-        1: { "cost": 0 },
+        1: { "cost": 33 },
         2: { "cost": 244 },
         3: { "cost": 651 },
         4: { "cost": 1255 },
@@ -198,7 +198,7 @@ item_data = {
         10: { "cost": 9010 }
     },
     ItemType.concussion_bomb: {
-        1: { "cost": 0 },
+        1: { "cost": 33 },
         2: { "cost": 244 },
         3: { "cost": 651 },
         4: { "cost": 1255 },
@@ -210,7 +210,7 @@ item_data = {
         10: { "cost": 9010 }
     },
     ItemType.fire_ball: {
-        1: { "cost": 0 },
+        1: { "cost": 34 },
         2: { "cost": 255 },
         3: { "cost": 680 },
         4: { "cost": 1312 },
@@ -222,7 +222,7 @@ item_data = {
         10: { "cost": 9419 }
     },
     ItemType.thunderbolt: {
-        1: { "cost": 0 },
+        1: { "cost": 34 },
         2: { "cost": 255 },
         3: { "cost": 680 },
         4: { "cost": 1312 },
@@ -234,7 +234,7 @@ item_data = {
         10: { "cost": 9419 }
     },
     ItemType.ice_spike: {
-        1: { "cost": 0 },
+        1: { "cost": 34 },
         2: { "cost": 255 },
         3: { "cost": 680 },
         4: { "cost": 1312 },
@@ -246,7 +246,7 @@ item_data = {
         10: { "cost": 9419 }
     },
     ItemType.sonic_blast: {
-        1: { "cost": 0 },
+        1: { "cost": 34 },
         2: { "cost": 255 },
         3: { "cost": 680 },
         4: { "cost": 1312 },
@@ -258,7 +258,7 @@ item_data = {
         10: { "cost": 9419 }
     },
     ItemType.magic_sword: {
-        1: { "cost": 0 },
+        1: { "cost": 34 },
         2: { "cost": 255 },
         3: { "cost": 680 },
         4: { "cost": 1312 },
@@ -270,7 +270,7 @@ item_data = {
         10: { "cost": 9419 }
     },
     ItemType.spear_of_light: {
-        1: { "cost": 0 },
+        1: { "cost": 34 },
         2: { "cost": 255 },
         3: { "cost": 680 },
         4: { "cost": 1312 },
@@ -282,7 +282,7 @@ item_data = {
         10: { "cost": 9419 }
     },
     ItemType.rock_smash: {
-        1: { "cost": 0 },
+        1: { "cost": 34 },
         2: { "cost": 255 },
         3: { "cost": 680 },
         4: { "cost": 1312 },
@@ -294,7 +294,7 @@ item_data = {
         10: { "cost": 9419 }
     },
     ItemType.armor: {
-        1: { "cost": 0 },
+        1: { "cost": 35 },
         2: { "cost": 277 },
         3: { "cost": 740 },
         4: { "cost": 1426 },
