@@ -119,7 +119,7 @@ Let me ignite the spark of your heart (and the rest of your body), and your flam
 ```
 
 #### Attack Logic
-Beauty is in the 👁(U+1F441) of the Beholder, but to him, all are ugly. Quite frankly, even 👁(U+1F441) have no idea.
+Beauty is in the 👁 of the Beholder, but to him, all are ugly. Quite frankly, even 👁 have no idea.
 
 ### Dragon
 
