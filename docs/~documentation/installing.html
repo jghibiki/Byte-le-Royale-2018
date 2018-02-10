@@ -96,8 +96,11 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#recommended-install-windows-linux">Recommended Install (Windows &amp; Linux)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-install">Manual Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running_the_game.html">Running The Game</a></li>
@@ -219,6 +222,14 @@
 <br></li>
 </ol>
 </li>
+<li>Now that we have set up a virtual environment, we need to install the python libraries required for the game.<ol>
+<li>To do this, go to the file browser on the left, and open the <code class="docutils literal"><span class="pre">custom_client.py</span></code> file in the root of the repository. In the top right corner of the file you should see the following bar pop up after a few seconds.
+<img src="_static/installReqs.png" style="width:800px"/></li>
+<li>Click on install requirements, and click Ok/Install Requirements on the window that pops up.</li>
+<li>In the lower right corner you should see a progress bar pop up. When this bar reaches 100% the python requirements have been installed successfully.
+<img src="_static/installProgress.png" style="width:800px"/></li>
+</ol>
+</li>
 <li>Now that we have set up a virtual environment, we need to set the working directory for some helper scripts.<ol>
 <li>Select <code class="docutils literal"><span class="pre">Edit</span> <span class="pre">Configurations</span></code> from the dropdown menu in the upper right corner of the main menu.
 <br>
@@ -239,8 +250,10 @@
 <br></li>
 </ol>
 </div>
+<div class="section" id="manual-install">
+<span id="manual-install"></span><h2>Manual Install<a class="headerlink" href="#manual-install" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="windows">
-<span id="windows"></span><h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<span id="windows"></span><h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
 <p><strong><em>Note: This installation method is not recommended. The PyCharm installation will be much easier to use and provides the benefit of the PyCharm Debugger.</em></strong></p>
 <ol class="simple">
 <li>Install Python 3.6: Download Python 3.6 or newer from the <a class="reference external" href="https://royale.ndacm.org/~documentation/python.org">Python Official Website</a></li>
@@ -260,7 +273,7 @@
 </div>
 </div>
 <div class="section" id="linux">
-<span id="linux"></span><h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<span id="linux"></span><h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
 <p><strong><em>Note: This installation method is not recommended. The PyCharm installation will be much easier to use and provides the benefit of the PyCharm Debugger.</em></strong></p>
 <ol class="simple">
 <li>Install Python 3.6 via your distro’s package manager.</li>
@@ -274,6 +287,7 @@
 </ol>
 <div class="highlight-shell"><div class="highlight"><pre><span></span>pip install -r requirements.txt
 </pre></div>
+</div>
 </div>
 </div>
 </div>

@@ -13,20 +13,20 @@ Basic flow of how a game works:
 ## Generate a Game Map
 Generates a game map ```game_data.json``` file. This file outlines a randomly generated game map.
 
-**Pycharm**:
+### Pycharm
 <br>
 Select "Generate Map" from the drop down, then click the green arrow to run the script.
 <br>
 <br>
 <img src="_static/generate_map_config.png" style="width:400px"/>
 
-**Terminal**:
+### Terminal
 ```shell
 python -m game.scripts.generate
 ```
 
 ## Easy Run Script
-***Only works for Linux***
+***Only works for a Linux teminal.***
 
 Runs both the client and server.
 ```shell
@@ -36,7 +36,7 @@ Runs both the client and server.
 ## Run Server
 Runs the game server. 
 
-**Pycharm**:
+### Pycharm
 <br>
 Select "Run Server" from the drop down, then click the green arrow to run the script.
 <br>
@@ -44,7 +44,7 @@ Select "Run Server" from the drop down, then click the green arrow to run the sc
 <img src="_static/run_server.png" style="width:400px"/>
 
 
-**Terminal**:
+### Terminal
 ```shell
 python -m game.scripts.server
 ```
@@ -52,14 +52,14 @@ python -m game.scripts.server
 ## Run Client
 Runs the default client (```custom_client.py```).
 
-**Pycharm**:
+### Pycharm
 <br>
 Select "Run Client" from the drop down, then click the green arrow to run the script.
 <br>
 <br>
 <img src="_static/run_client.png" style="width:400px"/>
 
-**Terminal**:
+### Terminal
 ```shell
 python -m game.scripts.client
 ```
@@ -70,21 +70,20 @@ Run a custom client defined in the root of the repository (e.g. ```demo_client.p
 python -m game.scripts.client --client demo_client
 ```
 
-#### Run Visualizer
+## Run Visualizer
 
 Run the visualizer in `game_log/`
 <br>
 Requires a successful game to have been run beforehand.
 
-**Pycharm**:
+### Pycharm
 <br>
 Select "Run Visualizer" from the drop down, then click the green arrow to run the script.
 <br>
 <br>
 <img src="_static/run_visualizer.png" style="width:400px"/>
 
-**Terminal**:
-
+### Terminal
 ```shell
 python -m game.scripts.visualizer
 ```
@@ -96,3 +95,5 @@ python -m game.scripts.visualizer --game-log copied_game_log_path
 ```
 
 To adjust the brightness of the game (and possibly throw off the colors of your monitor - restart should fix) try adding ```--gamma 1.1```. ```1.0``` should be the default display colorization. Less than ```1.0``` wil make the display darker, greater than ```1.0``` will make the display brighter. ```2.0``` Does some interesting things.
+
+

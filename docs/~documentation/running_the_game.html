@@ -96,11 +96,25 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Running The Game</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#generate-a-game-map">Generate a Game Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-a-game-map">Generate a Game Map</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pycharm">Pycharm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terminal">Terminal</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#easy-run-script">Easy Run Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-server">Run Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-server">Run Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pycharm">Pycharm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terminal">Terminal</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#run-client">Run Client</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#run-visualizer">Run Visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pycharm">Pycharm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terminal">Terminal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#run-visualizer">Run Visualizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pycharm">Pycharm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terminal">Terminal</a></li>
 </ul>
 </li>
 </ul>
@@ -190,20 +204,24 @@
 <div class="section" id="generate-a-game-map">
 <span id="generate-a-game-map"></span><h2>Generate a Game Map<a class="headerlink" href="#generate-a-game-map" title="Permalink to this headline">¶</a></h2>
 <p>Generates a game map <code class="docutils literal"><span class="pre">game_data.json</span></code> file. This file outlines a randomly generated game map.</p>
-<p><strong>Pycharm</strong>:
-<br>
+<div class="section" id="pycharm">
+<span id="pycharm"></span><h3>Pycharm<a class="headerlink" href="#pycharm" title="Permalink to this headline">¶</a></h3>
+<p><br>
 Select “Generate Map” from the drop down, then click the green arrow to run the script.
 <br>
 <br>
 <img src="_static/generate_map_config.png" style="width:400px"/></p>
-<p><strong>Terminal</strong>:</p>
+</div>
+<div class="section" id="terminal">
+<span id="terminal"></span><h3>Terminal<a class="headerlink" href="#terminal" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-shell"><div class="highlight"><pre><span></span>python -m game.scripts.generate
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="easy-run-script">
 <span id="easy-run-script"></span><h2>Easy Run Script<a class="headerlink" href="#easy-run-script" title="Permalink to this headline">¶</a></h2>
-<p><strong><em>Only works for Linux</em></strong></p>
+<p><strong><em>Only works for a Linux teminal.</em></strong></p>
 <p>Runs both the client and server.</p>
 <div class="highlight-shell"><div class="highlight"><pre><span></span>./run.sh
 </pre></div>
@@ -212,27 +230,34 @@ Select “Generate Map” from the drop down, then click the green arrow to run 
 <div class="section" id="run-server">
 <span id="run-server"></span><h2>Run Server<a class="headerlink" href="#run-server" title="Permalink to this headline">¶</a></h2>
 <p>Runs the game server.</p>
-<p><strong>Pycharm</strong>:
-<br>
+<div class="section" id="pycharm">
+<span id="id1"></span><h3>Pycharm<a class="headerlink" href="#pycharm" title="Permalink to this headline">¶</a></h3>
+<p><br>
 Select “Run Server” from the drop down, then click the green arrow to run the script.
 <br>
 <br>
 <img src="_static/run_server.png" style="width:400px"/></p>
-<p><strong>Terminal</strong>:</p>
+</div>
+<div class="section" id="terminal">
+<span id="id2"></span><h3>Terminal<a class="headerlink" href="#terminal" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-shell"><div class="highlight"><pre><span></span>python -m game.scripts.server
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="run-client">
 <span id="run-client"></span><h2>Run Client<a class="headerlink" href="#run-client" title="Permalink to this headline">¶</a></h2>
 <p>Runs the default client (<code class="docutils literal"><span class="pre">custom_client.py</span></code>).</p>
-<p><strong>Pycharm</strong>:
-<br>
+<div class="section" id="pycharm">
+<span id="id3"></span><h3>Pycharm<a class="headerlink" href="#pycharm" title="Permalink to this headline">¶</a></h3>
+<p><br>
 Select “Run Client” from the drop down, then click the green arrow to run the script.
 <br>
 <br>
 <img src="_static/run_client.png" style="width:400px"/></p>
-<p><strong>Terminal</strong>:</p>
+</div>
+<div class="section" id="terminal">
+<span id="id4"></span><h3>Terminal<a class="headerlink" href="#terminal" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-shell"><div class="highlight"><pre><span></span>python -m game.scripts.client
 </pre></div>
 </div>
@@ -240,18 +265,23 @@ Select “Run Client” from the drop down, then click the green arrow to run th
 <div class="highlight-shell"><div class="highlight"><pre><span></span>python -m game.scripts.client --client demo_client
 </pre></div>
 </div>
+</div>
+</div>
 <div class="section" id="run-visualizer">
-<span id="run-visualizer"></span><h3>Run Visualizer<a class="headerlink" href="#run-visualizer" title="Permalink to this headline">¶</a></h3>
+<span id="run-visualizer"></span><h2>Run Visualizer<a class="headerlink" href="#run-visualizer" title="Permalink to this headline">¶</a></h2>
 <p>Run the visualizer in <code class="docutils literal"><span class="pre">game_log/</span></code>
 <br>
 Requires a successful game to have been run beforehand.</p>
-<p><strong>Pycharm</strong>:
-<br>
+<div class="section" id="pycharm">
+<span id="id5"></span><h3>Pycharm<a class="headerlink" href="#pycharm" title="Permalink to this headline">¶</a></h3>
+<p><br>
 Select “Run Visualizer” from the drop down, then click the green arrow to run the script.
 <br>
 <br>
 <img src="_static/run_visualizer.png" style="width:400px"/></p>
-<p><strong>Terminal</strong>:</p>
+</div>
+<div class="section" id="terminal">
+<span id="id6"></span><h3>Terminal<a class="headerlink" href="#terminal" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-shell"><div class="highlight"><pre><span></span>python -m game.scripts.visualizer
 </pre></div>
 </div>

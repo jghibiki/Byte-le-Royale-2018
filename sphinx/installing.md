@@ -40,7 +40,13 @@
     <br>
     <img src="_static/venvPic.png" style="width:800px"/>
     <br>
-6. Now that we have set up a virtual environment, we need to set the working directory for some helper scripts.
+6. Now that we have set up a virtual environment, we need to install the python libraries required for the game. 
+    1. To do this, go to the file browser on the left, and open the ```custom_client.py``` file in the root of the repository. In the top right corner of the file you should see the following bar pop up after a few seconds.
+    <img src="_static/installReqs.png" style="width:800px"/>
+    2. Click on install requirements, and click Ok/Install Requirements on the window that pops up.
+    3. In the lower right corner you should see a progress bar pop up. When this bar reaches 100% the python requirements have been installed successfully.
+    <img src="_static/installProgress.png" style="width:800px"/>
+7. Now that we have set up a virtual environment, we need to set the working directory for some helper scripts.
     1. Select ```Edit Configurations``` from the dropdown menu in the upper right corner of the main menu.
     <br>
     <img src="_static/edit_configs_dropdown.png" style="width:400px"/>
@@ -58,8 +64,9 @@
 <img src="_static/generate_map_log.png" style="width:700px"/>
 <br>
 
+## Manual Install
 
-## Windows
+### Windows
 ***Note: This installation method is not recommended. The PyCharm installation will be much easier to use and provides the benefit of the PyCharm Debugger.***
 
 1. Install Python 3.6: Download Python 3.6 or newer from the [Python Official Website](python.org)
@@ -77,7 +84,7 @@
 pip install -r requirements.txt
 ```
 
-## Linux
+### Linux
 ***Note: This installation method is not recommended. The PyCharm installation will be much easier to use and provides the benefit of the PyCharm Debugger.***
 
 1. Install Python 3.6 via your distro's package manager.
