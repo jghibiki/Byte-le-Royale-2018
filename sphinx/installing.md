@@ -15,7 +15,7 @@
 <br>
 4. Now we will clone the github repository. This copys the remote code repository to your local machine.
     1. Fill in fields
-        - ***Git Repository URL:*** ```https://github.com/jghibiki/Byt-le-Royale-2017-2018.git```
+        - ***Git Repository URL:*** ```https://github.com/jghibiki/Byte-le-Royale-2018```
         - ***Parent Directory:*** Use the ```...``` to select where you would like to download the code to.
         - ***Directory Name:*** ```Byte-le Royale```
     2. Click ```Clone```
@@ -26,17 +26,19 @@
     1. Click File -> Settings
     2. In the settings window, click on the triangle next to ```Project: Byte-le ...``` and then click ```Project Interpreter```
     <br>
-    <img src="_static/python_interpreter.png" style="width:400px"/>
     <br>
-    3. Click on the gear icon, then click on ```Create Virtual Env```
+    <img src="_static/python_interpreter.png" style="width:900px"/>
     <br>
-    <img src="_static/python_interpreter_gear.png" style="width:250px"/>
+    3. Click on the gear icon, then click on ```Add Local```
     <br>
-    4. In the window that appears, fill in the following fields:
-        - ***Name:*** ```.venv```
-        - Click ```Ok```
+    <img src="_static/python_interpreter_gear.png" style="width:500px"/>
     <br>
-    <img src="_static/create_venv.png" style="width:400px"/>
+    <br>
+    <img src="_static/gearPic.png" style="width:500px"/>
+    <br>
+    4. In the window that appears, rename the ```venv``` directory to ```.venv```. This will help prevent git from attempting to track changes to this python virtual environment.
+    <br>
+    <img src="_static/venvPic.png" style="width:800px"/>
     <br>
 6. Now that we have set up a virtual environment, we need to set the working directory for some helper scripts.
     1. Select ```Edit Configurations``` from the dropdown menu in the upper right corner of the main menu.

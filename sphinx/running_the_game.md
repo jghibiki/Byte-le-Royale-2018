@@ -13,6 +13,14 @@ Basic flow of how a game works:
 ## Generate a Game Map
 Generates a game map ```game_data.json``` file. This file outlines a randomly generated game map.
 
+**Pycharm**:
+<br>
+Select "Generate Map" from the drop down, then click the green arrow to run the script.
+<br>
+<br>
+<img src="_static/generate_map_config.png" style="width:400px"/>
+
+**Terminal**:
 ```shell
 python -m game.scripts.generate
 ```
@@ -28,6 +36,15 @@ Runs both the client and server.
 ## Run Server
 Runs the game server. 
 
+**Pycharm**:
+<br>
+Select "Run Server" from the drop down, then click the green arrow to run the script.
+<br>
+<br>
+<img src="_static/run_server.png" style="width:400px"/>
+
+
+**Terminal**:
 ```shell
 python -m game.scripts.server
 ```
@@ -35,6 +52,14 @@ python -m game.scripts.server
 ## Run Client
 Runs the default client (```custom_client.py```).
 
+**Pycharm**:
+<br>
+Select "Run Client" from the drop down, then click the green arrow to run the script.
+<br>
+<br>
+<img src="_static/run_client.png" style="width:400px"/>
+
+**Terminal**:
 ```shell
 python -m game.scripts.client
 ```
@@ -48,6 +73,17 @@ python -m game.scripts.client --client demo_client
 #### Run Visualizer
 
 Run the visualizer in `game_log/`
+<br>
+Requires a successful game to have been run beforehand.
+
+**Pycharm**:
+<br>
+Select "Run Visualizer" from the drop down, then click the green arrow to run the script.
+<br>
+<br>
+<img src="_static/run_visualizer.png" style="width:400px"/>
+
+**Terminal**:
 
 ```shell
 python -m game.scripts.visualizer
