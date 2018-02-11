@@ -1,3 +1,5 @@
+import sys
+import os
 from game.common.enums import *
 from game.common.node_types import get_node
 from game.common.unit_classes import get_unit
@@ -70,7 +72,13 @@ class ClientLogic:
 
         turn_data = self.deserialize(turn_data)
 
-        turn_result = self.turn(turn_data)
+        try:
+            turn_result = self.turn(turn_data)
+        except Exception as e:
+            print()
+            print("Exception:")
+            print(e)
+            sys.exit(1)
 
         serialized_turn_result = self.serialize(turn_result)
 

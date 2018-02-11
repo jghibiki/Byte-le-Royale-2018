@@ -43,7 +43,7 @@ class Wisp(Monster):
         self.health = math.floor( ((117500*level)/9) + (94000/9) )
         self.current_health = self.health
         self.damage = math.floor( ((320 * level)/9) + (1120/9) )
-        self.gold = math.floor( ((6568 * level)/9) - (4768/9) )
+        self.gold = math.floor( ((6568 * level)/36) - (4768/36) )
 
         self.weaknesses = [
             DamageType.cold,
@@ -83,6 +83,10 @@ class Wisp(Monster):
 
                 if self.attack_state["index"] >= len(group):
                     self.attack_state["index"] = 0
+
+                living_units = [ unit for unit in targets if unit.current_health > 0 and unit.unit_class in group]
+                if len(living_units) == 0:
+                    self.attack_state["index"] = 0
                     break
 
         raise Exception("No valid targets: ", targets)
@@ -96,7 +100,7 @@ class Beholder(Monster):
         self.health = math.floor( ((125000*level)/9)+(100000/9) )
         self.current_health = self.health
         self.damage = math.floor( (39 * level) +150 )
-        self.gold = math.floor( (850 * level) - (500) )
+        self.gold = math.floor( (850/4 * level) - (500/4) )
 
         self.weaknesses = [
             DamageType.acid,
@@ -133,7 +137,7 @@ class Dragon(Monster):
         self.health = math.floor( ((50000 * level)/3) + (40000/3) )
         self.current_health = self.health
         self.damage = math.floor( ((370 * level)/9) + (1295/9) )
-        self.gold = math.floor( ((9535*level)/9) - (5440/9) )
+        self.gold = math.floor( ((9535*level)/36) - (5440/36) )
 
         self.weaknesses = [
             DamageType.acid,
@@ -169,7 +173,6 @@ class Dragon(Monster):
 
             if self.attack_state["index"] >= len(self.attack_state["group"]):
                 self.attack_state["index"] = 0
-                break
 
         raise Exception("No valid targets: ", targets)
 
@@ -181,7 +184,7 @@ class Minotaur(Monster):
         self.health = math.floor( ((140000*level)/9) + (112000/9) )
         self.current_health = self.health
         self.damage = math.floor( ((400 * level)/9) + (1400/9) )
-        self.gold = math.floor( ((8500*level)/9) - (4900/9) )
+        self.gold = math.floor( ((8500*level)/18) - (4900/18) )
 
         self.weaknesses = [
             DamageType.cold,
@@ -221,6 +224,10 @@ class Minotaur(Monster):
 
                 if self.attack_state["index"] >= len(group):
                     self.attack_state["index"] = 0
+
+                living_units = [ unit for unit in targets if unit.current_health > 0 and unit.unit_class in group]
+                if len(living_units) == 0:
+                    self.attack_state["index"] = 0
                     break
 
         raise Exception("No valid targets: ", targets)
@@ -233,7 +240,7 @@ class Slime(Monster):
         self.health = math.floor( ((110000*level)/9) + (88000/9) )
         self.current_health = self.health
         self.damage = math.floor( ((100 * level)/3) + (350/3) )
-        self.gold = math.floor( ((5740*level)/3) - (3940/9) )
+        self.gold = math.floor( ((2870*level)/18) - (1970/18) )
 
         self.weaknesses = [
             DamageType.electricity,
@@ -282,7 +289,7 @@ class Wraith(Monster):
         self.damage = math.floor( ((110 * level)/3) + (385/3) )
         self.health = math.floor( ((130000*level)/9) + (104000/9) )
         self.current_health = self.health
-        self.gold = math.floor( ((7048*level)/9) - (4798/9) )
+        self.gold = math.floor( ((3524*level)/18) - (2399/18) )
 
         self.weaknesses = [
             DamageType.acid,
@@ -323,6 +330,10 @@ class Wraith(Monster):
 
                 if self.attack_state["index"] >= len(group):
                     self.attack_state["index"] = 0
+
+                living_units = [ unit for unit in targets if unit.current_health > 0 and unit.unit_class in group]
+                if len(living_units) == 0:
+                    self.attack_state["index"] = 0
                     break
 
         raise Exception("No valid targets: ", targets)
@@ -335,7 +346,7 @@ class Vampire(Monster):
         self.health = math.floor( ((125000*level)/9)+(100000/9) )
         self.current_health = self.health
         self.damage = math.floor( ((350 * level)/9) + (1225/9) )
-        self.gold = math.floor( ((2474*level)/3) - (1574/3) )
+        self.gold = math.floor( ((1237*level)/6) - (787/6) )
 
         self.weaknesses = [
             DamageType.fire,
@@ -377,7 +388,11 @@ class Vampire(Monster):
 
                 if self.attack_state["index"] >= len(group):
                     self.attack_state["index"] = 0
-                    break
 
+                living_units = [ unit for unit in targets if unit.current_health > 0 and unit.unit_class in group]
+                if len(living_units) == 0:
+                    self.attack_state["index"] = 0
+                    break
+                    
         raise Exception("No valid targets: ", targets)
 

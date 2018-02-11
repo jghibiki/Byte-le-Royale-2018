@@ -3,7 +3,9 @@ import os
 import json
 import platform
 import shutil
+import sys
 from datetime import datetime, timedelta
+
 
 
 class ServerControl:
@@ -83,8 +85,19 @@ class ServerControl:
         log_data = self.log()
         self.dump_log(log_data)
 
-        if self.game_tick_no < self.max_game_tick and not self._quit:
-            self.schedule(self.pre_tick)
+        if self.game_tick_no < self.max_game_tick:
+            if not self._quit:
+                self.schedule(self.pre_tick)
+            else:
+                # Exit Cleanly
+
+                # Dump Game log manifest
+                with open("game_log/manifest.json", "w") as f:
+                    json.dump({"ticks": self.game_tick_no}, f)
+
+                self._socket_client.close()
+                self.schedule(lambda : sys.exit(0), 3)
+
         else:
             print("Exiting - MAX Tickes: {0} exceeded".format(self.max_game_tick))
 
@@ -93,7 +106,7 @@ class ServerControl:
                 json.dump({"ticks": self.game_tick_no}, f)
 
             self._socket_client.close()
-            self.schedule(exit, 3)
+            self.schedule(lambda : sys.exit(1), 3)
 
     def send_turn_data(self):
         pass

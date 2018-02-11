@@ -399,7 +399,7 @@ def unit_text(font, upper_left, unit, item_uses):
     return text_parts
 
 
-def start(verbose, log_path, gamma, dont_wait):
+def start(verbose, log_path, gamma, dont_wait, fullscreen):
 
     log_parser = GameLogParser(log_path)
     team_name, units, events = log_parser.get_turn()
@@ -426,6 +426,9 @@ def start(verbose, log_path, gamma, dont_wait):
 
     pygame.display.set_gamma(gamma)
 
+    if fullscreen:
+        pygame.display.toggle_fullscreen()
+
     bgSurfaceObj = pygame.image.load('game/visualizer/assets/brick_wall.png')
     bgSurfaceObj = pygame.transform.scale(bgSurfaceObj,(1280,720))
 
@@ -442,7 +445,7 @@ def start(verbose, log_path, gamma, dont_wait):
     small_font = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf', 14)
 
     team_name = ''
-    gold = 300
+    gold = 2000
     trophies = 0
 
     monster = None
@@ -737,6 +740,15 @@ def start(verbose, log_path, gamma, dont_wait):
 
                             if not showing:
                                 special_ability_group.add( TargetWeaknessAnimation(540, 170) )
+                                color = unit_colors[event["unit"].id]
+                                fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
+                                floating_number_group.add(fn)
+
+                        elif event["unit"].unit_class is UnitClass.brawler:
+                            color = unit_colors[event["unit"].id]
+                            fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
+                            floating_number_group.add(fn)
+
 
                         elif event["unit"].unit_class is UnitClass.magus:
                             showing = False
@@ -747,6 +759,9 @@ def start(verbose, log_path, gamma, dont_wait):
 
                             if not showing:
                                 special_ability_group.add( ElementalBurstAnimation(480, 110) )
+                                color = unit_colors[event["unit"].id]
+                                fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
+                                floating_number_group.add(fn)
 
                     elif event["type"] == Event.combat_resolved:
 
@@ -1129,6 +1144,8 @@ def start(verbose, log_path, gamma, dont_wait):
             elif event.type == KEYUP:
                 if event.key == K_p:
                     pause = not pause
+                if event.key == K_f:
+                    pygame.display.toggle_fullscreen()
 
         first_loop = False
 

@@ -24,20 +24,27 @@ p1=$!
 sleep 6;
 
 echo "Starting Client..."
-python -m game.scripts.client --port $port_no &
-p2=$!
+if python -m game.scripts.client --port $port_no; then
+    echo "$?";
+    echo "Client exited peacfully, waiting for server to close.";
 
-# wait for client to finish
-echo "Waiting for client to exit";
-wait $p2;
+    wait $p1
+
+else
+    # script died
+    echo "$?";
+    echo "Client exited with error, giving server a chance to close."
+    sleep 1;
+
+    # if server is still running kill it
+    echo "Killing Server."
+    kill $p1
+
+    rm results.json;
+fi
+
 
 # sleep
-echo "Client exited, giving server a chance to close."
-sleep 1;
-
-# if server is still running kill it
-echo "Killing Server."
-kill $p1
 
 echo "Run finished. EXITING."
 
