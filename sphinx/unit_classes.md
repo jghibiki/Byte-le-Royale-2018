@@ -304,7 +304,7 @@ Armor replaces the unit's current maximum health.
 Resupply: Spend one turn to regenerate one of bomb of the types currently possessed.
 
 ### Special Ability 
-Bomb Expert: The Alchemist can hold three of each bomb type. Additionally, their bomb damage scales with the bomb's level:
+Bomb Expert: The Alchemist can hold three of each bomb type. Additionally, their bomb damage gains bonus damage, which scales with the bomb's level:
 
 ```
 ((level*5)/100) + 1.0
