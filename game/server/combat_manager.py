@@ -131,9 +131,23 @@ class FitOfRage(SpecialAbility):
             elif damage > math.floor(unit.health * 0.75):
                 n = 3.5
 
-            damage = math.floor( unit.primary_weapon.damage * ( 3.5 + n  ) )
+            damage = math.floor(
+                self.damage_taken * ( 3 + (0.25 *
+                                               (
+                                                   min(self.damage_taken, unit.health*0.1)/
+                                                   unit.health * 0.01
+                                               )
+                                           )
+                                     )
+            )
+
             monster.current_health -= damage
             if monster.current_health < 0: monster.current_health = 0
+
+            # heal unit for 10% of damage dealt
+            health_to_restore = math.floor(damage * .25)
+            unit.current_health += health_to_restore
+            unit.current_health = min(unit.current_health, unit.health)
 
             turn_log["events"].append({
                 "type": Event.special_ability_attack,
