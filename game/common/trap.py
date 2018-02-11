@@ -20,7 +20,7 @@ class Trap(Serializable):
         self.stat = stat
         self.pass_type = pass_type
         self.damage_interval = damage_interval
-        self.damage = damage * (math.floor(0.5 * level))
+        self.damage = math.floor(damage * (0.5 * level))
         self.damage_type = damage_type
         self.required_effort = required_effort
 
