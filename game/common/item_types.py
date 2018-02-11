@@ -33,6 +33,12 @@ def get_item(item_type, level, unit_class=None, init=False):
         new_item = IceSpike()
     elif item_type == ItemType.sonic_blast:
         new_item = SonicBlast()
+    elif item_type == ItemType.magic_sword:
+        new_item = MagicSword()
+    elif item_type == ItemType.spear_of_light:
+        new_item = SpearOfLight()
+    elif item_type == ItemType.rock_smash:
+        new_item = RockSmash()
 
     # Bombs
     elif item_type == ItemType.fire_bomb:
@@ -92,6 +98,12 @@ def load_item(item_type, data, unit_class=None):
         new_item = IceSpike()
     elif item_type == ItemType.sonic_blast:
         new_item = SonicBlast()
+    elif item_type == ItemType.magic_sword:
+        new_item = MagicSword()
+    elif item_type == ItemType.spear_of_light:
+        new_item = SpearOfLight()
+    elif item_type == ItemType.rock_smash:
+        new_item = RockSmash()
 
     # Bombs
     elif item_type == ItemType.fire_bomb:
