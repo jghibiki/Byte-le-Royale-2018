@@ -737,6 +737,9 @@ def start(verbose, log_path, gamma, dont_wait):
 
                             if not showing:
                                 special_ability_group.add( TargetWeaknessAnimation(540, 170) )
+                                color = unit_colors[event["unit"].id]
+                                fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
+                                floating_number_group.add(fn)
 
                         elif event["unit"].unit_class is UnitClass.magus:
                             showing = False
@@ -747,6 +750,9 @@ def start(verbose, log_path, gamma, dont_wait):
 
                             if not showing:
                                 special_ability_group.add( ElementalBurstAnimation(480, 110) )
+                                color = unit_colors[event["unit"].id]
+                                fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
+                                floating_number_group.add(fn)
 
                     elif event["type"] == Event.combat_resolved:
 
