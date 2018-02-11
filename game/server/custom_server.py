@@ -29,8 +29,8 @@ class CustomServer(ServerControl):
 
         self.trophies = 0
         self.towns = 0
-        self.gold = 300
-        self.total_gold = 300
+        self.gold = 9999999
+        self.total_gold = 9999999
 
         self.max_combat_rounds = 1000
 
@@ -553,6 +553,12 @@ class CustomServer(ServerControl):
                 item_level = purchase["item_level"]
 
                 if level > 10:
+                    continue
+
+                avail = any(True for item in shop_items
+                            if item["type"] == item_type and item["level"] == item_level )
+
+                if not avail:
                     continue
 
                 if "slot" in purchase:
