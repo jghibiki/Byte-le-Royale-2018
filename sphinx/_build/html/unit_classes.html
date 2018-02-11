@@ -401,29 +401,7 @@
 </div>
 <div class="section" id="unique-ability">
 <span id="id3"></span><h3>Unique Ability<a class="headerlink" href="#unique-ability" title="Permalink to this headline">¶</a></h3>
-<p>Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal <code class="docutils literal"><span class="pre">(normal</span> <span class="pre">damage)</span> <span class="pre">*</span> <span class="pre">(3.5</span> <span class="pre">+</span> <span class="pre">N)</span></code> damage. Where N is determined by the table below. NOTE: This must be called, or “charged”, for multiple turns. It will execute on the third turn.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="23%" />
-<col width="78%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">N</th>
-<th class="head">Damage Taken</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>2.0</td>
-<td>(unit max health) * 0.25 &lt; damage &lt;= (unit max health) * 0.5</td>
-</tr>
-<tr class="row-odd"><td>3.0</td>
-<td>(unit max health) * 0.5 &lt; damage &lt;= (unit max health) * 0.75</td>
-</tr>
-<tr class="row-even"><td>3.5</td>
-<td>damage &gt;= (unit max health) * 0.75</td>
-</tr>
-</tbody>
-</table>
+<p>Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal <code class="docutils literal"><span class="pre">(damage</span> <span class="pre">taken)</span> <span class="pre">*</span> <span class="pre">(3</span> <span class="pre">+</span> <span class="pre">(0.25</span> <span class="pre">*</span> <span class="pre">(min(damage</span> <span class="pre">taken,</span> <span class="pre">brawler.health</span> <span class="pre">*0.1)/(brawler.health*0.01)))</span></code> damage. 25% of the damage dealt by Fit of Rage is returned to the Brawler as health. NOTE: This must be called, or “charged”, for multiple turns. It will execute on the third turn.</p>
 </div>
 <div class="section" id="unit-properties">
 <span id="id4"></span><h3>Unit Properties<a class="headerlink" href="#unit-properties" title="Permalink to this headline">¶</a></h3>
