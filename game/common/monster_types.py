@@ -84,6 +84,11 @@ class Wisp(Monster):
                 if self.attack_state["index"] >= len(group):
                     self.attack_state["index"] = 0
 
+                living_units = [ unit for unit in targets if unit.current_health > 0 and unit.unit_class in group]
+                if len(living_units) == 0:
+                    self.attack_state["index"] = 0
+                    break
+
         raise Exception("No valid targets: ", targets)
 
 
@@ -220,6 +225,11 @@ class Minotaur(Monster):
                 if self.attack_state["index"] >= len(group):
                     self.attack_state["index"] = 0
 
+                living_units = [ unit for unit in targets if unit.current_health > 0 and unit.unit_class in group]
+                if len(living_units) == 0:
+                    self.attack_state["index"] = 0
+                    break
+
         raise Exception("No valid targets: ", targets)
 
 
@@ -321,6 +331,11 @@ class Wraith(Monster):
                 if self.attack_state["index"] >= len(group):
                     self.attack_state["index"] = 0
 
+                living_units = [ unit for unit in targets if unit.current_health > 0 and unit.unit_class in group]
+                if len(living_units) == 0:
+                    self.attack_state["index"] = 0
+                    break
+
         raise Exception("No valid targets: ", targets)
 
 
@@ -374,5 +389,10 @@ class Vampire(Monster):
                 if self.attack_state["index"] >= len(group):
                     self.attack_state["index"] = 0
 
+                living_units = [ unit for unit in targets if unit.current_health > 0 and unit.unit_class in group]
+                if len(living_units) == 0:
+                    self.attack_state["index"] = 0
+                    break
+                    
         raise Exception("No valid targets: ", targets)
 
