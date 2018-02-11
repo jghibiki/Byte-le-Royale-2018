@@ -59,20 +59,7 @@ Armor replaces the unit's current maximum health.
 ```
 
 ### Unique Ability
-Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(normal damage) * (3.5 + N)``` damage. Where N is determined by the table below. NOTE: This must be called, or "charged", for multiple turns. It will execute on the third turn.
-
-
-```eval_rst
-+------------------+--------------------------------------------------------------+
-| N                | Damage Taken                                                 |
-+==================+==============================================================+
-| 2.0              | (unit max health) * 0.25 < damage <= (unit max health) * 0.5 |
-+------------------+--------------------------------------------------------------+
-| 3.0              | (unit max health) * 0.5 < damage <= (unit max health) * 0.75 |
-+------------------+--------------------------------------------------------------+
-| 3.5              | damage >= (unit max health) * 0.75                           |
-+------------------+--------------------------------------------------------------+
-```
+Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(damage taken) * (3 + (0.25 * (min(damage taken, brawler.health *0.1)/(brawler.health*0.01)))``` damage. 25% of the damage dealt by Fit of Rage is returned to the Brawler as health. NOTE: This must be called, or "charged", for multiple turns. It will execute on the third turn.
 
 ### Unit Properties
 - ```Brawler.primary_weapon``` The type of primary weapon the unit is carrying.
@@ -325,7 +312,3 @@ Bomb Expert: The Alchemist can hold three of each bomb type. Additionally, their
 - ```Alchemist.wait()``` Do nothing for this turn.
 
 *Note: The Alchemist does not have a basic attack.*
-
-
-
-
