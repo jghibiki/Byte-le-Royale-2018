@@ -400,7 +400,7 @@
 </div>
 <div class="section" id="unique-ability">
 <span id="id3"></span><h3>Unique Ability<a class="headerlink" href="#unique-ability" title="Permalink to this headline">¶</a></h3>
-<p>Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal <code class="docutils literal"><span class="pre">(normal</span> <span class="pre">damage)</span> <span class="pre">*</span> <span class="pre">(2.5</span> <span class="pre">+</span> <span class="pre">(N</span> <span class="pre">*</span> <span class="pre">0.5))</span></code> damage. Where N is determined by the table below. NOTE: This must be called, or “charged”, for multiple turns. It will execute on the third turn.</p>
+<p>Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal <code class="docutils literal"><span class="pre">(normal</span> <span class="pre">damage)</span> <span class="pre">*</span> <span class="pre">(3.5</span> <span class="pre">+</span> <span class="pre">N)</span></code> damage. Where N is determined by the table below. NOTE: This must be called, or “charged”, for multiple turns. It will execute on the third turn.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="23%" />
@@ -412,13 +412,13 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>0</td>
-<td>damage &lt; (unit max health) * 0.25</td>
+<tr class="row-even"><td>2.0</td>
+<td>(unit max health) * 0.25  &lt;= (unit max health) * 0.5</td>
 </tr>
-<tr class="row-odd"><td>1</td>
-<td>(unit max health) * 0.25 &lt;= damage &lt; (unit max health) * 0.5</td>
+<tr class="row-odd"><td>3.0</td>
+<td>(unit max health) * 0.5 &lt; damage &lt;= (unit max health) * 0.5</td>
 </tr>
-<tr class="row-even"><td>2</td>
+<tr class="row-even"><td>3.5</td>
 <td>damage &gt;= (unit max health) * 0.75</td>
 </tr>
 </tbody>

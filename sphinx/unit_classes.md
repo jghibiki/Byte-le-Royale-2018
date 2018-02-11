@@ -59,18 +59,18 @@ Armor replaces the unit's current maximum health.
 ```
 
 ### Unique Ability
-Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(normal damage) * (2.5 + (N * 0.5))``` damage. Where N is determined by the table below. NOTE: This must be called, or "charged", for multiple turns. It will execute on the third turn.
+Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(normal damage) * (3.5 + N)``` damage. Where N is determined by the table below. NOTE: This must be called, or "charged", for multiple turns. It will execute on the third turn.
 
 
 ```eval_rst
 +------------------+--------------------------------------------------------------+
 | N                | Damage Taken                                                 |
 +==================+==============================================================+
-| 0                | damage < (unit max health) * 0.25                            |
+| 2.0              | (unit max health) * 0.25  <= (unit max health) * 0.5         |
 +------------------+--------------------------------------------------------------+
-| 1                | (unit max health) * 0.25 <= damage < (unit max health) * 0.5 |
+| 3.0              | (unit max health) * 0.5 < damage <= (unit max health) * 0.5  |
 +------------------+--------------------------------------------------------------+
-| 2                | damage >= (unit max health) * 0.75                           |
+| 3.5              | damage >= (unit max health) * 0.75                           |
 +------------------+--------------------------------------------------------------+
 ```
 
