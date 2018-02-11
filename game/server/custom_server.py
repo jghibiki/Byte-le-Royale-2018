@@ -615,6 +615,7 @@ class CustomServer(ServerControl):
 
                                 if(unit.bomb_1 is not None and
                                    item_type is unit.bomb_1.item_type and
+                                   item_level is unit.bomb_1.level and
                                    unit.bomb_1_quantity < 2):
                                         unit.bomb_1_quantity += 1
                                 else:
@@ -635,6 +636,7 @@ class CustomServer(ServerControl):
 
                                 if(unit.bomb_2 is not None and
                                    item_type is unit.bomb_2.item_type and
+                                   item_level is unit.bomb_2.level and
                                    unit.bomb_2_quantity < 2):
                                     unit.bomb_2_quantity += 1
                                 else:
@@ -654,6 +656,7 @@ class CustomServer(ServerControl):
 
                                 if(unit.bomb_3 is not None and
                                    item_type is unit.bomb_3.item_type and
+                                   item_level is unit.bomb_3.level and
                                    unit.bomb_3_quantity < 2):
                                     unit.bomb_3_quantity += 1
                                 else:
@@ -687,6 +690,7 @@ class CustomServer(ServerControl):
 
                                 if(unit.bomb_1 is not None and
                                    item_type is unit.bomb_1.item_type and
+                                   item_level is unit.bomb_1.level and
                                    unit.bomb_1_quantity < 2):
                                     unit.bomb_1_quantity += 1
                                 else:
@@ -706,6 +710,7 @@ class CustomServer(ServerControl):
 
                                 if(unit.bomb_2 is not None and
                                    item_type is unit.bomb_2.item_type and
+                                   item_level is unit.bomb_2.level and
                                    unit.bomb_2_quantity < 2):
 
                                     unit.bomb_2_quantity += 1

@@ -172,7 +172,7 @@ Trap expert: rogues have increased focus and willpower during trap evasion.
 +--------+----------------+-------+-----------+-------------+
 | Health | Primary Weapon | Focus | Willpower | Spell Slots |
 +========+================+=======+===========+=============+
-|  7000  | Staff          | 14    | 10        | 4           |
+|  7000  | Staff          | 14    | 10        | 3           |
 +--------+----------------+-------+-----------+-------------+
 ```
 
