@@ -73,6 +73,9 @@ class ClientLogic:
         try:
             turn_result = self.turn(turn_data)
         except Exception as e:
+            print()
+            print("Exception:")
+            print(e)
             exit()
 
         serialized_turn_result = self.serialize(turn_result)
