@@ -59,7 +59,7 @@ Armor replaces the unit's current maximum health.
 ```
 
 ### Unique Ability
-Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(normal damage) * (2.5 + (N * 0.5))``` damage. Where N is determined by the table below.
+Fit of Rage: This unit deals takes two turns to become enraged. Damage dealt to this unit while becoming enraged increases the effectiveness of Fit of Rage. Once enraged, this unit will deal ```(normal damage) * (2.5 + (N * 0.5))``` damage. Where N is determined by the table below. NOTE: This must be called, or "charged", for multiple turns. It will execute on the third turn.
 
 
 ```eval_rst
@@ -107,7 +107,7 @@ Armor replaces the unit's current maximum health.
 ```
 
 ### Unique Ability
-Target Weakness: takes a turn to find critical points, then next turn deal 2.5 * damage.
+Target Weakness: takes a turn to find critical points, then next turn deal 2.5 * damage. NOTE: This must be called, or "charged", for multiple turns. It will execute on the second turn.
 
 ### Unit Properties
 - ```Pikeman.primary_weapon``` The type of primary weapon the unit is carrying.
@@ -187,7 +187,7 @@ Armor replaces the unit's current maximum health.
 ```
 
 ### Unique Ability
-Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 200% the Magus' primary weapon damage, plus an extra 25% per weakness hit.
+Elemental Burst: Spend two turns concentrating to cast a spell that deals fire, cold, and electric damage at 200% the Magus' primary weapon damage, plus an extra 25% per weakness hit. NOTE: This must be called, or "charged", for multiple turns. It will execute on the second turn.
 
 ### Unit Properties
 - ```Magus.primary_weapon``` The type of primary weapon the unit is carrying.
