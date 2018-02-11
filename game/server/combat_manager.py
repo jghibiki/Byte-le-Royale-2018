@@ -556,7 +556,7 @@ class CombatManager:
                 dmg_multiplier = 1.0
 
                 if unit is invigorated_unit: # deal more damage if target was invigorated
-                    dmg_multiplier += 1.5
+                    dmg_multiplier += 2.5
 
                 for damage_type in weapon.damage_types:
                     if damage_type in self.monster.weaknesses:
