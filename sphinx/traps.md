@@ -81,7 +81,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-----------------+
 | **Frequency/Timer** | Every 3 turns   |
 +---------------------+-----------------+
-| **Damage Amount**   | 200             |
+| **Damage Amount**   | 150             |
 +---------------------+-----------------+
 ```
 
@@ -100,7 +100,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Frequency/Timer** | Every 2 turns                 |
 +---------------------+-------------------------------+
-| **Damage Amount**   | 150                           |
+| **Damage Amount**   | 100                           |
 +---------------------+-------------------------------+
 ```
 
@@ -117,7 +117,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-----------------+
 | **Damage Type**     | All Units       |
 +---------------------+-----------------+
-| **Frequency/Timer** | After 6 Turns   |
+| **Frequency/Timer** | After 18 Turns  |
 +---------------------+-----------------+
 | **Damage Amount**   | 99999999        |
 +---------------------+-----------------+
@@ -131,7 +131,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Effort Stat**     | Focus                         |
 +---------------------+-------------------------------+
-| **Effort Required** | 150                           |
+| **Effort Required** | 100                           |
 +---------------------+-------------------------------+
 | **Pass Type**       | Group Pass                    |
 +---------------------+-------------------------------+
@@ -158,7 +158,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Frequency/Timer** | Every 4 turns                 |
 +---------------------+-------------------------------+
-| **Damage Amount**   | 200                           |
+| **Damage Amount**   | 150                           |
 +---------------------+-------------------------------+
 ```
 
@@ -178,7 +178,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Frequency/Timer** | Every 2 turns                 |
 +---------------------+-------------------------------+
-| **Damage Amount**   | 100                           |
+| **Damage Amount**   | 50                            |
 +---------------------+-------------------------------+
 ```
 
