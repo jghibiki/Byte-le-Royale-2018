@@ -442,7 +442,7 @@ def start(verbose, log_path, gamma, dont_wait):
     small_font = pygame.font.Font('game/visualizer/assets/joystix/joystix monospace.ttf', 14)
 
     team_name = ''
-    gold = 300
+    gold = 2000
     trophies = 0
 
     monster = None

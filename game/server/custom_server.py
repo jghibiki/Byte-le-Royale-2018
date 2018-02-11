@@ -55,8 +55,8 @@ class CustomServer(ServerControl):
 
         self.trophies = 0
         self.towns = 0
-        self.gold = 300
-        self.total_gold = 300
+        self.gold = 2000
+        self.total_gold = 2000
 
         self.started = False
 
