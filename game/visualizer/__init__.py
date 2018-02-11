@@ -744,6 +744,12 @@ def start(verbose, log_path, gamma, dont_wait, fullscreen):
                                 fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
                                 floating_number_group.add(fn)
 
+                        elif event["unit"].unit_class is UnitClass.brawler:
+                            color = unit_colors[event["unit"].id]
+                            fn = FloatingNumber(520 + random.randint(-15, 15) , 0 , '-{}'.format(event["damage"]), color)
+                            floating_number_group.add(fn)
+
+
                         elif event["unit"].unit_class is UnitClass.magus:
                             showing = False
                             for ani in special_ability_group.sprites():
