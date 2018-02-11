@@ -479,8 +479,8 @@ class CombatManager:
 
                 elif unit.unit_class is UnitClass.alchemist:
                     if unit.combat_action_target_1 is 1:
-                        if unit.bomb_1 is not None and unit.bomb_1_quantity < 2:
-                            unit.bomb_1_quantity = 2
+                        if unit.bomb_1 is not None and unit.bomb_1_quantity < 3:
+                            unit.bomb_1_quantity = 3
 
                             turn_log["events"].append({
                                 "type": Event.special_ability,
@@ -488,8 +488,8 @@ class CombatManager:
                             })
 
                     if unit.combat_action_target_1 is 2:
-                        if unit.bomb_2 is not None and unit.bomb_2_quantity < 2:
-                            unit.bomb_2_quantity = 2
+                        if unit.bomb_2 is not None and unit.bomb_2_quantity < 3:
+                            unit.bomb_2_quantity = 3
 
                             turn_log["events"].append({
                                 "type": Event.special_ability,
@@ -557,6 +557,9 @@ class CombatManager:
 
                 if unit is invigorated_unit: # deal more damage if target was invigorated
                     dmg_multiplier += 1.5
+
+                if unit.unit_class is UnitClass.alchemist:
+                    dmg_multiplier += ((weapon.level * 5.0)/100) + 1.0
 
                 for damage_type in weapon.damage_types:
                     if damage_type in self.monster.weaknesses:
