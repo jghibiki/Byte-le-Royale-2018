@@ -96,7 +96,7 @@ class ServerControl:
                     json.dump({"ticks": self.game_tick_no}, f)
 
                 self._socket_client.close()
-                self.schedule(lambda : exit(0), 3)
+                self.schedule(lambda : sys.exit(0), 3)
 
         else:
             print("Exiting - MAX Tickes: {0} exceeded".format(self.max_game_tick))
@@ -106,7 +106,7 @@ class ServerControl:
                 json.dump({"ticks": self.game_tick_no}, f)
 
             self._socket_client.close()
-            self.schedule(lambda : exit(1), 3)
+            self.schedule(lambda : sys.exit(1), 3)
 
     def send_turn_data(self):
         pass
