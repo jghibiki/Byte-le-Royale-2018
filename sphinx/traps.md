@@ -111,7 +111,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-----------------+
 | **Effort Stat**     | Willpower       |
 +---------------------+-----------------+
-| **Effort Required** | 100             |
+| **Effort Required** | 60              |
 +---------------------+-----------------+
 | **Pass Type**       | Group Pass      |
 +---------------------+-----------------+
@@ -131,7 +131,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Effort Stat**     | Focus                         |
 +---------------------+-------------------------------+
-| **Effort Required** | 100                           |
+| **Effort Required** | 150                           |
 +---------------------+-------------------------------+
 | **Pass Type**       | Group Pass                    |
 +---------------------+-------------------------------+
@@ -139,7 +139,7 @@ If your units take too long however, based on the damage interval(```Trap.damage
 +---------------------+-------------------------------+
 | **Frequency/Timer** | 1 Turns                       |
 +---------------------+-------------------------------+
-| **Damage Amount**   | 100                           |
+| **Damage Amount**   | 50                            |
 +---------------------+-------------------------------+
 ```
 
