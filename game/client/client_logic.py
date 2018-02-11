@@ -70,7 +70,10 @@ class ClientLogic:
 
         turn_data = self.deserialize(turn_data)
 
-        turn_result = self.turn(turn_data)
+        try:
+            turn_result = self.turn(turn_data)
+        except Exception as e:
+            exit()
 
         serialized_turn_result = self.serialize(turn_result)
 
