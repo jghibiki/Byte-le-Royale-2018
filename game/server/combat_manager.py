@@ -556,7 +556,7 @@ class CombatManager:
                 dmg_multiplier = 1.0
 
                 if unit is invigorated_unit: # deal more damage if target was invigorated
-                    dmg_multiplier += 1.5
+                    dmg_multiplier += 2.5
 
                 if unit.unit_class is UnitClass.alchemist:
                     dmg_multiplier += ((weapon.level * 5.0)/100) + 1.0

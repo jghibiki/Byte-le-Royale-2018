@@ -225,7 +225,7 @@ Armor replaces the unit's current maximum health.
 ```
 
 ### Unique Ability
-Invigorate: Charm one ally to deal 1.5 times damage for a turn. Cancels any other damage modifiers that would be in effect for that unit including the effects of Elemental Burst, and Fit of Rage. Can be cast once every 3 turns.
+Invigorate: Charm one ally to deal 2.5 times damage for a turn. Cancels any other damage modifiers that would be in effect for that unit including the effects of Elemental Burst, and Fit of Rage. Can be cast once every 3 turns.
 
 ### Unit Properties
 - ```Wizard.primary_weapon``` The type of primary weapon the unit is carrying.
