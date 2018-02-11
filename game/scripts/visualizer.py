@@ -9,9 +9,10 @@ import click
 @click.option("--log-path", default="./game_log")
 @click.option("--gamma", default=1.0)
 @click.option("--dont-wait", is_flag=True)
-def main(verbose, log_path, gamma, dont_wait):
+@click.option("--fullscreen", is_flag=True)
+def main(verbose, log_path, gamma, dont_wait, fullscreen):
 
-    start(verbose, log_path, gamma, dont_wait)
+    start(verbose, log_path, gamma, dont_wait, fullscreen)
 
 if __name__ == "__main__":
 

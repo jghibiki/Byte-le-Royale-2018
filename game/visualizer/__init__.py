@@ -399,7 +399,7 @@ def unit_text(font, upper_left, unit, item_uses):
     return text_parts
 
 
-def start(verbose, log_path, gamma, dont_wait):
+def start(verbose, log_path, gamma, dont_wait, fullscreen):
 
     log_parser = GameLogParser(log_path)
     team_name, units, events = log_parser.get_turn()
@@ -425,6 +425,9 @@ def start(verbose, log_path, gamma, dont_wait):
     pygame.display.set_caption('DnD Visualizer')
 
     pygame.display.set_gamma(gamma)
+
+    if fullscreen:
+        pygame.display.toggle_fullscreen()
 
     bgSurfaceObj = pygame.image.load('game/visualizer/assets/brick_wall.png')
     bgSurfaceObj = pygame.transform.scale(bgSurfaceObj,(1280,720))
@@ -1135,6 +1138,8 @@ def start(verbose, log_path, gamma, dont_wait):
             elif event.type == KEYUP:
                 if event.key == K_p:
                     pause = not pause
+                if event.key == K_f:
+                    pygame.display.toggle_fullscreen()
 
         first_loop = False
 
