@@ -10,11 +10,12 @@
     <option name="IS_MODULE_SDK" value="true" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
-    <module name="Mini-MechMania-2017-2018" />
+    <module name="Byte-le-Royale-2018" />
     <option name="SCRIPT_NAME" value="pycharm_run.py" />
     <option name="PARAMETERS" value="game.scripts.server --server-verbose" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
+    <option name="MODULE_MODE" value="false" />
     <method />
   </configuration>
 </component>
