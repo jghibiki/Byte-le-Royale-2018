@@ -124,9 +124,9 @@ class FitOfRage(SpecialAbility):
                     self.charged = True
         else:
             n = 1.0
-            if math.floor(unit.health * 0.25) < self.damage_taken < math.floor(unit.health * 0.5):
+            if math.floor(unit.health * 0.25) < self.damage_taken <= math.floor(unit.health * 0.5):
                 n = 2.0
-            elif math.floor(unit.health * 0.5) < self.damage_taken < math.floor(unit.health * 75):
+            elif math.floor(unit.health * 0.5) < self.damage_taken <= math.floor(unit.health * 75):
                 n = 3.0
             elif damage > math.floor(unit.health * 0.75):
                 n = 3.5
