@@ -1,6 +1,7 @@
 from autobahn.asyncio.websocket import WebSocketClientProtocol
 from autobahn.asyncio.websocket import WebSocketClientFactory
 
+import sys
 import os
 import json
 import random
@@ -67,7 +68,7 @@ class BroadcastClientProtocol(WebSocketClientProtocol):
         if self.verbose:
             print("Connection closed. Reason: {}".format(reason))
             print("Server Connection Closed. Exiting.")
-        exit()
+        sys.exit(0)
 
     def register(self, id):
         self.clients.append(id)
@@ -200,9 +201,4 @@ def start_client(host, port, client_logic, verbose=False):
     coro = loop.create_connection(factory, host, port)
     client = loop.run_until_complete(coro)
 
-    try:
-       loop.run_forever()
-    except KeyboardInterrupt:
-       pass
-    finally:
-      loop.close()
+    loop.run_forever()

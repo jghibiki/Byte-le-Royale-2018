@@ -1,3 +1,5 @@
+import sys
+import os
 from game.common.enums import *
 from game.common.node_types import get_node
 from game.common.unit_classes import get_unit
@@ -76,7 +78,7 @@ class ClientLogic:
             print()
             print("Exception:")
             print(e)
-            exit()
+            sys.exit(1)
 
         serialized_turn_result = self.serialize(turn_result)
 
