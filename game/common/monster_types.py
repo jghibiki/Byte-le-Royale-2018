@@ -169,7 +169,6 @@ class Dragon(Monster):
 
             if self.attack_state["index"] >= len(self.attack_state["group"]):
                 self.attack_state["index"] = 0
-                break
 
         raise Exception("No valid targets: ", targets)
 
